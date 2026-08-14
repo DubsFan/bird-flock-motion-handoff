@@ -1,7 +1,7 @@
 "use client"
 
 import { FileJson, FileText, Film, Image as ImageIcon, Loader2, Package } from "lucide-react"
-import { useMemo, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import {
   detectVideoSupport,
   exportDesignerBrief,
@@ -18,7 +18,17 @@ export function ExportPanel({ project }: { project: Project }) {
   const [job, setJob] = useState<Job>(null)
   const [error, setError] = useState<string | null>(null)
   const cancelRef = useRef<{ cancelled: boolean }>({ cancelled: false })
-  const support = useMemo(() => detectVideoSupport(), [])
+  // The server cannot know browser codec support. Start from the same stable
+  // snapshot on the server and first client render, then detect after hydration.
+  const [support, setSupport] = useState<ReturnType<typeof detectVideoSupport>>({
+    opaque: false,
+    transparent: false,
+    mime: null,
+  })
+
+  useEffect(() => {
+    setSupport(detectVideoSupport())
+  }, [])
 
   const run = async (kind: string, fn: (sig: { cancelled: boolean }, onProgress: (p: number) => void) => Promise<void>) => {
     setError(null)
