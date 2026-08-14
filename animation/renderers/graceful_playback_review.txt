@@ -1,0 +1,5 @@
+Chromium white-background WebM review, graceful flock iteration 1:
+
+Improved: the flock no longer reads as a rigid horizontal sweep. The separate lanes and slow arc paths create a calmer spread, and the simplified blue marks avoid the rejected realistic/cartoon-bird system.
+
+Still to refine: the flock lacks the source composition's three visually dominant hero birds, and the small-bird system is too uniformly V-shaped. The final pass will add three larger, loose double-arc hero birds and retain smaller scattered gesture birds as supporting flock texture. The output must also be checked at both endpoint timestamps to confirm the rendered loop is visually empty after the flock exits.

@@ -1,0 +1,5 @@
+method=procedural 2D sparse line-art flock
+bird_forms=open blue Bezier gesture curves; no fills, feather details, white outlines, feet, or realistic anatomy
+motion=stationary body center with continuously redrawn wing arcs, elbows, and tips
+flap_rate=2.55_to_3.75_cycles_per_second
+timeline=empty_to_flock_crossing_to_empty

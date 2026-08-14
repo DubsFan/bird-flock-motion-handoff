@@ -1,0 +1,4 @@
+style=open, sparse, hand-drawn blue gesture birds
+prohibited=no white outline, no fill, no closed realistic body, no feathers, no feet, no AI redraw
+motion=slow layered curved lanes with vertical drift, gentle banks, and 1.15 to 1.55 wing cycles per second
+timeline=transparent handles then left entry, diagonal/curved flock passage, right exit, transparent handle

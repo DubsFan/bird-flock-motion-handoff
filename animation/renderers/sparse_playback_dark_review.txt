@@ -1,0 +1,3 @@
+Dark-background Chromium review, iteration 2:
+
+The controlled flock now avoids the rejected realistic/cartoon bird forms and avoids the prior rigid V hinge. The lines are visibly more legible than iteration 1, but the dark review surface is not the correct acceptance context for blue line art intended to originate from a white field. Next inspection uses the actual alpha WebM composited in Chromium over white, which will accurately evaluate source-style likeness, line weight, full-flock readability, and empty loop handles.

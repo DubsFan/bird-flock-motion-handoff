@@ -1,0 +1,7 @@
+source=birds_only_original_pixels_v2.png
+components=17
+fps=24
+duration_seconds=8
+frames=192
+method=original-pixel left/right wing rotation around existing lower wing joint
+interpolation=nearest-neighbor

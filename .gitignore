@@ -1,0 +1,21 @@
+# Large delivered video binaries stay in the local handoff package.
+*.mov
+*.mp4
+*.webm
+*.tar
+*.zip
+
+# Generated media and browser captures not explicitly selected as QA evidence.
+*.raw
+frames/
+*_playback_frames/
+*_flap_proof/
+
+# Tool and operating-system artifacts.
+node_modules/
+.git/
+.manus-logs/
+.test-downloads/
+.DS_Store
+__pycache__/
+*.pyc
