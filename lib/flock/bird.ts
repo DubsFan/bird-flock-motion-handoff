@@ -24,16 +24,25 @@ export type BirdDraw = {
 
 export function drawBird(ctx: CanvasRenderingContext2D, b: BirdDraw) {
   const { size } = b
-  const upA = easeFlap(b.phase)
-  const upB = easeFlap(b.phase + 0.04 * b.asym) // slight lag on far wing
+  // Two eased flap phases, slightly offset, so the two wings are never a
+  // perfectly rigid mirror -> reads as a live bird, not a folded paper V.
+  const upL = easeFlap(b.phase)
+  const upR = easeFlap(b.phase + 0.05 * (0.5 + b.asym)) // far wing lags a touch
 
   const span = size
-  const rise = span * 0.5
-  const sweep = span * 0.42
+  const halfSpan = span * 0.5
+  const rise = span * (0.34 + 0.06 * b.asym) // vertical travel of the wingtips
 
-  // Elevation of each wing tip.
-  const tipAy = -upA * rise * (0.55 + 0.15 * b.asym)
-  const tipBy = -upB * rise * (0.55 + 0.15 * (1 - b.asym))
+  // Wingtip elevations (negative = up on canvas). A glide frame sits near 0.
+  const tipLy = -upL * rise
+  const tipRy = -upR * rise
+  // Elbow (wrist) points give the wing an S-curve rather than a straight arm.
+  const elbowLift = 0.42
+  const elbowLx = -halfSpan * 0.34
+  const elbowRx = halfSpan * 0.34
+  const elbowLy = tipLy * elbowLift - span * 0.02
+  const elbowRy = tipRy * elbowLift - span * 0.02
+  const noseY = -span * 0.015
 
   ctx.save()
   ctx.globalAlpha = b.alpha
@@ -41,26 +50,23 @@ export function drawBird(ctx: CanvasRenderingContext2D, b: BirdDraw) {
   ctx.fillStyle = b.color
   ctx.lineJoin = "round"
   ctx.lineCap = "round"
-  ctx.lineWidth = Math.max(0.75, span * 0.05 * b.weight)
+  ctx.lineWidth = Math.max(0.8, span * 0.055 * b.weight)
 
-  // Body: a small tapered core so distant birds still read as birds.
-  const bodyLen = span * 0.16
+  // ONE continuous ink stroke: left wingtip -> wrist -> head -> wrist -> right
+  // wingtip. A single flowing contour reads far more elegant at any scale than
+  // two disconnected wing lines.
   ctx.beginPath()
-  ctx.moveTo(-bodyLen * 0.5, 0)
-  ctx.quadraticCurveTo(bodyLen * 0.2, -span * 0.03, bodyLen * 0.7, 0)
+  ctx.moveTo(-halfSpan, tipLy)
+  ctx.quadraticCurveTo(elbowLx, elbowLy, span * 0.02, noseY)
+  ctx.quadraticCurveTo(elbowRx, elbowRy, halfSpan, tipRy)
   ctx.stroke()
 
-  // Near wing (down/back to tip).
-  ctx.beginPath()
-  ctx.moveTo(bodyLen * 0.55, 0)
-  ctx.quadraticCurveTo(-sweep * 0.15, -span * 0.02 + tipAy * 0.35, -sweep, tipAy)
-  ctx.stroke()
-
-  // Far wing.
-  ctx.beginPath()
-  ctx.moveTo(bodyLen * 0.55, 0)
-  ctx.quadraticCurveTo(-sweep * 0.15, span * 0.02 + tipBy * 0.35, -sweep, tipBy + span * 0.06)
-  ctx.stroke()
+  // Tiny body accent at the head so near birds gain a little weight/direction.
+  if (span > 9) {
+    ctx.beginPath()
+    ctx.ellipse(span * 0.05, noseY + span * 0.01, span * 0.07, span * 0.045, 0, 0, Math.PI * 2)
+    ctx.fill()
+  }
 
   ctx.restore()
 }

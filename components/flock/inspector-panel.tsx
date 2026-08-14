@@ -80,7 +80,7 @@ function NumberSlider({
         min={min}
         max={max}
         step={step}
-        onValueChange={(v) => onChange(v[0])}
+        onValueChange={(v) => onChange(Array.isArray(v) ? v[0] : v)}
         className="flex-1"
       />
       <span className="w-14 shrink-0 text-right font-mono text-xs tabular-nums text-foreground">
