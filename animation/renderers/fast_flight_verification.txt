@@ -1,6 +1,0 @@
-start_empty_frame=0 visible_alpha_pixels=0
-pre_entry_empty_frame=17 visible_alpha_pixels=0
-entry_frame=36 visible_alpha_pixels=66
-mid_flight_frame=96 visible_alpha_pixels=4429
-exit_frame=156 visible_alpha_pixels=0
-end_empty_frame=191 visible_alpha_pixels=0

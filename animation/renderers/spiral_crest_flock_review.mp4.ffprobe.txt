@@ -1,6 +1,0 @@
-codec_name=h264
-width=1672
-height=940
-pix_fmt=yuv420p
-avg_frame_rate=24/1
-duration=10.000000

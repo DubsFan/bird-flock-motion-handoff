@@ -1,6 +1,0 @@
-codec_name=prores
-width=1672
-height=941
-pix_fmt=yuva444p12le
-avg_frame_rate=24/1
-duration=10.000000
