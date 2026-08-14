@@ -1,10 +1,15 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
+import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 
+const geistSans = Geist({ subsets: ['latin'], variable: '--font-geist-sans' })
+const geistMono = Geist_Mono({ subsets: ['latin'], variable: '--font-geist-mono' })
+
 export const metadata: Metadata = {
-  title: 'v0 App',
-  description: 'Created with v0',
+  title: 'Murmur — Bird Flock Video Builder',
+  description:
+    'Design elegant, hand-drawn flocks of birds. Draw a flight path, drop a landing zone, set the dwell, and export a transparent background video for your site.',
   generator: 'v0.app',
   icons: {
     icon: [
@@ -39,8 +44,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
+    <html
+      lang="en"
+      className={`dark bg-background ${geistSans.variable} ${geistMono.variable}`}
+    >
+      <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
