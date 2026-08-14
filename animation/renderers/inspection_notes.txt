@@ -1,7 +1,0 @@
-Inspection 2026-08-13
-
-The first Hough-line removal candidate still contained many long, non-bird background/construction strokes. The stricter connected-component candidate also retained those strokes because several connect to bird strokes or meet compactness thresholds. Neither candidate is acceptable for animation.
-
-Next correction: use an aggressive, multi-scale straight-line mask on original pixels, then keep only compact hand-drawn bird contours. No generated image/video output will be used. The original supplied image is not to be altered semantically; output pixels must be copied directly from it.
-
-Second diagnostic inspection: the component-based candidate successfully removed most long construction strokes but still retains several isolated non-bird marks, including a long diagonal at the right center and lower-right slashes. The attempted coordinate exclusions did not remove the observed lines. Next pass will use measured Hough-line coordinates from the candidate alpha mask, not visually estimated coordinates.

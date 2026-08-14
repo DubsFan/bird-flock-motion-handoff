@@ -1,7 +1,0 @@
-codec_name=vp9
-width=1672
-height=940
-pix_fmt=yuv420p
-avg_frame_rate=24/1
-duration=N/A
-TAG:alpha_mode=1

@@ -1,21 +1,15 @@
-# Large delivered video binaries stay in the local handoff package.
-*.mov
-*.mp4
-*.webm
-*.tar
-*.zip
+# v0 sandbox internal files
+__v0_runtime_loader.js
+__v0_devtools.tsx
+__v0_jsx-dev-runtime.ts
+.snowflake/
+.v0-trash/
+.vercel/
 
-# Generated media and browser captures not explicitly selected as QA evidence.
-*.raw
-frames/
-*_playback_frames/
-*_flap_proof/
+# Environment variables
+.env*.local
 
-# Tool and operating-system artifacts.
-node_modules/
-.git/
-.manus-logs/
-.test-downloads/
+# Common ignores
+node_modules
+.next/
 .DS_Store
-__pycache__/
-*.pyc
