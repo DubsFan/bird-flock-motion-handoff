@@ -50,24 +50,46 @@ function shortestAngle(a: number, b: number) {
   return Math.atan2(Math.sin(b - a), Math.cos(b - a))
 }
 
-function entryPoint(first: Point, entry: Sequence["entry"], d: Dims): Point {
-  const off = 0.35
+function unit(dx: number, dy: number): Point {
+  const m = Math.hypot(dx, dy) || 1
+  return { x: dx / m, y: dy / m }
+}
+
+// The flock must fly INTO the drawn path along its own opening direction and
+// leave continuing its closing direction. Deriving the lead-in / lead-out from
+// the path tangent (instead of a fixed compass edge) is what makes the flock
+// actually follow the stroke the user drew, rather than swooping across the
+// screen to reach a mismatched entry edge.
+function entryPoint(px: Point[], entry: Sequence["entry"], d: Dims): Point {
+  const off = 0.42 * Math.max(d.w, d.h)
+  const first = px[0]
+  if (px.length >= 2) {
+    const dir = unit(px[1].x - first.x, px[1].y - first.y) // heading into the path
+    return { x: first.x - dir.x * off, y: first.y - dir.y * off }
+  }
+  // Single-point fallback: honor the compass hint.
   switch (entry) {
-    case "Enter from right": return { x: d.w * (1 + off), y: first.y - d.h * 0.08 }
-    case "Enter from left": return { x: -d.w * off, y: first.y - d.h * 0.08 }
-    case "Enter from top": return { x: first.x, y: -d.h * off }
-    case "Enter from bottom": return { x: first.x, y: d.h * (1 + off) }
+    case "Enter from right": return { x: d.w + off, y: first.y }
+    case "Enter from left": return { x: -off, y: first.y }
+    case "Enter from top": return { x: first.x, y: -off }
+    case "Enter from bottom": return { x: first.x, y: d.h + off }
   }
 }
 
-function exitPoint(last: Point, exit: Sequence["exit"], d: Dims): Point {
-  const off = 0.4
+function exitPoint(px: Point[], exit: Sequence["exit"], d: Dims): Point {
+  const off = 0.42 * Math.max(d.w, d.h)
+  const last = px[px.length - 1]
+  if (px.length >= 2) {
+    const prev = px[px.length - 2]
+    const dir = unit(last.x - prev.x, last.y - prev.y) // heading out of the path
+    return { x: last.x + dir.x * off, y: last.y + dir.y * off }
+  }
   switch (exit) {
-    case "Pull upward": return { x: last.x + d.w * 0.05, y: -d.h * off }
-    case "Exit right": return { x: d.w * (1 + off), y: last.y - d.h * 0.1 }
-    case "Exit left": return { x: -d.w * off, y: last.y - d.h * 0.1 }
-    case "Drift down": return { x: last.x, y: d.h * (1 + off) }
-    case "Scatter": return { x: last.x + d.w * 0.05, y: -d.h * off * 0.6 }
+    case "Pull upward": return { x: last.x, y: -off }
+    case "Exit right": return { x: d.w + off, y: last.y }
+    case "Exit left": return { x: -off, y: last.y }
+    case "Drift down": return { x: last.x, y: d.h + off }
+    case "Scatter": return { x: last.x, y: -off * 0.6 }
   }
 }
 
@@ -102,22 +124,29 @@ function prepare(seq: Sequence, d: Dims): Prepared {
   const sig = sigFor(seq, d)
   const hit = cache.get(seq.id)
   if (hit?.sig === sig) return hit
+  const PER_SEGMENT = 64
   const px = seq.points.map((p) => ({ x: p.x * d.w, y: p.y * d.h }))
-  const first = px[0] ?? { x: d.w * 0.5, y: d.h * 0.5 }
-  const last = px.at(-1) ?? first
-  const path = samplePath([entryPoint(first, seq.entry, d), ...px, exitPoint(last, seq.exit, d)], 64)
+  const fallback = { x: d.w * 0.5, y: d.h * 0.5 }
+  const safePx = px.length ? px : [fallback]
+  const path = samplePath([entryPoint(safePx, seq.entry, d), ...safePx, exitPoint(safePx, seq.exit, d)], PER_SEGMENT)
   let landU = 0.55
   if (seq.landing) {
     const cx = (seq.landing.x + seq.landing.w / 2) * d.w
     const cy = (seq.landing.y + seq.landing.h / 2) * d.h
+    // Only snap to the DRAWN portion of the path. Samples 0..PER_SEGMENT are
+    // the off-screen lead-in and the tail is the lead-out; landing on those
+    // would make the flock settle mid-swoop instead of on the visible stroke.
+    const firstUserIdx = PER_SEGMENT
+    const lastUserIdx = PER_SEGMENT * Math.max(1, safePx.length)
     let nearest = Infinity
-    path.points.forEach((point, index) => {
+    for (let index = firstUserIdx; index <= lastUserIdx && index < path.points.length; index++) {
+      const point = path.points[index]
       const distance = (point.x - cx) ** 2 + (point.y - cy) ** 2
       if (distance < nearest) {
         nearest = distance
         landU = path.cumulative[index] / Math.max(1, path.length)
       }
-    })
+    }
   }
   const prepared = { path, landU, landDistance: landU * path.length, seeds: buildBirdSeeds(seq), sig }
   cache.set(seq.id, prepared)
