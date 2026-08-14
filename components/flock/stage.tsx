@@ -6,10 +6,12 @@ import {
   useEffect,
   useImperativeHandle,
   useLayoutEffect,
+  useMemo,
   useRef,
   useState,
 } from "react"
-import { renderProjectFrame } from "@/lib/flock/engine"
+import { buildMotionPath, renderProjectFrame } from "@/lib/flock/engine"
+import { preloadBirdTemplate } from "@/lib/flock/template-renderer"
 import type { BirdTemplate, LandingZone, Point, SceneSource, Sequence, Style } from "@/lib/flock/types"
 
 export type StageMode = "draw" | "landing" | "edit"
@@ -85,6 +87,7 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
   const wrapRef = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [dims, setDims] = useState({ w: 0, h: 0 })
+  const [artworkState, setArtworkState] = useState<"loading" | "ready" | "error">("loading")
 
   const tRef = useRef(0)
   const playingRef = useRef(false)
@@ -96,6 +99,7 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
   const styleRef = useRef(style)
   const durRef = useRef(totalDuration)
   const templateRef = useRef(birdTemplate)
+  const assignedTemplatesRef = useRef<BirdTemplate[]>([])
   seqRef.current = sequences
   styleRef.current = style
   durRef.current = totalDuration
@@ -122,26 +126,56 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
     if (!canvas || dims.w === 0) return
     const ctx = canvas.getContext("2d")
     if (!ctx) return
-    const dpr = Math.min(window.devicePixelRatio || 1, 2)
+    const dpr = Math.min(window.devicePixelRatio || 1, 3)
     if (canvas.width !== Math.round(dims.w * dpr) || canvas.height !== Math.round(dims.h * dpr)) {
       canvas.width = Math.round(dims.w * dpr)
       canvas.height = Math.round(dims.h * dpr)
     }
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    ctx.imageSmoothingEnabled = true
+    ctx.imageSmoothingQuality = "high"
     renderProjectFrame(ctx, tRef.current, seqRef.current, styleRef.current, { w: dims.w, h: dims.h }, durRef.current, templateRef.current)
   }, [dims])
+
+  const assignedTemplates = [birdTemplate, ...sequences.flatMap((sequence) => sequence.birdTemplate ? [sequence.birdTemplate] : [])]
+  assignedTemplatesRef.current = [...new Map(assignedTemplates.map((template) => [template.id, template])).values()]
+  const templateKey = assignedTemplatesRef.current.map((template) => [
+      template.id,
+      template.frames.join("|"),
+      template.actionFrames?.approach.join("|") ?? "",
+      template.actionFrames?.perch.join("|") ?? "",
+      template.actionFrames?.launch.join("|") ?? "",
+    ].join(":")).join("||")
+
+  useEffect(() => {
+    let current = true
+    setArtworkState("loading")
+    void Promise.all(assignedTemplatesRef.current.map(preloadBirdTemplate)).then(() => {
+      if (!current) return
+      setArtworkState("ready")
+      draw()
+    }).catch(() => {
+      if (current) setArtworkState("error")
+    })
+    return () => {
+      current = false
+    }
+  }, [draw, templateKey])
 
   // Animation loop.
   useEffect(() => {
     const tick = (ts: number) => {
       rafRef.current = requestAnimationFrame(tick)
+      if (!playingRef.current) return
       if (!lastTsRef.current) lastTsRef.current = ts
       const dt = (ts - lastTsRef.current) / 1000
       lastTsRef.current = ts
-      if (playingRef.current) {
-        const total = durRef.current || 1
-        tRef.current += dt / total
-        if (tRef.current >= 1) {
+      const total = durRef.current || 1
+      tRef.current += dt / total
+      if (tRef.current >= 1) {
+        if (seqRef.current.some((sequence) => sequence.loopPath)) {
+          tRef.current %= 1
+        } else {
           tRef.current = 1
           playingRef.current = false
           onEnded()
@@ -286,9 +320,14 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
 
   // Overlay geometry in px.
   const px = (p: Point) => ({ x: p.x * dims.w, y: p.y * dims.h })
-  const pathD = active && active.points.length >= 2
-    ? active.points.map((p, i) => `${i === 0 ? "M" : "L"} ${(p.x * dims.w).toFixed(1)} ${(p.y * dims.h).toFixed(1)}`).join(" ")
-    : ""
+  const pathD = useMemo(() => {
+    if (!active || active.points.length < 2 || dims.w <= 0) return ""
+    const guidePath = buildMotionPath(active, dims).path.points
+    return guidePath
+      .filter((_, index) => index % 4 === 0 || index === guidePath.length - 1)
+      .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`)
+      .join(" ")
+  }, [active, dims])
 
   const cursor = mode === "edit" ? "default" : "crosshair"
 
@@ -322,8 +361,12 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
           className="pointer-events-none absolute inset-0 h-full w-full border-0 bg-background"
         />
       ) : (
-        <div className="pointer-events-none absolute inset-0 opacity-[0.5]" aria-hidden>
-          <div className="h-full w-full" style={{ backgroundImage: "linear-gradient(to right, var(--border) 1px, transparent 1px), linear-gradient(to bottom, var(--border) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{ backgroundColor: style.backgroundColor || "#f3efe6" }}
+          aria-hidden
+        >
+          <div className="h-full w-full opacity-40" style={{ backgroundImage: "linear-gradient(to right, #64748b33 1px, transparent 1px), linear-gradient(to bottom, #64748b33 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
         </div>
       )}
 
@@ -333,6 +376,16 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
         className="pointer-events-none absolute inset-0 h-full w-full"
         style={{ width: dims.w, height: dims.h }}
       />
+
+      {artworkState !== "ready" && (
+        <div
+          className="pointer-events-none absolute left-3 top-3 rounded-md border border-border bg-background/90 px-2.5 py-1.5 text-[11px] text-muted-foreground shadow-sm"
+          role={artworkState === "error" ? "alert" : "status"}
+          aria-live="polite"
+        >
+          {artworkState === "error" ? "Artist bird artwork could not load." : "Loading artist bird artwork…"}
+        </div>
+      )}
 
       {/* Interaction + guides overlay */}
       <svg
@@ -348,58 +401,113 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
         {showGuides && active && (
           <g>
             {pathD && (
-              <path
-                d={pathD}
-                fill="none"
-                stroke="var(--primary)"
-                strokeWidth={2}
-                strokeDasharray="6 6"
-                strokeLinecap="round"
-                opacity={0.85}
-              />
+              <g aria-label="Flight path guide">
+                <path
+                  d={pathD}
+                  fill="none"
+                  stroke="#050505"
+                  strokeWidth={7}
+                  strokeDasharray="8 7"
+                  strokeLinecap="round"
+                  opacity={0.92}
+                />
+                <path
+                  d={pathD}
+                  fill="none"
+                  stroke="#ffffff"
+                  strokeWidth={5}
+                  strokeDasharray="8 7"
+                  strokeLinecap="round"
+                />
+                <path
+                  d={pathD}
+                  fill="none"
+                  stroke="#0284c7"
+                  strokeWidth={2.5}
+                  strokeDasharray="8 7"
+                  strokeLinecap="round"
+                />
+              </g>
             )}
             {active.points.map((p, i) => {
               const c = px(p)
+              const isStart = i === 0
+              const isEnd = i === active.points.length - 1
+              const pointColor = isStart ? "#16a34a" : isEnd ? "#dc2626" : "#0284c7"
               return (
-                <circle
-                  key={i}
-                  cx={c.x}
-                  cy={c.y}
-                  r={i === 0 || i === active.points.length - 1 ? 6 : 4}
-                  fill={i === 0 ? "var(--primary)" : "var(--card)"}
-                  stroke="var(--primary)"
-                  strokeWidth={2}
-                />
+                <g key={i} aria-label={isStart ? "Path start" : isEnd ? "Path end" : "Path control point"}>
+                  <circle cx={c.x} cy={c.y} r={isStart || isEnd ? 9 : 7} fill="#050505" />
+                  <circle cx={c.x} cy={c.y} r={isStart || isEnd ? 7 : 5.5} fill="#ffffff" />
+                  <circle cx={c.x} cy={c.y} r={isStart || isEnd ? 4.5 : 3.5} fill={pointColor} />
+                </g>
               )
             })}
             {active.landing && (
-              <g>
+              <g aria-label="Landing zone guide">
                 <rect
                   x={active.landing.x * dims.w}
                   y={active.landing.y * dims.h}
                   width={active.landing.w * dims.w}
                   height={active.landing.h * dims.h}
-                  fill="var(--primary)"
-                  fillOpacity={0.08}
-                  stroke="var(--primary)"
-                  strokeWidth={1.5}
-                  strokeDasharray="4 4"
-                  rx={4}
+                  fill="none"
+                  stroke="#050505"
+                  strokeWidth={7}
+                  strokeDasharray="10 7"
+                  rx={5}
+                />
+                <rect
+                  x={active.landing.x * dims.w}
+                  y={active.landing.y * dims.h}
+                  width={active.landing.w * dims.w}
+                  height={active.landing.h * dims.h}
+                  fill="none"
+                  stroke="#ffffff"
+                  strokeWidth={5}
+                  strokeDasharray="10 7"
+                  rx={5}
+                />
+                <rect
+                  x={active.landing.x * dims.w}
+                  y={active.landing.y * dims.h}
+                  width={active.landing.w * dims.w}
+                  height={active.landing.h * dims.h}
+                  fill="#f59e0b"
+                  fillOpacity={0.18}
+                  stroke="#f59e0b"
+                  strokeWidth={2.5}
+                  strokeDasharray="10 7"
+                  rx={5}
                 />
                 <circle
                   cx={(active.landing.x + active.landing.w) * dims.w}
                   cy={(active.landing.y + active.landing.h) * dims.h}
-                  r={5}
-                  fill="var(--primary)"
+                  r={9}
+                  fill="#050505"
+                />
+                <circle
+                  cx={(active.landing.x + active.landing.w) * dims.w}
+                  cy={(active.landing.y + active.landing.h) * dims.h}
+                  r={7}
+                  fill="#ffffff"
+                />
+                <circle
+                  cx={(active.landing.x + active.landing.w) * dims.w}
+                  cy={(active.landing.y + active.landing.h) * dims.h}
+                  r={4.5}
+                  fill="#f59e0b"
                 />
                 <text
                   x={active.landing.x * dims.w + 6}
-                  y={active.landing.y * dims.h + 14}
-                  fill="var(--primary)"
-                  fontSize={10}
+                  y={active.landing.y * dims.h + 16}
+                  fill="#111827"
+                  stroke="#ffffff"
+                  strokeWidth={4}
+                  paintOrder="stroke fill"
+                  fontSize={11}
+                  fontWeight={700}
                   fontFamily="var(--font-mono)"
                 >
-                  land · {active.dwellSeconds}s
+                  LANDING · {active.dwellSeconds}s
                 </text>
               </g>
             )}

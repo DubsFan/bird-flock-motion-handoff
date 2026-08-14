@@ -1,252 +1,408 @@
-import JSZip from "jszip"
-import { buildDesignerBriefMarkdown, buildMotionBriefJson } from "./brief"
-import { projectDuration, renderProjectFrame, renderSequence } from "./engine"
+import {
+  buildApplicationGuide,
+  buildDesignerBriefMarkdown,
+  buildMotionBriefJson,
+} from "./brief"
+import { projectDuration, renderProjectFrame, renderSequence, sequenceDuration } from "./engine"
+import { preloadBirdTemplate } from "./template-renderer"
 import type { Project } from "./types"
 
 export type ExportSize = { width: number; height: number }
+export type ExportSignal = { cancelled: boolean }
+export type ExportProgress = (progress: number) => void
 
-// Clamp export width and derive height from viewport aspect.
-export function exportDims(project: Project, maxWidth = 1600): ExportSize {
-  const aspect = project.viewport.height / project.viewport.width
-  const width = Math.min(maxWidth, project.viewport.width)
-  return { width: Math.round(width), height: Math.round(width * aspect) }
+type BaseExportOptions = {
+  baseName?: string
+  fps?: number
+  maxWidth?: number
+  onProgress?: ExportProgress
+  signal?: ExportSignal
+}
+
+export type VideoSupport = {
+  mp4: boolean
+  opaqueWebm: boolean
+  transparentWebm: boolean
+}
+
+function even(value: number) {
+  const rounded = Math.max(2, Math.round(value))
+  return rounded % 2 === 0 ? rounded : rounded - 1
+}
+
+export function exportDims(project: Pick<Project, "viewport">, maxWidth = 1600): ExportSize {
+  const aspect = project.viewport.height / Math.max(1, project.viewport.width)
+  const width = even(Math.min(maxWidth, project.viewport.width))
+  return { width, height: even(width * aspect) }
 }
 
 function download(blob: Blob, filename: string) {
   const url = URL.createObjectURL(blob)
-  const a = document.createElement("a")
-  a.href = url
-  a.download = filename
-  document.body.appendChild(a)
-  a.click()
-  a.remove()
-  setTimeout(() => URL.revokeObjectURL(url), 2000)
+  window.dispatchEvent(new CustomEvent("murmur-export-ready", { detail: { url, filename } }))
+  const anchor = document.createElement("a")
+  anchor.href = url
+  anchor.download = filename
+  document.body.appendChild(anchor)
+  anchor.click()
+  anchor.remove()
+  // Keep the result available long enough for the persistent in-app download
+  // link. Large browser-generated files can outlive the original click gesture.
+  setTimeout(() => URL.revokeObjectURL(url), 10 * 60 * 1000)
 }
 
-function makeCanvas(w: number, h: number): { canvas: HTMLCanvasElement; ctx: CanvasRenderingContext2D } {
+function makeCanvas(width: number, height: number) {
   const canvas = document.createElement("canvas")
-  canvas.width = w
-  canvas.height = h
-  const ctx = canvas.getContext("2d", { alpha: true })!
+  canvas.width = width
+  canvas.height = height
+  const ctx = canvas.getContext("2d", { alpha: true })
+  if (!ctx) throw new Error("Canvas 2D rendering is unavailable in this browser.")
   return { canvas, ctx }
 }
 
-function slug(s: string) {
-  return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "") || "flock"
+export function safeExportName(value: string) {
+  const cleaned = value
+    .trim()
+    .replace(/\.[a-z0-9]{2,5}$/i, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/(^-|-$)/g, "")
+  return cleaned || "flock"
 }
 
-// --- Codec feature detection ------------------------------------------------
-export type VideoSupport = { opaque: boolean; transparent: boolean; mime: string | null }
+export function buildProResCommand(name: string, fps: number, pad: number) {
+  return [
+    "#!/bin/zsh",
+    "set -euo pipefail",
+    'script_dir="${0:A:h}"',
+    'cd "$script_dir"',
+    "if ! command -v ffmpeg >/dev/null 2>&1; then",
+    '  echo "FFmpeg is required. Install it, then double-click this file again."',
+    '  read -r "reply?Press Return to close…"',
+    "  exit 1",
+    "fi",
+    `ffmpeg -y -framerate ${fps} -i "frames/frame_%0${pad}d.png" -c:v prores_ks -profile:v 4444 -pix_fmt yuva444p10le "${name}-prores4444.mov"`,
+    'echo ""',
+    `echo "Created ${name}-prores4444.mov"`,
+    'read -r "reply?Press Return to close…"',
+    "",
+  ].join("\n")
+}
 
-export function detectVideoSupport(): VideoSupport {
-  if (typeof window === "undefined" || typeof MediaRecorder === "undefined") {
-    return { opaque: false, transparent: false, mime: null }
+async function preloadProjectBirdTemplates(project: Project) {
+  const templates = [project.birdTemplate, ...project.sequences.flatMap((sequence) => sequence.birdTemplate ? [sequence.birdTemplate] : [])]
+  const unique = [...new Map(templates.map((template) => [template.id, template])).values()]
+  await Promise.all(unique.map(preloadBirdTemplate))
+}
+
+function outputName(project: Project, requested?: string) {
+  return safeExportName(requested || project.name)
+}
+
+export async function detectVideoSupport(project?: Pick<Project, "viewport">): Promise<VideoSupport> {
+  if (typeof window === "undefined") return { mp4: false, opaqueWebm: false, transparentWebm: false }
+  try {
+    const { canEncodeVideo, QUALITY_HIGH } = await import("mediabunny")
+    const { width, height } = project
+      ? exportDims(project)
+      : { width: 1280, height: 720 }
+    const [mp4, opaqueWebm, transparentWebm] = await Promise.all([
+      canEncodeVideo("avc", { width, height, quality: QUALITY_HIGH, alpha: "discard" }),
+      canEncodeVideo("vp9", { width, height, quality: QUALITY_HIGH, alpha: "discard" }),
+      canEncodeVideo("vp9", { width, height, quality: QUALITY_HIGH, alpha: "keep" }),
+    ])
+    return { mp4, opaqueWebm, transparentWebm }
+  } catch {
+    return { mp4: false, opaqueWebm: false, transparentWebm: false }
   }
-  const candidates = ["video/webm;codecs=vp9", "video/webm;codecs=vp8", "video/webm"]
-  const mime = candidates.find((c) => MediaRecorder.isTypeSupported(c)) ?? null
-  // Transparent webm is best-effort and Chromium-only in practice.
-  const transparent = !!mime && /Chrome/.test(navigator.userAgent) && !/Edg\//.test(navigator.userAgent)
-  return { opaque: !!mime, transparent, mime }
 }
 
-// --- Tier 1: transparent PNG frame sequence -> ZIP (guaranteed alpha) --------
-export async function exportPngSequenceZip(
+async function loadSceneImage(project: Project) {
+  const src = project.scene.kind === "image" ? project.scene.dataUrl : project.backdropDataUrl
+  if (!src) return null
+  return await new Promise<HTMLImageElement | null>((resolve) => {
+    const image = new Image()
+    image.crossOrigin = "anonymous"
+    image.onload = () => resolve(image)
+    image.onerror = () => resolve(null)
+    image.src = src
+  })
+}
+
+function renderFlocksOnly(
+  ctx: CanvasRenderingContext2D,
+  globalT: number,
   project: Project,
-  opts: { fps?: number; maxWidth?: number; onProgress?: (p: number) => void; signal?: { cancelled: boolean } } = {},
+  total: number,
 ) {
-  const fps = opts.fps ?? project.fps ?? 30
-  const { width, height } = exportDims(project, opts.maxWidth ?? 1600)
+  const seconds = Math.max(0, Math.min(1, globalT)) * total
+  for (const sequence of project.sequences) {
+    if (sequence.points.length < 2) continue
+    const localT = Math.max(0, Math.min(1, seconds / Math.max(0.001, sequenceDuration(sequence))))
+    renderSequence(
+      ctx,
+      sequence,
+      localT,
+      project.style,
+      { w: ctx.canvas.width, h: ctx.canvas.height },
+      sequence.birdTemplate ?? project.birdTemplate,
+    )
+  }
+}
+
+function composeFrame(
+  ctx: CanvasRenderingContext2D,
+  t: number,
+  project: Project,
+  total: number,
+  transparent: boolean,
+  background: HTMLImageElement | null,
+) {
+  const { width, height } = ctx.canvas
+  ctx.clearRect(0, 0, width, height)
+  if (!transparent) {
+    ctx.fillStyle = project.style.backgroundColor || "#0b1220"
+    ctx.fillRect(0, 0, width, height)
+    if (background) {
+      drawImageContain(ctx, background, width, height)
+    }
+  }
+  renderFlocksOnly(ctx, t, project, total)
+}
+
+function drawImageContain(
+  ctx: CanvasRenderingContext2D,
+  image: CanvasImageSource & { width: number; height: number },
+  width: number,
+  height: number,
+) {
+  const scale = Math.min(width / image.width, height / image.height)
+  const drawWidth = image.width * scale
+  const drawHeight = image.height * scale
+  ctx.drawImage(image, (width - drawWidth) / 2, (height - drawHeight) / 2, drawWidth, drawHeight)
+}
+
+async function exportEncodedVideo(
+  project: Project,
+  format: "mp4" | "webm",
+  options: BaseExportOptions & { transparent?: boolean } = {},
+) {
+  const {
+    BufferTarget,
+    CanvasSource,
+    Mp4OutputFormat,
+    Output,
+    QUALITY_HIGH,
+    WebMOutputFormat,
+    canEncodeVideo,
+  } = await import("mediabunny")
+
+  const fps = options.fps ?? project.fps ?? 30
+  const { width, height } = exportDims(project, options.maxWidth ?? 1600)
   const total = projectDuration(project.sequences)
-  const frames = Math.max(1, Math.round(total * fps))
+  const frameCount = Math.max(1, Math.ceil(total * fps))
+  const transparent = format === "webm" && !!options.transparent
+  const codec = format === "mp4" ? "avc" : "vp9"
+  const supported = await canEncodeVideo(codec, {
+    width,
+    height,
+    quality: QUALITY_HIGH,
+    alpha: transparent ? "keep" : "discard",
+  })
+  if (!supported) {
+    throw new Error(
+      format === "mp4"
+        ? "This browser cannot encode H.264 MP4. Use Chrome or Safari with WebCodecs support, or export the frame handoff."
+        : "This browser cannot encode VP9 WebM with the requested alpha mode. Use the transparent frame handoff.",
+    )
+  }
+
+  await preloadProjectBirdTemplates(project)
+
+  const { canvas, ctx } = makeCanvas(width, height)
+  const background = transparent ? null : await loadSceneImage(project)
+  const target = new BufferTarget()
+  const output = new Output({
+    format: format === "mp4" ? new Mp4OutputFormat({ fastStart: "in-memory" }) : new WebMOutputFormat(),
+    target,
+  })
+  const source = new CanvasSource(canvas, {
+    codec,
+    quality: QUALITY_HIGH,
+    alpha: transparent ? "keep" : "discard",
+    keyFrameInterval: 2,
+  })
+  output.addVideoTrack(source, { frameRate: fps })
+  output.setMetadataTags({ title: project.name, comment: "Created with Murmur Bird Flock Video Builder" })
+  await output.start()
+
+  try {
+    for (let index = 0; index < frameCount; index++) {
+      if (options.signal?.cancelled) throw new Error("cancelled")
+      const t = frameCount <= 1 ? 0 : index / (frameCount - 1)
+      composeFrame(ctx, t, project, total, transparent, background)
+      await source.add(index / fps, 1 / fps, { keyFrame: index % Math.max(1, fps * 2) === 0 })
+      options.onProgress?.((index + 1) / frameCount)
+    }
+    await output.finalize()
+  } catch (error) {
+    if (output.state !== "finalized" && output.state !== "canceled") await output.cancel()
+    throw error
+  }
+
+  if (!target.buffer) throw new Error("The browser encoder completed without producing a video buffer.")
+  const name = outputName(project, options.baseName)
+  const suffix = transparent ? "-alpha" : ""
+  const type = format === "mp4" ? "video/mp4" : "video/webm"
+  download(new Blob([target.buffer], { type }), `${name}${suffix}.${format}`)
+}
+
+export function exportMp4(project: Project, options: BaseExportOptions = {}) {
+  return exportEncodedVideo(project, "mp4", { ...options, transparent: false })
+}
+
+export function exportWebM(
+  project: Project,
+  options: BaseExportOptions & { transparent?: boolean } = {},
+) {
+  return exportEncodedVideo(project, "webm", options)
+}
+
+type FrameBundleMode = "standard" | "apple"
+
+async function exportFrameBundle(
+  project: Project,
+  mode: FrameBundleMode,
+  options: BaseExportOptions = {},
+) {
+  const { default: JSZip } = await import("jszip")
+  const fps = options.fps ?? project.fps ?? 30
+  const { width, height } = exportDims(project, options.maxWidth ?? 1600)
+  const total = projectDuration(project.sequences)
+  const frames = Math.max(1, Math.ceil(total * fps))
+  await preloadProjectBirdTemplates(project)
   const { canvas, ctx } = makeCanvas(width, height)
   const zip = new JSZip()
   const folder = zip.folder("frames")!
   const pad = String(frames).length
+  const name = outputName(project, options.baseName)
 
-  for (let i = 0; i < frames; i++) {
-    if (opts.signal?.cancelled) throw new Error("cancelled")
-    const t = frames <= 1 ? 0 : i / frames
-    renderProjectFrame(ctx, t, project.sequences, project.style, { w: width, h: height }, total, project.birdTemplate)
-    const blob = await new Promise<Blob | null>((res) => canvas.toBlob(res, "image/png"))
-    if (blob) folder.file(`frame_${String(i).padStart(pad, "0")}.png`, blob)
-    opts.onProgress?.((i + 1) / frames)
-    // Yield to keep UI responsive.
-    if (i % 4 === 0) await new Promise((r) => setTimeout(r, 0))
+  for (let index = 0; index < frames; index++) {
+    if (options.signal?.cancelled) throw new Error("cancelled")
+    const t = frames <= 1 ? 0 : index / (frames - 1)
+    renderProjectFrame(
+      ctx,
+      t,
+      project.sequences,
+      project.style,
+      { w: width, h: height },
+      total,
+      project.birdTemplate,
+    )
+    const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/png"))
+    if (!blob) throw new Error(`Could not render frame ${index + 1}.`)
+    folder.file(`frame_${String(index).padStart(pad, "0")}.png`, blob)
+    options.onProgress?.(((index + 1) / frames) * 0.85)
+    if (index % 4 === 0) await new Promise((resolve) => setTimeout(resolve, 0))
   }
 
-  const name = slug(project.name)
-  zip.file(
-    "README.txt",
-    [
-      `${project.name} — transparent bird flock frame sequence`,
-      ``,
-      `${frames} PNG frames at ${fps} fps (${width}x${height}), full alpha transparency.`,
-      ``,
-      `Assemble a TRUE transparent-background video with ffmpeg:`,
-      ``,
-      `# VP9 WebM with alpha (web background video):`,
-      `ffmpeg -framerate ${fps} -i frames/frame_%0${pad}d.png \\`,
-      `  -c:v libvpx-vp9 -pix_fmt yuva420p -b:v 0 -crf 24 ${name}.webm`,
-      ``,
-      `# ProRes 4444 MOV with alpha (editing / After Effects):`,
-      `ffmpeg -framerate ${fps} -i frames/frame_%0${pad}d.png \\`,
-      `  -c:v prores_ks -profile:v 4444 -pix_fmt yuva444p10le ${name}.mov`,
-      ``,
-      `Then drop it into your site:`,
-      `<video autoplay muted loop playsinline src="${name}.webm"></video>`,
-    ].join("\n"),
-  )
+  const readme = mode === "apple"
+    ? [
+        `${name} — Apple transparent video handoff`,
+        "",
+        `${frames} transparent PNG frames at ${fps} fps (${width}x${height}).`,
+        "",
+        "IMPORTANT: HEIC is a still-image/image-sequence container. The Apple transparent video delivery format is HEVC with alpha in a .mov file.",
+        "",
+        "Recommended Apple workflow:",
+        "1. For an editing-ready transparent MOV, double-click MAKE_PRORES_4444.command. It uses FFmpeg and creates a ProRes 4444 alpha master beside this README.",
+        "2. For the smallest Apple playback file, import the numbered PNG sequence into Apple Compressor, Final Cut Pro, or an AVFoundation workflow.",
+        `3. Set the frame rate to ${fps} fps and preserve the ${width}x${height} canvas.`,
+        `4. Export HEVC with alpha as ${name}-alpha.mov.`,
+        "5. Keep premultiplied alpha unless the destination pipeline explicitly requires straight alpha.",
+        "",
+        "Portable editing intermediate (requires ffmpeg):",
+        `ffmpeg -framerate ${fps} -i frames/frame_%0${pad}d.png -c:v prores_ks -profile:v 4444 -pix_fmt yuva444p10le ${name}-prores4444.mov`,
+        "",
+        "Use the included AGENTS.md for site integration and browser fallbacks.",
+      ].join("\n")
+    : [
+        `${name} — transparent bird flock frame sequence`,
+        "",
+        `${frames} PNG frames at ${fps} fps (${width}x${height}), with full alpha transparency.`,
+        "",
+        "VP9 WebM with alpha:",
+        `ffmpeg -framerate ${fps} -i frames/frame_%0${pad}d.png -c:v libvpx-vp9 -pix_fmt yuva420p -b:v 0 -crf 24 ${name}-alpha.webm`,
+        "",
+        "ProRes 4444 editing master:",
+        `ffmpeg -framerate ${fps} -i frames/frame_%0${pad}d.png -c:v prores_ks -profile:v 4444 -pix_fmt yuva444p10le ${name}-prores4444.mov`,
+      ].join("\n")
+
+  zip.file("README.txt", readme)
+  zip.file("MAKE_PRORES_4444.command", buildProResCommand(name, fps, pad), { unixPermissions: 0o755 })
+  zip.file("AGENTS.md", buildApplicationGuide(project, name))
   zip.file(`${name}.motion-brief.json`, JSON.stringify(buildMotionBriefJson(project), null, 2))
-
-  opts.onProgress?.(1)
-  const out = await zip.generateAsync({ type: "blob" }, (m) => {
-    // zipping progress in the last 0..1 stretch is folded into 1
+  const blob = await zip.generateAsync({ type: "blob", platform: "UNIX" }, (metadata) => {
+    options.onProgress?.(0.85 + (metadata.percent / 100) * 0.15)
   })
-  download(out, `${name}-frames.zip`)
+  download(blob, `${name}-${mode === "apple" ? "apple-hevc-alpha-handoff" : "frames"}.zip`)
 }
 
-// --- Tier 2/3: in-browser WebM via deterministic capture --------------------
-export async function exportWebM(
-  project: Project,
-  opts: {
-    fps?: number
-    maxWidth?: number
-    transparent?: boolean
-    onProgress?: (p: number) => void
-    signal?: { cancelled: boolean }
-  } = {},
-): Promise<void> {
-  const support = detectVideoSupport()
-  if (!support.mime) throw new Error("WebM recording is not supported in this browser. Use the PNG sequence export.")
-
-  const fps = opts.fps ?? project.fps ?? 30
-  const { width, height } = exportDims(project, opts.maxWidth ?? 1600)
-  const total = projectDuration(project.sequences)
-  const frames = Math.max(1, Math.round(total * fps))
-  const transparent = !!opts.transparent && support.transparent
-
-  const { canvas, ctx } = makeCanvas(width, height)
-
-  // Optional backdrop image for opaque background composition.
-  let bg: HTMLImageElement | null = null
-  if (!transparent && project.backdropDataUrl) {
-    bg = await new Promise<HTMLImageElement | null>((res) => {
-      const img = new Image()
-      img.crossOrigin = "anonymous"
-      img.onload = () => res(img)
-      img.onerror = () => res(null)
-      img.src = project.backdropDataUrl!
-    })
-  }
-
-  const stream = canvas.captureStream(0)
-  const track = stream.getVideoTracks()[0] as CanvasCaptureMediaStreamTrack
-  const rec = new MediaRecorder(stream, { mimeType: support.mime, videoBitsPerSecond: 12_000_000 })
-  const chunks: BlobPart[] = []
-  rec.ondataavailable = (e) => e.data.size > 0 && chunks.push(e.data)
-
-  const done = new Promise<Blob>((resolve) => {
-    rec.onstop = () => resolve(new Blob(chunks, { type: "video/webm" }))
-  })
-
-  rec.start()
-
-  const composeFrame = (t: number) => {
-    if (transparent) {
-      ctx.clearRect(0, 0, width, height)
-    } else {
-      ctx.clearRect(0, 0, width, height)
-      if (bg) {
-        ctx.drawImage(bg, 0, 0, width, height)
-      } else {
-        ctx.fillStyle = project.style.backgroundColor || "#0b1220"
-        ctx.fillRect(0, 0, width, height)
-      }
-    }
-    // Draw flocks over the composed background (renderProjectFrame clears, so
-    // draw sequences directly here by re-using the same routine on a scratch).
-    renderFlocksOnly(ctx, t, project, total)
-  }
-
-  for (let i = 0; i < frames; i++) {
-    if (opts.signal?.cancelled) {
-      rec.stop()
-      throw new Error("cancelled")
-    }
-    const t = frames <= 1 ? 0 : i / frames
-    composeFrame(t)
-    if (typeof track.requestFrame === "function") track.requestFrame()
-    else (stream as unknown as { requestFrame?: () => void }).requestFrame?.()
-    opts.onProgress?.((i + 1) / frames)
-    // Give the encoder a moment per frame (deterministic, not real-time).
-    await new Promise((r) => setTimeout(r, 1000 / Math.min(fps, 60) / 2))
-  }
-
-  rec.stop()
-  const blob = await done
-  download(blob, `${slug(project.name)}${transparent ? "-alpha" : ""}.webm`)
+export function exportPngSequenceZip(project: Project, options: BaseExportOptions = {}) {
+  return exportFrameBundle(project, "standard", options)
 }
 
-// renderProjectFrame clears the canvas; when compositing over a background we
-// need to draw only the birds. Re-run per-sequence render without clearing.
-function renderFlocksOnly(ctx: CanvasRenderingContext2D, globalT: number, project: Project, total: number) {
-  const seconds = Math.max(0, Math.min(1, globalT)) * total
-  for (const seq of project.sequences) {
-    if (seq.points.length < 2) continue
-    const tSeq = Math.max(0, Math.min(1, seconds / Math.max(0.001, seq.durationSeconds)))
-    renderSequence(ctx, seq, tSeq, project.style, { w: ctx.canvas.width, h: ctx.canvas.height }, project.birdTemplate)
-  }
+export function exportAppleAlphaBundle(project: Project, options: BaseExportOptions = {}) {
+  return exportFrameBundle(project, "apple", options)
 }
 
-// --- Brief + visual map exports --------------------------------------------
-export function exportMotionBriefJson(project: Project) {
-  const blob = new Blob([JSON.stringify(buildMotionBriefJson(project), null, 2)], { type: "application/json" })
-  download(blob, `${slug(project.name)}.motion-brief.json`)
+export function exportMotionBriefJson(project: Project, baseName?: string) {
+  const name = outputName(project, baseName)
+  download(
+    new Blob([JSON.stringify(buildMotionBriefJson(project), null, 2)], { type: "application/json" }),
+    `${name}.motion-brief.json`,
+  )
 }
 
-export function exportDesignerBrief(project: Project) {
-  const blob = new Blob([buildDesignerBriefMarkdown(project)], { type: "text/markdown" })
-  download(blob, `${slug(project.name)}.brief.md`)
+export function exportDesignerBrief(project: Project, baseName?: string) {
+  const name = outputName(project, baseName)
+  download(new Blob([buildDesignerBriefMarkdown(project)], { type: "text/markdown" }), `${name}.brief.md`)
 }
 
-export async function exportVisualMap(project: Project) {
+export function exportApplicationGuide(project: Project, baseName?: string) {
+  const name = outputName(project, baseName)
+  download(new Blob([buildApplicationGuide(project, name)], { type: "text/markdown" }), `${name}.AGENTS.md`)
+}
+
+export async function exportVisualMap(project: Project, baseName?: string) {
   const { width, height } = exportDims(project, 1600)
   const { canvas, ctx } = makeCanvas(width, height)
   ctx.fillStyle = "#0b1220"
   ctx.fillRect(0, 0, width, height)
-  if (project.backdropDataUrl) {
-    const img = await new Promise<HTMLImageElement | null>((res) => {
-      const im = new Image()
-      im.crossOrigin = "anonymous"
-      im.onload = () => res(im)
-      im.onerror = () => res(null)
-      im.src = project.backdropDataUrl!
-    })
-    if (img) ctx.drawImage(img, 0, 0, width, height)
-  }
-  for (const s of project.sequences) {
+  const background = await loadSceneImage(project)
+  if (background) drawImageContain(ctx, background, width, height)
+  for (const sequence of project.sequences) {
     ctx.strokeStyle = "#5ea8ff"
     ctx.lineWidth = 2
     ctx.setLineDash([8, 6])
     ctx.beginPath()
-    s.points.forEach((p, i) => {
-      const x = p.x * width
-      const y = p.y * height
-      if (i === 0) ctx.moveTo(x, y)
+    sequence.points.forEach((point, index) => {
+      const x = point.x * width
+      const y = point.y * height
+      if (index === 0) ctx.moveTo(x, y)
       else ctx.lineTo(x, y)
     })
     ctx.stroke()
     ctx.setLineDash([])
-    if (s.landing) {
+    if (sequence.landing) {
       ctx.strokeStyle = "#5ea8ff"
-      ctx.strokeRect(s.landing.x * width, s.landing.y * height, s.landing.w * width, s.landing.h * height)
+      ctx.strokeRect(
+        sequence.landing.x * width,
+        sequence.landing.y * height,
+        sequence.landing.w * width,
+        sequence.landing.h * height,
+      )
     }
   }
-  const blob = await new Promise<Blob | null>((res) => canvas.toBlob(res, "image/png"))
-  if (blob) download(blob, `${slug(project.name)}.visual-map.png`)
-}
-
-// Ambient types for canvas capture.
-interface CanvasCaptureMediaStreamTrack extends MediaStreamTrack {
-  requestFrame?: () => void
+  const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/png"))
+  if (blob) download(blob, `${outputName(project, baseName)}.visual-map.png`)
 }

@@ -1,13 +1,29 @@
 import type { BirdTemplate } from "./types"
 
 const cache = new Map<string, HTMLImageElement[]>()
+const tintCache = new Map<string, HTMLCanvasElement>()
+export type BirdAnimationTrack = "flight" | "approach" | "perch" | "launch"
 
-function imagesFor(template: BirdTemplate): HTMLImageElement[] {
-  if (typeof window === "undefined" || template.kind === "builtin") return []
-  const key = `${template.id}:${template.frames.join("|").length}`
+// Ratios measured at the center notch in the approved C/A/B/D source crops.
+const ARTIST_PIVOTS = [
+  { x: 0.53, y: 0.66 },
+  { x: 0.49, y: 0.62 },
+  { x: 0.42, y: 0.61 },
+  { x: 0.5, y: 0.66 },
+]
+
+function sourcesFor(template: BirdTemplate, track: BirdAnimationTrack) {
+  if (track === "flight") return template.frames
+  return template.actionFrames?.[track] ?? []
+}
+
+function imagesFor(template: BirdTemplate, track: BirdAnimationTrack = "flight"): HTMLImageElement[] {
+  const sources = sourcesFor(template, track)
+  if (typeof window === "undefined" || !sources.length) return []
+  const key = `${template.id}:${track}:${sources.join("|")}`
   const hit = cache.get(key)
   if (hit) return hit
-  const images = template.frames.map((src) => {
+  const images = sources.map((src) => {
     const image = new Image()
     image.crossOrigin = "anonymous"
     image.src = src
@@ -17,6 +33,115 @@ function imagesFor(template: BirdTemplate): HTMLImageElement[] {
   return images
 }
 
+function tintedSource(image: HTMLImageElement, color: string) {
+  const key = `${image.src}:${color}`
+  const hit = tintCache.get(key)
+  if (hit) return hit
+  const canvas = document.createElement("canvas")
+  canvas.width = image.naturalWidth
+  canvas.height = image.naturalHeight
+  const ctx = canvas.getContext("2d")
+  if (!ctx) return image
+  ctx.drawImage(image, 0, 0)
+  ctx.globalCompositeOperation = "source-in"
+  ctx.fillStyle = color
+  ctx.fillRect(0, 0, canvas.width, canvas.height)
+  tintCache.set(key, canvas)
+  return canvas
+}
+
+function drawArtistContour(
+  ctx: CanvasRenderingContext2D,
+  image: HTMLImageElement,
+  phase: number,
+  size: number,
+  alpha: number,
+  color: string,
+  index: number,
+  strength: number,
+  pivotOverride?: { x: number; y: number },
+) {
+  const source = tintedSource(image, color)
+  const sourceWidth = image.naturalWidth
+  const sourceHeight = image.naturalHeight
+  const width = size
+  const height = width / Math.max(0.35, sourceWidth / sourceHeight)
+  const pivot = pivotOverride ?? ARTIST_PIVOTS[index % ARTIST_PIVOTS.length]
+  const pivotSourceX = sourceWidth * pivot.x
+  const pivotX = -width / 2 + width * pivot.x
+  const pivotY = -height / 2 + height * pivot.y
+  const overlap = Math.max(2, sourceWidth * 0.025)
+  const flex = Math.sin(phase * Math.PI * 2)
+  const up = Math.max(flex, 0)
+  const down = Math.max(-flex, 0)
+  // Single-still fallback only. Canonical artist bundles use their authored
+  // ordered PNGs above and never pass through this procedural rig.
+  const leftAngle = (-34 * up + 30 * down) * strength * Math.PI / 180
+  const rightAngle = (34 * up - 32 * down) * strength * Math.PI / 180
+
+  const drawPart = (sourceX: number, sourcePartWidth: number, angle: number) => {
+    ctx.save()
+    ctx.translate(pivotX, pivotY)
+    ctx.rotate(angle)
+    ctx.translate(-pivotX, -pivotY)
+    ctx.drawImage(
+      source,
+      sourceX,
+      0,
+      sourcePartWidth,
+      sourceHeight,
+      -width / 2 + (sourceX / sourceWidth) * width,
+      -height / 2,
+      (sourcePartWidth / sourceWidth) * width,
+      height,
+    )
+    ctx.restore()
+  }
+
+  const drawRig = () => {
+    drawPart(0, Math.min(sourceWidth, pivotSourceX + overlap), leftAngle)
+    const rightStart = Math.max(0, pivotSourceX - overlap)
+    drawPart(rightStart, sourceWidth - rightStart, rightAngle)
+    // Restore the artist-drawn center notch above both rotating wing regions.
+    const centerStart = Math.max(0, pivotSourceX - overlap)
+    ctx.drawImage(
+      source,
+      centerStart,
+      0,
+      overlap * 2,
+      sourceHeight,
+      -width / 2 + (centerStart / sourceWidth) * width,
+      -height / 2,
+      (overlap * 2 / sourceWidth) * width,
+      height,
+    )
+  }
+
+  ctx.save()
+  ctx.globalAlpha = alpha
+  drawRig()
+  // Exact-pixel overdraw preserves the thin source contour after deep
+  // downscaling. It reinforces coverage only; the geometry and pivot remain
+  // identical, so it cannot create a second wing or a thicker substitute bird.
+  if (width < 92) {
+    ctx.globalAlpha = alpha * (width < 48 ? 0.62 : 0.42)
+    drawRig()
+  }
+  ctx.restore()
+}
+
+export async function preloadBirdTemplate(template: BirdTemplate) {
+  const tracks: BirdAnimationTrack[] = ["flight", "approach", "perch", "launch"]
+  const images = tracks.flatMap((track) => imagesFor(template, track))
+  await Promise.all(images.map((image) => {
+    if (image.complete && image.naturalWidth) return Promise.resolve()
+    return new Promise<void>((resolve, reject) => {
+      image.addEventListener("load", () => resolve(), { once: true })
+      image.addEventListener("error", () => reject(new Error(`Could not load bird artwork: ${image.src}`)), { once: true })
+    })
+  }))
+}
+
 export function drawBirdTemplate(
   ctx: CanvasRenderingContext2D,
   template: BirdTemplate,
@@ -24,19 +149,79 @@ export function drawBirdTemplate(
   size: number,
   alpha: number,
   color: string,
+  variant = 0,
+  wingStrength = 1,
+  track: BirdAnimationTrack = "flight",
 ): boolean {
-  const images = imagesFor(template)
+  let images = imagesFor(template, track)
+  if (!images.length && track !== "flight") images = imagesFor(template, "flight")
   if (!images.length || images.some((image) => !image.complete || !image.naturalWidth)) return false
   const normalized = ((phase % 1) + 1) % 1
-  const index = images.length === 1 ? 0 : Math.min(images.length - 1, Math.floor(normalized * images.length))
+  ctx.imageSmoothingEnabled = true
+  ctx.imageSmoothingQuality = "high"
+
+  const drawExactFrame = (image: HTMLImageElement) => {
+    const source = template.kind === "builtin" ? tintedSource(image, color) : image
+    const aspect = image.naturalWidth / Math.max(1, image.naturalHeight)
+    const width = size
+    const height = Math.min(size * 1.2, width / Math.max(0.35, aspect))
+    ctx.save()
+    ctx.globalAlpha = alpha
+    ctx.drawImage(source, -width / 2, -height / 2, width, height)
+    if (width < 92) {
+      ctx.globalAlpha = alpha * (width < 48 ? 0.62 : 0.42)
+      ctx.drawImage(source, -width / 2, -height / 2, width, height)
+    }
+    ctx.restore()
+  }
+
+  if (template.playbackMode === "sequence" && (template.framesPerVariant ?? images.length) > 1) {
+    const frameCount = template.framesPerVariant ?? images.length
+    const variantCount = Math.max(1, Math.floor(images.length / frameCount))
+    const variantIndex = Math.abs(Math.floor(variant)) % variantCount
+    const frameIndex = Math.min(frameCount - 1, Math.floor(normalized * frameCount))
+    drawExactFrame(images[variantIndex * frameCount + frameIndex])
+    return true
+  }
+  if ((template.kind === "raster" || template.kind === "sprites") && template.wingPivot && template.playbackMode !== "sequence") {
+    drawArtistContour(
+      ctx,
+      images[0],
+      normalized,
+      size,
+      alpha,
+      color,
+      0,
+      wingStrength,
+      template.wingPivot,
+    )
+    return true
+  }
+  const continuousFrame = normalized * images.length
+  const index = template.kind === "builtin"
+    ? Math.abs(Math.floor(variant)) % images.length
+    : images.length === 1 ? 0 : Math.round(continuousFrame) % images.length
   const image = images[index]
+  if (template.kind === "builtin") {
+    // Legacy built-in compatibility only. Current curated built-ins declare
+    // playbackMode="sequence" and return through the exact-frame branch.
+    drawArtistContour(ctx, image, normalized, size, alpha, color, index, wingStrength)
+    return true
+  }
   const aspect = image.naturalWidth / Math.max(1, image.naturalHeight)
   const width = size
   const height = Math.min(size * 1.2, width / Math.max(0.35, aspect))
+  const drawFrame = (source: CanvasImageSource, opacity: number) => {
+    ctx.globalAlpha = opacity
+    ctx.drawImage(source, -width / 2, -height / 2, width, height)
+    if (width < 92) {
+      ctx.globalAlpha = opacity * (width < 48 ? 0.62 : 0.42)
+      ctx.drawImage(source, -width / 2, -height / 2, width, height)
+    }
+  }
 
   ctx.save()
-  ctx.globalAlpha = alpha
-  ctx.drawImage(image, -width / 2, -height / 2, width, height)
+  drawFrame(image, alpha)
   // SVGs using currentColor cannot inherit from a canvas image. A light
   // source-atop wash still gives monochrome templates the chosen flock color.
   if (template.kind === "svg") {
@@ -51,4 +236,5 @@ export function drawBirdTemplate(
 
 export function clearTemplateCache() {
   cache.clear()
+  tintCache.clear()
 }

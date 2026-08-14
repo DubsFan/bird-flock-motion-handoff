@@ -1,37 +1,61 @@
 "use client"
 
-import { FileJson, FileText, Film, Image as ImageIcon, Loader2, Package } from "lucide-react"
+import { Bot, FileJson, FileText, Film, Image as ImageIcon, Loader2, Package } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
 import {
   detectVideoSupport,
+  exportAppleAlphaBundle,
+  exportApplicationGuide,
   exportDesignerBrief,
+  exportMp4,
   exportMotionBriefJson,
   exportPngSequenceZip,
   exportVisualMap,
   exportWebM,
+  safeExportName,
 } from "@/lib/flock/export"
 import type { Project } from "@/lib/flock/types"
 
 type Job = { kind: string; progress: number } | null
+type ReadyDownload = { url: string; filename: string } | null
 
 export function ExportPanel({ project }: { project: Project }) {
+  const { width: viewportWidth, height: viewportHeight } = project.viewport
   const [job, setJob] = useState<Job>(null)
   const [error, setError] = useState<string | null>(null)
+  const [readyDownload, setReadyDownload] = useState<ReadyDownload>(null)
+  const [fileName, setFileName] = useState(project.name)
   const cancelRef = useRef<{ cancelled: boolean }>({ cancelled: false })
   // The server cannot know browser codec support. Start from the same stable
   // snapshot on the server and first client render, then detect after hydration.
-  const [support, setSupport] = useState<ReturnType<typeof detectVideoSupport>>({
-    opaque: false,
-    transparent: false,
-    mime: null,
+  const [support, setSupport] = useState({
+    mp4: false,
+    opaqueWebm: false,
+    transparentWebm: false,
   })
 
   useEffect(() => {
-    setSupport(detectVideoSupport())
+    let current = true
+    void detectVideoSupport({ viewport: { width: viewportWidth, height: viewportHeight } }).then((next) => {
+      if (current) setSupport(next)
+    })
+    return () => {
+      current = false
+    }
+  }, [viewportHeight, viewportWidth])
+
+  useEffect(() => {
+    const onReady = (event: Event) => {
+      const detail = (event as CustomEvent<{ url: string; filename: string }>).detail
+      if (detail?.url && detail?.filename) setReadyDownload(detail)
+    }
+    window.addEventListener("murmur-export-ready", onReady)
+    return () => window.removeEventListener("murmur-export-ready", onReady)
   }, [])
 
   const run = async (kind: string, fn: (sig: { cancelled: boolean }, onProgress: (p: number) => void) => Promise<void>) => {
     setError(null)
+    setReadyDownload(null)
     cancelRef.current = { cancelled: false }
     setJob({ kind, progress: 0 })
     try {
@@ -45,6 +69,7 @@ export function ExportPanel({ project }: { project: Project }) {
 
   const busy = job !== null
   const hasPaths = project.sequences.some((s) => s.points.length >= 2)
+  const baseName = safeExportName(fileName)
 
   return (
     <div className="flex flex-col gap-4 p-4">
@@ -54,6 +79,18 @@ export function ExportPanel({ project }: { project: Project }) {
           Export birds with alpha, or composite them over an uploaded card image. HTML/CSS and URL scenes stay reference-only.
         </p>
       </div>
+
+      <label className="flex flex-col gap-1.5">
+        <span className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">Export file name</span>
+        <input
+          value={fileName}
+          onChange={(event) => setFileName(event.target.value)}
+          placeholder="bird-flock-hero"
+          className="h-9 rounded-md border border-border bg-secondary px-2.5 text-sm text-foreground outline-none focus:ring-1 focus:ring-ring"
+          aria-label="Export file name"
+        />
+        <span className="text-[10px] text-muted-foreground">Preview: {baseName}.mp4</span>
+      </label>
 
       {/* Tier 1 */}
       <ExportButton
@@ -65,53 +102,92 @@ export function ExportPanel({ project }: { project: Project }) {
         disabled={busy || !hasPaths}
         loading={job?.kind === "png"}
         progress={job?.kind === "png" ? job.progress : 0}
-        onClick={() => run("png", (sig, onProgress) => exportPngSequenceZip(project, { signal: sig, onProgress }))}
+        onClick={() => run("png", (sig, onProgress) => exportPngSequenceZip(project, { baseName, signal: sig, onProgress }))}
       />
 
-      {/* Tier 2 */}
+      <ExportButton
+        icon={<Film className="h-4 w-4" />}
+        title="Background MP4 (H.264)"
+        subtitle={
+          project.scene.kind === "image"
+            ? "Composited over your uploaded scene image"
+            : project.scene.kind === "html" || project.scene.kind === "url"
+              ? "Scene is reference-only · uses background color"
+              : "Composited over the background color"
+        }
+        badge={support.mp4 ? "Ready" : "N/A"}
+        disabled={busy || !hasPaths || !support.mp4}
+        loading={job?.kind === "mp4"}
+        progress={job?.kind === "mp4" ? job.progress : 0}
+        onClick={() => run("mp4", (sig, onProgress) => exportMp4(project, { baseName, signal: sig, onProgress }))}
+      />
+
       <ExportButton
         icon={<Film className="h-4 w-4" />}
         title="Background WebM (opaque)"
         subtitle={
           project.scene.kind === "image" ? "Composited over your uploaded card image" : project.scene.kind === "html" || project.scene.kind === "url" ? "Scene is reference-only · uses background color" : "Composited over the background color"
         }
-        disabled={busy || !hasPaths || !support.opaque}
+        disabled={busy || !hasPaths || !support.opaqueWebm}
         loading={job?.kind === "webm"}
         progress={job?.kind === "webm" ? job.progress : 0}
-        onClick={() => run("webm", (sig, onProgress) => exportWebM(project, { transparent: false, signal: sig, onProgress }))}
+        onClick={() => run("webm", (sig, onProgress) => exportWebM(project, { baseName, transparent: false, signal: sig, onProgress }))}
       />
 
-      {/* Tier 3 */}
       <ExportButton
         icon={<Film className="h-4 w-4" />}
         title="Transparent WebM"
-        subtitle="Experimental · Chrome only · verify alpha in your player"
-        badge={support.transparent ? "Beta" : "N/A"}
-        disabled={busy || !hasPaths || !support.transparent}
+        subtitle="VP9 alpha · Chrome/Chromium · verify alpha in your player"
+        badge={support.transparentWebm ? "Ready" : "N/A"}
+        disabled={busy || !hasPaths || !support.transparentWebm}
         loading={job?.kind === "webma"}
         progress={job?.kind === "webma" ? job.progress : 0}
-        onClick={() => run("webma", (sig, onProgress) => exportWebM(project, { transparent: true, signal: sig, onProgress }))}
+        onClick={() => run("webma", (sig, onProgress) => exportWebM(project, { baseName, transparent: true, signal: sig, onProgress }))}
+      />
+
+      <ExportButton
+        icon={<Package className="h-4 w-4" />}
+        title="Apple HEVC alpha handoff (.zip)"
+        subtitle="Transparent frames + double-click ProRes 4444 converter + HEVC guide"
+        badge="Apple"
+        disabled={busy || !hasPaths}
+        loading={job?.kind === "apple"}
+        progress={job?.kind === "apple" ? job.progress : 0}
+        onClick={() => run("apple", (sig, onProgress) => exportAppleAlphaBundle(project, { baseName, signal: sig, onProgress }))}
       />
 
       <div className="h-px bg-border" />
 
       <h3 className="text-sm font-semibold text-foreground">Export handoff</h3>
       <div className="grid grid-cols-1 gap-2">
-        <SmallButton icon={<FileJson className="h-4 w-4" />} label="Motion brief (.json)" disabled={busy} onClick={() => exportMotionBriefJson(project)} />
-        <SmallButton icon={<FileText className="h-4 w-4" />} label="Designer brief (.md)" disabled={busy} onClick={() => exportDesignerBrief(project)} />
-        <SmallButton icon={<ImageIcon className="h-4 w-4" />} label="Visual map (.png)" disabled={busy} onClick={() => run("map", () => exportVisualMap(project))} />
+        <SmallButton icon={<Bot className="h-4 w-4" />} label="Application AGENTS.md" disabled={busy} onClick={() => exportApplicationGuide(project, baseName)} />
+        <SmallButton icon={<FileJson className="h-4 w-4" />} label="Motion brief (.json)" disabled={busy} onClick={() => exportMotionBriefJson(project, baseName)} />
+        <SmallButton icon={<FileText className="h-4 w-4" />} label="Designer brief (.md)" disabled={busy} onClick={() => exportDesignerBrief(project, baseName)} />
+        <SmallButton icon={<ImageIcon className="h-4 w-4" />} label="Visual map (.png)" disabled={busy} onClick={() => run("map", () => exportVisualMap(project, baseName))} />
       </div>
 
       {busy && (
-        <button
-          type="button"
-          onClick={() => (cancelRef.current.cancelled = true)}
-          className="mt-1 rounded-md border border-border bg-secondary px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground"
-        >
-          Cancel export
-        </button>
+        <div className="flex items-center justify-between gap-3" role="status" aria-live="polite">
+          <span className="text-xs text-muted-foreground">{job.kind.toUpperCase()} export · {Math.round(job.progress * 100)}%</span>
+          <button
+            type="button"
+            onClick={() => (cancelRef.current.cancelled = true)}
+            className="rounded-md border border-border bg-secondary px-3 py-1.5 text-xs text-muted-foreground hover:text-foreground"
+          >
+            Cancel export
+          </button>
+        </div>
       )}
-      {error && <p className="text-xs text-destructive">{error}</p>}
+      {error && <p role="alert" className="text-xs text-destructive">{error}</p>}
+      {readyDownload && (
+        <a
+          href={readyDownload.url}
+          download={readyDownload.filename}
+          className="rounded-md border border-primary/50 bg-primary/10 px-3 py-2 text-xs font-medium text-primary hover:bg-primary/15"
+        >
+          Download {readyDownload.filename}
+        </a>
+      )}
     </div>
   )
 }

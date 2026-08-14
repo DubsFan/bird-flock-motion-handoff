@@ -14,17 +14,20 @@ export const TREATMENT_PRESETS: Record<
   }
 > = {
   "Calm Glide": {
-    density: "Sparse",
-    wingIntensity: "Soft",
-    entry: "Enter from left",
-    exit: "Exit right",
-    dwellSeconds: 2.5,
-    durationSeconds: 9,
+    density: "Medium",
+    // Eight authored poses at the natural 8 fps baseline. "Soft" remains
+    // available for a slower 6 fps glide, but should not be the default when
+    // the acceptance issue is visibly under-moving wings.
+    wingIntensity: "Medium",
+    entry: "Enter from right",
+    exit: "Exit left",
+    dwellSeconds: 0,
+    durationSeconds: 10,
     points: [
-      { x: 0.08, y: 0.34 },
-      { x: 0.35, y: 0.42 },
-      { x: 0.62, y: 0.38 },
-      { x: 0.9, y: 0.3 },
+      { x: 0.92, y: 0.28 },
+      { x: 0.7, y: 0.36 },
+      { x: 0.46, y: 0.48 },
+      { x: 0.2, y: 0.38 },
     ],
   },
   "Symmetric Murmuration": {
@@ -101,16 +104,16 @@ export const TREATMENT_PRESETS: Record<
   "Waterfall Bloom": {
     density: "Murmuration",
     wingIntensity: "Medium",
-    entry: "Enter from top",
+    entry: "Enter from right",
     exit: "Exit left",
     dwellSeconds: 0,
     durationSeconds: 12,
     points: [
-      { x: 0.58, y: 0.06 },
-      { x: 0.59, y: 0.32 },
-      { x: 0.56, y: 0.63 },
+      { x: 0.92, y: 0.12 },
+      { x: 0.74, y: 0.38 },
+      { x: 0.56, y: 0.7 },
       { x: 0.38, y: 0.77 },
-      { x: 0.1, y: 0.62 },
+      { x: 0.1, y: 0.55 },
     ],
   },
   "Vortex Pull": {
@@ -130,8 +133,127 @@ export const TREATMENT_PRESETS: Record<
   },
 }
 
+type TreatmentSettings = Pick<
+  Sequence,
+  | "birdCount"
+  | "sizeScale"
+  | "spacingScale"
+  | "speedMultiplier"
+  | "foregroundBirdCount"
+  | "foregroundBoost"
+  | "depthDirection"
+  | "depthStrength"
+>
+
+// These counts preserve the held creative baselines and the later large-flock
+// progress: calm remains open, while Waterfall and Vortex reproduce the exact
+// 68/74-bird rosters documented in the supplied continuation package.
+export const TREATMENT_SETTINGS: Record<Treatment, TreatmentSettings> = {
+  "Calm Glide": {
+    birdCount: 22,
+    sizeScale: 1,
+    spacingScale: 2.8,
+    speedMultiplier: 0.9,
+    foregroundBirdCount: 0,
+    foregroundBoost: 1,
+    depthDirection: "Flat plane",
+    depthStrength: 0.55,
+  },
+  "Symmetric Murmuration": {
+    birdCount: 36,
+    sizeScale: 0.95,
+    spacingScale: 2.35,
+    speedMultiplier: 0.9,
+    foregroundBirdCount: 0,
+    foregroundBoost: 1,
+    depthDirection: "Flat plane",
+    depthStrength: 0.6,
+  },
+  "Dive and Pullout": {
+    birdCount: 44,
+    sizeScale: 0.9,
+    spacingScale: 2.05,
+    speedMultiplier: 0.95,
+    foregroundBirdCount: 0,
+    foregroundBoost: 1,
+    depthDirection: "Flat plane",
+    depthStrength: 0.75,
+  },
+  "Curl and Release": {
+    birdCount: 44,
+    sizeScale: 0.9,
+    spacingScale: 2.15,
+    speedMultiplier: 0.9,
+    foregroundBirdCount: 0,
+    foregroundBoost: 1,
+    depthDirection: "Flat plane",
+    depthStrength: 0.75,
+  },
+  "Ribbon Wave": {
+    birdCount: 22,
+    sizeScale: 0.95,
+    spacingScale: 2.45,
+    speedMultiplier: 0.9,
+    foregroundBirdCount: 0,
+    foregroundBoost: 1,
+    depthDirection: "Flat plane",
+    depthStrength: 0.65,
+  },
+  "Split and Rejoin": {
+    birdCount: 44,
+    sizeScale: 0.85,
+    spacingScale: 2.1,
+    speedMultiplier: 0.9,
+    foregroundBirdCount: 0,
+    foregroundBoost: 1,
+    depthDirection: "Flat plane",
+    depthStrength: 0.7,
+  },
+  "Waterfall Bloom": {
+    birdCount: 68,
+    sizeScale: 0.82,
+    spacingScale: 3,
+    speedMultiplier: 0.9,
+    foregroundBirdCount: 0,
+    foregroundBoost: 1,
+    depthDirection: "Flat plane",
+    depthStrength: 0.7,
+  },
+  "Vortex Pull": {
+    birdCount: 74,
+    sizeScale: 0.8,
+    spacingScale: 2.8,
+    speedMultiplier: 0.88,
+    foregroundBirdCount: 0,
+    foregroundBoost: 1,
+    depthDirection: "Flat plane",
+    depthStrength: 0.7,
+  },
+}
+
+export function treatmentPresetPatch(treatment: Treatment): Partial<Sequence> {
+  const preset = TREATMENT_PRESETS[treatment]
+  return {
+    treatment,
+    density: preset.density,
+    wingIntensity: preset.wingIntensity,
+    entry: preset.entry,
+    exit: preset.exit,
+    points: preset.points.map((point) => ({ ...point })),
+    landing: null,
+    arrivalMode: "Fly through",
+    perchCount: 0,
+    gatherCount: 0,
+    dwellSeconds: preset.dwellSeconds,
+    durationSeconds: preset.durationSeconds,
+    loopPath: false,
+    ...TREATMENT_SETTINGS[treatment],
+  }
+}
+
 export function makeSequence(treatment: Treatment, name?: string): Sequence {
   const p = TREATMENT_PRESETS[treatment]
+  const settings = TREATMENT_SETTINGS[treatment]
   return {
     id: uid(),
     name: name ?? treatment,
@@ -141,14 +263,29 @@ export function makeSequence(treatment: Treatment, name?: string): Sequence {
     entry: p.entry,
     exit: p.exit,
     points: p.points.map((pt) => ({ ...pt })),
-    landing:
-      p.dwellSeconds > 0 ? { x: 0.42, y: 0.34, w: 0.16, h: 0.13 } : null,
-    arrivalMode: p.dwellSeconds > 0 ? "Perch" : "Fly through",
+    landing: null,
+    arrivalMode: "Fly through",
+    perchCount: 0,
+    gatherCount: 0,
     dwellSeconds: p.dwellSeconds,
     durationSeconds: p.durationSeconds,
+    loopPath: false,
+    ...settings,
     seed: Math.floor(Math.random() * 1e9),
     notes: "",
     color: FLOCK_INK,
+  }
+}
+
+export function clearSequenceGeometry(sequence: Sequence): Sequence {
+  return {
+    ...sequence,
+    points: [],
+    landing: null,
+    arrivalMode: "Fly through",
+    perchCount: 0,
+    gatherCount: 0,
+    loopPath: false,
   }
 }
 
@@ -159,11 +296,11 @@ export function defaultProject(): Project {
     backdropDataUrl: null,
     scene: { kind: "none" },
     birdTemplate: BUILTIN_BIRD_TEMPLATE,
-    sequences: [makeSequence("Dive and Pullout", "Hero Dive")],
+    sequences: [makeSequence("Calm Glide", "Calm Editorial")],
     style: {
       inkColor: FLOCK_INK,
       transparentBackground: true,
-      backgroundColor: "#0b1220",
+      backgroundColor: "#f3efe6",
     },
     fps: 30,
   }

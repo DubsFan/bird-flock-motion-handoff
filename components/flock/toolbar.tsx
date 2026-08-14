@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState } from "react"
 import {
   Pause,
   Pencil,
@@ -13,6 +13,7 @@ import {
   X,
   Eye,
   EyeOff,
+  Trash2,
 } from "lucide-react"
 import type { StageMode } from "./stage"
 import type { Sequence } from "@/lib/flock/types"
@@ -32,6 +33,7 @@ type Props = {
   onSelect: (id: string) => void
   onAdd: () => void
   onRemove: (id: string) => void
+  onStartOver: (id: string) => void
   hasBackdrop: boolean
   onUpload: (file: File) => void
   onClearBackdrop: () => void
@@ -59,6 +61,7 @@ export function Toolbar({
   onSelect,
   onAdd,
   onRemove,
+  onStartOver,
   hasBackdrop,
   onUpload,
   onClearBackdrop,
@@ -66,6 +69,7 @@ export function Toolbar({
   onToggleBackdrop,
 }: Props) {
   const fileRef = useRef<HTMLInputElement>(null)
+  const [confirmStartOverId, setConfirmStartOverId] = useState<string | null>(null)
   const seconds = (progress * totalDuration).toFixed(1)
 
   return (
@@ -115,12 +119,16 @@ export function Toolbar({
           {hasBackdrop && (
             <>
               <Button
-                variant="ghost"
-                size="icon"
+                variant="secondary"
+                size="sm"
                 onClick={onToggleBackdrop}
-                title={showBackdrop ? "Hide backdrop" : "Show backdrop"}
+                title={showBackdrop ? "Hide the background image" : "Show the background image"}
+                aria-label={showBackdrop ? "Hide background image" : "Show background image"}
+                aria-pressed={showBackdrop}
+                className="min-w-[136px] justify-center"
               >
-                {showBackdrop ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
+                {showBackdrop ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                {showBackdrop ? "Hide background" : "Show background"}
               </Button>
               <Button variant="ghost" size="icon" onClick={onClearBackdrop} title="Remove backdrop">
                 <X className="h-4 w-4" />
@@ -183,6 +191,36 @@ export function Toolbar({
           <Plus className="h-3.5 w-3.5" />
           Flock
         </Button>
+        {confirmStartOverId === activeId ? (
+          <div className="ml-1 flex items-center gap-1 rounded-md border border-destructive/40 bg-destructive/10 p-1" role="group" aria-label="Confirm start over">
+            <span className="px-1 text-[11px] text-destructive">Erase path + landing?</span>
+            <Button
+              variant="destructive"
+              size="sm"
+              className="h-6 px-2 text-[11px]"
+              onClick={() => {
+                onStartOver(activeId)
+                setConfirmStartOverId(null)
+              }}
+            >
+              Erase
+            </Button>
+            <Button variant="ghost" size="sm" className="h-6 px-2 text-[11px]" onClick={() => setConfirmStartOverId(null)}>
+              Cancel
+            </Button>
+          </div>
+        ) : (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setConfirmStartOverId(activeId)}
+            className="ml-1 h-7 gap-1 text-xs text-destructive hover:text-destructive"
+            title="Erase this flock's path and landing, then draw again"
+          >
+            <Trash2 className="h-3.5 w-3.5" />
+            Start over
+          </Button>
+        )}
       </div>
     </div>
   )

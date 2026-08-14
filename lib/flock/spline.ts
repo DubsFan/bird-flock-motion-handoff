@@ -68,6 +68,32 @@ export function samplePath(control: Point[], perSegment = 48): SampledPath {
   return { points: pts, cumulative, length: len }
 }
 
+// Periodic Catmull-Rom sampling for a path whose final segment returns to the
+// first control point with matching incoming/outgoing tangents.
+export function sampleClosedPath(control: Point[], perSegment = 48): SampledPath {
+  if (control.length < 3) return samplePath([...control, ...control.slice(0, 1)], perSegment)
+  const pts: Point[] = []
+  const count = control.length
+  for (let i = 0; i < count; i++) {
+    const p0 = control[(i - 1 + count) % count]
+    const p1 = control[i]
+    const p2 = control[(i + 1) % count]
+    const p3 = control[(i + 2) % count]
+    for (let j = 0; j < perSegment; j++) {
+      pts.push(catmullRom(p0, p1, p2, p3, j / perSegment))
+    }
+  }
+  pts.push({ ...pts[0] })
+
+  const cumulative: number[] = [0]
+  let length = 0
+  for (let i = 1; i < pts.length; i++) {
+    length += Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y)
+    cumulative.push(length)
+  }
+  return { points: pts, cumulative, length }
+}
+
 // Position at normalized distance u in [0,1] along the arc-length.
 export function pointAt(path: SampledPath, u: number): Point {
   const { points, cumulative, length } = path
