@@ -2,6 +2,13 @@
 
 This file is the regression guard for bird artwork and motion. Read it before changing the renderer, presets, asset intake, or export proofs.
 
+## Canonical repository and legacy archive
+
+- `/Volumes/Sam4T/External Project/bird-flock-motion-handoff` is the only active Git repository and the canonical Murmur application. Its GitHub remote is `DubsFan/bird-flock-motion-handoff`.
+- `/Volumes/Sam4T/External Project/_Archive - Murmur Legacy Handoff 2026-08-13` is a dated, non-Git creative-production archive. It is not a second application checkout and the current tool has no runtime or build dependency on it.
+- The active repository contains byte-identical C/A/B/D source contours and retained dive-curl WebM/MP4 proofs, plus the newer canonical flight and landing libraries. The archive uniquely retains historical masters such as the symmetric ProRes/WebM/MP4 set, the dive-curl ProRes master, and the superseded Python render workspace.
+- Use the archive only for provenance or recovery of those historical outputs. Do not copy its old mapper, procedural rig, rejected render experiments, or hard-coded leftward/blank-edge contracts back into the current application.
+
 ## Authoritative chronology
 
 1. `/Users/liltroy/Downloads/Animate Birds 101 source/How to Make a Transparent Background Video from an Image.zip` is the accumulated baseline: experiments, rejection notes, accepted flock renderers, browser reviews, and output examples.
