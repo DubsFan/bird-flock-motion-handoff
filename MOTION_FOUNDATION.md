@@ -5,8 +5,8 @@ This file is the regression guard for bird artwork and motion. Read it before ch
 ## Canonical repository and legacy archive
 
 - `/Volumes/Sam4T/External Project/bird-flock-motion-handoff` is the only active Git repository and the canonical Murmur application. Its GitHub remote is `DubsFan/bird-flock-motion-handoff`.
-- `/Volumes/Sam4T/External Project/_Archive - Murmur Legacy Handoff 2026-08-13` is a dated, non-Git creative-production archive. It is not a second application checkout and the current tool has no runtime or build dependency on it.
-- The active repository contains byte-identical C/A/B/D source contours and retained dive-curl WebM/MP4 proofs, plus the newer canonical flight and landing libraries. The archive uniquely retains historical masters such as the symmetric ProRes/WebM/MP4 set, the dive-curl ProRes master, and the superseded Python render workspace.
+- `work/legacy-murmur-handoff-2026-08-13` is the consolidated, Git-ignored creative-production archive inside this repository. It is not a second application checkout and the current tool has no runtime or build dependency on it.
+- The active application contains byte-identical C/A/B/D source contours and retained dive-curl WebM/MP4 proofs, plus the newer canonical flight and landing libraries. The ignored archive retains 556 content-unique historical files, including the symmetric ProRes/WebM/MP4 set, the dive-curl ProRes master, and the superseded Python render workspace. `MANIFEST.sha256` and `CONSOLIDATION_REPORT.md` record the verified consolidation.
 - Use the archive only for provenance or recovery of those historical outputs. Do not copy its old mapper, procedural rig, rejected render experiments, or hard-coded leftward/blank-edge contracts back into the current application.
 
 ## Authoritative chronology
