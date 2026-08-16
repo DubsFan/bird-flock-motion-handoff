@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/select"
 import { Slider } from "@/components/ui/slider"
 import { treatmentPresetPatch } from "@/lib/flock/defaults"
-import { depthScaleAt, landingCounts } from "@/lib/flock/engine"
+import { depthScaleAt, landingCounts, landingZones } from "@/lib/flock/engine"
 import {
   DEPTH_DIRECTIONS,
   DENSITIES,
@@ -116,12 +116,14 @@ export function InspectorPanel({
   onUpdate,
   onUpdateStyle,
   onReseed,
+  onAddLanding,
 }: {
   sequence: Sequence | undefined
   style: Style
   onUpdate: (patch: Partial<Sequence>) => void
   onUpdateStyle: (patch: Partial<Style>) => void
   onReseed: () => void
+  onAddLanding: () => void
 }) {
   if (!sequence) {
     return (
@@ -132,6 +134,7 @@ export function InspectorPanel({
   }
 
   const counts = landingCounts(sequence)
+  const zones = landingZones(sequence)
   const depthGrowth = depthScaleAt(sequence, 1) / Math.max(0.001, depthScaleAt(sequence, 0))
 
   return (
@@ -378,13 +381,33 @@ export function InspectorPanel({
         </Row>
         {sequence.loopPath ? (
           <p className="rounded-md border border-primary/30 bg-primary/10 p-3 text-[11px] leading-relaxed text-primary">Loop mode keeps every bird in continuous flight. Turn it off to use perching and gathering.</p>
-        ) : sequence.landing ? (
+        ) : (
           <div className="flex flex-col gap-3 rounded-md border border-border bg-secondary/35 p-3">
-            <div>
-              <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">Landing participation</p>
-              <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">Choose exact counts. The remaining {counts.flyThrough} bird{counts.flyThrough === 1 ? "" : "s"} fly through without stopping.</p>
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">Landing events · {zones.length}</p>
+                <p className="mt-1 text-[11px] leading-relaxed text-muted-foreground">Use zero, one, or several authored stops on this route.</p>
+              </div>
+              <button type="button" onClick={onAddLanding} className="shrink-0 rounded-md border border-primary/40 bg-primary/10 px-2 py-1 text-[10px] font-medium text-primary hover:bg-primary/15">+ Add landing</button>
             </div>
-            <Row label="Perching birds">
+            {zones.length > 0 ? <>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    const landings = zones.slice(0, -1)
+                    onUpdate({ landings, landing: landings[0] ?? null, ...(landings.length ? {} : { perchCount: 0, gatherCount: 0, arrivalMode: "Fly through" as const }) })
+                  }}
+                  className="rounded-md border border-border bg-background px-2 py-1 text-[10px] text-muted-foreground hover:text-foreground"
+                >Remove last</button>
+                <button
+                  type="button"
+                  onClick={() => onUpdate({ landings: [], landing: null, perchCount: 0, gatherCount: 0, arrivalMode: "Fly through" })}
+                  className="rounded-md border border-border bg-background px-2 py-1 text-[10px] text-muted-foreground hover:text-foreground"
+                >Clear all</button>
+              </div>
+              <p className="text-[11px] leading-relaxed text-muted-foreground">The same selected birds use the authored approach, settle, and launch tracks at every stop. The remaining {counts.flyThrough} fly through.</p>
+              <Row label="Perching birds">
               <NumberSlider
                 label="Perching birds"
                 value={counts.perch}
@@ -420,12 +443,13 @@ export function InspectorPanel({
                 }}
               />
             </Row>
+            </> : (
+              <p className="rounded-md border border-dashed border-border p-2 text-[11px] leading-relaxed text-muted-foreground">No landing events. Every bird flies through. Choose Add landing, then drag a box on the stage.</p>
+            )}
           </div>
-        ) : (
-          <p className="rounded-md border border-dashed border-border p-3 text-[11px] leading-relaxed text-muted-foreground">Add a landing zone to set perching and gathering counts. Until then, every bird flies through.</p>
         )}
         {!sequence.loopPath && (
-          <Row label={sequence.landing && counts.perch + counts.gather > 0 ? "Dwell at landing" : "Dwell (no landing birds selected)"}>
+          <Row label={zones.length && counts.perch + counts.gather > 0 ? "Dwell at each landing" : "Dwell (no landing birds selected)"}>
             <NumberSlider
               label="Dwell at landing"
               value={sequence.dwellSeconds}
@@ -443,36 +467,57 @@ export function InspectorPanel({
       <div className="h-px bg-border" />
 
       <div className="flex flex-col gap-4">
-        <h3 className="text-sm font-semibold text-foreground">Ink</h3>
-        <Row label="Bird color">
+        <div>
+          <h3 className="text-sm font-semibold text-foreground">Theme-aware bird color</h3>
+          <p className="mt-1 text-[10px] leading-relaxed text-muted-foreground">The complete handoff exports both palettes and tells the implementation agent how to switch them with light/dark theme.</p>
+        </div>
+        <Row label="Preview against">
+          <div className="grid grid-cols-2 gap-2">
+            {(["light", "dark"] as const).map((theme) => (
+              <button key={theme} type="button" aria-pressed={style.previewTheme === theme} onClick={() => onUpdateStyle({ previewTheme: theme })} className={`rounded-md border px-2 py-1.5 text-xs capitalize ${style.previewTheme === theme ? "border-primary bg-primary/15 text-primary" : "border-border bg-secondary text-foreground"}`}>{theme} theme</button>
+            ))}
+          </div>
+        </Row>
+        <Row label="Birds on light theme">
           <div className="flex items-center gap-2">
             {INK_SWATCHES.map((c) => (
               <button
                 key={c}
                 type="button"
                 onClick={() => {
-                  onUpdate({ color: c })
+                  onUpdate({ lightColor: c, color: c })
                   onUpdateStyle({ inkColor: c })
                 }}
-                aria-label={`Ink color ${c}`}
+                aria-label={`Light theme bird color ${c}`}
                 className="h-6 w-6 rounded-full border-2 transition-transform hover:scale-110"
                 style={{
                   backgroundColor: c,
-                  borderColor: (sequence.color || style.inkColor) === c ? "var(--primary)" : "var(--border)",
+                  borderColor: (sequence.lightColor || sequence.color || style.inkColor) === c ? "var(--primary)" : "var(--border)",
                 }}
               />
             ))}
             <label className="relative ml-1 inline-flex">
               <input
                 type="color"
-                value={sequence.color || style.inkColor}
+                value={sequence.lightColor || sequence.color || style.inkColor}
                 onChange={(e) => {
-                  onUpdate({ color: e.target.value })
+                  onUpdate({ lightColor: e.target.value, color: e.target.value })
                   onUpdateStyle({ inkColor: e.target.value })
                 }}
                 className="h-6 w-6 cursor-pointer rounded-full border border-border bg-transparent p-0"
-                aria-label="Custom ink color"
+                aria-label="Custom light theme bird color"
               />
+            </label>
+          </div>
+        </Row>
+
+        <Row label="Birds on dark theme">
+          <div className="flex items-center gap-2">
+            {INK_SWATCHES.map((c) => (
+              <button key={c} type="button" onClick={() => onUpdate({ darkColor: c })} aria-label={`Dark theme bird color ${c}`} className="h-6 w-6 rounded-full border-2 transition-transform hover:scale-110" style={{ backgroundColor: c, borderColor: sequence.darkColor === c ? "var(--primary)" : "var(--border)" }} />
+            ))}
+            <label className="relative ml-1 inline-flex">
+              <input type="color" value={sequence.darkColor || "#e2e8f0"} onChange={(e) => onUpdate({ darkColor: e.target.value })} className="h-6 w-6 cursor-pointer rounded-full border border-border bg-transparent p-0" aria-label="Custom dark theme bird color" />
             </label>
           </div>
         </Row>

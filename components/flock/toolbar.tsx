@@ -14,6 +14,8 @@ import {
   Eye,
   EyeOff,
   Trash2,
+  Moon,
+  Sun,
 } from "lucide-react"
 import type { StageMode } from "./stage"
 import type { Sequence } from "@/lib/flock/types"
@@ -39,12 +41,14 @@ type Props = {
   onClearBackdrop: () => void
   showBackdrop: boolean
   onToggleBackdrop: () => void
+  previewTheme: "light" | "dark"
+  onPreviewTheme: (theme: "light" | "dark") => void
 }
 
 const MODES: { id: StageMode; label: string; icon: typeof Pencil; hint: string }[] = [
   { id: "draw", label: "Path", icon: Pencil, hint: "Drag to draw the flight path" },
-  { id: "landing", label: "Landing", icon: Square, hint: "Drag a box where the flock lands" },
-  { id: "edit", label: "Edit", icon: MousePointer2, hint: "Drag points or the landing box" },
+  { id: "landing", label: "Add landing", icon: Square, hint: "Drag another landing stop; repeat for multiple stops" },
+  { id: "edit", label: "Edit", icon: MousePointer2, hint: "Drag points or any landing box" },
 ]
 
 export function Toolbar({
@@ -67,6 +71,8 @@ export function Toolbar({
   onClearBackdrop,
   showBackdrop,
   onToggleBackdrop,
+  previewTheme,
+  onPreviewTheme,
 }: Props) {
   const fileRef = useRef<HTMLInputElement>(null)
   const [confirmStartOverId, setConfirmStartOverId] = useState<string | null>(null)
@@ -99,6 +105,18 @@ export function Toolbar({
             )
           })}
         </div>
+
+        <button
+          type="button"
+          aria-label={`Preview ${previewTheme === "light" ? "dark" : "light"} theme bird palette`}
+          aria-pressed={previewTheme === "dark"}
+          onClick={() => onPreviewTheme(previewTheme === "light" ? "dark" : "light")}
+          className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-2.5 py-2 text-xs text-muted-foreground hover:border-primary/50 hover:text-foreground"
+          title="Switch only the bird palette; the authored motion and background stay aligned"
+        >
+          {previewTheme === "light" ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
+          {previewTheme === "light" ? "Light-theme birds" : "Dark-theme birds"}
+        </button>
 
         <div className="ml-auto flex items-center gap-2">
           <input
@@ -193,7 +211,7 @@ export function Toolbar({
         </Button>
         {confirmStartOverId === activeId ? (
           <div className="ml-1 flex items-center gap-1 rounded-md border border-destructive/40 bg-destructive/10 p-1" role="group" aria-label="Confirm start over">
-            <span className="px-1 text-[11px] text-destructive">Erase path + landing?</span>
+            <span className="px-1 text-[11px] text-destructive">Erase path + landings?</span>
             <Button
               variant="destructive"
               size="sm"
@@ -215,7 +233,7 @@ export function Toolbar({
             size="sm"
             onClick={() => setConfirmStartOverId(activeId)}
             className="ml-1 h-7 gap-1 text-xs text-destructive hover:text-destructive"
-            title="Erase this flock's path and landing, then draw again"
+            title="Erase this flock's path and landings, then draw again"
           >
             <Trash2 className="h-3.5 w-3.5" />
             Start over

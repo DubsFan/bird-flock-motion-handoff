@@ -31,6 +31,8 @@ type Prepared = {
   path: SampledPath
   landU: number
   landDistance: number
+  landingDistances: number[]
+  orderedLandings: Sequence["landings"]
   seeds: BirdSeed[]
   sig: string
 }
@@ -61,6 +63,11 @@ function shortestAngle(a: number, b: number) {
 
 function clamp(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, value))
+}
+
+export function landingZones(seq: Pick<Sequence, "landings" | "landing">) {
+  if (seq.landings?.length) return seq.landings
+  return seq.landing ? [seq.landing] : []
 }
 
 export function sequenceBirdCount(seq: Pick<Sequence, "birdCount" | "density">) {
@@ -220,7 +227,7 @@ function sigFor(seq: Sequence, d: Dims): string {
   return [
     seq.id, seq.seed, seq.density, sequenceBirdCount(seq), seq.entry, seq.exit, seq.loopPath,
     seq.points.map((p) => `${p.x.toFixed(3)},${p.y.toFixed(3)}`).join("|"),
-    seq.landing ? `${seq.landing.x},${seq.landing.y},${seq.landing.w},${seq.landing.h}` : "none",
+    landingZones(seq).map((landing) => `${landing.x},${landing.y},${landing.w},${landing.h}`).join("|") || "none",
     Math.round(d.w), Math.round(d.h),
   ].join(";")
 }
@@ -233,44 +240,63 @@ export function buildMotionPath(seq: Sequence, d: Dims) {
     ? [...px]
     : [entryPoint(first, seq.entry, d), ...px, exitPoint(last, seq.exit, d, px.at(-2))]
   let landU = 0.55
-  if (seq.landing && !seq.loopPath) {
-    const cx = (seq.landing.x + seq.landing.w / 2) * d.w
-    const cy = (seq.landing.y + seq.landing.h / 2) * d.h
-    const landingCenter = { x: cx, y: cy }
+  const zones = seq.loopPath ? [] : landingZones(seq)
+  if (zones.length && controls.length >= 2) {
     const roughPath = samplePath(controls, 64)
-    let nearestRoughIndex = 0
-    let nearest = Infinity
-    roughPath.points.forEach((point, index) => {
-      const distance = (point.x - cx) ** 2 + (point.y - cy) ** 2
-      if (distance < nearest) {
-        nearest = distance
-        nearestRoughIndex = index
+    const insertions = zones.map((zone) => {
+      const center = {
+        x: (zone.x + zone.w / 2) * d.w,
+        y: (zone.y + zone.h / 2) * d.h,
       }
-    })
-    // A landing is a real waypoint, not a late visual warp. Insert its center
-    // into the nearest spline segment so constant arc-length travel physically
-    // passes through the landing zone at a constant velocity.
-    if (nearest > 1) {
-      const segment = Math.min(controls.length - 2, Math.floor(nearestRoughIndex / 64))
-      controls = [...controls.slice(0, segment + 1), landingCenter, ...controls.slice(segment + 1)]
+      let nearestRoughIndex = 0
+      let nearest = Infinity
+      roughPath.points.forEach((point, index) => {
+        const distance = (point.x - center.x) ** 2 + (point.y - center.y) ** 2
+        if (distance < nearest) {
+          nearest = distance
+          nearestRoughIndex = index
+        }
+      })
+      return {
+        center,
+        routeOrder: nearestRoughIndex,
+        segment: Math.min(controls.length - 2, Math.floor(nearestRoughIndex / 64)),
+      }
+    }).sort((a, b) => a.routeOrder - b.routeOrder)
+
+    // Every landing is a real route waypoint. Grouping insertions by their
+    // original spline segment preserves chronological path order even when a
+    // user adds several landing boxes to one stretch of the route.
+    const expanded: Point[] = [controls[0]]
+    for (let segment = 0; segment < controls.length - 1; segment++) {
+      insertions
+        .filter((insertion) => insertion.segment === segment)
+        .forEach((insertion) => expanded.push(insertion.center))
+      expanded.push(controls[segment + 1])
     }
+    controls = expanded
   }
 
   const path = seq.loopPath ? sampleClosedPath(controls, 64) : samplePath(controls, 64)
-  if (seq.landing && !seq.loopPath) {
-    const cx = (seq.landing.x + seq.landing.w / 2) * d.w
-    const cy = (seq.landing.y + seq.landing.h / 2) * d.h
+  const orderedStops = zones.map((zone) => {
+    const cx = (zone.x + zone.w / 2) * d.w
+    const cy = (zone.y + zone.h / 2) * d.h
     let nearest = Infinity
+    let distanceAlongPath = 0
     path.points.forEach((point, index) => {
       const distance = (point.x - cx) ** 2 + (point.y - cy) ** 2
       if (distance < nearest) {
         nearest = distance
-        landU = path.cumulative[index] / Math.max(1, path.length)
+        distanceAlongPath = path.cumulative[index]
       }
     })
-  }
+    return { zone, distance: distanceAlongPath }
+  }).sort((a, b) => a.distance - b.distance)
+  const landingDistances = orderedStops.map((stop) => stop.distance)
+  const orderedLandings = orderedStops.map((stop) => stop.zone)
+  if (landingDistances.length) landU = landingDistances[0] / Math.max(1, path.length)
 
-  return { path, landU, landDistance: landU * path.length }
+  return { path, landU, landDistance: landingDistances[0] ?? landU * path.length, landingDistances, orderedLandings }
 }
 
 function prepare(seq: Sequence, d: Dims): Prepared {
@@ -278,8 +304,8 @@ function prepare(seq: Sequence, d: Dims): Prepared {
   const hit = cache.get(seq.id)
   if (hit?.sig === sig) return hit
   const motionPath = buildMotionPath(seq, d)
-  const { path, landU, landDistance } = motionPath
-  const prepared = { path, landU, landDistance, seeds: buildBirdSeeds(seq), sig }
+  const { path, landU, landDistance, landingDistances, orderedLandings } = motionPath
+  const prepared = { path, landU, landDistance, landingDistances, orderedLandings, seeds: buildBirdSeeds(seq), sig }
   cache.set(seq.id, prepared)
   return prepared
 }
@@ -403,16 +429,20 @@ function sequenceTiming(seq: Sequence) {
   if (seq.loopPath) {
     return {
       dwell: 0,
+      dwellPerStop: 0,
       movingTime: Math.max(0.1, seq.durationSeconds) / Math.max(0.05, seq.speedMultiplier ?? 1),
     }
   }
   const counts = landingCounts(seq)
-  const hasLandingParticipants = !!seq.landing && counts.perch + counts.gather > 0
-  const dwell = hasLandingParticipants ? Math.min(seq.dwellSeconds, seq.durationSeconds * 0.65) : 0
+  const stopCount = landingZones(seq).length
+  const hasLandingParticipants = stopCount > 0 && counts.perch + counts.gather > 0
+  const requestedDwell = hasLandingParticipants ? Math.max(0, seq.dwellSeconds) * stopCount : 0
+  const dwell = Math.min(requestedDwell, seq.durationSeconds * 0.65)
+  const dwellPerStop = stopCount ? dwell / stopCount : 0
   const baseMovingTime = Math.max(0.1, seq.durationSeconds - dwell)
   const speedMultiplier = Math.max(0.05, seq.speedMultiplier ?? 1)
   const movingTime = baseMovingTime / speedMultiplier
-  return { dwell, movingTime }
+  return { dwell, dwellPerStop, movingTime }
 }
 
 export function sequenceDuration(seq: Sequence) {
@@ -426,49 +456,73 @@ export function sequenceDuration(seq: Sequence) {
 export function motionClock(
   seq: Sequence,
   path: SampledPath,
-  landDistance: number,
+  landDistance: number | number[],
   seconds: number,
   role: Sequence["arrivalMode"] = seq.arrivalMode,
 ) {
   const timing = sequenceTiming(seq)
-  const dwell = role === "Fly through" ? 0 : timing.dwell
+  const dwell = role === "Fly through" ? 0 : timing.dwellPerStop
   const movingTime = timing.movingTime
   const speed = path.length / movingTime
-  if (!dwell) return { distance: Math.min(path.length, seconds * speed), landingBlend: 0, dwelling: false, speed, action: "flight" as const, actionPhase: 0 }
-  const arriveAt = landDistance / speed
-  const leaveAt = arriveAt + dwell
+  const distances = (Array.isArray(landDistance) ? landDistance : [landDistance])
+    .filter((distance) => Number.isFinite(distance))
+    .sort((a, b) => a - b)
+  if (!dwell || !distances.length) return { distance: Math.min(path.length, seconds * speed), landingBlend: 0, dwelling: false, speed, action: "flight" as const, actionPhase: 0, landingIndex: -1 }
   const approachDistance = Math.max(path.length * 0.08, Math.min(path.length * 0.18, speed * 1.8))
-  if (seconds < arriveAt) {
-    const distance = seconds * speed
-    const blend = smoothstep(Math.max(0, landDistance - approachDistance), landDistance, distance)
-    return {
-      distance,
-      landingBlend: blend,
-      dwelling: false,
-      speed,
-      action: blend > 0 ? "approach" as const : "flight" as const,
-      actionPhase: blend,
+  let completedDwell = 0
+  for (let index = 0; index < distances.length; index++) {
+    const stopDistance = distances[index]
+    const arriveAt = stopDistance / speed + completedDwell
+    const leaveAt = arriveAt + dwell
+    if (seconds < arriveAt) {
+      const distance = (seconds - completedDwell) * speed
+      if (index > 0) {
+        const previousStop = distances[index - 1]
+        const release = smoothstep(0, approachDistance, distance - previousStop)
+        if (release < 1) return {
+          distance,
+          landingBlend: 1 - release,
+          dwelling: false,
+          speed,
+          action: "launch" as const,
+          actionPhase: release,
+          landingIndex: index - 1,
+        }
+      }
+      const blend = smoothstep(Math.max(0, stopDistance - approachDistance), stopDistance, distance)
+      return {
+        distance,
+        landingBlend: blend,
+        dwelling: false,
+        speed,
+        action: blend > 0 ? "approach" as const : "flight" as const,
+        actionPhase: blend,
+        landingIndex: index,
+      }
     }
+    if (seconds <= leaveAt) return {
+      distance: stopDistance,
+      landingBlend: 1,
+      dwelling: true,
+      speed,
+      action: "perch" as const,
+      actionPhase: clamp01((seconds - arriveAt) / Math.max(0.001, dwell)),
+      landingIndex: index,
+    }
+    completedDwell += dwell
   }
-  if (seconds <= leaveAt) return {
-    distance: landDistance,
-    landingBlend: 1,
-    dwelling: true,
-    speed,
-    action: "perch" as const,
-    actionPhase: clamp01((seconds - arriveAt) / Math.max(0.001, dwell)),
-  }
-  // Release over the same spatial runway used for arrival. The flock resumes
-  // the exact pre-landing velocity instead of accelerating to recover time.
-  const departed = (seconds - leaveAt) * speed
-  const release = smoothstep(0, approachDistance, departed)
+  const lastIndex = distances.length - 1
+  const lastStop = distances[lastIndex]
+  const distance = (seconds - completedDwell) * speed
+  const release = smoothstep(0, approachDistance, distance - lastStop)
   return {
-    distance: Math.min(path.length, landDistance + departed),
+    distance: Math.min(path.length, distance),
     landingBlend: 1 - release,
     dwelling: false,
     speed,
     action: release < 1 ? "launch" as const : "flight" as const,
     actionPhase: release,
+    landingIndex: lastIndex,
   }
 }
 
@@ -532,7 +586,7 @@ export function renderSequence(
   d: Dims,
   template: BirdTemplate = BUILTIN_BIRD_TEMPLATE,
 ) {
-  const { path, landDistance, seeds } = prepare(seq, d)
+  const { path, landingDistances, orderedLandings, seeds } = prepare(seq, d)
   if (path.points.length < 2 || path.length <= 0) return
   const runtime = sequenceDuration(seq)
   const seconds = clamp01(t) * runtime
@@ -540,18 +594,20 @@ export function renderSequence(
   const counts = landingCounts(seq)
   const loopProgress = seq.loopPath ? (t >= 1 ? 0 : ((t % 1) + 1) % 1) : 0
   const scale = Math.min(d.w, d.h)
-  const lz = seq.landing ? {
-    cx: (seq.landing.x + seq.landing.w / 2) * d.w,
-    cy: (seq.landing.y + seq.landing.h / 2) * d.h,
-    w: seq.landing.w * d.w,
-    h: seq.landing.h * d.h,
-  } : null
+  const lzs = orderedLandings.map((landing) => ({
+    cx: (landing.x + landing.w / 2) * d.w,
+    cy: (landing.y + landing.h / 2) * d.h,
+    w: landing.w * d.w,
+    h: landing.h * d.h,
+  }))
   const seam = seq.loopPath ? 1 : smoothstep(0, 0.035, 1 - t)
   const count = sequenceBirdCount(seq)
   const densitySize = count > 60 ? 0.7 : count > 30 ? 0.82 : count > 12 ? 0.94 : 1
   const baseSize = scale * 0.055 * densitySize
   const wingRate = WING_RATE[seq.wingIntensity]
-  const ink = seq.color || style.inkColor
+  const ink = style.previewTheme === "dark"
+    ? seq.darkColor || "#e2e8f0"
+    : seq.lightColor || seq.color || style.inkColor
 
   seeds.forEach((s, index) => {
     let birdSeconds: number
@@ -562,7 +618,7 @@ export function renderSequence(
       birdSeconds = loopProgress * movingTime
       role = "Fly through"
       u = ((loopProgress - s.depth) % 1 + 1) % 1
-      clock = { distance: u * path.length, landingBlend: 0, dwelling: false, speed: path.length / movingTime, action: "flight" as const, actionPhase: 0 }
+      clock = { distance: u * path.length, landingBlend: 0, dwelling: false, speed: path.length / movingTime, action: "flight" as const, actionPhase: 0, landingIndex: -1 }
     } else {
       // Every bird uses the same constant-speed clock with a staggered start.
       // No follower is accelerated or position-blended forward to catch up.
@@ -570,7 +626,7 @@ export function renderSequence(
       role = index < counts.perch
         ? "Perch"
         : index < counts.perch + counts.gather ? "Gather" : "Fly through"
-      clock = motionClock(seq, path, landDistance, birdSeconds, role)
+      clock = motionClock(seq, path, landingDistances, birdSeconds, role)
       u = clock.distance / path.length
     }
     // Do not clamp parked followers onto edge points. They remain offscreen
@@ -596,6 +652,7 @@ export function renderSequence(
     let x = head.x + offset.dx
     let y = head.y + offset.dy
 
+    const lz = clock.landingIndex >= 0 ? lzs[clock.landingIndex] : null
     if (lz && role !== "Fly through" && clock.landingBlend > 0) {
       const target = landingOffset(role, s, birdSeconds, lz)
       const settled = resolveLandingPosition(head, offset, target, clock.landingBlend)
@@ -625,7 +682,7 @@ export function renderSequence(
     ctx.translate(x, y)
     // Perched birds settle upright; airborne birds smoothly bank with path curvature.
     const templateDirection = template.direction ?? "left"
-    if (clock.dwelling && role === "Perch") {
+    if (clock.dwelling && role !== "Fly through") {
       ctx.rotate(0)
     } else {
       const orientation = orientationForMotion(seq, bank, templateDirection)

@@ -10,7 +10,7 @@ import {
   useRef,
   useState,
 } from "react"
-import { buildMotionPath, renderProjectFrame } from "@/lib/flock/engine"
+import { buildMotionPath, landingZones, renderProjectFrame } from "@/lib/flock/engine"
 import { preloadBirdTemplate } from "@/lib/flock/template-renderer"
 import type { BirdTemplate, LandingZone, Point, SceneSource, Sequence, Style } from "@/lib/flock/types"
 
@@ -222,6 +222,7 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
   const drawingRef = useRef(false)
   const rawRef = useRef<Point[]>([])
   const dragRef = useRef<{ kind: "point" | "landMove" | "landResize"; index?: number; start?: Point; orig?: LandingZone } | null>(null)
+  const landingDrawRef = useRef<{ index: number; zones: LandingZone[] } | null>(null)
 
   const toNorm = useCallback(
     (e: React.PointerEvent): Point => {
@@ -253,22 +254,26 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
     } else if (mode === "landing") {
       drawingRef.current = true
       rawRef.current = [p]
-      onUpdateSequence(active.id, { landing: { x: p.x, y: p.y, w: 0.001, h: 0.001 } })
+      const zones = [...landingZones(active), { x: p.x, y: p.y, w: 0.001, h: 0.001 }]
+      landingDrawRef.current = { index: zones.length - 1, zones }
+      onUpdateSequence(active.id, { landings: zones, landing: zones[0] })
     } else if (mode === "edit") {
       const idx = hitPoint(p, active.points)
       if (idx >= 0) {
         dragRef.current = { kind: "point", index: idx }
         return
       }
-      const lz = active.landing
-      if (lz) {
+      const zones = landingZones(active)
+      for (let landingIndex = zones.length - 1; landingIndex >= 0; landingIndex--) {
+        const lz = zones[landingIndex]
         const nearCorner = Math.hypot(p.x - (lz.x + lz.w), p.y - (lz.y + lz.h)) < 0.03
         if (nearCorner) {
-          dragRef.current = { kind: "landResize", start: p, orig: { ...lz } }
+          dragRef.current = { kind: "landResize", index: landingIndex, start: p, orig: { ...lz } }
           return
         }
         if (p.x >= lz.x && p.x <= lz.x + lz.w && p.y >= lz.y && p.y <= lz.y + lz.h) {
-          dragRef.current = { kind: "landMove", start: p, orig: { ...lz } }
+          dragRef.current = { kind: "landMove", index: landingIndex, start: p, orig: { ...lz } }
+          return
         }
       }
     }
@@ -282,29 +287,34 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
       onUpdateSequence(active.id, { points: decimate(rawRef.current) })
     } else if (mode === "landing" && drawingRef.current) {
       const s = rawRef.current[0]
-      onUpdateSequence(active.id, {
-        landing: {
-          x: Math.min(s.x, p.x),
-          y: Math.min(s.y, p.y),
-          w: Math.abs(p.x - s.x),
-          h: Math.abs(p.y - s.y),
-        },
-      })
+      const drawing = landingDrawRef.current
+      if (!drawing) return
+      const zone = {
+        x: Math.min(s.x, p.x),
+        y: Math.min(s.y, p.y),
+        w: Math.max(0.03, Math.abs(p.x - s.x)),
+        h: Math.max(0.03, Math.abs(p.y - s.y)),
+      }
+      const zones = drawing.zones.map((landing, index) => index === drawing.index ? zone : landing)
+      landingDrawRef.current = { ...drawing, zones }
+      onUpdateSequence(active.id, { landings: zones, landing: zones[0] })
     } else if (mode === "edit" && dragRef.current) {
       const d = dragRef.current
       if (d.kind === "point" && d.index != null) {
         const pts = active.points.map((pt, i) => (i === d.index ? p : pt))
         onUpdateSequence(active.id, { points: pts })
-      } else if (d.kind === "landMove" && d.orig && d.start) {
+      } else if (d.kind === "landMove" && d.orig && d.start && d.index != null) {
         const dx = p.x - d.start.x
         const dy = p.y - d.start.y
-        onUpdateSequence(active.id, {
-          landing: { ...d.orig, x: clamp01(d.orig.x + dx), y: clamp01(d.orig.y + dy) },
-        })
-      } else if (d.kind === "landResize" && d.orig) {
-        onUpdateSequence(active.id, {
-          landing: { x: d.orig.x, y: d.orig.y, w: Math.max(0.03, p.x - d.orig.x), h: Math.max(0.03, p.y - d.orig.y) },
-        })
+        const zones = landingZones(active).map((landing, index) => index === d.index
+          ? { ...d.orig!, x: clamp01(d.orig!.x + dx), y: clamp01(d.orig!.y + dy) }
+          : landing)
+        onUpdateSequence(active.id, { landings: zones, landing: zones[0] ?? null })
+      } else if (d.kind === "landResize" && d.orig && d.index != null) {
+        const zones = landingZones(active).map((landing, index) => index === d.index
+          ? { x: d.orig!.x, y: d.orig!.y, w: Math.max(0.03, p.x - d.orig!.x), h: Math.max(0.03, p.y - d.orig!.y) }
+          : landing)
+        onUpdateSequence(active.id, { landings: zones, landing: zones[0] ?? null })
       }
     }
   }
@@ -314,6 +324,7 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
       onUpdateSequence(active.id, { points: decimate(rawRef.current) })
     }
     drawingRef.current = false
+    landingDrawRef.current = null
     dragRef.current = null
     rawRef.current = []
   }
@@ -328,6 +339,7 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
       .map((p, i) => `${i === 0 ? "M" : "L"} ${p.x.toFixed(1)} ${p.y.toFixed(1)}`)
       .join(" ")
   }, [active, dims])
+  const activeLandings = active ? landingZones(active) : []
 
   const cursor = mode === "edit" ? "default" : "crosshair"
 
@@ -442,13 +454,13 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
                 </g>
               )
             })}
-            {active.landing && (
-              <g aria-label="Landing zone guide">
+            {activeLandings.map((landing, landingIndex) => (
+              <g key={landingIndex} aria-label={`Landing zone ${landingIndex + 1} guide`}>
                 <rect
-                  x={active.landing.x * dims.w}
-                  y={active.landing.y * dims.h}
-                  width={active.landing.w * dims.w}
-                  height={active.landing.h * dims.h}
+                  x={landing.x * dims.w}
+                  y={landing.y * dims.h}
+                  width={landing.w * dims.w}
+                  height={landing.h * dims.h}
                   fill="none"
                   stroke="#050505"
                   strokeWidth={7}
@@ -456,10 +468,10 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
                   rx={5}
                 />
                 <rect
-                  x={active.landing.x * dims.w}
-                  y={active.landing.y * dims.h}
-                  width={active.landing.w * dims.w}
-                  height={active.landing.h * dims.h}
+                  x={landing.x * dims.w}
+                  y={landing.y * dims.h}
+                  width={landing.w * dims.w}
+                  height={landing.h * dims.h}
                   fill="none"
                   stroke="#ffffff"
                   strokeWidth={5}
@@ -467,10 +479,10 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
                   rx={5}
                 />
                 <rect
-                  x={active.landing.x * dims.w}
-                  y={active.landing.y * dims.h}
-                  width={active.landing.w * dims.w}
-                  height={active.landing.h * dims.h}
+                  x={landing.x * dims.w}
+                  y={landing.y * dims.h}
+                  width={landing.w * dims.w}
+                  height={landing.h * dims.h}
                   fill="#f59e0b"
                   fillOpacity={0.18}
                   stroke="#f59e0b"
@@ -479,26 +491,26 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
                   rx={5}
                 />
                 <circle
-                  cx={(active.landing.x + active.landing.w) * dims.w}
-                  cy={(active.landing.y + active.landing.h) * dims.h}
+                  cx={(landing.x + landing.w) * dims.w}
+                  cy={(landing.y + landing.h) * dims.h}
                   r={9}
                   fill="#050505"
                 />
                 <circle
-                  cx={(active.landing.x + active.landing.w) * dims.w}
-                  cy={(active.landing.y + active.landing.h) * dims.h}
+                  cx={(landing.x + landing.w) * dims.w}
+                  cy={(landing.y + landing.h) * dims.h}
                   r={7}
                   fill="#ffffff"
                 />
                 <circle
-                  cx={(active.landing.x + active.landing.w) * dims.w}
-                  cy={(active.landing.y + active.landing.h) * dims.h}
+                  cx={(landing.x + landing.w) * dims.w}
+                  cy={(landing.y + landing.h) * dims.h}
                   r={4.5}
                   fill="#f59e0b"
                 />
                 <text
-                  x={active.landing.x * dims.w + 6}
-                  y={active.landing.y * dims.h + 16}
+                  x={landing.x * dims.w + 6}
+                  y={landing.y * dims.h + 16}
                   fill="#111827"
                   stroke="#ffffff"
                   strokeWidth={4}
@@ -507,10 +519,10 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
                   fontWeight={700}
                   fontFamily="var(--font-mono)"
                 >
-                  LANDING · {active.dwellSeconds}s
+                  LANDING {landingIndex + 1} · {active.dwellSeconds}s
                 </text>
               </g>
-            )}
+            ))}
           </g>
         )}
       </svg>

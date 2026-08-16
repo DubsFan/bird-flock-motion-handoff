@@ -1,4 +1,5 @@
 "use client"
+/* eslint-disable @next/next/no-img-element -- local/data URL artwork previews cannot use next/image */
 
 import { useRef, useState } from "react"
 import { Bird, Code2, FileDown, ImageIcon, Link2, Upload, X } from "lucide-react"
@@ -306,6 +307,47 @@ export function AssetPanel({ scene, flockName, birdTemplate, onScene, onBirdTemp
           {BUILTIN_ARTWORK_OPTIONS.map((option) => <option key={option.id} value={option.id}>{option.name}</option>)}
         </select>
       </label>
+      <div>
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Visible artwork library</p>
+        <p className="mt-1 text-[10px] leading-relaxed text-muted-foreground">Choose from the actual bird drawings; no need to apply one just to discover its shape.</p>
+        <div className="mt-2 grid grid-cols-2 gap-2">
+          {BUILTIN_ARTWORK_OPTIONS.map((option) => {
+            const selected = option.id === birdTemplate.id
+            return (
+              <button
+                key={option.id}
+                type="button"
+                aria-pressed={selected}
+                onClick={() => onBirdTemplate(option)}
+                className={`rounded-md border p-2 text-left transition-colors ${selected ? "border-primary bg-primary/10" : "border-border bg-secondary/50 hover:border-primary/50"}`}
+              >
+                <span className="flex h-12 items-center justify-center rounded border border-black/10 bg-[#f3efe6]">
+                  <img src={option.previewDataUrl} alt="" className="h-10 w-full object-contain" aria-hidden="true" />
+                </span>
+                <span className="mt-1.5 block text-[10px] leading-tight text-foreground">{option.name}</span>
+              </button>
+            )
+          })}
+        </div>
+      </div>
+      {birdTemplate.actionFrames && (
+        <div className="rounded-md border border-border bg-secondary/35 p-2">
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Selected action tracks</p>
+          <div className="mt-2 grid grid-cols-4 gap-1.5">
+            {([
+              ["Flight", birdTemplate.frames[0]],
+              ["Approach", birdTemplate.actionFrames.approach.at(-1)],
+              ["Perch", birdTemplate.actionFrames.perch[3]],
+              ["Launch", birdTemplate.actionFrames.launch[4]],
+            ] as const).map(([label, source]) => (
+              <div key={label} className="text-center">
+                <span className="flex h-10 items-center justify-center rounded border border-black/10 bg-[#f3efe6]"><img src={source} alt="" className="h-9 w-full object-contain" aria-hidden="true" /></span>
+                <span className="mt-1 block text-[8px] text-muted-foreground">{label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       <input
         ref={birdRef}
         type="file"
@@ -319,8 +361,6 @@ export function AssetPanel({ scene, flockName, birdTemplate, onScene, onBirdTemp
       />
       <button type="button" onClick={() => birdRef.current?.click()} className="flex items-center gap-3 rounded-lg border border-dashed border-border bg-secondary/50 p-3 text-left hover:bg-secondary">
         {birdTemplate.previewDataUrl ? (
-          // User-supplied data URLs and local contour previews are not compatible with next/image optimization.
-          // eslint-disable-next-line @next/next/no-img-element
           <img src={birdTemplate.previewDataUrl} alt="Bird template preview" className="h-10 w-14 object-contain" />
         ) : <Bird className="h-8 w-8 text-primary" />}
         <span><span className="block text-sm font-medium text-foreground">{birdTemplate.name}</span><span className="text-[11px] text-muted-foreground">Import one bundle ZIP or numbered PNG sequence</span></span>

@@ -181,7 +181,7 @@ function drawImageContain(
   ctx.drawImage(image, (width - drawWidth) / 2, (height - drawHeight) / 2, drawWidth, drawHeight)
 }
 
-async function exportEncodedVideo(
+async function encodeVideoBlob(
   project: Project,
   format: "mp4" | "webm",
   options: BaseExportOptions & { transparent?: boolean } = {},
@@ -250,10 +250,19 @@ async function exportEncodedVideo(
   }
 
   if (!target.buffer) throw new Error("The browser encoder completed without producing a video buffer.")
-  const name = outputName(project, options.baseName)
-  const suffix = transparent ? "-alpha" : ""
   const type = format === "mp4" ? "video/mp4" : "video/webm"
-  download(new Blob([target.buffer], { type }), `${name}${suffix}.${format}`)
+  return new Blob([target.buffer], { type })
+}
+
+async function exportEncodedVideo(
+  project: Project,
+  format: "mp4" | "webm",
+  options: BaseExportOptions & { transparent?: boolean } = {},
+) {
+  const blob = await encodeVideoBlob(project, format, options)
+  const name = outputName(project, options.baseName)
+  const suffix = format === "webm" && options.transparent ? "-alpha" : ""
+  download(blob, `${name}${suffix}.${format}`)
 }
 
 export function exportMp4(project: Project, options: BaseExportOptions = {}) {
@@ -355,6 +364,133 @@ export function exportAppleAlphaBundle(project: Project, options: BaseExportOpti
   return exportFrameBundle(project, "apple", options)
 }
 
+export function projectForTheme(project: Project, theme: "light" | "dark"): Project {
+  return {
+    ...project,
+    style: { ...project.style, previewTheme: theme },
+  }
+}
+
+export function buildAllBrowserCommand(name: string, fps: number, pad: number) {
+  return [
+    "#!/bin/zsh",
+    "set -euo pipefail",
+    'script_dir="${0:A:h}"',
+    'cd "$script_dir"',
+    "if ! command -v ffmpeg >/dev/null 2>&1; then",
+    '  echo "FFmpeg is required. Install it, then run this file again."',
+    "  exit 1",
+    "fi",
+    "for theme in light dark; do",
+    `  ffmpeg -y -framerate ${fps} -i "$theme/frames/frame_%0${pad}d.png" -c:v libvpx-vp9 -pix_fmt yuva420p -b:v 0 -crf 24 "$theme/${name}-$theme-alpha.webm"`,
+    `  ffmpeg -y -framerate ${fps} -i "$theme/frames/frame_%0${pad}d.png" -c:v prores_ks -profile:v 4444 -pix_fmt yuva444p10le "$theme/${name}-$theme-prores4444.mov"`,
+    "done",
+    'echo "Created light/dark VP9-alpha WebM and ProRes 4444 MOV files."',
+    "",
+  ].join("\n")
+}
+
+export function buildCompleteHandoffReadme(project: Project, name: string, frames: number, fps: number, width: number, height: number) {
+  return [
+    `# ${name} complete cross-browser bird-motion handoff`,
+    "",
+    `This single package contains ${frames} synchronized transparent frames for each light/dark palette at ${fps} fps (${width}x${height}), the browser WebM files when the exporting browser supported VP9 alpha, conversion tooling, implementation code, AGENTS.md, and the motion brief.`,
+    "",
+    "## Use this package",
+    "",
+    "1. Give the whole unzipped folder to the implementation agent. AGENTS.md is the source of truth.",
+    "2. Keep the authored viewport. Do not independently crop the bird layer.",
+    "3. Use the light asset pair on light theme and the dark asset pair on dark theme.",
+    "4. Use HEVC-with-alpha MOV first for Safari/Apple and VP9-alpha WebM second for Chrome, Chromium, and Firefox.",
+    "5. If a WebM is absent, run MAKE_ALL_BROWSER_ASSETS.command to create it from the included frames.",
+    "6. Use Apple Compressor or AVFoundation to convert each included ProRes 4444 master to HEVC with alpha and name it exactly as AGENTS.md specifies.",
+    "",
+    "HEIC is not a video substitute. The Apple web asset is HEVC with alpha in a MOV container.",
+  ].join("\n")
+}
+
+function integrationComponent(name: string) {
+  return `export function FlockBackground({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="flock-scene">
+      <div className="flock-scene__background">{children}</div>
+      <video className="flock-scene__birds flock-scene__birds--light" muted autoPlay loop playsInline aria-hidden="true">
+        <source src="/${name}-light-alpha.mov" type='video/quicktime; codecs="hvc1"' />
+        <source src="/${name}-light-alpha.webm" type='video/webm; codecs="vp9"' />
+      </video>
+      <video className="flock-scene__birds flock-scene__birds--dark" muted autoPlay loop playsInline aria-hidden="true">
+        <source src="/${name}-dark-alpha.mov" type='video/quicktime; codecs="hvc1"' />
+        <source src="/${name}-dark-alpha.webm" type='video/webm; codecs="vp9"' />
+      </video>
+    </div>
+  )
+}
+`
+}
+
+const INTEGRATION_CSS = `.flock-scene { position: relative; overflow: hidden; }
+.flock-scene__background { position: relative; z-index: 0; }
+.flock-scene__birds { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; object-fit: contain; pointer-events: none; background: transparent; }
+.flock-scene__birds--dark { display: none; }
+.dark .flock-scene__birds--light, [data-theme='dark'] .flock-scene__birds--light { display: none; }
+.dark .flock-scene__birds--dark, [data-theme='dark'] .flock-scene__birds--dark { display: block; }
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not([data-theme='light']) .flock-scene__birds--light { display: none; }
+  :root:not(.light):not([data-theme='light']) .flock-scene__birds--dark { display: block; }
+}
+@media (prefers-reduced-motion: reduce) { .flock-scene__birds { display: none !important; } }
+`
+
+export async function exportCompleteHandoff(project: Project, options: BaseExportOptions = {}) {
+  const { default: JSZip } = await import("jszip")
+  const fps = options.fps ?? project.fps ?? 30
+  const { width, height } = exportDims(project, options.maxWidth ?? 1600)
+  const total = projectDuration(project.sequences)
+  const frames = Math.max(1, Math.ceil(total * fps))
+  const pad = String(frames).length
+  const name = outputName(project, options.baseName)
+  const zip = new JSZip()
+  await preloadProjectBirdTemplates(project)
+  const { canvas, ctx } = makeCanvas(width, height)
+  const themes = ["light", "dark"] as const
+
+  for (let themeIndex = 0; themeIndex < themes.length; themeIndex++) {
+    const theme = themes[themeIndex]
+    const themed = projectForTheme(project, theme)
+    const folder = zip.folder(`${theme}/frames`)!
+    for (let index = 0; index < frames; index++) {
+      if (options.signal?.cancelled) throw new Error("cancelled")
+      const t = frames <= 1 ? 0 : index / (frames - 1)
+      renderProjectFrame(ctx, t, themed.sequences, themed.style, { w: width, h: height }, total, themed.birdTemplate)
+      const frame = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/png"))
+      if (!frame) throw new Error(`Could not render ${theme} frame ${index + 1}.`)
+      folder.file(`frame_${String(index).padStart(pad, "0")}.png`, frame)
+      options.onProgress?.(((themeIndex * frames + index + 1) / (frames * themes.length)) * 0.72)
+      if (index % 4 === 0) await new Promise((resolve) => setTimeout(resolve, 0))
+    }
+    try {
+      const webm = await encodeVideoBlob(themed, "webm", {
+        ...options,
+        transparent: true,
+        onProgress: (progress) => options.onProgress?.(0.72 + themeIndex * 0.1 + progress * 0.1),
+      })
+      zip.file(`${theme}/${name}-${theme}-alpha.webm`, webm)
+    } catch (error) {
+      if ((error as Error).message === "cancelled") throw error
+      zip.file(`${theme}/WEBM_NOT_ENCODED.txt`, "This browser could not encode VP9 alpha. Run ../MAKE_ALL_BROWSER_ASSETS.command from the package root.")
+    }
+  }
+
+  zip.file("README.md", buildCompleteHandoffReadme(project, name, frames, fps, width, height))
+  zip.file("AGENTS.md", buildApplicationGuide(project, name))
+  zip.file("MAKE_ALL_BROWSER_ASSETS.command", buildAllBrowserCommand(name, fps, pad), { unixPermissions: 0o755 })
+  zip.file(`${name}.motion-brief.json`, JSON.stringify(buildMotionBriefJson(project), null, 2))
+  zip.file("integration/FlockBackground.tsx", integrationComponent(name))
+  zip.file("integration/flock-background.css", INTEGRATION_CSS)
+  const blob = await zip.generateAsync({ type: "blob", platform: "UNIX" }, (metadata) => options.onProgress?.(0.92 + metadata.percent / 100 * 0.08))
+  download(blob, `${name}-complete-cross-browser-handoff.zip`)
+}
+
 export function exportMotionBriefJson(project: Project, baseName?: string) {
   const name = outputName(project, baseName)
   download(
@@ -393,13 +529,13 @@ export async function exportVisualMap(project: Project, baseName?: string) {
     })
     ctx.stroke()
     ctx.setLineDash([])
-    if (sequence.landing) {
+    for (const landing of sequence.landings?.length ? sequence.landings : sequence.landing ? [sequence.landing] : []) {
       ctx.strokeStyle = "#5ea8ff"
       ctx.strokeRect(
-        sequence.landing.x * width,
-        sequence.landing.y * height,
-        sequence.landing.w * width,
-        sequence.landing.h * height,
+        landing.x * width,
+        landing.y * height,
+        landing.w * width,
+        landing.h * height,
       )
     }
   }

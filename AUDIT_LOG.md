@@ -221,3 +221,29 @@ The announced candidate delivery has arrived and was audited. Ten identities are
 - Live browser reload renders the mixed four-role canonical set plus ten curated per-flock identities. Close timestamp captures show independent authored pose changes, immediate frame-zero occupancy, upright direction, and calm negative space. Browser warning/error log is empty.
 - Download route: HTTP 200, `text/markdown`, attachment filename `murmur-bird-artwork-agent-prompt.md`; the contract specifies one directly importable ZIP per identity with 8 flight + 8 approach + 8 perch + 8 launch transparent PNGs, `1600 px` preferred frames, fixed track-local canvases/shared normalized anchor/direction, and 6/8/10 fps QA.
 - `pnpm build`: pass; Next.js 16.3.0 production bundle compiled and statically prerendered `/`, `/_not-found`, and `/api/bird-artwork-agent-prompt`.
+
+## Iteration 15: repeatable landings, visible source choices, and one complete theme-aware handoff
+
+- Reproduced the missing capability in the live app and data model: a sequence stored one singular `landing`, so placing another landing replaced the first. The current project had one stop with 1 perch + 2 gather birds, and its dark scene plus dark-blue bird palette made the action look absent even when the timing code ran.
+- Replaced the singular runtime contract with an ordered `landings` collection while retaining legacy-project migration. Add landing now appends a numbered event, any event can be moved or resized, and the inspector exposes Add, Remove last, and Clear all controls. Zero events fly through; one or more events become real ordered path waypoints.
+- Rebuilt the clock around multiple approach -> dwell -> launch cycles. Every stop uses its own action window and participant counts, all route travel remains distance-based and constant-speed, and gathering birds now visibly settle upright during their dwell instead of continuing to look like fly-through birds.
+- Added separate light-theme and dark-theme bird colors plus an immediate stage-preview toggle. Both colors persist per flock and are written into the motion brief and generated integration contract.
+- Replaced the text-only identity choice with a visible artwork library for all curated identities and four role presets. The selected identity also shows its authored Flight, Approach, Perch, and Launch tracks before export.
+- Made `Complete browser + theme handoff (.zip)` the single recommended export. The ZIP contains 348 light RGBA frames, 348 dark RGBA frames, both browser-produced VP9-alpha WebMs, the motion brief, a generated `AGENTS.md`, README, executable all-browser converter, and drop-in React/CSS integration files. Individual exports remain available but are explicitly secondary.
+- The generated agent contract requires dual theme assets, HEVC-alpha MOV first and VP9-alpha WebM second, one shared aspect-ratio box, `object-fit: contain`, transparent overlay positioning, `pointer-events: none`, `aria-hidden`, reduced-motion handling, and validation in both Safari and Chrome. It honestly identifies Compressor/AVFoundation as the final HEVC-alpha path rather than relabeling a non-HEVC file.
+
+### Visual and export proof
+
+- In-app browser editing proof: added a second landing by dragging a new box on the stage; both numbered landing guides remained visible and `Landing events · 2` appeared in the inspector. Normal-speed captures at 2.4s, 4.2s, 5.9s, and 7.7s showed the flock traverse both stops, settle/release at each, and continue without a teleport or catch-up jump.
+- The dark-theme palette toggle changed the previously near-invisible birds to the configured light ink while retaining the dark scene and exact route alignment. A full reload preserved two landing events, the dark palette selection, and the recommended bundle control. Browser diagnostics contain no warning or error entries.
+- Decoded visual sheets: `/Users/liltroy/Downloads/murmur-multi-landing-dark-full-playback-sheet.png`, `/Users/liltroy/Downloads/murmur-multi-landing-action-sheet.png`, `/Users/liltroy/Downloads/murmur-multi-landing-one-close-sheet.png`, and `/Users/liltroy/Downloads/murmur-multi-landing-two-close-sheet.png`. The sheets show authored approach/perch/launch poses, held participants at both stop regions, and eventual clearance.
+- Complete handoff proof: `/Users/liltroy/Downloads/murmur-multi-landing-theme-proof-complete-cross-browser-handoff.zip` (`45,342,672` bytes). Extraction produced exactly 348 light + 348 dark PNG frames. Sample frame 120 decoded as RGBA `1600x900` with transparent and visible pixels. Both included WebMs probe as VP9 `1600x900`, `30 fps`, `11.6s`, and `alpha_mode=1`.
+- Ran the ZIP's `MAKE_ALL_BROWSER_ASSETS.command` successfully. It produced light and dark ProRes 4444 MOV masters at `1600x900`, `30 fps`, `11.6s`, `yuva444p12le`; the generated handoff then gives the explicit Apple HEVC-alpha conversion step.
+
+### Final verification
+
+- `pnpm exec tsc --noEmit`: pass.
+- `pnpm lint`: pass.
+- `pnpm test`: pass, 33 tests. Added coverage locks multiple ordered landing waypoints/action cycles and the complete dual-theme agent handoff contract.
+- `pnpm build`: pass with Next.js 16.3.0; `/`, `/_not-found`, and `/api/bird-artwork-agent-prompt` statically prerendered.
+- `git diff --check`: pass.
