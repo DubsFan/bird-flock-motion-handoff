@@ -1,5 +1,5 @@
 import type { Project } from "./types"
-import { landingCounts, sequenceDuration } from "./engine"
+import { landingCounts, landingZones, sequenceDuration } from "./engine"
 
 // JSON motion brief, schema-compatible with the Bird Motion Mapper pipeline.
 export function buildMotionBriefJson(project: Project) {
@@ -10,20 +10,17 @@ export function buildMotionBriefJson(project: Project) {
       captured_at: new Date().toISOString(),
       viewport: project.viewport,
     },
-    anchors: project.sequences
-      .filter((s) => s.landing)
-      .map((s, i) => {
-        const lz = s.landing!
-        return {
-          id: `a-${i + 1}`,
-          name: `${s.name} landing`,
+    anchors: project.sequences.flatMap((sequence, sequenceIndex) =>
+      landingZones(sequence).map((landing, landingIndex) => ({
+          id: `a-${sequenceIndex + 1}-${landingIndex + 1}`,
+          name: `${sequence.name} landing ${landingIndex + 1}`,
           role: "Landing zone",
-          normalized_center: { x: +(lz.x + lz.w / 2).toFixed(4), y: +(lz.y + lz.h / 2).toFixed(4) },
-          normalized_size: { w: +lz.w.toFixed(4), h: +lz.h.toFixed(4) },
+          normalized_center: { x: +(landing.x + landing.w / 2).toFixed(4), y: +(landing.y + landing.h / 2).toFixed(4) },
+          normalized_size: { w: +landing.w.toFixed(4), h: +landing.h.toFixed(4) },
           flock_interaction: "Land",
-          dwell_seconds: s.dwellSeconds,
-        }
-      }),
+          dwell_seconds: sequence.dwellSeconds,
+        })),
+    ),
     paths: project.sequences.map((s) => ({
       id: s.id,
       name: s.name,
@@ -32,11 +29,12 @@ export function buildMotionBriefJson(project: Project) {
       effective_duration_seconds: +sequenceDuration(s).toFixed(3),
       dwell_seconds: s.dwellSeconds,
       arrival_mode: s.arrivalMode,
+      landing_event_count: landingZones(s).length,
       seamless_loop: s.loopPath,
       perch_count: landingCounts(s).perch,
       gather_count: landingCounts(s).gather,
       fly_through_count: landingCounts(s).flyThrough,
-      speed_model: "constant arc-length through landing waypoint",
+      speed_model: "constant arc-length through ordered landing waypoints",
       speed_multiplier: s.speedMultiplier ?? 1,
       bird_size_scale: s.sizeScale ?? 1,
       formation_spacing_scale: s.spacingScale ?? 1.8,
@@ -56,6 +54,7 @@ export function buildMotionBriefJson(project: Project) {
       exit: s.exit,
       raw_points: s.points.map((p) => ({ x: +p.x.toFixed(6), y: +p.y.toFixed(6) })),
       notes: s.notes,
+      theme_colors: { light: s.lightColor, dark: s.darkColor },
     })),
     scene: { kind: project.scene.kind, compositable: project.scene.kind === "image" },
     default_bird_template: { name: project.birdTemplate.name, kind: project.birdTemplate.kind, frames: project.birdTemplate.frames.length },
@@ -81,16 +80,15 @@ export function buildDesignerBriefMarkdown(project: Project): string {
     lines.push(`- Enter: ${s.entry} · Exit: ${s.exit}`)
     lines.push(`- Base timeline: ${s.durationSeconds}s · Speed: ${(s.speedMultiplier ?? 1).toFixed(2)}x · Dwell: ${s.dwellSeconds}s`)
     lines.push(`- Seamless background loop: ${s.loopPath ? "yes — closed path, landing disabled" : "no"}`)
-    lines.push(`- Landing birds: ${landingCounts(s).perch} perch · ${landingCounts(s).gather} gather · ${landingCounts(s).flyThrough} fly through`)
+    lines.push(`- Landing events: ${landingZones(s).length} · Birds at each stop: ${landingCounts(s).perch} perch · ${landingCounts(s).gather} gather · ${landingCounts(s).flyThrough} fly through`)
     lines.push(`- Bird size: ${(s.sizeScale ?? 1).toFixed(2)}x · Spacing: ${(s.spacingScale ?? 1.8).toFixed(2)}x · Depth: ${s.depthDirection ?? "Flat plane"} (${(s.depthStrength ?? 0.75).toFixed(2)}x)`)
     lines.push(`- Foreground birds: ${s.foregroundBirdCount ?? 0} · Foreground boost: ${(s.foregroundBoost ?? 1).toFixed(2)}x`)
     lines.push(`- Bird artwork: ${(s.birdTemplate ?? project.birdTemplate).name} (${(s.birdTemplate ?? project.birdTemplate).frames.length} file(s))`)
-    if (s.landing) {
-      const lz = s.landing
+    landingZones(s).forEach((lz, landingIndex) => {
       lines.push(
-        `- Landing zone: center (${(lz.x + lz.w / 2).toFixed(2)}, ${(lz.y + lz.h / 2).toFixed(2)}), size ${(lz.w * 100).toFixed(0)}% x ${(lz.h * 100).toFixed(0)}%`,
+        `- Landing ${landingIndex + 1}: center (${(lz.x + lz.w / 2).toFixed(2)}, ${(lz.y + lz.h / 2).toFixed(2)}), size ${(lz.w * 100).toFixed(0)}% x ${(lz.h * 100).toFixed(0)}%`,
       )
-    }
+    })
     lines.push(`- Path points: ${s.points.map((p) => `(${p.x.toFixed(2)}, ${p.y.toFixed(2)})`).join(" → ")}`)
     if (s.notes.trim()) lines.push(`- Notes: ${s.notes.trim()}`)
     lines.push("")
@@ -109,21 +107,31 @@ export function buildApplicationGuide(project: Project, exportBaseName: string):
     "",
     "## Choose the correct asset",
     "",
-    `- Web/Chrome transparency: \`${exportBaseName}-alpha.webm\` (VP9 alpha).`,
-    `- Apple transparency: \`${exportBaseName}-alpha.mov\` (HEVC with alpha), created from the supplied PNG sequence with Apple AVFoundation or Compressor.`,
+    `- Light-theme Chrome/Firefox transparency: \`${exportBaseName}-light-alpha.webm\` (VP9 alpha).`,
+    `- Dark-theme Chrome/Firefox transparency: \`${exportBaseName}-dark-alpha.webm\` (VP9 alpha).`,
+    `- Light-theme Apple transparency: \`${exportBaseName}-light-alpha.mov\` (HEVC with alpha).`,
+    `- Dark-theme Apple transparency: \`${exportBaseName}-dark-alpha.mov\` (HEVC with alpha).`,
     `- Opaque, already composited delivery: \`${exportBaseName}.mp4\` (H.264). Do not overlay this file on the same background again.`,
     "- Editing master: the transparent PNG sequence or ProRes 4444 intermediate.",
     "",
     "HEIC is a still-image/image-sequence container. For transparent motion on Apple platforms, use HEVC with alpha in a MOV file.",
+    "",
+    "## Theme color contract",
+    "",
+    "Bird color is authored to change with the destination site's light/dark theme. Do not ship one palette for both themes and do not recolor the video with a guessed CSS filter. The complete handoff includes synchronized light and dark renders. Keep both source pairs and let CSS select the appropriate video.",
     "",
     "## Web overlay structure",
     "",
     "```html",
     '<div class="flock-scene">',
     '  <div class="flock-scene__background"><!-- selected background/card/page --></div>',
-    '  <video class="flock-scene__birds" autoplay muted loop playsinline aria-hidden="true">',
-    `    <source src="/${exportBaseName}-alpha.mov" type='video/quicktime; codecs="hvc1"'>`,
-    `    <source src="/${exportBaseName}-alpha.webm" type='video/webm; codecs="vp9"'>`,
+    '  <video class="flock-scene__birds flock-scene__birds--light" autoplay muted loop playsinline aria-hidden="true">',
+    `    <source src="/${exportBaseName}-light-alpha.mov" type='video/quicktime; codecs="hvc1"'>`,
+    `    <source src="/${exportBaseName}-light-alpha.webm" type='video/webm; codecs="vp9"'>`,
+    "  </video>",
+    '  <video class="flock-scene__birds flock-scene__birds--dark" autoplay muted loop playsinline aria-hidden="true">',
+    `    <source src="/${exportBaseName}-dark-alpha.mov" type='video/quicktime; codecs="hvc1"'>`,
+    `    <source src="/${exportBaseName}-dark-alpha.webm" type='video/webm; codecs="vp9"'>`,
     "  </video>",
     "</div>",
     "```",
@@ -135,6 +143,13 @@ export function buildApplicationGuide(project: Project, exportBaseName: string):
     "  position: absolute; inset: 0; z-index: 1;",
     "  width: 100%; height: 100%; object-fit: contain;",
     "  pointer-events: none; background: transparent;",
+    "}",
+    ".flock-scene__birds--dark { display: none; }",
+    ".dark .flock-scene__birds--light, [data-theme='dark'] .flock-scene__birds--light { display: none; }",
+    ".dark .flock-scene__birds--dark, [data-theme='dark'] .flock-scene__birds--dark { display: block; }",
+    "@media (prefers-color-scheme: dark) {",
+    "  :root:not(.light):not([data-theme='light']) .flock-scene__birds--light { display: none; }",
+    "  :root:not(.light):not([data-theme='light']) .flock-scene__birds--dark { display: block; }",
     "}",
     "```",
     "",
@@ -149,13 +164,14 @@ export function buildApplicationGuide(project: Project, exportBaseName: string):
     "## Validation checklist",
     "",
     "1. Confirm the first and last frames do not flash an opaque rectangle.",
-    "2. Confirm participating birds approach at constant speed and non-participating birds fly through without being pulled into the landing.",
+    "2. Confirm every authored landing stop plays approach → settle/perch → launch at constant route speed, while non-participants fly through.",
     "3. Test Safari with the HEVC-alpha MOV and Chrome/Firefox with VP9-alpha WebM.",
     "4. Honor `prefers-reduced-motion` by pausing or hiding decorative autoplay video.",
-    "5. Keep the MP4 fallback separate because it already contains an opaque background.",
+    "5. Toggle the site's actual light/dark theme and confirm the matching bird palette appears without moving or cropping.",
+    "6. Keep the MP4 fallback separate because it already contains an opaque background.",
     "",
     "```css",
-    "@media (prefers-reduced-motion: reduce) { .flock-scene__birds { display: none; } }",
+    "@media (prefers-reduced-motion: reduce) { .flock-scene__birds { display: none !important; } }",
     "```",
     "",
   ].join("\n")

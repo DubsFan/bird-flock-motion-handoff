@@ -6,6 +6,7 @@ import {
   detectVideoSupport,
   exportAppleAlphaBundle,
   exportApplicationGuide,
+  exportCompleteHandoff,
   exportDesignerBrief,
   exportMp4,
   exportMotionBriefJson,
@@ -92,13 +93,27 @@ export function ExportPanel({ project }: { project: Project }) {
         <span className="text-[10px] text-muted-foreground">Preview: {baseName}.mp4</span>
       </label>
 
-      {/* Tier 1 */}
+      <ExportButton
+        icon={<Package className="h-4 w-4" />}
+        title="Complete browser + theme handoff (.zip)"
+        subtitle="One package · light + dark palettes · Safari MOV workflow · Chrome/Firefox WebM · agent code + instructions"
+        badge="Recommended"
+        highlight
+        disabled={busy || !hasPaths}
+        loading={job?.kind === "complete"}
+        progress={job?.kind === "complete" ? job.progress : 0}
+        onClick={() => run("complete", (sig, onProgress) => exportCompleteHandoff(project, { baseName, signal: sig, onProgress }))}
+      />
+
+      <p className="text-[10px] leading-relaxed text-muted-foreground">This is the low-friction output to give an implementation agent. Everything below is an individual/advanced export.</p>
+
+      <div className="h-px bg-border" />
+      <h3 className="text-sm font-semibold text-foreground">Individual exports</h3>
       <ExportButton
         icon={<Package className="h-4 w-4" />}
         title="Transparent PNG frames (.zip)"
-        subtitle="True alpha · includes ffmpeg command · recommended"
+        subtitle="True alpha · includes ffmpeg command"
         badge="Reliable"
-        highlight
         disabled={busy || !hasPaths}
         loading={job?.kind === "png"}
         progress={job?.kind === "png" ? job.progress : 0}

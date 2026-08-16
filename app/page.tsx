@@ -47,9 +47,12 @@ export default function Page() {
             scene: parsed.scene ?? (parsed.backdropDataUrl ? { kind: "image", dataUrl: parsed.backdropDataUrl, name: "Saved backdrop" } : { kind: "none" }),
             birdTemplate: parsed.birdTemplate?.kind === "builtin" ? BUILTIN_BIRD_TEMPLATE : parsed.birdTemplate ?? fallback.birdTemplate,
             sequences: parsed.sequences.map((sequence) => {
-              const arrivalMode = sequence.arrivalMode ?? (sequence.landing ? "Perch" : "Fly through")
+              const landings = sequence.landings?.length
+                ? sequence.landings
+                : sequence.landing ? [sequence.landing] : []
+              const arrivalMode = sequence.arrivalMode ?? (landings.length ? "Perch" : "Fly through")
               const migratedBirdCount = sequence.birdCount ?? DENSITY_COUNT[sequence.density]
-              const legacyCount = sequence.landing ? migratedBirdCount : 0
+              const legacyCount = landings.length ? migratedBirdCount : 0
               // Repair the original giant preset. It multiplied the entire dense
               // flock by 3.5 while keeping compact formation offsets, which made
               // saved projects reopen as a single overlapping knot.
@@ -58,6 +61,8 @@ export default function Page() {
                 && sequence.depthDirection === "Background to foreground"
               return {
                 ...sequence,
+                landings,
+                landing: landings[0] ?? null,
                 birdCount: migratedBirdCount,
                 arrivalMode,
                 perchCount: sequence.perchCount ?? (arrivalMode === "Perch" ? legacyCount : 0),
@@ -72,6 +77,8 @@ export default function Page() {
                 foregroundBoost: legacyGiantPreset ? 2 : sequence.foregroundBoost ?? 1,
                 depthDirection: sequence.depthDirection ?? "Flat plane",
                 depthStrength: sequence.depthStrength ?? 0.75,
+                lightColor: sequence.lightColor ?? sequence.color ?? fallback.style.inkColor,
+                darkColor: sequence.darkColor ?? "#e2e8f0",
               }
             }),
           }
@@ -244,6 +251,8 @@ export default function Page() {
             onClearBackdrop={() => setProject((p) => ({ ...p, backdropDataUrl: null, scene: { kind: "none" } }))}
             showBackdrop={showBackdrop}
             onToggleBackdrop={() => setShowBackdrop((s) => !s)}
+            previewTheme={project.style.previewTheme}
+            onPreviewTheme={(previewTheme) => updateStyle({ previewTheme })}
           />
 
           <Stage
@@ -285,6 +294,7 @@ export default function Page() {
               onUpdate={(patch) => active && updateSequence(active.id, patch)}
               onUpdateStyle={updateStyle}
               onReseed={reseed}
+              onAddLanding={() => setMode("landing")}
             />
           </div>
           <ExportPanel project={project} />
@@ -299,8 +309,8 @@ function HintBar({ mode }: { mode: StageMode }) {
     mode === "draw"
       ? "Draw mode — click and drag across the stage to sketch the flight path. The first point is where the flock enters."
       : mode === "landing"
-        ? "Landing mode — drag a box over a card to mark where the flock gathers and dwells."
-        : "Edit mode — drag any path point to reshape the flight, or drag the landing box to reposition it."
+        ? "Add landing mode — drag a box for the next stop. Repeat to add multiple landing events."
+        : "Edit mode — drag any path point or landing box. Use Add landing for another stop."
   return (
     <p className="rounded-md border border-border bg-card px-3 py-2 text-xs leading-relaxed text-muted-foreground">
       {text}

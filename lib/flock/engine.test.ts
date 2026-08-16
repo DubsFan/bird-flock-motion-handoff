@@ -6,6 +6,7 @@ import {
   depthScaleAt,
   formationSpacingAt,
   landingCounts,
+  landingZones,
   motionClock,
   naturalWingPhase,
   orientationForMotion,
@@ -77,6 +78,36 @@ describe("flock motion timing", () => {
     expect(motionClock(sequence, path, landDistance, arriveAt + 0.2, "Perch").action).toBe("perch")
     expect(motionClock(sequence, path, landDistance, arriveAt + sequence.dwellSeconds + 0.05, "Perch").action).toBe("launch")
     expect(motionClock(sequence, path, landDistance, arriveAt + sequence.dwellSeconds + 3, "Perch").action).toBe("flight")
+  })
+
+  it("supports zero, one, or multiple ordered landing events on one route", () => {
+    const sequence = makeSequence("Dive and Pullout")
+    sequence.durationSeconds = 14
+    sequence.perchCount = 2
+    sequence.dwellSeconds = 1.5
+    sequence.landings = [
+      { x: 0.72, y: 0.24, w: 0.1, h: 0.1 },
+      { x: 0.24, y: 0.62, w: 0.12, h: 0.12 },
+    ]
+    sequence.landing = sequence.landings[0]
+    const { path, landingDistances } = buildMotionPath(sequence, { w: 1000, h: 600 })
+
+    expect(landingZones(sequence)).toHaveLength(2)
+    expect(landingDistances).toHaveLength(2)
+    expect(landingDistances[0]).toBeLessThan(landingDistances[1])
+
+    const base = motionClock(sequence, path, landingDistances, 0, "Perch")
+    const firstArrival = landingDistances[0] / base.speed
+    const secondArrival = landingDistances[1] / base.speed + sequence.dwellSeconds
+    expect(motionClock(sequence, path, landingDistances, firstArrival + 0.2, "Perch").landingIndex).toBe(0)
+    expect(motionClock(sequence, path, landingDistances, firstArrival + sequence.dwellSeconds + 0.05, "Perch").action).toBe("launch")
+    const secondStop = motionClock(sequence, path, landingDistances, secondArrival + 0.2, "Perch")
+    expect(secondStop.action).toBe("perch")
+    expect(secondStop.landingIndex).toBe(1)
+
+    sequence.landings = []
+    sequence.landing = null
+    expect(landingZones(sequence)).toEqual([])
   })
 
   it("settles formation offsets without pulling the path head toward landing", () => {
@@ -290,6 +321,7 @@ describe("start over", () => {
 
     expect(cleared.points).toEqual([])
     expect(cleared.landing).toBeNull()
+    expect(cleared.landings).toEqual([])
     expect(cleared.arrivalMode).toBe("Fly through")
     expect(cleared.perchCount).toBe(0)
     expect(cleared.gatherCount).toBe(0)

@@ -2,7 +2,7 @@ import { describe, expect, it } from "vitest"
 import { parseBirdArtworkManifest } from "./artwork-manifest"
 import { buildApplicationGuide, buildBirdArtworkAgentPrompt, buildMotionBriefJson } from "./brief"
 import { defaultProject } from "./defaults"
-import { buildProResCommand, exportDims, safeExportName } from "./export"
+import { buildAllBrowserCommand, buildCompleteHandoffReadme, buildProResCommand, exportDims, projectForTheme, safeExportName } from "./export"
 import { BUILTIN_BIRD_TEMPLATE, CURATED_BIRD_TEMPLATES } from "./types"
 
 describe("export naming", () => {
@@ -33,11 +33,27 @@ describe("application guide", () => {
   it("documents transparent fallbacks and the opaque MP4 boundary", () => {
     const guide = buildApplicationGuide(defaultProject(), "hero-birds")
     expect(guide).toContain("# Apply hero-birds")
-    expect(guide).toContain("hero-birds-alpha.mov")
-    expect(guide).toContain("hero-birds-alpha.webm")
+    expect(guide).toContain("hero-birds-light-alpha.mov")
+    expect(guide).toContain("hero-birds-light-alpha.webm")
+    expect(guide).toContain("hero-birds-dark-alpha.mov")
+    expect(guide).toContain("hero-birds-dark-alpha.webm")
     expect(guide).toContain("hero-birds.mp4")
     expect(guide).toContain("HEIC is a still-image/image-sequence container")
     expect(guide).toContain("prefers-reduced-motion")
+    expect(guide).toContain("Bird color is authored to change")
+    expect(guide.indexOf('<source src="/hero-birds-light-alpha.mov"')).toBeLessThan(guide.indexOf('<source src="/hero-birds-light-alpha.webm"'))
+  })
+
+  it("builds one complete light/dark conversion handoff", () => {
+    const project = defaultProject()
+    const command = buildAllBrowserCommand("hero-birds", 30, 3)
+    const readme = buildCompleteHandoffReadme(project, "hero-birds", 300, 30, 1600, 900)
+    expect(command).toContain("for theme in light dark")
+    expect(command).toContain("hero-birds-$theme-alpha.webm")
+    expect(command).toContain("prores_ks")
+    expect(readme).toContain("single package")
+    expect(readme).toContain("HEVC-with-alpha MOV first")
+    expect(projectForTheme(project, "dark").style.previewTheme).toBe("dark")
   })
 })
 

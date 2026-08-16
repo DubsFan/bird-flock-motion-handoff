@@ -54,6 +54,9 @@ export type Sequence = {
   entry: Entry
   exit: Exit
   points: Point[]
+  // Ordered landing stops. The singular field remains for projects saved by
+  // older Murmur releases and is migrated into this array on load.
+  landings: LandingZone[]
   landing: LandingZone | null
   arrivalMode: ArrivalMode
   perchCount: number
@@ -70,6 +73,8 @@ export type Sequence = {
   depthStrength: number
   seed: number
   notes: string
+  lightColor: string
+  darkColor: string
   color: string
   // Optional per-flock override. When absent, the project-level artist set is used.
   birdTemplate?: BirdTemplate
@@ -79,6 +84,7 @@ export type Style = {
   inkColor: string
   transparentBackground: boolean
   backgroundColor: string
+  previewTheme: "light" | "dark"
 }
 
 export type SceneSource =

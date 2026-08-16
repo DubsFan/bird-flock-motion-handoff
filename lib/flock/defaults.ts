@@ -5,6 +5,7 @@ export function uid(prefix = "seq"): string {
 }
 
 export const FLOCK_INK = "#043a78"
+export const FLOCK_INK_DARK_THEME = "#e2e8f0"
 
 // Treatment starter presets: sensible path shape + parameters per treatment.
 export const TREATMENT_PRESETS: Record<
@@ -240,6 +241,7 @@ export function treatmentPresetPatch(treatment: Treatment): Partial<Sequence> {
     entry: preset.entry,
     exit: preset.exit,
     points: preset.points.map((point) => ({ ...point })),
+    landings: [],
     landing: null,
     arrivalMode: "Fly through",
     perchCount: 0,
@@ -263,6 +265,7 @@ export function makeSequence(treatment: Treatment, name?: string): Sequence {
     entry: p.entry,
     exit: p.exit,
     points: p.points.map((pt) => ({ ...pt })),
+    landings: [],
     landing: null,
     arrivalMode: "Fly through",
     perchCount: 0,
@@ -273,6 +276,8 @@ export function makeSequence(treatment: Treatment, name?: string): Sequence {
     ...settings,
     seed: Math.floor(Math.random() * 1e9),
     notes: "",
+    lightColor: FLOCK_INK,
+    darkColor: FLOCK_INK_DARK_THEME,
     color: FLOCK_INK,
   }
 }
@@ -281,6 +286,7 @@ export function clearSequenceGeometry(sequence: Sequence): Sequence {
   return {
     ...sequence,
     points: [],
+    landings: [],
     landing: null,
     arrivalMode: "Fly through",
     perchCount: 0,
@@ -301,6 +307,7 @@ export function defaultProject(): Project {
       inkColor: FLOCK_INK,
       transparentBackground: true,
       backgroundColor: "#f3efe6",
+      previewTheme: "light",
     },
     fps: 30,
   }
