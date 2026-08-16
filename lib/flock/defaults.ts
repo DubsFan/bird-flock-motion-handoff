@@ -299,6 +299,8 @@ export function defaultProject(): Project {
   return {
     name: "Untitled flock",
     viewport: { width: 1600, height: 900 },
+    activeVariant: "desktop",
+    variantStates: {},
     backdropDataUrl: null,
     scene: { kind: "none" },
     birdTemplate: BUILTIN_BIRD_TEMPLATE,

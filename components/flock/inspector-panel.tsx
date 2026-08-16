@@ -1,6 +1,6 @@
 "use client"
 
-import { Shuffle } from "lucide-react"
+import { Shuffle, Trash2 } from "lucide-react"
 import { Label } from "@/components/ui/label"
 import {
   Select,
@@ -10,8 +10,10 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Slider } from "@/components/ui/slider"
+import { Disclosure } from "@/components/flock/disclosure"
 import { treatmentPresetPatch } from "@/lib/flock/defaults"
 import { depthScaleAt, landingCounts, landingZones } from "@/lib/flock/engine"
+import { deleteLanding } from "@/lib/flock/editing"
 import {
   DEPTH_DIRECTIONS,
   DENSITIES,
@@ -141,16 +143,10 @@ export function InspectorPanel({
     <div className="flex flex-col gap-5 p-4">
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-semibold text-foreground">Motion</h3>
-          <button
-            type="button"
-            onClick={onReseed}
-            className="inline-flex items-center gap-1.5 rounded-md border border-border bg-secondary px-2 py-1 text-[11px] text-muted-foreground transition-colors hover:text-foreground"
-            title="Re-roll the random seed for a new flock arrangement"
-          >
-            <Shuffle className="h-3 w-3" />
-            Reseed
-          </button>
+          <div>
+            <p className="text-[10px] font-semibold uppercase tracking-wide text-primary">Step 2</p>
+            <h3 className="mt-0.5 text-sm font-semibold text-foreground">Choose the motion</h3>
+          </div>
         </div>
 
         <div className="rounded-lg border border-primary/25 bg-primary/[0.06] p-3">
@@ -174,36 +170,6 @@ export function InspectorPanel({
           </div>
         </div>
 
-        <Row label="Flock behavior (keeps your path)">
-          <Field value={sequence.treatment} options={TREATMENTS} onChange={(v) => onUpdate({ treatment: v })} />
-        </Row>
-
-        <div className="grid grid-cols-2 gap-3">
-          <Row label="Density">
-            <Field
-              value={sequence.density}
-              options={DENSITIES}
-              onChange={(v) => {
-                const nextTotal = DENSITY_COUNT[v]
-                const perchCount = Math.min(counts.perch, nextTotal)
-                onUpdate({
-                  density: v,
-                  birdCount: nextTotal,
-                  perchCount,
-                  gatherCount: Math.min(counts.gather, nextTotal - perchCount),
-                })
-              }}
-            />
-          </Row>
-          <Row label="Wing cadence">
-            <Field
-              value={sequence.wingIntensity}
-              options={WING_INTENSITIES}
-              onChange={(v) => onUpdate({ wingIntensity: v })}
-            />
-          </Row>
-        </div>
-
         <Row label="Exact birds">
           <NumberSlider
             label="Exact birds"
@@ -223,7 +189,7 @@ export function InspectorPanel({
               })
             }}
           />
-          <p className="text-[10px] leading-relaxed text-muted-foreground">Use any exact count. Density above is only a quick-size shortcut.</p>
+          <p className="text-[10px] leading-relaxed text-muted-foreground">Use any exact count. The motion presets above choose a helpful starting count.</p>
         </Row>
 
         <div className="grid grid-cols-2 gap-3">
@@ -253,44 +219,85 @@ export function InspectorPanel({
           </Row>
         </div>
 
-        <Row label="Formation spacing">
-          <NumberSlider
-            label="Formation spacing"
-            value={sequence.spacingScale ?? 1.8}
-            min={0.5}
-            max={5}
-            step={0.1}
-            suffix="×"
-            decimals={1}
-            onChange={(v) => onUpdate({ spacingScale: v })}
-          />
-          <p className="text-[10px] leading-relaxed text-muted-foreground">Raise this when birds overlap. Spacing now grows with their rendered footprint.</p>
-        </Row>
-
-        <Row label="Depth travel">
+        <Disclosure label="Fine-tune motion" summary="Cadence, spacing, depth, direction, and arrangement.">
           <button
             type="button"
-            onClick={() => onUpdate({
-              depthDirection: "Background to foreground",
-              depthStrength: 1.5,
-              sizeScale: 1.1,
-              spacingScale: 3.2,
-              foregroundBirdCount: 1,
-              foregroundBoost: 2,
-            })}
-            className="mb-2 rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-left text-xs font-medium text-primary transition-colors hover:bg-primary/15"
+            onClick={onReseed}
+            className="inline-flex items-center justify-center gap-1.5 rounded-md border border-border bg-secondary px-2 py-1.5 text-[11px] text-muted-foreground transition-colors hover:text-foreground"
+            title="Re-roll the random seed for a new flock arrangement"
           >
-            Small background → one giant foreground bird
+            <Shuffle className="h-3 w-3" />
+            Try another arrangement
           </button>
-          <Field
-            value={sequence.depthDirection ?? "Flat plane"}
-            options={DEPTH_DIRECTIONS}
-            onChange={(v) => onUpdate({ depthDirection: v })}
-          />
-        </Row>
 
-        {(sequence.depthDirection ?? "Flat plane") !== "Flat plane" && (
-          <div className="flex flex-col gap-4">
+          <Row label="Flock behavior (keeps your path)">
+            <Field value={sequence.treatment} options={TREATMENTS} onChange={(v) => onUpdate({ treatment: v })} />
+          </Row>
+
+          <div className="grid grid-cols-2 gap-3">
+            <Row label="Density">
+              <Field
+                value={sequence.density}
+                options={DENSITIES}
+                onChange={(v) => {
+                  const nextTotal = DENSITY_COUNT[v]
+                  const perchCount = Math.min(counts.perch, nextTotal)
+                  onUpdate({
+                    density: v,
+                    birdCount: nextTotal,
+                    perchCount,
+                    gatherCount: Math.min(counts.gather, nextTotal - perchCount),
+                  })
+                }}
+              />
+            </Row>
+            <Row label="Wing cadence">
+              <Field
+                value={sequence.wingIntensity}
+                options={WING_INTENSITIES}
+                onChange={(v) => onUpdate({ wingIntensity: v })}
+              />
+            </Row>
+          </div>
+
+          <Row label="Formation spacing">
+            <NumberSlider
+              label="Formation spacing"
+              value={sequence.spacingScale ?? 1.8}
+              min={0.5}
+              max={5}
+              step={0.1}
+              suffix="×"
+              decimals={1}
+              onChange={(v) => onUpdate({ spacingScale: v })}
+            />
+            <p className="text-[10px] leading-relaxed text-muted-foreground">Raise this when birds overlap. Spacing grows with their rendered footprint.</p>
+          </Row>
+
+          <Row label="Depth travel">
+            <button
+              type="button"
+              onClick={() => onUpdate({
+                depthDirection: "Background to foreground",
+                depthStrength: 1.5,
+                sizeScale: 1.1,
+                spacingScale: 3.2,
+                foregroundBirdCount: 1,
+                foregroundBoost: 2,
+              })}
+              className="mb-2 rounded-md border border-primary/40 bg-primary/10 px-3 py-2 text-left text-xs font-medium text-primary transition-colors hover:bg-primary/15"
+            >
+              Small background → one giant foreground bird
+            </button>
+            <Field
+              value={sequence.depthDirection ?? "Flat plane"}
+              options={DEPTH_DIRECTIONS}
+              onChange={(v) => onUpdate({ depthDirection: v })}
+            />
+          </Row>
+
+          {(sequence.depthDirection ?? "Flat plane") !== "Flat plane" && (
+            <div className="flex flex-col gap-4">
           <Row label="Perspective strength">
             <NumberSlider
               label="Perspective strength"
@@ -331,23 +338,27 @@ export function InspectorPanel({
               />
             </Row>
           )}
-          </div>
-        )}
+            </div>
+          )}
 
-        <div className="grid grid-cols-2 gap-3">
-          <Row label="Enter">
-            <Field value={sequence.entry} options={ENTRIES} onChange={(v) => onUpdate({ entry: v })} />
-          </Row>
-          <Row label="Exit">
-            <Field value={sequence.exit} options={EXITS} onChange={(v) => onUpdate({ exit: v })} />
-          </Row>
-        </div>
+          <div className="grid grid-cols-2 gap-3">
+            <Row label="Enter">
+              <Field value={sequence.entry} options={ENTRIES} onChange={(v) => onUpdate({ entry: v })} />
+            </Row>
+            <Row label="Exit">
+              <Field value={sequence.exit} options={EXITS} onChange={(v) => onUpdate({ exit: v })} />
+            </Row>
+          </div>
+        </Disclosure>
       </div>
 
       <div className="h-px bg-border" />
 
       <div className="flex flex-col gap-4">
-        <h3 className="text-sm font-semibold text-foreground">Timing</h3>
+        <div>
+          <p className="text-[10px] font-semibold uppercase tracking-wide text-primary">Step 3</p>
+          <h3 className="mt-0.5 text-sm font-semibold text-foreground">Landings and timing</h3>
+        </div>
         <Row label="Base timeline">
           <NumberSlider
             label="Base timeline"
@@ -391,20 +402,25 @@ export function InspectorPanel({
               <button type="button" onClick={onAddLanding} className="shrink-0 rounded-md border border-primary/40 bg-primary/10 px-2 py-1 text-[10px] font-medium text-primary hover:bg-primary/15">+ Add landing</button>
             </div>
             {zones.length > 0 ? <>
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={() => {
-                    const landings = zones.slice(0, -1)
-                    onUpdate({ landings, landing: landings[0] ?? null, ...(landings.length ? {} : { perchCount: 0, gatherCount: 0, arrivalMode: "Fly through" as const }) })
-                  }}
-                  className="rounded-md border border-border bg-background px-2 py-1 text-[10px] text-muted-foreground hover:text-foreground"
-                >Remove last</button>
+              <div className="flex flex-col gap-1.5" aria-label="Landing list">
+                {zones.map((_, landingIndex) => (
+                  <div key={landingIndex} className="flex items-center justify-between rounded-md border border-border bg-background px-2.5 py-2">
+                    <span className="text-xs font-medium text-foreground">Landing {landingIndex + 1}</span>
+                    <button
+                      type="button"
+                      onClick={() => onUpdate(deleteLanding(sequence, landingIndex))}
+                      className="inline-flex items-center gap-1 rounded px-2 py-1 text-xs text-destructive hover:bg-destructive/10"
+                      aria-label={`Delete landing ${landingIndex + 1}`}
+                    >
+                      <Trash2 className="h-3.5 w-3.5" />Delete
+                    </button>
+                  </div>
+                ))}
                 <button
                   type="button"
                   onClick={() => onUpdate({ landings: [], landing: null, perchCount: 0, gatherCount: 0, arrivalMode: "Fly through" })}
-                  className="rounded-md border border-border bg-background px-2 py-1 text-[10px] text-muted-foreground hover:text-foreground"
-                >Clear all</button>
+                  className="self-start rounded-md border border-border bg-background px-2 py-1 text-xs text-muted-foreground hover:text-destructive"
+                >Clear all landings</button>
               </div>
               <p className="text-[11px] leading-relaxed text-muted-foreground">The same selected birds use the authored approach, settle, and launch tracks at every stop. The remaining {counts.flyThrough} fly through.</p>
               <Row label="Perching birds">
@@ -464,13 +480,7 @@ export function InspectorPanel({
         )}
       </div>
 
-      <div className="h-px bg-border" />
-
-      <div className="flex flex-col gap-4">
-        <div>
-          <h3 className="text-sm font-semibold text-foreground">Theme-aware bird color</h3>
-          <p className="mt-1 text-[10px] leading-relaxed text-muted-foreground">The complete handoff exports both palettes and tells the implementation agent how to switch them with light/dark theme.</p>
-        </div>
+      <Disclosure label="Step 4 · Colors and notes" summary="Optional theme colors, fallback background, and handoff notes.">
         <Row label="Preview against">
           <div className="grid grid-cols-2 gap-2">
             {(["light", "dark"] as const).map((theme) => (
@@ -559,7 +569,7 @@ export function InspectorPanel({
             className="resize-none rounded-md border border-border bg-secondary px-2.5 py-2 text-sm text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:ring-1 focus:ring-ring"
           />
         </Row>
-      </div>
+      </Disclosure>
     </div>
   )
 }

@@ -2,15 +2,17 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { Bird } from "lucide-react"
-import { Stage, type StageHandle, type StageMode } from "@/components/flock/stage"
+import { Stage, type GeometrySelection, type StageHandle, type StageMode } from "@/components/flock/stage"
 import { Toolbar } from "@/components/flock/toolbar"
 import { InspectorPanel } from "@/components/flock/inspector-panel"
 import { ExportPanel } from "@/components/flock/export-panel"
 import { AssetPanel } from "@/components/flock/asset-panel"
 import { projectDuration } from "@/lib/flock/engine"
+import { deleteLanding, deletePathPoint } from "@/lib/flock/editing"
 import { clearSequenceGeometry, defaultProject, makeSequence } from "@/lib/flock/defaults"
+import { switchOutputVariant } from "@/lib/flock/output-variants"
 import { loadStoredProject, saveStoredProject } from "@/lib/flock/project-storage"
-import { BUILTIN_BIRD_TEMPLATE, DENSITY_COUNT, type Project, type Sequence, type Style } from "@/lib/flock/types"
+import { BUILTIN_BIRD_TEMPLATE, DENSITY_COUNT, type OutputVariantId, type Project, type Sequence, type Style } from "@/lib/flock/types"
 
 export default function Page() {
   const [project, setProject] = useState<Project>(() => defaultProject())
@@ -21,8 +23,13 @@ export default function Page() {
   const [showBackdrop, setShowBackdrop] = useState(true)
   const [hydrated, setHydrated] = useState(false)
   const [storageWarning, setStorageWarning] = useState<string | null>(null)
+  const [selection, setSelection] = useState<GeometrySelection | null>(null)
+  const [historyAvailability, setHistoryAvailability] = useState({ canUndo: false, canRedo: false })
 
   const stageRef = useRef<StageHandle>(null)
+  const projectRef = useRef(project)
+  const historyRef = useRef<{ past: Project[]; future: Project[] }>({ past: [], future: [] })
+  const lastCommitRef = useRef({ group: "", time: 0 })
 
   // Hydrate the versioned large-project store, with legacy localStorage fallback.
   useEffect(() => {
@@ -46,6 +53,8 @@ export default function Page() {
             },
             scene: parsed.scene ?? (parsed.backdropDataUrl ? { kind: "image", dataUrl: parsed.backdropDataUrl, name: "Saved backdrop" } : { kind: "none" }),
             birdTemplate: parsed.birdTemplate?.kind === "builtin" ? BUILTIN_BIRD_TEMPLATE : parsed.birdTemplate ?? fallback.birdTemplate,
+            activeVariant: parsed.activeVariant ?? fallback.activeVariant,
+            variantStates: parsed.variantStates ?? fallback.variantStates,
             sequences: parsed.sequences.map((sequence) => {
               const landings = sequence.landings?.length
                 ? sequence.landings
@@ -82,6 +91,7 @@ export default function Page() {
               }
             }),
           }
+        projectRef.current = migrated
         setProject(migrated)
         setActiveId(migrated.sequences[0].id)
         setHydrated(true)
@@ -115,34 +125,109 @@ export default function Page() {
   const active = project.sequences.find((s) => s.id === activeId) ?? project.sequences[0]
   const resolvedActiveId = active?.id ?? ""
 
+  const refreshHistory = useCallback(() => setHistoryAvailability({
+    canUndo: historyRef.current.past.length > 0,
+    canRedo: historyRef.current.future.length > 0,
+  }), [])
+
+  const commitProject = useCallback((
+    updater: (current: Project) => Project,
+    group = "project",
+    coalesce = false,
+  ) => {
+    const current = projectRef.current
+    const next = updater(current)
+    if (next === current) return
+    const now = Date.now()
+    const mergeWithPrevious = coalesce
+      && lastCommitRef.current.group === group
+      && now - lastCommitRef.current.time < 700
+    if (!mergeWithPrevious) {
+      historyRef.current.past.push(current)
+      if (historyRef.current.past.length > 60) historyRef.current.past.shift()
+    }
+    historyRef.current.future = []
+    lastCommitRef.current = { group, time: now }
+    projectRef.current = next
+    setProject(next)
+    refreshHistory()
+  }, [refreshHistory])
+
+  const checkpointProject = useCallback(() => {
+    const current = projectRef.current
+    historyRef.current.past.push(current)
+    if (historyRef.current.past.length > 60) historyRef.current.past.shift()
+    historyRef.current.future = []
+    lastCommitRef.current = { group: "", time: 0 }
+    refreshHistory()
+  }, [refreshHistory])
+
+  const undo = useCallback(() => {
+    const previous = historyRef.current.past.pop()
+    if (!previous) return
+    stageRef.current?.pause()
+    setPlaying(false)
+    historyRef.current.future.push(projectRef.current)
+    projectRef.current = previous
+    setProject(previous)
+    setSelection(null)
+    lastCommitRef.current = { group: "", time: 0 }
+    refreshHistory()
+  }, [refreshHistory])
+
+  const redo = useCallback(() => {
+    const next = historyRef.current.future.pop()
+    if (!next) return
+    stageRef.current?.pause()
+    setPlaying(false)
+    historyRef.current.past.push(projectRef.current)
+    projectRef.current = next
+    setProject(next)
+    setSelection(null)
+    lastCommitRef.current = { group: "", time: 0 }
+    refreshHistory()
+  }, [refreshHistory])
+
   const updateSequence = useCallback((id: string, patch: Partial<Sequence>) => {
-    setProject((p) => ({
+    const group = `sequence:${id}:${Object.keys(patch).sort().join(",")}`
+    commitProject((p) => ({
       ...p,
       sequences: p.sequences.map((s) => (s.id === id ? { ...s, ...patch } : s)),
-    }))
+    }), group, true)
+  }, [commitProject])
+
+  const updateSequenceOnCanvas = useCallback((id: string, patch: Partial<Sequence>) => {
+    const current = projectRef.current
+    const next = {
+      ...current,
+      sequences: current.sequences.map((sequence) => sequence.id === id ? { ...sequence, ...patch } : sequence),
+    }
+    projectRef.current = next
+    setProject(next)
   }, [])
 
   const updateStyle = useCallback((patch: Partial<Style>) => {
-    setProject((p) => ({ ...p, style: { ...p.style, ...patch } }))
-  }, [])
+    commitProject((p) => ({ ...p, style: { ...p.style, ...patch } }), `style:${Object.keys(patch).sort().join(",")}`, true)
+  }, [commitProject])
 
   const addFlock = useCallback(() => {
-    setProject((p) => {
+    commitProject((p) => {
       const seq = makeSequence("Calm Glide", `Flock ${p.sequences.length + 1}`)
       queueMicrotask(() => setActiveId(seq.id))
       return { ...p, sequences: [...p.sequences, seq] }
-    })
+    }, "add-flock")
     setMode("edit")
-  }, [])
+  }, [commitProject])
 
   const removeFlock = useCallback((id: string) => {
-    setProject((p) => {
+    commitProject((p) => {
       const next = p.sequences.filter((s) => s.id !== id)
       const safe = next.length ? next : [makeSequence("Calm Glide", "Flock 1")]
       queueMicrotask(() => setActiveId((cur) => (cur === id ? safe[0].id : cur)))
       return { ...p, sequences: safe }
-    })
-  }, [])
+    }, "remove-flock")
+    setSelection(null)
+  }, [commitProject])
 
   const startOver = useCallback((id: string) => {
     stageRef.current?.pause()
@@ -150,13 +235,14 @@ export default function Page() {
     setPlaying(false)
     setProgress(0)
     setMode("draw")
-    setProject((p) => ({
+    commitProject((p) => ({
       ...p,
       sequences: p.sequences.map((sequence) => (
         sequence.id === id ? clearSequenceGeometry(sequence) : sequence
       )),
-    }))
-  }, [])
+    }), "start-over")
+    setSelection(null)
+  }, [commitProject])
 
   const reseed = useCallback(() => {
     if (!active) return
@@ -170,18 +256,67 @@ export default function Page() {
       const img = new Image()
       img.crossOrigin = "anonymous"
       img.onload = () => {
-        setProject((p) => ({
+        commitProject((p) => ({
           ...p,
           backdropDataUrl: dataUrl,
           scene: { kind: "image", dataUrl, name: file.name },
-          viewport: { width: img.naturalWidth || 1600, height: img.naturalHeight || 900 },
-        }))
+        }), "scene-image")
         setShowBackdrop(true)
       }
       img.src = dataUrl
     }
     reader.readAsDataURL(file)
-  }, [])
+  }, [commitProject])
+
+  const selectOutputVariant = useCallback((variant: OutputVariantId) => {
+    stageRef.current?.pause()
+    stageRef.current?.seek(0)
+    setPlaying(false)
+    setProgress(0)
+    setMode("edit")
+    commitProject((current) => switchOutputVariant(current, variant), "output-variant")
+    setSelection(null)
+  }, [commitProject])
+
+  const deleteSelection = useCallback(() => {
+    if (!active || !selection) return
+    stageRef.current?.pause()
+    setPlaying(false)
+    commitProject((current) => ({
+      ...current,
+      sequences: current.sequences.map((sequence) => {
+        if (sequence.id !== active.id) return sequence
+        return selection.kind === "point"
+          ? deletePathPoint(sequence, selection.index)
+          : deleteLanding(sequence, selection.index)
+      }),
+    }), `delete-${selection.kind}`)
+    setSelection(null)
+  }, [active, commitProject, selection])
+
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      const target = event.target as HTMLElement | null
+      const typing = target?.matches("input, textarea, select, [contenteditable='true']")
+      if (typing) return
+      const command = event.metaKey || event.ctrlKey
+      if (command && event.key.toLowerCase() === "z") {
+        event.preventDefault()
+        if (event.shiftKey) redo()
+        else undo()
+      } else if (command && event.key.toLowerCase() === "y") {
+        event.preventDefault()
+        redo()
+      } else if ((event.key === "Delete" || event.key === "Backspace") && selection) {
+        event.preventDefault()
+        deleteSelection()
+      } else if (event.key === "Escape") {
+        setSelection(null)
+      }
+    }
+    window.addEventListener("keydown", onKeyDown)
+    return () => window.removeEventListener("keydown", onKeyDown)
+  }, [deleteSelection, redo, selection, undo])
 
   const togglePlay = useCallback(() => {
     setPlaying((prev) => {
@@ -228,12 +363,15 @@ export default function Page() {
         </p>
       )}
 
-      <main className="mx-auto flex w-full max-w-[1400px] flex-1 flex-col gap-4 p-4 lg:flex-row">
+      <main className="mx-auto flex w-full max-w-[1600px] flex-1 flex-col items-start gap-4 p-4 xl:flex-row">
         {/* Stage column */}
-        <section className="flex min-w-0 flex-1 flex-col gap-4">
+        <section className="murmur-stage-column flex w-full min-w-0 flex-1 flex-col gap-4 xl:sticky xl:top-4">
           <Toolbar
             mode={mode}
-            onMode={setMode}
+            onMode={(nextMode) => {
+              setMode(nextMode)
+              if (nextMode !== "edit") setSelection(null)
+            }}
             playing={playing}
             onTogglePlay={togglePlay}
             onRestart={restart}
@@ -242,13 +380,16 @@ export default function Page() {
             totalDuration={totalDuration}
             sequences={project.sequences}
             activeId={resolvedActiveId}
-            onSelect={setActiveId}
+            onSelect={(id) => {
+              setActiveId(id)
+              setSelection(null)
+            }}
             onAdd={addFlock}
             onRemove={removeFlock}
             onStartOver={startOver}
             hasBackdrop={project.scene.kind !== "none" || !!project.backdropDataUrl}
             onUpload={onUpload}
-            onClearBackdrop={() => setProject((p) => ({ ...p, backdropDataUrl: null, scene: { kind: "none" } }))}
+            onClearBackdrop={() => commitProject((p) => ({ ...p, backdropDataUrl: null, scene: { kind: "none" } }), "clear-scene")}
             showBackdrop={showBackdrop}
             onToggleBackdrop={() => setShowBackdrop((s) => !s)}
             previewTheme={project.style.previewTheme}
@@ -264,27 +405,39 @@ export default function Page() {
             scene={project.scene}
             birdTemplate={project.birdTemplate}
             viewport={project.viewport}
+            activeVariant={project.activeVariant}
             totalDuration={totalDuration}
             mode={mode}
             showGuides={!playing}
             showBackdrop={showBackdrop}
             onTime={setProgress}
             onEnded={onEnded}
-            onUpdateSequence={updateSequence}
+            onUpdateSequence={updateSequenceOnCanvas}
+            onEditStart={checkpointProject}
+            selection={selection}
+            onSelection={setSelection}
+            canUndo={historyAvailability.canUndo}
+            canRedo={historyAvailability.canRedo}
+            onUndo={undo}
+            onRedo={redo}
+            onDeleteSelection={deleteSelection}
           />
 
           <HintBar mode={mode} />
         </section>
 
         {/* Inspector column */}
-        <aside className="flex w-full shrink-0 flex-col overflow-hidden rounded-lg border border-border bg-card lg:w-[360px]">
+        <aside className="murmur-cockpit flex w-full shrink-0 flex-col overflow-hidden rounded-lg border border-border bg-card xl:max-h-[calc(100vh-5.5rem)] xl:w-[420px] xl:overflow-y-auto">
           <div className="border-b border-border">
             <AssetPanel
               scene={project.scene}
               flockName={active?.name ?? "Selected flock"}
               birdTemplate={active?.birdTemplate ?? project.birdTemplate}
-              onScene={(scene) => setProject((p) => ({ ...p, scene, backdropDataUrl: scene.kind === "image" ? scene.dataUrl : null }))}
+              activeVariant={project.activeVariant}
+              viewport={project.viewport}
+              onScene={(scene) => commitProject((p) => ({ ...p, scene, backdropDataUrl: scene.kind === "image" ? scene.dataUrl : null }), "scene-source")}
               onBirdTemplate={(birdTemplate) => active && updateSequence(active.id, { birdTemplate })}
+              onOutputVariant={selectOutputVariant}
             />
           </div>
           <div className="border-b border-border">
@@ -310,7 +463,7 @@ function HintBar({ mode }: { mode: StageMode }) {
       ? "Draw mode — click and drag across the stage to sketch the flight path. The first point is where the flock enters."
       : mode === "landing"
         ? "Add landing mode — drag a box for the next stop. Repeat to add multiple landing events."
-        : "Edit mode — drag any path point or landing box. Use Add landing for another stop."
+        : "Edit mode — click a path dot or landing to select it. Drag to move it, or use Delete selected on the canvas. Undo and Redo are beside it."
   return (
     <p className="rounded-md border border-border bg-card px-3 py-2 text-xs leading-relaxed text-muted-foreground">
       {text}

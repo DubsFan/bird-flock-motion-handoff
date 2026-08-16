@@ -247,3 +247,69 @@ The announced candidate delivery has arrived and was audited. Ten identities are
 - `pnpm test`: pass, 33 tests. Added coverage locks multiple ordered landing waypoints/action cycles and the complete dual-theme agent handoff contract.
 - `pnpm build`: pass with Next.js 16.3.0; `/`, `/_not-found`, and `/api/bird-artwork-agent-prompt` statically prerendered.
 - `git diff --check`: pass.
+
+## Iteration 16: progressive nontechnical workflow and artwork drill-down
+
+- Measured the compact live interface before editing: `5014 px` document height, `73` visible buttons, a duplicated artwork dropdown plus 11-card gallery, four always-visible action-stage thumbnails, and all specialist exports exposed in the primary scroll.
+- Reorganized the working order as five plain-language steps: Scene and artwork, Choose the motion, Landings and timing, optional Colors and notes, and Export. The canvas Path/Add landing/Edit tools remain continuously available and the underlying project, motion, landing, artwork, and export contracts are unchanged.
+- Replaced the duplicated artwork selector with one selected-artwork summary. The visual library/import control, Flight/Approach/Perch/Launch inspection row, and source setup remain available through separate one-click inline disclosures. The motion-stage disclosure explicitly identifies itself as a quality-control view rather than a required editing step.
+- Kept the four grounded motion presets and essential count/size/speed controls visible. Cadence, density, spacing, depth, entry/exit, and reseeding moved under Fine-tune motion. Theme palettes/notes and individual specialist exports moved under labeled disclosures; the complete browser/theme handoff remains the single immediately visible recommended export.
+- The compact default state now measures `2657 px` document height and `22` visible buttons: a `47%` height reduction and `70%` reduction in simultaneously exposed buttons. All seven disclosures default closed, with no modal, new page, or destructive state transition.
+- Browser behavior simulation passed Path -> Add landing -> Edit instructions, artwork-stage open/close, alternate curated artwork selection plus restoration, Fine-tune controls, Colors and notes, advanced exports, recommended-export enablement, and normal-speed Play -> Pause. The compact and desktop layouts had no horizontal overflow or framework overlay; browser warning/error logs remained empty.
+- React review: one shared stateless disclosure component, native keyboard-focusable `details/summary`, no new effects, no duplicate derived state, and no change to the established client boundary or dynamic import paths.
+
+### Verification
+
+- `pnpm exec tsc --noEmit`: pass.
+- `pnpm lint`: pass.
+- `pnpm test`: pass, 33 tests.
+- `pnpm build`: pass with Next.js 16.3.0; `/`, `/_not-found`, and `/api/bird-artwork-agent-prompt` statically prerendered.
+- `git diff --check`: pass.
+- Final live reload at `http://localhost:3000/`: title and selected artwork restored, all disclosures closed, meaningful content rendered, no console warning/error, and no Next.js error overlay.
+
+## Iteration 17: obvious URL intake, true screen variations, and readable cockpit
+
+- Promoted Background URL from a hidden secondary choice to the first visible action in Step 1. The field accepts Enter or the full-width `Use URL` button, validates `http://`/`https://`, identifies the current source, and keeps Remove background distinct.
+- Reproduced the misleading responsive preview with the supplied Portfolio Readiness URL. The project said `1600 × 900`, but the cross-origin iframe was laid out at the editor stage's roughly 680px width, so the reference site selected the wrong navigation and content breakpoint.
+- URL and pasted HTML/CSS scenes now lay out at the exact active output viewport first, then scale as one complete viewport into the editor. The bird canvas, route, and landing guides retain the same authored aspect box; the background is never independently cropped.
+- Added Desktop `1600 × 900`, Tablet `1024 × 768`, and Mobile `390 × 844` as visible one-click output variations. Each variation saves its own viewport, flock paths, and landing zones while sharing the chosen scene and artwork. Returning to a variation restores its prior composition.
+- Added an always-visible stage badge and an Exporting variation summary. All export filenames receive the active `-desktop`, `-tablet`, or `-mobile` suffix, and motion brief JSON/Markdown records the active variation.
+- Rebuilt the responsive shell as a readable cockpit. At the tested `1422 × 800` browser viewport, the stage occupied `938px` and the independently scrollable control rail occupied `420px`; the rail's smallest labels computed to `12px`. Below the laptop breakpoint the stage and cards stack full-width instead of compressing into the illegible two-column arrangement.
+- Portrait and 4:3 previews are height-fitted without changing their output viewport. Live measurements: Desktop displayed `938 × 526` while its iframe remained `1600 × 900`; Tablet displayed `832 × 623` while remaining `1024 × 768`; Mobile displayed `288 × 619` while remaining `390 × 844`.
+- Browser simulation loaded `https://practical-portfolio-management-brie.vercel.app/ppm-bakeoff/briefing/portfolio-readiness`, switched Desktop → Mobile → Tablet → Desktop, confirmed the selected badge and true iframe dimensions at every stop, retained the URL scene, and found no warning or error logs.
+
+### Verification
+
+- `pnpm exec tsc --noEmit`: pass.
+- `pnpm lint`: pass.
+- `pnpm test`: pass, 35 tests. New coverage locks variation creation, independent path/landing preservation, and restoration.
+- `pnpm build`: pass with Next.js 16.3.0; `/`, `/_not-found`, and `/api/bird-artwork-agent-prompt` statically prerendered.
+- `git diff --check`: pass.
+- Live server: `http://localhost:3000/` returned HTTP 200 after the production-build check.
+
+## Iteration 18: canvas-native edit safety and automatic landing polish
+
+- Reproduced the editing-control gap in the live interface. Start over and the buried Step 3 Remove last/Clear all actions existed, but the canvas had no Undo, Redo, selected path-point deletion, selected landing deletion, or keyboard history controls.
+- Added a compact edit toolbar directly on the background canvas: Undo, Redo, and contextual Delete selected. Clicking a path dot or landing gives it a cyan selection ring and names the selected item in the toolbar. Escape clears selection; Delete/Backspace removes it; Command/Ctrl+Z, Shift+Command/Ctrl+Z, and Command/Ctrl+Y drive history.
+- History checkpoints once per canvas draw/drag gesture instead of once per pointer-move frame. Inspector sliders coalesce rapid updates, history is capped, and Undo/Redo pause playback before restoring a project snapshot.
+- Replaced ambiguous Remove last with a visible ordered Landing 1/Landing 2 list in Step 3. Every landing has its own labeled Delete action, plus Clear all landings. Removing the final stop automatically returns its participants to Fly through.
+- Browser behavior proof: path dots `4 → delete → 3 → Undo → 4 → Redo → 3 → Undo → 4`. Canvas-selected Landing 1 and listed Landing 2 each deleted exactly one stop and Undo restored two. Keyboard Command+Z and Shift+Command+Z reproduced the same state transitions. The final live canvas showed Landing 1 selected, a cyan perimeter, and the contextual Delete landing button.
+- Kept all landing frame decisions inside Murmur. Users do not edit frames. The engine automatically sequences the supplied approach, perch, and launch artwork for every participating bird.
+- Corrected perch timing so the semantic source frames play as contact → wing fold → settle → quiet hold/micro-lift → ready launch. The fold/settle happens once, the middle dwell stays within restrained hold frames, and the final frame prepares the launch regardless of total dwell length.
+- Corrected touchdown orientation. Landing participants now retain the approach direction/mirroring while their bank eases upright through the landing blend; launch eases that bank back in. The previous dwell branch could suddenly remove mirroring at contact.
+
+### Motion and export proof
+
+- Normal-speed browser playback at `2.4s`, `4.2s`, `5.9s`, and `7.7s`, plus seven close `0.4s` samples across the first landing, showed distinct braking/fold/settle/launch poses and continuous follower travel. Browser warning/error logs remained empty.
+- Opaque proof: `/Users/liltroy/Downloads/murmur-native-landing-controls-v26-desktop.mp4`; H.264 `avc1`, `1600x900`, `30 fps`, `348` frames, `11.6s`.
+- Transparent proof: `/Users/liltroy/Downloads/murmur-native-landing-controls-v26-desktop-alpha.webm`; VP9, `1600x900`, `30 fps`, `11.6s`, `alpha_mode=1`; decoded alpha spans `YMIN=0` through `YMAX=255`.
+- The active dark-page bird palette is intentionally light and the URL reference cannot be composited into the opaque export. Visual motion proof therefore decodes the transparent WebM over the working blue background rather than pretending the low-contrast ivory fallback represents the selected page.
+- Decoded sheets: `work/landing-v26-proof/full-playback-dark-sheet.png`, `work/landing-v26-proof/landing-one-dark-close-sheet.png`, and `work/landing-v26-proof/landing-two-dark-close-sheet.png`. The close sheets show stable landing positions, restrained hold frames, continuous source identity, consistent facing, and authored launch poses.
+
+### Verification
+
+- `pnpm exec tsc --noEmit`: pass.
+- `pnpm lint`: pass.
+- `pnpm test`: pass, 39 tests across 4 files. New coverage locks exact point deletion, exact landing deletion/final-stop fly-through repair, and native fold/hold/ready timing.
+- `pnpm build`: pass with Next.js 16.3.0; `/`, `/_not-found`, and `/api/bird-artwork-agent-prompt` statically prerendered.
+- `git diff --check`: pass.

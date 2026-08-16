@@ -2,6 +2,7 @@
 
 import { Bot, FileJson, FileText, Film, Image as ImageIcon, Loader2, Package } from "lucide-react"
 import { useEffect, useRef, useState } from "react"
+import { Disclosure } from "@/components/flock/disclosure"
 import {
   detectVideoSupport,
   exportAppleAlphaBundle,
@@ -15,6 +16,7 @@ import {
   exportWebM,
   safeExportName,
 } from "@/lib/flock/export"
+import { outputVariantDefinition } from "@/lib/flock/output-variants"
 import type { Project } from "@/lib/flock/types"
 
 type Job = { kind: string; progress: number } | null
@@ -70,15 +72,23 @@ export function ExportPanel({ project }: { project: Project }) {
 
   const busy = job !== null
   const hasPaths = project.sequences.some((s) => s.points.length >= 2)
-  const baseName = safeExportName(fileName)
+  const variant = outputVariantDefinition(project.activeVariant)
+  const baseName = safeExportName(`${fileName}-${project.activeVariant}`)
 
   return (
     <div className="flex flex-col gap-4 p-4">
       <div>
-        <h3 className="text-sm font-semibold text-foreground">Export video</h3>
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-primary">Step 5</p>
+        <h3 className="mt-0.5 text-sm font-semibold text-foreground">Export</h3>
         <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-          Export birds with alpha, or composite them over an uploaded card image. HTML/CSS and URL scenes stay reference-only.
+          The recommended package includes the browser assets, both theme palettes, and implementation instructions.
         </p>
+      </div>
+
+      <div className="rounded-md border border-primary/25 bg-primary/[0.06] px-3 py-2">
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-primary">Exporting {variant.label}</p>
+        <p className="mt-0.5 text-xs text-foreground">{project.viewport.width} × {project.viewport.height}</p>
+        <p className="mt-1 text-[10px] leading-relaxed text-muted-foreground">Switch the output variation in Step 1 to export Tablet or Mobile separately.</p>
       </div>
 
       <label className="flex flex-col gap-1.5">
@@ -105,81 +115,81 @@ export function ExportPanel({ project }: { project: Project }) {
         onClick={() => run("complete", (sig, onProgress) => exportCompleteHandoff(project, { baseName, signal: sig, onProgress }))}
       />
 
-      <p className="text-[10px] leading-relaxed text-muted-foreground">This is the low-friction output to give an implementation agent. Everything below is an individual/advanced export.</p>
+      <p className="text-[10px] leading-relaxed text-muted-foreground">For the shortest handoff, use the recommended package. Open advanced files only when a specialist asks for one.</p>
 
-      <div className="h-px bg-border" />
-      <h3 className="text-sm font-semibold text-foreground">Individual exports</h3>
-      <ExportButton
-        icon={<Package className="h-4 w-4" />}
-        title="Transparent PNG frames (.zip)"
-        subtitle="True alpha · includes ffmpeg command"
-        badge="Reliable"
-        disabled={busy || !hasPaths}
-        loading={job?.kind === "png"}
-        progress={job?.kind === "png" ? job.progress : 0}
-        onClick={() => run("png", (sig, onProgress) => exportPngSequenceZip(project, { baseName, signal: sig, onProgress }))}
-      />
+      <Disclosure label="Advanced export files" summary="Individual video, frame, Apple, map, and brief downloads.">
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Individual exports</p>
+        <ExportButton
+          icon={<Package className="h-4 w-4" />}
+          title="Transparent PNG frames (.zip)"
+          subtitle="True alpha · includes ffmpeg command"
+          badge="Reliable"
+          disabled={busy || !hasPaths}
+          loading={job?.kind === "png"}
+          progress={job?.kind === "png" ? job.progress : 0}
+          onClick={() => run("png", (sig, onProgress) => exportPngSequenceZip(project, { baseName, signal: sig, onProgress }))}
+        />
 
-      <ExportButton
-        icon={<Film className="h-4 w-4" />}
-        title="Background MP4 (H.264)"
-        subtitle={
-          project.scene.kind === "image"
-            ? "Composited over your uploaded scene image"
-            : project.scene.kind === "html" || project.scene.kind === "url"
-              ? "Scene is reference-only · uses background color"
-              : "Composited over the background color"
-        }
-        badge={support.mp4 ? "Ready" : "N/A"}
-        disabled={busy || !hasPaths || !support.mp4}
-        loading={job?.kind === "mp4"}
-        progress={job?.kind === "mp4" ? job.progress : 0}
-        onClick={() => run("mp4", (sig, onProgress) => exportMp4(project, { baseName, signal: sig, onProgress }))}
-      />
+        <ExportButton
+          icon={<Film className="h-4 w-4" />}
+          title="Background MP4 (H.264)"
+          subtitle={
+            project.scene.kind === "image"
+              ? "Composited over your uploaded scene image"
+              : project.scene.kind === "html" || project.scene.kind === "url"
+                ? "Scene is reference-only · uses background color"
+                : "Composited over the background color"
+          }
+          badge={support.mp4 ? "Ready" : "N/A"}
+          disabled={busy || !hasPaths || !support.mp4}
+          loading={job?.kind === "mp4"}
+          progress={job?.kind === "mp4" ? job.progress : 0}
+          onClick={() => run("mp4", (sig, onProgress) => exportMp4(project, { baseName, signal: sig, onProgress }))}
+        />
 
-      <ExportButton
-        icon={<Film className="h-4 w-4" />}
-        title="Background WebM (opaque)"
-        subtitle={
-          project.scene.kind === "image" ? "Composited over your uploaded card image" : project.scene.kind === "html" || project.scene.kind === "url" ? "Scene is reference-only · uses background color" : "Composited over the background color"
-        }
-        disabled={busy || !hasPaths || !support.opaqueWebm}
-        loading={job?.kind === "webm"}
-        progress={job?.kind === "webm" ? job.progress : 0}
-        onClick={() => run("webm", (sig, onProgress) => exportWebM(project, { baseName, transparent: false, signal: sig, onProgress }))}
-      />
+        <ExportButton
+          icon={<Film className="h-4 w-4" />}
+          title="Background WebM (opaque)"
+          subtitle={
+            project.scene.kind === "image" ? "Composited over your uploaded card image" : project.scene.kind === "html" || project.scene.kind === "url" ? "Scene is reference-only · uses background color" : "Composited over the background color"
+          }
+          disabled={busy || !hasPaths || !support.opaqueWebm}
+          loading={job?.kind === "webm"}
+          progress={job?.kind === "webm" ? job.progress : 0}
+          onClick={() => run("webm", (sig, onProgress) => exportWebM(project, { baseName, transparent: false, signal: sig, onProgress }))}
+        />
 
-      <ExportButton
-        icon={<Film className="h-4 w-4" />}
-        title="Transparent WebM"
-        subtitle="VP9 alpha · Chrome/Chromium · verify alpha in your player"
-        badge={support.transparentWebm ? "Ready" : "N/A"}
-        disabled={busy || !hasPaths || !support.transparentWebm}
-        loading={job?.kind === "webma"}
-        progress={job?.kind === "webma" ? job.progress : 0}
-        onClick={() => run("webma", (sig, onProgress) => exportWebM(project, { baseName, transparent: true, signal: sig, onProgress }))}
-      />
+        <ExportButton
+          icon={<Film className="h-4 w-4" />}
+          title="Transparent WebM"
+          subtitle="VP9 alpha · Chrome/Chromium · verify alpha in your player"
+          badge={support.transparentWebm ? "Ready" : "N/A"}
+          disabled={busy || !hasPaths || !support.transparentWebm}
+          loading={job?.kind === "webma"}
+          progress={job?.kind === "webma" ? job.progress : 0}
+          onClick={() => run("webma", (sig, onProgress) => exportWebM(project, { baseName, transparent: true, signal: sig, onProgress }))}
+        />
 
-      <ExportButton
-        icon={<Package className="h-4 w-4" />}
-        title="Apple HEVC alpha handoff (.zip)"
-        subtitle="Transparent frames + double-click ProRes 4444 converter + HEVC guide"
-        badge="Apple"
-        disabled={busy || !hasPaths}
-        loading={job?.kind === "apple"}
-        progress={job?.kind === "apple" ? job.progress : 0}
-        onClick={() => run("apple", (sig, onProgress) => exportAppleAlphaBundle(project, { baseName, signal: sig, onProgress }))}
-      />
+        <ExportButton
+          icon={<Package className="h-4 w-4" />}
+          title="Apple HEVC alpha handoff (.zip)"
+          subtitle="Transparent frames + double-click ProRes 4444 converter + HEVC guide"
+          badge="Apple"
+          disabled={busy || !hasPaths}
+          loading={job?.kind === "apple"}
+          progress={job?.kind === "apple" ? job.progress : 0}
+          onClick={() => run("apple", (sig, onProgress) => exportAppleAlphaBundle(project, { baseName, signal: sig, onProgress }))}
+        />
 
-      <div className="h-px bg-border" />
-
-      <h3 className="text-sm font-semibold text-foreground">Export handoff</h3>
-      <div className="grid grid-cols-1 gap-2">
-        <SmallButton icon={<Bot className="h-4 w-4" />} label="Application AGENTS.md" disabled={busy} onClick={() => exportApplicationGuide(project, baseName)} />
-        <SmallButton icon={<FileJson className="h-4 w-4" />} label="Motion brief (.json)" disabled={busy} onClick={() => exportMotionBriefJson(project, baseName)} />
-        <SmallButton icon={<FileText className="h-4 w-4" />} label="Designer brief (.md)" disabled={busy} onClick={() => exportDesignerBrief(project, baseName)} />
-        <SmallButton icon={<ImageIcon className="h-4 w-4" />} label="Visual map (.png)" disabled={busy} onClick={() => run("map", () => exportVisualMap(project, baseName))} />
-      </div>
+        <div className="h-px bg-border" />
+        <p className="text-[10px] font-semibold uppercase tracking-wide text-muted-foreground">Briefs and implementation files</p>
+        <div className="grid grid-cols-1 gap-2">
+          <SmallButton icon={<Bot className="h-4 w-4" />} label="Application AGENTS.md" disabled={busy} onClick={() => exportApplicationGuide(project, baseName)} />
+          <SmallButton icon={<FileJson className="h-4 w-4" />} label="Motion brief (.json)" disabled={busy} onClick={() => exportMotionBriefJson(project, baseName)} />
+          <SmallButton icon={<FileText className="h-4 w-4" />} label="Designer brief (.md)" disabled={busy} onClick={() => exportDesignerBrief(project, baseName)} />
+          <SmallButton icon={<ImageIcon className="h-4 w-4" />} label="Visual map (.png)" disabled={busy} onClick={() => run("map", () => exportVisualMap(project, baseName))} />
+        </div>
+      </Disclosure>
 
       {busy && (
         <div className="flex items-center justify-between gap-3" role="status" aria-live="polite">
