@@ -10,6 +10,7 @@ import {
   motionClock,
   naturalWingPhase,
   orientationForMotion,
+  perchActionPhase,
   resolveLandingPosition,
   sequenceBirdCount,
   sequenceDuration,
@@ -78,6 +79,16 @@ describe("flock motion timing", () => {
     expect(motionClock(sequence, path, landDistance, arriveAt + 0.2, "Perch").action).toBe("perch")
     expect(motionClock(sequence, path, landDistance, arriveAt + sequence.dwellSeconds + 0.05, "Perch").action).toBe("launch")
     expect(motionClock(sequence, path, landDistance, arriveAt + sequence.dwellSeconds + 3, "Perch").action).toBe("flight")
+  })
+
+  it("folds and settles once, holds quietly, then prepares for launch automatically", () => {
+    expect(perchActionPhase(0, 2)).toBeCloseTo(0, 6)
+    expect(perchActionPhase(0.4, 2)).toBeGreaterThan(0)
+    expect(perchActionPhase(0.4, 2)).toBeLessThan(0.5)
+    expect(perchActionPhase(1.1, 2)).toBeGreaterThanOrEqual(0.5)
+    expect(perchActionPhase(1.1, 2)).toBeLessThan(0.875)
+    expect(perchActionPhase(1.85, 2)).toBeGreaterThanOrEqual(0.875)
+    expect(perchActionPhase(2, 2)).toBeCloseTo(0.999999, 6)
   })
 
   it("supports zero, one, or multiple ordered landing events on one route", () => {

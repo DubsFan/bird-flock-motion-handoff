@@ -9,6 +9,7 @@ export function buildMotionBriefJson(project: Project) {
       name: project.name,
       captured_at: new Date().toISOString(),
       viewport: project.viewport,
+      output_variant: project.activeVariant,
     },
     anchors: project.sequences.flatMap((sequence, sequenceIndex) =>
       landingZones(sequence).map((landing, landingIndex) => ({
@@ -69,6 +70,7 @@ export function buildMotionBriefJson(project: Project) {
 export function buildDesignerBriefMarkdown(project: Project): string {
   const lines: string[] = []
   lines.push(`# ${project.name} — Bird Motion Brief`, "")
+  lines.push(`Output variation: ${project.activeVariant}`)
   lines.push(`Viewport: ${project.viewport.width} x ${project.viewport.height}`)
   lines.push(`Ink color: ${project.style.inkColor}`)
   lines.push(`Background: ${project.style.transparentBackground ? "transparent" : project.style.backgroundColor}`)

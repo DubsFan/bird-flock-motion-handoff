@@ -453,6 +453,24 @@ export function sequenceDuration(seq: Sequence) {
   return movingTime + dwell + movingTime * followerDelayFraction(sequenceBirdCount(seq) - 1)
 }
 
+export function perchActionPhase(elapsedSeconds: number, dwellSeconds: number) {
+  const dwell = Math.max(0.001, dwellSeconds)
+  const elapsed = clamp(elapsedSeconds, 0, dwell)
+  // The authored perch track is semantic, not a looping flight flap:
+  // contact -> fold -> settle -> quiet hold/micro-lift -> ready launch.
+  const settleDuration = Math.min(0.8, dwell * 0.4)
+  const readyDuration = Math.min(0.35, dwell * 0.18)
+  if (elapsed < settleDuration) {
+    return lerp(0, 0.499999, smoothstep(0, settleDuration, elapsed))
+  }
+  if (elapsed >= dwell - readyDuration) {
+    return lerp(0.875, 0.999999, smoothstep(dwell - readyDuration, dwell, elapsed))
+  }
+  const holdElapsed = elapsed - settleDuration
+  const quietHold = [0.53, 0.66, 0.78, 0.66]
+  return quietHold[Math.floor(holdElapsed / 0.48) % quietHold.length]
+}
+
 export function motionClock(
   seq: Sequence,
   path: SampledPath,
@@ -506,7 +524,7 @@ export function motionClock(
       dwelling: true,
       speed,
       action: "perch" as const,
-      actionPhase: clamp01((seconds - arriveAt) / Math.max(0.001, dwell)),
+      actionPhase: perchActionPhase(seconds - arriveAt, dwell),
       landingIndex: index,
     }
     completedDwell += dwell
@@ -680,15 +698,13 @@ export function renderSequence(
 
     ctx.save()
     ctx.translate(x, y)
-    // Perched birds settle upright; airborne birds smoothly bank with path curvature.
+    // Landing birds keep the correct source-facing direction while their bank
+    // eases upright at contact and returns smoothly during launch.
     const templateDirection = template.direction ?? "left"
-    if (clock.dwelling && role !== "Fly through") {
-      ctx.rotate(0)
-    } else {
-      const orientation = orientationForMotion(seq, bank, templateDirection)
-      ctx.rotate(orientation.rotation)
-      if (orientation.mirrorX) ctx.scale(-1, 1)
-    }
+    const orientation = orientationForMotion(seq, bank, templateDirection)
+    const uprightBlend = role === "Fly through" ? 0 : clock.landingBlend
+    ctx.rotate(lerp(orientation.rotation, 0, uprightBlend))
+    if (orientation.mirrorX) ctx.scale(-1, 1)
     // Strength is used only if this template is a one-still fallback. Ordered
     // source bundles render the artist's exact pixels and ignore this value.
     const wingStrength = 1

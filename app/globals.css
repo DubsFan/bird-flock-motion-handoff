@@ -167,3 +167,22 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* The inspector is a working cockpit, not a thumbnail. Its smallest utility
+   labels stay legible when the rail is beside the stage. */
+.murmur-cockpit .text-\[8px\],
+.murmur-cockpit .text-\[9px\],
+.murmur-cockpit .text-\[10px\] {
+  font-size: 0.75rem;
+  line-height: 1rem;
+}
+
+.murmur-cockpit .text-\[11px\] {
+  font-size: 0.8125rem;
+  line-height: 1.125rem;
+}
+
+.murmur-cockpit .text-xs {
+  font-size: 0.8125rem;
+  line-height: 1.25rem;
+}

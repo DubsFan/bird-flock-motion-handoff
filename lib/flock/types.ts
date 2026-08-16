@@ -117,6 +117,8 @@ export type BirdTemplate = {
 export type Project = {
   name: string
   viewport: { width: number; height: number }
+  activeVariant: OutputVariantId
+  variantStates: Partial<Record<OutputVariantId, OutputVariantState>>
   // Legacy field retained so old saved projects migrate without data loss.
   backdropDataUrl: string | null
   scene: SceneSource
@@ -124,6 +126,13 @@ export type Project = {
   sequences: Sequence[]
   style: Style
   fps: number
+}
+
+export type OutputVariantId = "desktop" | "tablet" | "mobile"
+
+export type OutputVariantState = {
+  viewport: { width: number; height: number }
+  sequences: Sequence[]
 }
 
 const CURATED_FLIGHT_FRAMES = [
