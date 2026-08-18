@@ -1,0 +1,171 @@
+{
+  "schema_version": "2.0",
+  "authored": true,
+  "visible_rgb": [
+    4,
+    58,
+    120
+  ],
+  "minimum_clear_border_px": 64,
+  "landmark_tolerance_px": 4.0,
+  "adjacent_scale_ratio_limit": 1.08,
+  "track_scale_ratio_limit": 1.12,
+  "species": "crow",
+  "track": "flight",
+  "frames": [
+    {
+      "file": "baked-flight/01_crow_rig_flight.png",
+      "sha256": "354423e4be634c13c1b3a779ae600144287eb2100544641501b13ed4e27f6fa1",
+      "body_landmark_px": [
+        800.0,
+        501.0895771993749
+      ],
+      "body_scale_px": 587.17
+    },
+    {
+      "file": "baked-flight/02_crow_rig_flight.png",
+      "sha256": "7691f6f25c7b5ddafbee922f71c16bec810fd24b229f130b42a2cbf43a848f4e",
+      "body_landmark_px": [
+        800.0,
+        499.8743937050169
+      ],
+      "body_scale_px": 587.17
+    },
+    {
+      "file": "baked-flight/03_crow_rig_flight.png",
+      "sha256": "e2d31dea019379c2caefe733ba518dd4265b0657daff26e2aa0998fb7d5e1e37",
+      "body_landmark_px": [
+        800.0,
+        498.69286631596395
+      ],
+      "body_scale_px": 587.17
+    },
+    {
+      "file": "baked-flight/04_crow_rig_flight.png",
+      "sha256": "6dead3de8bc707fa807848441f43d7fb97c15b0f821dfc61f8f541c94fb5fd4a",
+      "body_landmark_px": [
+        800.0,
+        497.8615843419479
+      ],
+      "body_scale_px": 587.17
+    },
+    {
+      "file": "baked-flight/05_crow_rig_flight.png",
+      "sha256": "6dea887e21b990dbc804dbad60e2c7ba4111a83f3cb30918b7d414287a00a698",
+      "body_landmark_px": [
+        800.0,
+        497.603289116589
+      ],
+      "body_scale_px": 587.17
+    },
+    {
+      "file": "baked-flight/06_crow_rig_flight.png",
+      "sha256": "ee0f26a3b3a22c2990a091e96efb24c23a4c8a1414b850585e6f71b194983f54",
+      "body_landmark_px": [
+        800.0,
+        497.98719063693096
+      ],
+      "body_scale_px": 587.17
+    },
+    {
+      "file": "baked-flight/07_crow_rig_flight.png",
+      "sha256": "4c8b74d55d9c85e2054eb217b79537e49eb7001f61ae703412f7c864a9ee7c60",
+      "body_landmark_px": [
+        800.0,
+        498.9104228006251
+      ],
+      "body_scale_px": 587.17
+    },
+    {
+      "file": "baked-flight/08_crow_rig_flight.png",
+      "sha256": "643c7d1b689122d4a09fb051b09600a6b45eaef4e8aa2b547689f38a51873c48",
+      "body_landmark_px": [
+        800.0,
+        500.1256062949831
+      ],
+      "body_scale_px": 587.17
+    },
+    {
+      "file": "baked-flight/09_crow_rig_flight.png",
+      "sha256": "7848d0b81c739acfbe6ad302a134a0e7c2163b804795cea6fcb2dd656df4a18e",
+      "body_landmark_px": [
+        800.0,
+        501.30713368403605
+      ],
+      "body_scale_px": 587.17
+    },
+    {
+      "file": "baked-flight/10_crow_rig_flight.png",
+      "sha256": "14004136cad99fb06f7338606ad7f3899c0b4d33006bcdd05103aa298cbcc30b",
+      "body_landmark_px": [
+        800.0,
+        502.1384156580521
+      ],
+      "body_scale_px": 587.17
+    },
+    {
+      "file": "baked-flight/11_crow_rig_flight.png",
+      "sha256": "1d6bd6a4e7a2c68f0314ed3a2ee93d4c10a5689afd4c006d541a45e804137e2c",
+      "body_landmark_px": [
+        800.0,
+        502.396710883411
+      ],
+      "body_scale_px": 587.17
+    },
+    {
+      "file": "baked-flight/12_crow_rig_flight.png",
+      "sha256": "fd13394272c41298f337926439edd43b873500b1556e629460e25ef41fab8dac",
+      "body_landmark_px": [
+        800.0,
+        502.01280936306904
+      ],
+      "body_scale_px": 587.17
+    }
+  ],
+  "evidence": [
+    {
+      "file": "../../../../../evidence/animal-motion-v2/crow-flight-v2-4.5hz-60fps.mp4",
+      "frame_sha256": [
+        "354423e4be634c13c1b3a779ae600144287eb2100544641501b13ed4e27f6fa1",
+        "7691f6f25c7b5ddafbee922f71c16bec810fd24b229f130b42a2cbf43a848f4e",
+        "e2d31dea019379c2caefe733ba518dd4265b0657daff26e2aa0998fb7d5e1e37",
+        "6dead3de8bc707fa807848441f43d7fb97c15b0f821dfc61f8f541c94fb5fd4a",
+        "6dea887e21b990dbc804dbad60e2c7ba4111a83f3cb30918b7d414287a00a698",
+        "ee0f26a3b3a22c2990a091e96efb24c23a4c8a1414b850585e6f71b194983f54",
+        "4c8b74d55d9c85e2054eb217b79537e49eb7001f61ae703412f7c864a9ee7c60",
+        "643c7d1b689122d4a09fb051b09600a6b45eaef4e8aa2b547689f38a51873c48",
+        "7848d0b81c739acfbe6ad302a134a0e7c2163b804795cea6fcb2dd656df4a18e",
+        "14004136cad99fb06f7338606ad7f3899c0b4d33006bcdd05103aa298cbcc30b",
+        "1d6bd6a4e7a2c68f0314ed3a2ee93d4c10a5689afd4c006d541a45e804137e2c",
+        "fd13394272c41298f337926439edd43b873500b1556e629460e25ef41fab8dac"
+      ],
+      "video_sha256": "90f99682ff2da0571fe4532b168c47dfd88695ce97d4bf0bf6fe8760607a991b",
+      "cycle_hz": 4.5,
+      "input_pose_fps": 54.0,
+      "output_fps": 60,
+      "duration_seconds": 3.0
+    },
+    {
+      "file": "../../../../../evidence/animal-motion-v2/crow-flight-v2-4.5hz-60fps-alpha.webm",
+      "frame_sha256": [
+        "354423e4be634c13c1b3a779ae600144287eb2100544641501b13ed4e27f6fa1",
+        "7691f6f25c7b5ddafbee922f71c16bec810fd24b229f130b42a2cbf43a848f4e",
+        "e2d31dea019379c2caefe733ba518dd4265b0657daff26e2aa0998fb7d5e1e37",
+        "6dead3de8bc707fa807848441f43d7fb97c15b0f821dfc61f8f541c94fb5fd4a",
+        "6dea887e21b990dbc804dbad60e2c7ba4111a83f3cb30918b7d414287a00a698",
+        "ee0f26a3b3a22c2990a091e96efb24c23a4c8a1414b850585e6f71b194983f54",
+        "4c8b74d55d9c85e2054eb217b79537e49eb7001f61ae703412f7c864a9ee7c60",
+        "643c7d1b689122d4a09fb051b09600a6b45eaef4e8aa2b547689f38a51873c48",
+        "7848d0b81c739acfbe6ad302a134a0e7c2163b804795cea6fcb2dd656df4a18e",
+        "14004136cad99fb06f7338606ad7f3899c0b4d33006bcdd05103aa298cbcc30b",
+        "1d6bd6a4e7a2c68f0314ed3a2ee93d4c10a5689afd4c006d541a45e804137e2c",
+        "fd13394272c41298f337926439edd43b873500b1556e629460e25ef41fab8dac"
+      ],
+      "video_sha256": "0584968740ddfa9c409747a43af1fb7213919ab58d3160209cd10b96b3977027",
+      "cycle_hz": 4.5,
+      "input_pose_fps": 54.0,
+      "output_fps": 60,
+      "duration_seconds": 3.0
+    }
+  ]
+}

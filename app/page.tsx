@@ -12,7 +12,7 @@ import { deleteLanding, deletePathPoint } from "@/lib/flock/editing"
 import { clearSequenceGeometry, defaultProject, makeSequence } from "@/lib/flock/defaults"
 import { switchOutputVariant } from "@/lib/flock/output-variants"
 import { loadStoredProject, saveStoredProject } from "@/lib/flock/project-storage"
-import { BUILTIN_BIRD_TEMPLATE, DENSITY_COUNT, type OutputVariantId, type Project, type Sequence, type Style } from "@/lib/flock/types"
+import { DENSITY_COUNT, refreshPackagedArtworkTemplate, type OutputVariantId, type Project, type Sequence, type Style } from "@/lib/flock/types"
 
 export default function Page() {
   const [project, setProject] = useState<Project>(() => defaultProject())
@@ -50,9 +50,10 @@ export default function Page() {
               backgroundColor: parsed.style?.backgroundColor === "#0b1220"
                 ? "#f3efe6"
                 : parsed.style?.backgroundColor ?? fallback.style.backgroundColor,
+              darkBackgroundColor: parsed.style?.darkBackgroundColor ?? fallback.style.darkBackgroundColor,
             },
             scene: parsed.scene ?? (parsed.backdropDataUrl ? { kind: "image", dataUrl: parsed.backdropDataUrl, name: "Saved backdrop" } : { kind: "none" }),
-            birdTemplate: parsed.birdTemplate?.kind === "builtin" ? BUILTIN_BIRD_TEMPLATE : parsed.birdTemplate ?? fallback.birdTemplate,
+            birdTemplate: refreshPackagedArtworkTemplate(parsed.birdTemplate, fallback.birdTemplate),
             activeVariant: parsed.activeVariant ?? fallback.activeVariant,
             variantStates: parsed.variantStates ?? fallback.variantStates,
             sequences: parsed.sequences.map((sequence) => {
@@ -70,6 +71,9 @@ export default function Page() {
                 && sequence.depthDirection === "Background to foreground"
               return {
                 ...sequence,
+                birdTemplate: sequence.birdTemplate
+                  ? refreshPackagedArtworkTemplate(sequence.birdTemplate, fallback.birdTemplate)
+                  : undefined,
                 landings,
                 landing: landings[0] ?? null,
                 birdCount: migratedBirdCount,

@@ -1,0 +1,488 @@
+{
+  "schema_version": "2.0",
+  "validator": "animation/validate_motion_v2.py",
+  "passed": true,
+  "frames_dir": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/butterfly/rig-v2/baked-flight",
+  "metadata": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/butterfly/rig-v2/authored-motion-v2.json",
+  "policy": {
+    "minimum_clear_border_px": 64,
+    "expected_visible_rgb": [
+      4,
+      58,
+      120
+    ],
+    "landmarks_and_scale": "explicit-authored-metadata-only; no pixel-derived fallback",
+    "evidence_freshness": "exact ordered frame hashes when declared, otherwise file mtime"
+  },
+  "gates": [
+    {
+      "name": "frames_directory_exists",
+      "passed": true,
+      "detail": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/butterfly/rig-v2/baked-flight"
+    },
+    {
+      "name": "frames_present",
+      "passed": true,
+      "detail": "matched 6 files with '*.png'"
+    },
+    {
+      "name": "metadata_decodes",
+      "passed": true,
+      "detail": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/butterfly/rig-v2/authored-motion-v2.json"
+    },
+    {
+      "name": "metadata_visible_rgb",
+      "passed": true,
+      "detail": "visible_rgb=[4, 58, 120]"
+    },
+    {
+      "name": "all_frame_pixel_gates",
+      "passed": true,
+      "detail": "6/6 frames passed"
+    },
+    {
+      "name": "bundle_one_visible_rgb",
+      "passed": true,
+      "detail": "colors=[[4, 58, 120]]"
+    },
+    {
+      "name": "authored_metadata_present",
+      "passed": true,
+      "detail": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/butterfly/rig-v2/authored-motion-v2.json"
+    },
+    {
+      "name": "metadata_schema_v2",
+      "passed": true,
+      "detail": "schema_version='2.0', authored=True"
+    },
+    {
+      "name": "metadata_exact_frame_set",
+      "passed": true,
+      "detail": "6 ordered frames"
+    },
+    {
+      "name": "frame_hashes_match_authored_metadata",
+      "passed": true,
+      "detail": "6 hashes match"
+    },
+    {
+      "name": "explicit_body_landmarks",
+      "passed": true,
+      "detail": "reference_max=3.4863px, limit=4.0000px"
+    },
+    {
+      "name": "explicit_body_scales",
+      "passed": true,
+      "detail": "adjacent_max=1.00000 limit=1.08000; track=1.00000 limit=1.12000"
+    },
+    {
+      "name": "evidence_fresh",
+      "passed": true,
+      "detail": "butterfly-flight-v2-10hz-60fps.mp4: frame_sha256 PASS (ordered source frame hashes match); butterfly-flight-v2-10hz-60fps-alpha.webm: frame_sha256 PASS (ordered source frame hashes match)"
+    }
+  ],
+  "metrics": {
+    "body_landmark_adjacent_delta_px": [
+      2.3967,
+      1.0896,
+      1.3071,
+      2.3967,
+      1.0896
+    ],
+    "body_landmark_seam_delta_px": 1.3071,
+    "body_landmark_reference_max_px": 3.4863,
+    "body_scale_adjacent_ratio": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "body_scale_seam_ratio": 1.0,
+    "body_scale_track_ratio": 1.0
+  },
+  "frames": [
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/butterfly/rig-v2/baked-flight/01_butterfly_rig_flight.png",
+      "sha256": "d46088a1ed5b5978c095f3b1b6c05215728a410b0784c6251881e4b15951bbf3",
+      "bytes": 83392,
+      "mtime_ns": 1786956407051895920,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        476,
+        357,
+        992,
+        650
+      ],
+      "clear_border_px": 357,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(476, 357, 992, 650)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=357px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/butterfly/rig-v2/baked-flight/02_butterfly_rig_flight.png",
+      "sha256": "fcfc7e84efd3d766b0c7f71063ebeaf2102e13a1c880219a160a54e45e395c01",
+      "bytes": 79910,
+      "mtime_ns": 1786956407184733910,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        532,
+        272,
+        992,
+        598
+      ],
+      "clear_border_px": 272,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(532, 272, 992, 598)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=272px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/butterfly/rig-v2/baked-flight/03_butterfly_rig_flight.png",
+      "sha256": "e85ec004cb2c940879ac20bf396f72f2222cf73a88d661cc76a3d34332106125",
+      "bytes": 77686,
+      "mtime_ns": 1786956407311319752,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        531,
+        313,
+        991,
+        596
+      ],
+      "clear_border_px": 313,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(531, 313, 991, 596)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=313px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/butterfly/rig-v2/baked-flight/04_butterfly_rig_flight.png",
+      "sha256": "945c3c446785dd4a7437e56a12aa7d6148256a7a5a08aeed50f34c45c304078e",
+      "bytes": 88531,
+      "mtime_ns": 1786956407439026014,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        519,
+        373,
+        991,
+        728
+      ],
+      "clear_border_px": 373,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(519, 373, 991, 728)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=373px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/butterfly/rig-v2/baked-flight/05_butterfly_rig_flight.png",
+      "sha256": "2d35fc158747d4aa861e1e059ae78b2713dc51c5c38eaf0591ca33880022b160",
+      "bytes": 69306,
+      "mtime_ns": 1786956407571887129,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        533,
+        400,
+        991,
+        787
+      ],
+      "clear_border_px": 400,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(533, 400, 991, 787)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=400px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/butterfly/rig-v2/baked-flight/06_butterfly_rig_flight.png",
+      "sha256": "491e2b75b8158411eb39ebf637e173f34d44645c7eb8500c3dce364ac41248b1",
+      "bytes": 68901,
+      "mtime_ns": 1786956407695439043,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        532,
+        402,
+        990,
+        768
+      ],
+      "clear_border_px": 402,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(532, 402, 990, 768)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=402px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "evidence": [
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/evidence/animal-motion-v2/butterfly-flight-v2-10hz-60fps.mp4",
+      "exists": true,
+      "sha256": "aaba97f7962c2fba5f509e44b95deebbe56c67e4cac99ba1bacdbfd15088c6f7",
+      "bytes": 711725,
+      "mtime_ns": 1786956864870966589,
+      "passed": true,
+      "method": "frame_sha256",
+      "detail": "ordered source frame hashes match"
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/evidence/animal-motion-v2/butterfly-flight-v2-10hz-60fps-alpha.webm",
+      "exists": true,
+      "sha256": "4d3efffa4e21f813c6d4edf7df4fd8c3170453f93f77c32b5201942cf5699b20",
+      "bytes": 3899670,
+      "mtime_ns": 1786956874143382996,
+      "passed": true,
+      "method": "frame_sha256",
+      "detail": "ordered source frame hashes match"
+    }
+  ]
+}

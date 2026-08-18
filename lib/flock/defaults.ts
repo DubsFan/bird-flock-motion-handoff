@@ -6,6 +6,14 @@ export function uid(prefix = "seq"): string {
 
 export const FLOCK_INK = "#043a78"
 export const FLOCK_INK_DARK_THEME = "#e2e8f0"
+export const LIGHT_THEME_BACKGROUND = "#f3efe6"
+export const DARK_THEME_BACKGROUND = "#0b1220"
+
+export function themeBackgroundColor(style: Project["style"]) {
+  return style.previewTheme === "dark"
+    ? style.darkBackgroundColor || DARK_THEME_BACKGROUND
+    : style.backgroundColor || LIGHT_THEME_BACKGROUND
+}
 
 // Treatment starter presets: sensible path shape + parameters per treatment.
 export const TREATMENT_PRESETS: Record<
@@ -308,7 +316,8 @@ export function defaultProject(): Project {
     style: {
       inkColor: FLOCK_INK,
       transparentBackground: true,
-      backgroundColor: "#f3efe6",
+      backgroundColor: LIGHT_THEME_BACKGROUND,
+      darkBackgroundColor: DARK_THEME_BACKGROUND,
       previewTheme: "light",
     },
     fps: 30,

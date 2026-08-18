@@ -62,6 +62,8 @@ export function buildMotionBriefJson(project: Project) {
     style: {
       ink_color: project.style.inkColor,
       transparent_background: project.style.transparentBackground,
+      light_background_color: project.style.backgroundColor,
+      dark_background_color: project.style.darkBackgroundColor,
       source_contours_only: true,
     },
   }
@@ -73,7 +75,7 @@ export function buildDesignerBriefMarkdown(project: Project): string {
   lines.push(`Output variation: ${project.activeVariant}`)
   lines.push(`Viewport: ${project.viewport.width} x ${project.viewport.height}`)
   lines.push(`Ink color: ${project.style.inkColor}`)
-  lines.push(`Background: ${project.style.transparentBackground ? "transparent" : project.style.backgroundColor}`)
+  lines.push(`Light / dark fallback backgrounds: ${project.style.backgroundColor} / ${project.style.darkBackgroundColor}`)
   lines.push(`Scene source: ${project.scene.kind} · Bird template: ${project.birdTemplate.name} (${project.birdTemplate.kind})`, "")
   project.sequences.forEach((s, i) => {
     lines.push(`## ${i + 1}. ${s.name}`, "")

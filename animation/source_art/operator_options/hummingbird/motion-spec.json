@@ -1,0 +1,13 @@
+{
+  "id": "natural-engraved-hummingbird-v1",
+  "name": "Natural engraved hummingbird",
+  "direction": "right",
+  "ink_color": "#043A78",
+  "source_method": "re-authored from the operator-supplied hummingbird identity as four chronological 8-pose tracks; forward figure-eight wing envelope, braking approach, body-locked hover loop, and acceleration departure with authored motion-echo lines; semantic torso anchoring and blue-ink extraction to true alpha",
+  "tracks": [
+    {"output":"flight","sheet":"flight-sheet-v2.png","rows":2,"anchor_mode":"body","target_span":620,"frames":["01_forward_high.png","02_forward_mid.png","03_low_back.png","04_rear_arc.png","05_return_high.png","06_reverse_mid.png","07_low_opposite.png","08_loop_return.png"]},
+    {"output":"approach","sheet":"approach-sheet-v3.png","rows":2,"anchor_mode":"body","dest_anchor":[800,620],"target_span":600,"frames":["01_fast_flight.png","02_tail_brake.png","03_pitch_upright.png","04_broad_stroke.png","05_near_hover.png","06_hover_capture.png","07_hover_adjust.png","08_hover_ready.png"]},
+    {"output":"perch","sheet":"perch-sheet-v3.png","rows":2,"anchor_mode":"body","dest_anchor":[800,620],"target_span":600,"frames":["01_hover.png","02_hover.png","03_hover.png","04_hover.png","05_hover.png","06_hover.png","07_hover.png","08_hover_loop.png"]},
+    {"output":"launch","sheet":"launch-sheet-v3.png","rows":2,"anchor_mode":"body","dest_anchor":[800,620],"target_span":600,"frames":["01_hover_depart.png","02_pitch_forward.png","03_tail_narrow.png","04_acceleration_stroke.png","05_forward_clear.png","06_second_stroke.png","07_recovery.png","08_fast_departure.png"]}
+  ]
+}

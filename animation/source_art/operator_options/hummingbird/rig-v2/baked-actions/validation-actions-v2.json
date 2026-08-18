@@ -1,0 +1,974 @@
+{
+  "validator": "motion-v2-actions",
+  "passed": true,
+  "passed_gate_count": 38,
+  "gate_count": 38,
+  "gates": [
+    {
+      "name": "metadata_schema_v2",
+      "passed": true,
+      "detail": "authored action metadata"
+    },
+    {
+      "name": "exact_track_set",
+      "passed": true,
+      "detail": "required=('approach', 'perch', 'launch')"
+    },
+    {
+      "name": "approach_eight_ordered_frames",
+      "passed": true,
+      "detail": "count=8"
+    },
+    {
+      "name": "approach_01_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "approach_02_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "approach_03_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "approach_04_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "approach_05_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "approach_06_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "approach_07_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "approach_08_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "perch_eight_ordered_frames",
+      "passed": true,
+      "detail": "count=8"
+    },
+    {
+      "name": "perch_01_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "perch_02_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "perch_03_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "perch_04_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "perch_05_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "perch_06_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "perch_07_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "perch_08_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "launch_eight_ordered_frames",
+      "passed": true,
+      "detail": "count=8"
+    },
+    {
+      "name": "launch_01_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "launch_02_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "launch_03_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "launch_04_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "launch_05_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "launch_06_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "launch_07_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "launch_08_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "explicit_authored_landmarks_and_scale",
+      "passed": true,
+      "detail": "24 contact points, body landmarks, and body scales required"
+    },
+    {
+      "name": "body_scale_locked",
+      "passed": true,
+      "detail": "max/min=1.000000, limit=1.03"
+    },
+    {
+      "name": "approach_contact_lock",
+      "passed": true,
+      "detail": "last-three max y residual=0.3968px"
+    },
+    {
+      "name": "perch_contact_lock",
+      "passed": true,
+      "detail": "max contact drift=0.0000px"
+    },
+    {
+      "name": "launch_releases_monotonically",
+      "passed": true,
+      "detail": "direction=decreasing, launch_y=[620.0, 617.4026, 601.1688, 584.9351, 568.7013, 552.4675, 536.2338, 520.0]"
+    },
+    {
+      "name": "approach_to_perch_contact_seam",
+      "passed": true,
+      "detail": "delta=0.0000px"
+    },
+    {
+      "name": "perch_to_launch_contact_seam",
+      "passed": true,
+      "detail": "delta=0.0000px"
+    },
+    {
+      "name": "perch_body_hold_stable",
+      "passed": true,
+      "detail": "frames 3-7 max body landmark drift=0.0000px"
+    },
+    {
+      "name": "hash_bound_normal_speed_evidence",
+      "passed": true,
+      "detail": "evidence_count=2"
+    }
+  ],
+  "frames": {
+    "approach": [
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/approach/01_hummingbird_rig_approach.png",
+        "sha256": "540ab5364f3a40df6807e19aa9d7a09250ac2f9280986bb1b240eb4228dbce56",
+        "bytes": 115501,
+        "mtime_ns": 1786959027869038729,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          536,
+          413,
+          1033,
+          759
+        ],
+        "clear_border_px": 413,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/approach/02_hummingbird_rig_approach.png",
+        "sha256": "1c655380c0ce6ceb5af22386d06c1aec09c754aa49bb0289c7a5887aeb3751c1",
+        "bytes": 119515,
+        "mtime_ns": 1786959028020091570,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          548,
+          424,
+          1039,
+          766
+        ],
+        "clear_border_px": 424,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/approach/03_hummingbird_rig_approach.png",
+        "sha256": "a7eb1d2e99082b27235872fa9cc3d1e970f6276447a00da04115d4b99db3d905",
+        "bytes": 121504,
+        "mtime_ns": 1786959028170969952,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          553,
+          434,
+          1042,
+          773
+        ],
+        "clear_border_px": 427,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/approach/04_hummingbird_rig_approach.png",
+        "sha256": "0dc63cdcdb1aed19ec4956e4775e4b1ef9432da50534580d0e7356769bb741b7",
+        "bytes": 116888,
+        "mtime_ns": 1786959028319262241,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          537,
+          445,
+          1038,
+          781
+        ],
+        "clear_border_px": 419,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/approach/05_hummingbird_rig_approach.png",
+        "sha256": "d8d3fa3e0be1dc97c06036b090d936b5f910386e0c09134e7006c688aa597173",
+        "bytes": 114883,
+        "mtime_ns": 1786959028469136911,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          530,
+          456,
+          1039,
+          788
+        ],
+        "clear_border_px": 412,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/approach/06_hummingbird_rig_approach.png",
+        "sha256": "c45f709fa04c9a2cf3ae00d1aa1ffc09beeae0659973b4aab027eb530c2da737",
+        "bytes": 119529,
+        "mtime_ns": 1786959028619010455,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          542,
+          467,
+          1043,
+          796
+        ],
+        "clear_border_px": 404,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/approach/07_hummingbird_rig_approach.png",
+        "sha256": "e28c20f57ac508611a80823f3ea3bca1e3f159f56ffc10b9bae8faa6c6a505c4",
+        "bytes": 121640,
+        "mtime_ns": 1786959028769801962,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          546,
+          468,
+          1046,
+          794
+        ],
+        "clear_border_px": 406,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/approach/08_hummingbird_rig_approach.png",
+        "sha256": "7e8fee258e15c007d42e260549be0b0362298a2e8b2729963a23a337f65bbd47",
+        "bytes": 116146,
+        "mtime_ns": 1786959028918972379,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          531,
+          469,
+          1044,
+          791
+        ],
+        "clear_border_px": 409,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      }
+    ],
+    "perch": [
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/perch/01_hummingbird_rig_perch.png",
+        "sha256": "bac54dd7d2e095d9463a08daae7fd3e8dfc8ec058fe9918e409f5dafa7eaec82",
+        "bytes": 115372,
+        "mtime_ns": 1786959029076033659,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          528,
+          469,
+          1044,
+          791
+        ],
+        "clear_border_px": 409,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/perch/02_hummingbird_rig_perch.png",
+        "sha256": "219f5c09c5719afdfab117c75a02f8586bac27eeba7e9865b6cf5513ced6c3f5",
+        "bytes": 119852,
+        "mtime_ns": 1786959029226629373,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          541,
+          470,
+          1046,
+          790
+        ],
+        "clear_border_px": 410,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/perch/03_hummingbird_rig_perch.png",
+        "sha256": "69aed6f147caf356e139690d7f45f717fb08a12e17a49912de2a96074638b08d",
+        "bytes": 122481,
+        "mtime_ns": 1786959029378232633,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          547,
+          469,
+          1048,
+          792
+        ],
+        "clear_border_px": 408,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/perch/04_hummingbird_rig_perch.png",
+        "sha256": "ff2c89ce2555b7b73e3ee5672aeff08e8ea9512fbb098eed3fd6a5c458699761",
+        "bytes": 116477,
+        "mtime_ns": 1786959029527550468,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          532,
+          469,
+          1044,
+          791
+        ],
+        "clear_border_px": 409,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/perch/05_hummingbird_rig_perch.png",
+        "sha256": "2f59853675e034e4571005f5bc8401444d9b388019ba7c8c9f0df48d0bb727a6",
+        "bytes": 114988,
+        "mtime_ns": 1786959029679226560,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          526,
+          469,
+          1044,
+          791
+        ],
+        "clear_border_px": 409,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/perch/06_hummingbird_rig_perch.png",
+        "sha256": "74f0942b5c28de05048e480490d206a3a0004a35d2b51a61176cad86f182e063",
+        "bytes": 119488,
+        "mtime_ns": 1786959029831211529,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          539,
+          469,
+          1045,
+          792
+        ],
+        "clear_border_px": 408,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/perch/07_hummingbird_rig_perch.png",
+        "sha256": "3b88fd5c3c7093e80c27619d0dda9dbf32958bf97b6ad38496392f6ac89bb2b6",
+        "bytes": 121727,
+        "mtime_ns": 1786959029981442201,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          545,
+          470,
+          1047,
+          791
+        ],
+        "clear_border_px": 409,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/perch/08_hummingbird_rig_perch.png",
+        "sha256": "7e8fee258e15c007d42e260549be0b0362298a2e8b2729963a23a337f65bbd47",
+        "bytes": 116146,
+        "mtime_ns": 1786959030131040828,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          531,
+          469,
+          1044,
+          791
+        ],
+        "clear_border_px": 409,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      }
+    ],
+    "launch": [
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/launch/01_hummingbird_rig_launch.png",
+        "sha256": "bac54dd7d2e095d9463a08daae7fd3e8dfc8ec058fe9918e409f5dafa7eaec82",
+        "bytes": 115372,
+        "mtime_ns": 1786959030283161673,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          528,
+          469,
+          1044,
+          791
+        ],
+        "clear_border_px": 409,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/launch/02_hummingbird_rig_launch.png",
+        "sha256": "8829b452d150924dabdb7aec35f93f457b52377a08817dea5b669a50d4fb1a8c",
+        "bytes": 120545,
+        "mtime_ns": 1786959030431210211,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          541,
+          466,
+          1046,
+          790
+        ],
+        "clear_border_px": 410,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/launch/03_hummingbird_rig_launch.png",
+        "sha256": "6e61108c14cb575987995cfb65748355cdade5cba5a2bb20eb3abc9beda3319e",
+        "bytes": 123773,
+        "mtime_ns": 1786959030584330184,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          547,
+          448,
+          1048,
+          779
+        ],
+        "clear_border_px": 421,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/launch/04_hummingbird_rig_launch.png",
+        "sha256": "739dd56bf350bf225743361567f83d781995535fbd781236fe66fabb0fbf4250",
+        "bytes": 119568,
+        "mtime_ns": 1786959030732594432,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          532,
+          429,
+          1042,
+          768
+        ],
+        "clear_border_px": 429,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/launch/05_hummingbird_rig_launch.png",
+        "sha256": "493af02615e168162ee5c593074909b494f4db2384b23f7a744a558e09fa20e0",
+        "bytes": 118938,
+        "mtime_ns": 1786959030887008243,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          526,
+          411,
+          1038,
+          758
+        ],
+        "clear_border_px": 411,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/launch/06_hummingbird_rig_launch.png",
+        "sha256": "25c69cd825288f31f98ea82a4a3662c18fde3cb6199b382fb11c94a5c8eca4c8",
+        "bytes": 124339,
+        "mtime_ns": 1786959031036019202,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          539,
+          393,
+          1045,
+          747
+        ],
+        "clear_border_px": 393,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/launch/07_hummingbird_rig_launch.png",
+        "sha256": "f5e56b90894bec68d3372bfbff4d8dfdbe55dcdcb1e487ac611ca12c300b5ff7",
+        "bytes": 127103,
+        "mtime_ns": 1786959031190551097,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          545,
+          375,
+          1047,
+          736
+        ],
+        "clear_border_px": 375,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-actions/launch/08_hummingbird_rig_launch.png",
+        "sha256": "3fa23163cb3e4552dd1f2129eff3ababf7cd9d10d6979c0e576a4b664474084a",
+        "bytes": 124039,
+        "mtime_ns": 1786959031343440195,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          531,
+          355,
+          1040,
+          725
+        ],
+        "clear_border_px": 355,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      }
+    ]
+  }
+}

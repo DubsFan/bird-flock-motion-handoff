@@ -313,3 +313,251 @@ The announced candidate delivery has arrived and was audited. Ten identities are
 - `pnpm test`: pass, 39 tests across 4 files. New coverage locks exact point deletion, exact landing deletion/final-stop fly-through repair, and native fold/hold/ready timing.
 - `pnpm build`: pass with Next.js 16.3.0; `/`, `/_not-found`, and `/api/bird-artwork-agent-prompt` statically prerendered.
 - `git diff --check`: pass.
+
+## Iteration 19: six species-specific identities, semantic anchors, and travel-aligned motion
+
+- Rejected the six initial 512×512 reference stills as runtime assets: they were opaque RGB images with baked black backgrounds and blue glow. The later full-size alpha files were retained as anatomy/identity references, not mistaken for chronological motion sequences.
+- Re-authored six distinct identities from those references. The runtime now contains 202 verified new frames: swallow 16 flight + 24 action, crow 8 + 24, pigeon 8 + 24, butterfly 8 + 24, bat 10 + 24, and hummingbird 8 + 24. Bat received two extra flight recovery poses because its eight-pose seam was not coherent enough; swallow retained its already-coherent 16-pose loop.
+- Every new runtime PNG is RGBA on a 1600×1200 canvas, has real 0–255 alpha with intermediate edge values, has a fully clear edge/border, contains exactly one visible RGB color (`#043A78`), stores zero RGB beneath alpha zero, and contains no visible white fill. `runtime-validation.json` in each species source directory records every frame hash and gate result.
+- Replaced whole-wing-bbox centering with semantic anchoring. Flight/hover uses a rigid head/torso landmark; upright perch/alight uses the feet; bat roost uses the overhead foot contact. Flight anchor error now measures 2.2–5.0 px across all six identities. Perch/alight/roost/hover anchor error measures 1.4–4.5 px, within the 5 px contact / 12 px body gates.
+- Added `motion-validation.json` as a hard build gate. It checks flight/action counts, body/contact anchors, approach and launch handoffs, duplicate/near-duplicate neighbors, loop overlap, and whether the loop seam is at least as coherent as internal wing transitions. All six identities pass. Loop-seam IoU: swallow .7758, crow .3535, pigeon .4158, butterfly .6232, bat .5113, hummingbird .6122; in every case the seam is no worse than the identity's internal chronological motion.
+- Corrected the runtime engine rather than asking the art to hide engine defects: each track uses its real frame count; cadence is capped at 24 authored pose changes per second so 30 fps playback cannot skip hard poses; integer cycles close flight segments and loops; gather uses flight/hover art rather than floating perch poses; zero-second dwell still performs approach/contact/launch; launch returns to a phase-locked flight cycle; planted perch settles once and holds instead of hopping among frames.
+- Separated travel heading from curvature bank. Side-profile animals mirror from actual path travel and pitch within an upright clamp; the engine no longer treats route tangent as banking or uses an entry/exit threshold that can flip near vertical motion. Species landing behavior is explicit: `perch`, butterfly `alight`, hummingbird `hover`, and bat `inverted-roost`.
+- Operator color is shared across all eight artwork choices. All eight packaged templates route through the same source-in alpha tint path, and saved selections refresh by stable artwork id after asset revisions. `evidence/animal-motion/all-8-operator-color-proof.png` shows every option rendered with operator colors `#7c2d12` and `#0f766e` on light/dark scenes.
+- The operator artwork library now presents exactly eight complete identity cards and hides frame-by-frame thumbnails behind the optional motion-inspection disclosure. The expanded library is not a wall of individual frames.
+
+### Research basis
+
+- Pigeon landing/takeoff work supports authored braking flare, foot contact, weight transfer, and launch as distinct kinematic phases: https://journals.biologists.com/jeb/article/213/10/1651/9685/Wing-and-body-kinematics-of-takeoff-and-landing
+- Perching research supports locking the foot/contact landmark rather than the changing wing silhouette: https://pmc.ncbi.nlm.nih.gov/articles/PMC6684272/
+- Bat/hummingbird hover research and hummingbird figure-eight kinematics support separate hover/membrane contracts rather than applying one bird-perch animation to all species: https://pmc.ncbi.nlm.nih.gov/articles/PMC6157961/ and https://pmc.ncbi.nlm.nih.gov/articles/PMC11583918/
+- Butterfly flight research supports a four-wing clap/flutter cycle and an alight behavior rather than a bird-like grounded perch: https://pmc.ncbi.nlm.nih.gov/articles/PMC13024673/
+- Steering/path-following and follow-path references support deriving anatomical facing from local route velocity while treating curvature separately: https://www.red3d.com/cwr/papers/1999/gdc99steer.html and https://docs.blender.org/manual/ru/3.0/animation/constraints/relationship/follow_path.html
+- FILM was reviewed as an in-between reference but not used to ghost/cross-fade final line art. The accepted runtime plays exact authored chronological PNGs: https://github.com/google-research/frame-interpolation
+
+### Visual and export proof
+
+- Six normal-speed, four-stage opaque review reels: `evidence/animal-motion/{swallow,crow,pigeon,butterfly,bat,hummingbird}-motion-stages-normal-speed.mp4`; each is H.264, 1600×1200, 24 fps, 4.0s, and shows flight → approach → perch/alight/roost/hover → launch.
+- Six transparent flight proofs: `evidence/animal-motion/{swallow,crow,pigeon,butterfly,bat,hummingbird}-flight-alpha.webm`; each is VP9, 1600×1200, 24 fps, 3.0s, with `alpha_mode=1`.
+- Chronological full-track and enlarged flight sheets: `animation/source_art/operator_options/<species>/runtime-contact-sheet.jpg` and `runtime-flight-review-sheet.jpg` for all six species.
+- Live in-app normal-speed crow pilot passed two landing stops with one selected bird: direction mirrored with travel, planted dwell remained quiet, and flight-only art resumed between stops. The library snapshot exposed exactly eight artwork cards.
+- An attempted expanded all-eight live browser pass was stopped by the in-app browser URL policy because the saved project contains an external URL scene. The policy forbade further clicks and alternate-browser circumvention. This limitation is recorded rather than converting source-reel/code proof into a false all-eight live-stage claim.
+
+### Verification
+
+- `pnpm test -- --run`: pass, 47 tests across 4 files.
+- `pnpm exec tsc --noEmit`: pass.
+- `pnpm lint`: pass.
+- `pnpm build`: pass with Next.js 16.3.0; `/`, `/_not-found`, and `/api/bird-artwork-agent-prompt` statically prerendered.
+- React review: no new effect/state duplication, card keys remain stable ids, controls retain native button semantics, and the artwork refresh logic is a pure shared function rather than client-component-local duplicated work.
+
+## Iteration 20: motion-forensics correction and layered V2 flight replacement
+
+### Correction to Iteration 19 acceptance
+
+- The prior static validator proved alpha, color, canvas, and file integrity; it
+  did **not** prove natural motion. Fresh adjacent-pose analysis found torso
+  scale changes up to 2.68x, camera-plane jumps up to 89.2 degrees, false wing
+  reversals, and severe flight/action seams. The six Iteration 19 stage reels
+  also predated their latest source manifests and are stale. They are retained
+  as failure evidence, not production acceptance.
+- Runtime optical-flow interpolation was prototyped and rejected because thin
+  engraved contours doubled and ghosted at wing reversals. V2 therefore keeps
+  exact PNG playback and moves interpolation/deformation into an offline,
+  reviewable layered authoring pipeline.
+
+### V2 flight work completed
+
+- Added deterministic layered-rig baking, strict fail-closed validation,
+  hash-bound normal-speed proof encoding, and gated publishing tools under
+  `animation/`.
+- Rebuilt all six flight identities around one locked body plus independently
+  deforming near/far wings. Published sampling is crow 12, pigeon 10, swallow
+  7, butterfly 6, bat 6, and hummingbird 4 motion-blur shimmer poses. Fast
+  species use fewer truly adjacent display poses instead of slowing biology to
+  satisfy an arbitrary frame budget.
+- Every V2 flight frame is 1600x1200 RGBA, one visible RGB `#043A78`, zero RGB
+  under alpha zero, clear by at least 64 pixels, and protected by an ordered
+  SHA-256 list plus explicit authored body landmark and body scale. All six
+  `validation-v2.json` reports pass 13/13 gates.
+- Every V2 MP4 and VP9-alpha WebM proof is bound to the exact current ordered
+  frame hashes, not merely a newer file timestamp. Proofs are under
+  `evidence/animal-motion-v2/`.
+- All six validated flight tracks are published into their packaged operator
+  choices. The live browser loaded the 1600x1200 V2 previews and current crow
+  flight frame, rendered the crow in the operator-selected teal `#0f766e`, and
+  reported no warning/error logs.
+
+### Runtime cadence correction
+
+- `cycleHz` now records species cadence independently of authored frame count.
+  Chronological tracks declare their required sampling FPS; unsupported FPS is
+  rejected by a pure validator rather than silently slowing the animal.
+- Hummingbird explicitly separates 40/50/60 Hz physical motion from a readable
+  2.0/2.3/2.6 Hz baked motion-blur shimmer. Loop phase remains deterministic
+  and seam-closed.
+
+### Open production blocker
+
+- Flight replacement is wired; the six approach/perch/launch tracks are still
+  the rejected Iteration 19 action artwork. They must be rebuilt from layered
+  action rigs with explicit foot/alight/roost/hover contact landmarks before
+  the complete eight-option motion system can be called production-ready.
+- A crow action-body atlas has been authored as a reference, but it is not
+  published because body-shape transitions and shoulder registration have not
+  yet passed normal-speed seam/contact gates. This prevents a cosmetic
+  flight-only improvement from being mislabeled as a complete crow-perching
+  solution.
+
+### Verification
+
+- Six V2 flight validators: pass, 13/13 each with exact evidence hash provenance.
+- `pnpm test -- --run`: pass, 52 tests across 4 files.
+- `pnpm exec tsc --noEmit`: pass.
+- `pnpm lint`: pass with zero warnings.
+- `pnpm build`: pass with Next.js 16.3.0.
+- Live localhost ownership: port 3000 belongs to this repository checkout.
+- Live browser: V2 crow normal-speed frame rendered in selected teal; no warning/error logs.
+
+## Iteration 21: all six V2 approach, dwell, and launch replacements
+
+- Rebuilt all 24 Crow action frames from the same locked V2 body and detached
+  wing/leg/tail layers used by the accepted flight identity. The sequence is
+  chronological: braking flare and tail fan, late foot extension, contact,
+  folded quiet hold, launch preload, release, downstroke, and leg tuck.
+- Corrected the draft approach-to-perch discontinuity so the final folded
+  approach pose enters the first settled pose without reopening the wing. The
+  final settled preload is byte-identical to launch frame 1.
+- Added a fail-closed action validator and a gated publisher. Crow passes 38/38
+  gates: all frames are 1600x1200 RGBA; one visible RGB `#043A78`; zero RGB
+  beneath alpha zero; at least 64 px clear border; exact authored hashes;
+  locked body scale; last-three approach contact residual <=0.397 px; zero
+  perch contact drift; exact approach/perch and perch/launch contact seams;
+  monotonic launch release; and a stable quiet body hold.
+- Generated fresh hash-bound 60 fps evidence from the exact accepted ordered
+  frame hashes: `evidence/animal-motion-v2/crow-action-stages-v2-60fps.mp4`
+  and `evidence/animal-motion-v2/crow-action-stages-v2-60fps-alpha.webm`.
+  The MP4 was reviewed at normal speed in QuickTime across the complete
+  approach -> perch -> launch timeline before publishing.
+- Published the accepted pixels over the stable public Crow action filenames,
+  updated the action contact anchor to `(801, 750)`, and recorded public hashes
+  in `public/artist-birds/natural-crow/action-v2-provenance.json`.
+- Applied the same locked-body/action-rig pipeline to Pigeon and Swallow, then
+  authored separate non-bird state contracts: Butterfly alight with upright
+  closed wings, Bat rotation into an overhead-claw inverted roost and downward
+  release, and Hummingbird stationary hover/shimmer instead of false surface
+  contact. All five additional bundles pass 38/38 gates.
+- Generated and reviewed fresh hash-bound 60 fps action MP4/WebM pairs for all
+  six species under `evidence/animal-motion-v2/`. Crow, Pigeon, Swallow,
+  Butterfly, Bat, and Hummingbird were each played through at normal speed in
+  QuickTime before publishing.
+- Published all 144 accepted V2 action frames over stable public filenames and
+  wrote per-species `action-v2-provenance.json` files containing the exact
+  public SHA-256 values. This supersedes Iteration 20's action-art blocker.
+- Reloaded localhost, selected `Natural engraved crow` in the eight-option
+  operator library, and confirmed the live editor reports all four Crow tracks
+  ready. Full live-stage sampling of every species/route state remains a final
+  acceptance task; the packaged source reels and validators are current.
+- Final live registry pass selected all six revised identities in turn; each
+  reported flight/approach/perch-or-hover/launch ready and browser warning/error
+  logs remained empty. The saved external URL scene prevented deterministic
+  programmatic scrubbing of every route state, so normal-speed action acceptance
+  is based on the six current hash-bound source reels plus the successful live
+  packaged-selection/load pass, not a false claim of six complete stage reels.
+- Final gates: six action validators pass 38/38; all six public provenance files
+  reproduce their published hashes; Python compilation passes; 52 Vitest tests
+  pass; TypeScript, ESLint, `git diff --check`, and the Next.js 16.3.0 production
+  build pass.
+
+## Iteration 22: normal-speed temporal rendering and 15-pose actions
+
+- Rejected the prior 30 fps contract after live playback proved that the fast
+  animals required 68–81+ discrete samples per second while Murmur exports 30
+  fps by default. Added an explicit temporal-shutter policy for Crow, Pigeon,
+  Swallow, Butterfly, and Bat. The renderer now composites only neighboring
+  chronological one-color alpha poses within the delivery-frame exposure;
+  physical cadence is no longer slowed and intermediate motion is no longer
+  silently discarded.
+- Added deterministic species rhythms: three-beat Crow bursts, five-beat
+  Pigeon bursts, and two-beat Swallow bursts followed by authored glide holds.
+  Butterfly and Bat remain continuous. Hummingbird retains a separate physical
+  40/50/60 Hz contract and readable authored shimmer.
+- Replaced constant-speed contact with paired Hermite distance profiles. Birds
+  now enter the approach runway at cruise velocity, decelerate to zero at
+  contact, and accelerate continuously from zero through launch, without a
+  position teleport or catch-up.
+- The first live Crow pass showed the eight-pose action handoff still read as a
+  coarse wing collapse. Rebuilt all six animals from their layered body/wing/
+  appendage rigs at 15 chronological poses per approach, dwell, and launch.
+  No runtime mask morph or full-frame crossfade was used. Published 270 new
+  one-color true-alpha action PNGs and removed the superseded eight-frame files.
+- Fresh action proofs are hash-bound to the exact accepted ordered frames at
+  `evidence/animal-motion-v2/*-action-stages-v3-60fps.mp4` and
+  `evidence/animal-motion-v2/*-action-stages-v3-60fps-alpha.webm`.
+  Each species passes 59/59 fail-closed action gates, including RGBA/one-color,
+  transparent RGB cleanup, 64 px border, explicit body/contact landmarks,
+  fixed body scale, contact seams, monotonic launch release, and exact proof
+  hashes.
+- Live localhost Crow playback was sampled at normal speed before and after the
+  rebuild. Flight now shows readable flapping with restrained shutter trails;
+  approach exposes the added intermediate poses; the body identity remains
+  locked through settle. Live flight-direction sampling also covered Swallow,
+  Pigeon, Butterfly, Bat, and Hummingbird. The packaged layered Butterfly and
+  Bat masters are right-facing side profiles, so runtime mirroring remains the
+  correct travel-orientation behavior.
+- Verification: 55 Vitest tests pass; TypeScript, ESLint, `git diff --check`,
+  and the Next.js 16.3.0 production build pass. Browser asset loading produced
+  no new missing-frame error after publishing the 15-frame manifests.
+- Actual Murmur browser exports, not source-only reels, were generated for the
+  two species with the highest semantic risk. Crow and Bat each completed the
+  full 10.67-second/two-landing route at 1600x900 and 30 fps in both opaque
+  H.264 and VP9-alpha WebM:
+  `evidence/runtime-v3/crow-two-landings-30fps.mp4`,
+  `evidence/runtime-v3/crow-two-landings-30fps-alpha.webm`,
+  `evidence/runtime-v3/bat-two-landings-30fps.mp4`, and
+  `evidence/runtime-v3/bat-two-landings-30fps-alpha.webm`.
+  Both WebMs report `alpha_mode=1`; frames decoded with libvpx have alpha
+  extrema Crow `(0,245)` and Bat `(0,244)`, with all four corner alpha values
+  zero. Crow runtime SHA-256 values are `093b101c...1224dd2e` (MP4) and
+  `1c70274c...02adda9` (WebM); Bat values are `a629ad43...b30f30c` and
+  `fe2fbb1b...acaf3f87`. Runtime contact sheets are stored beside the videos.
+
+## Iteration 23: light/dark visibility and operator-color repair
+
+- Reproduced the reported failure in the live localhost editor. The dark bird
+  palette was being drawn over the same ivory no-scene surface used by the
+  light palette. Artwork loaded without console errors, but the default dark
+  ink and ivory background had insufficient visual separation.
+- Added independent light and dark fallback backgrounds to the persisted
+  project style. The no-scene stage and opaque encoder now use the background
+  belonging to the active preview theme: ivory `#f3efe6` for light and navy
+  `#0b1220` for dark by default. Existing saved projects migrate to the dark
+  default without losing an operator-selected light fallback.
+- Clarified the toolbar as `Preview: Light` / `Preview: Dark` and exposed both
+  fallback colors in Step 4. Uploaded image, HTML, and URL scenes remain exact
+  alignment references and are not recolored.
+- Live browser proof covered the original Calm editorial flock on both theme
+  surfaces. Selecting `#043a78` in light mode and `#e2e8f0` in dark mode
+  immediately recolored the exact same authored bird. All eight artwork cards
+  were then selected in turn; each reached its pressed selection state and no
+  artwork-load error appeared. Static registry coverage additionally asserts
+  that all eight use the shared operator-color tint path.
+
+## Iteration 24: travel-linked natural flight cadence
+
+- Reproduced the reported frantic flight in the live 30 fps stage. The five
+  fast animal templates were advancing at 4–12 full authored cycles per second
+  while the route crossed the viewport slowly, and cadence did not respond to
+  the operator's flight-speed control.
+- Preserved biological source-rate metadata, but added explicit readable
+  display cycles for the baked line-art sequences: Crow 1.6/2.0/2.5 Hz,
+  Pigeon 2.0/2.6/3.2, Swallow 2.5/3.2/4.0, Butterfly 3.0/4.0/5.0, Bat
+  2.5/3.3/4.2, and Hummingbird shimmer 1.8/2.1/2.4 for Soft/Medium/Strong.
+- Coupled display cadence to the square root of the actual route-speed
+  multiplier, bounded to 0.55–1.35x. Gentle travel now reduces wing cadence;
+  faster travel increases it without returning to the prior frantic range.
+  The original editorial bird and clean gull use the same coupling.
+- Live normal-speed proof watched the Crow at the normal 0.90x route speed and
+  again at 0.35x. Broad chronological strokes remained readable at normal
+  speed and slowed with travel rather than churning in place. The operator
+  project was restored to 0.90x and Calm editorial after verification.

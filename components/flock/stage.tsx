@@ -12,6 +12,7 @@ import {
 } from "react"
 import { Redo2, Trash2, Undo2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { themeBackgroundColor } from "@/lib/flock/defaults"
 import { buildMotionPath, landingZones, renderProjectFrame } from "@/lib/flock/engine"
 import { preloadBirdTemplate } from "@/lib/flock/template-renderer"
 import { outputVariantDefinition } from "@/lib/flock/output-variants"
@@ -428,7 +429,7 @@ export const Stage = forwardRef<StageHandle, Props>(function Stage(
       ) : (
         <div
           className="pointer-events-none absolute inset-0"
-          style={{ backgroundColor: style.backgroundColor || "#f3efe6" }}
+          style={{ backgroundColor: themeBackgroundColor(style) }}
           aria-hidden
         >
           <div className="h-full w-full opacity-40" style={{ backgroundImage: "linear-gradient(to right, #64748b33 1px, transparent 1px), linear-gradient(to bottom, #64748b33 1px, transparent 1px)", backgroundSize: "40px 40px" }} />

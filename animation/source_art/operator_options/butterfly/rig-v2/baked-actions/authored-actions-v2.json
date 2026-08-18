@@ -1,0 +1,711 @@
+{
+  "schema_version": "2.0",
+  "authored": true,
+  "visible_rgb": [
+    4,
+    58,
+    120
+  ],
+  "minimum_clear_border_px": 64,
+  "species": "butterfly",
+  "launch_contact_direction": "decreasing",
+  "tracks": {
+    "approach": [
+      {
+        "file": "approach/01_butterfly_rig_approach.png",
+        "sha256": "13e147b3296f33579233cb6445afe8be835a59e67070f2d05f80f0f646b9a7bc",
+        "body_landmark_px": [
+          809.0018,
+          623.6275
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          700.0
+        ]
+      },
+      {
+        "file": "approach/02_butterfly_rig_approach.png",
+        "sha256": "57c8964679fa952f19b09d79ef9205df7f438bcf11c38a2ee0ad62d05ef0874b",
+        "body_landmark_px": [
+          809.0019,
+          626.9361
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          704.9603
+        ]
+      },
+      {
+        "file": "approach/03_butterfly_rig_approach.png",
+        "sha256": "74a26c792fe0673dc6827c762f87a39979f9ea73931d1a042f5c6f7c4b47b869",
+        "body_landmark_px": [
+          809.002,
+          630.2448
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          709.9206
+        ]
+      },
+      {
+        "file": "approach/04_butterfly_rig_approach.png",
+        "sha256": "87a6fc49e9c423df2ba47eb98bd4eee733648da7360da94d00d7dc10b1b5af5b",
+        "body_landmark_px": [
+          809.0021,
+          633.5535
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          714.881
+        ]
+      },
+      {
+        "file": "approach/05_butterfly_rig_approach.png",
+        "sha256": "3fc5e74dd936beadfc14778439d1546802852004a889c198d74c957a87a57325",
+        "body_landmark_px": [
+          809.0022,
+          636.8621
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          719.8413
+        ]
+      },
+      {
+        "file": "approach/06_butterfly_rig_approach.png",
+        "sha256": "bfb5c21938ae337035f1e501bca492bed099e45fe6cd5a99f10a8f0ff2350056",
+        "body_landmark_px": [
+          809.0023,
+          640.1708
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          724.8016
+        ]
+      },
+      {
+        "file": "approach/07_butterfly_rig_approach.png",
+        "sha256": "aacf72991a788fb229c8d0f0d95931a4374238296abfbcb0d0cfba4471bca2cd",
+        "body_landmark_px": [
+          809.0024,
+          643.4794
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          729.7619
+        ]
+      },
+      {
+        "file": "approach/08_butterfly_rig_approach.png",
+        "sha256": "1e9a2b49bf057738b6e9dc811d42e828061938f8ca713584c491656de32f0788",
+        "body_landmark_px": [
+          809.0025,
+          646.7881
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          734.7222
+        ]
+      },
+      {
+        "file": "approach/09_butterfly_rig_approach.png",
+        "sha256": "c1e3839494e1c1be8b0b5ee6960036b20c5907bcf170fffd32435a83a3917d9a",
+        "body_landmark_px": [
+          809.0026,
+          650.0968
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          739.6825
+        ]
+      },
+      {
+        "file": "approach/10_butterfly_rig_approach.png",
+        "sha256": "4d764f330fe1338b58c4c5eeca98cf5f8d05b0633cce5463044a63e45a95ac03",
+        "body_landmark_px": [
+          809.0027,
+          653.4054
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          744.6429
+        ]
+      },
+      {
+        "file": "approach/11_butterfly_rig_approach.png",
+        "sha256": "723f8180322e3953687747788f7065e4e3304533698148122d56e76bc2df3a4f",
+        "body_landmark_px": [
+          809.0028,
+          656.7141
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          749.6032
+        ]
+      },
+      {
+        "file": "approach/12_butterfly_rig_approach.png",
+        "sha256": "45668b7d35256196d1457f0fed10a3eb8cd0a474797d7251fd0deaae7511d543",
+        "body_landmark_px": [
+          809.0029,
+          655.4592
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "approach/13_butterfly_rig_approach.png",
+        "sha256": "ecb039ed6e3723254b76f197307ece02aa7ad163209db367632e2e4a8c721c7f",
+        "body_landmark_px": [
+          809.003,
+          653.8076
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "approach/14_butterfly_rig_approach.png",
+        "sha256": "a5593d94767aac872788a84039a5a6ea41c068d8d1741c0d81f9d5f6555e68f0",
+        "body_landmark_px": [
+          809.003,
+          652.1559
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "approach/15_butterfly_rig_approach.png",
+        "sha256": "3faf58adac02da9f996c10128ccd28cf342580fefedaa23058d6a4e06062ae00",
+        "body_landmark_px": [
+          809.0031,
+          650.5043
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      }
+    ],
+    "perch": [
+      {
+        "file": "perch/01_butterfly_rig_perch.png",
+        "sha256": "3faf58adac02da9f996c10128ccd28cf342580fefedaa23058d6a4e06062ae00",
+        "body_landmark_px": [
+          809.0031,
+          650.5043
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "perch/02_butterfly_rig_perch.png",
+        "sha256": "09af6f027b06187a29dba160eeb312d3fe608abde7ea718c92fab9703b58ddb9",
+        "body_landmark_px": [
+          809.0031,
+          650.5043
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "perch/03_butterfly_rig_perch.png",
+        "sha256": "4e3779b0f05bc939fe5af51a6fd7c3cfe7406e10b4ec1e9ce2d9dfe3ea6acd87",
+        "body_landmark_px": [
+          809.0031,
+          650.5043
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "perch/04_butterfly_rig_perch.png",
+        "sha256": "ca453c7635580831480973839ccdd0f78ed9320eebddd55b72311fd68d047630",
+        "body_landmark_px": [
+          809.0031,
+          650.5043
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "perch/05_butterfly_rig_perch.png",
+        "sha256": "a2b1ef98201e5ac371be1bb83f7c1d9ae59f356b0b541aceae467674e520905c",
+        "body_landmark_px": [
+          809.0031,
+          650.5043
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "perch/06_butterfly_rig_perch.png",
+        "sha256": "4d5d123a95d5076fcdcc8ed7770bfe45974bc6bb132cfac4f014414c63539ca5",
+        "body_landmark_px": [
+          809.0031,
+          650.5043
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "perch/07_butterfly_rig_perch.png",
+        "sha256": "fca056b67fcf600304e17a3d694b6573d82afce05327e4411fb730fe9f40fbf6",
+        "body_landmark_px": [
+          809.0031,
+          650.5043
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "perch/08_butterfly_rig_perch.png",
+        "sha256": "edf9a1e80b6c109ab01429c73c5377c43918ccb757c6d052febfc378f467b4f6",
+        "body_landmark_px": [
+          809.0031,
+          650.5043
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "perch/09_butterfly_rig_perch.png",
+        "sha256": "cbce28e35875a3a71c47792a429f4d936c8ebd02543030195eabe4a885bbf834",
+        "body_landmark_px": [
+          809.0031,
+          650.5043
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "perch/10_butterfly_rig_perch.png",
+        "sha256": "fca056b67fcf600304e17a3d694b6573d82afce05327e4411fb730fe9f40fbf6",
+        "body_landmark_px": [
+          809.0031,
+          650.5043
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "perch/11_butterfly_rig_perch.png",
+        "sha256": "a2b1ef98201e5ac371be1bb83f7c1d9ae59f356b0b541aceae467674e520905c",
+        "body_landmark_px": [
+          809.0031,
+          650.5043
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "perch/12_butterfly_rig_perch.png",
+        "sha256": "4d5d123a95d5076fcdcc8ed7770bfe45974bc6bb132cfac4f014414c63539ca5",
+        "body_landmark_px": [
+          809.0031,
+          650.5043
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "perch/13_butterfly_rig_perch.png",
+        "sha256": "fca056b67fcf600304e17a3d694b6573d82afce05327e4411fb730fe9f40fbf6",
+        "body_landmark_px": [
+          809.0031,
+          650.5043
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "perch/14_butterfly_rig_perch.png",
+        "sha256": "564605311b7cfb2277c4a4ba9bc835a19ec5d571de62a1e4810880abecc18db8",
+        "body_landmark_px": [
+          809.0031,
+          650.5043
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "perch/15_butterfly_rig_perch.png",
+        "sha256": "8839e45126429055508941a9ce4b0f2d910a2e04d85231c1299dcedd88293e2e",
+        "body_landmark_px": [
+          809.003,
+          652.8166
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      }
+    ],
+    "launch": [
+      {
+        "file": "launch/01_butterfly_rig_launch.png",
+        "sha256": "8839e45126429055508941a9ce4b0f2d910a2e04d85231c1299dcedd88293e2e",
+        "body_landmark_px": [
+          809.003,
+          652.8166
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "launch/02_butterfly_rig_launch.png",
+        "sha256": "b3155d03d2cda4dadab46ef0150acb05df46889800d13b5fbd70ca36ed9ef130",
+        "body_landmark_px": [
+          809.003,
+          652.8166
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          750
+        ]
+      },
+      {
+        "file": "launch/03_butterfly_rig_launch.png",
+        "sha256": "54a892ccefd90210f9683ff46ae5f3a9ec6b3b657f14dc0dc3e5fc985d82d110",
+        "body_landmark_px": [
+          809.003,
+          650.8701
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          747.2727
+        ]
+      },
+      {
+        "file": "launch/04_butterfly_rig_launch.png",
+        "sha256": "4543d4da287f1c12f36fe884826a2c4483c35ddf7a4bf8f105501fcc76b41dbb",
+        "body_landmark_px": [
+          809.0028,
+          644.7873
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          738.75
+        ]
+      },
+      {
+        "file": "launch/05_butterfly_rig_launch.png",
+        "sha256": "84c1227adfc6852e20bd9eea3aea5fc721335949a4b68a81adb779ade19409dd",
+        "body_landmark_px": [
+          809.0027,
+          638.7045
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          730.2273
+        ]
+      },
+      {
+        "file": "launch/06_butterfly_rig_launch.png",
+        "sha256": "4fdf2c6287e80809fb5ec249e0b6532c6d01b517638237531f7cd5a01cf18d78",
+        "body_landmark_px": [
+          809.0026,
+          632.6218
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          721.7045
+        ]
+      },
+      {
+        "file": "launch/07_butterfly_rig_launch.png",
+        "sha256": "e5f7bb5df867a10c7c15baf075e7bacbcff75eabd96337d93aea5f03a5cfffa4",
+        "body_landmark_px": [
+          809.0024,
+          626.539
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          713.1818
+        ]
+      },
+      {
+        "file": "launch/08_butterfly_rig_launch.png",
+        "sha256": "1fd38b6c48626791b344efff84136466132765e7b117324d56135b2fd9c25129",
+        "body_landmark_px": [
+          809.0023,
+          620.4562
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          704.6591
+        ]
+      },
+      {
+        "file": "launch/09_butterfly_rig_launch.png",
+        "sha256": "d7a0274e32b344ac0a9a9abd6ed039e15696fd6d2dc1e1f0374c3f817e05c15e",
+        "body_landmark_px": [
+          809.0021,
+          614.3734
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          696.1364
+        ]
+      },
+      {
+        "file": "launch/10_butterfly_rig_launch.png",
+        "sha256": "a29b4e245f8c449dd4d3c26885836f8cf4f842a0dac1fc5a6b3dcfec426abf15",
+        "body_landmark_px": [
+          809.002,
+          608.2907
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          687.6136
+        ]
+      },
+      {
+        "file": "launch/11_butterfly_rig_launch.png",
+        "sha256": "f775331e150adec46f5e8fa273ccd6de8302c42d99f22820e0631dab7ab55340",
+        "body_landmark_px": [
+          809.0019,
+          602.2079
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          679.0909
+        ]
+      },
+      {
+        "file": "launch/12_butterfly_rig_launch.png",
+        "sha256": "28a934e68acb92854b6cc2f3bbce9f6233d7c57ddf14a56d149befd882459da5",
+        "body_landmark_px": [
+          809.0017,
+          596.1251
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          670.5682
+        ]
+      },
+      {
+        "file": "launch/13_butterfly_rig_launch.png",
+        "sha256": "114a68a22d320d64f23d9d5e1e3d5a02474088f6d4ebba9133fa5fca1b1309f9",
+        "body_landmark_px": [
+          809.0016,
+          590.0423
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          662.0455
+        ]
+      },
+      {
+        "file": "launch/14_butterfly_rig_launch.png",
+        "sha256": "1f899c61c7516a476235581d84d14adc30a5072ba8b3c717fcef43c9c9a01864",
+        "body_landmark_px": [
+          809.0014,
+          583.9596
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          653.5227
+        ]
+      },
+      {
+        "file": "launch/15_butterfly_rig_launch.png",
+        "sha256": "6ca0f39a2e74af3de97f64aa3e409a4a298180b1ac89e60bc15513db018c4b78",
+        "body_landmark_px": [
+          809.0013,
+          577.8768
+        ],
+        "body_scale_px": 483.7,
+        "contact_landmark_px": [
+          801,
+          645.0
+        ]
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "file": "../../../../../../evidence/animal-motion-v2/butterfly-action-stages-v3-60fps.mp4",
+      "frame_sha256": [
+        "13e147b3296f33579233cb6445afe8be835a59e67070f2d05f80f0f646b9a7bc",
+        "57c8964679fa952f19b09d79ef9205df7f438bcf11c38a2ee0ad62d05ef0874b",
+        "74a26c792fe0673dc6827c762f87a39979f9ea73931d1a042f5c6f7c4b47b869",
+        "87a6fc49e9c423df2ba47eb98bd4eee733648da7360da94d00d7dc10b1b5af5b",
+        "3fc5e74dd936beadfc14778439d1546802852004a889c198d74c957a87a57325",
+        "bfb5c21938ae337035f1e501bca492bed099e45fe6cd5a99f10a8f0ff2350056",
+        "aacf72991a788fb229c8d0f0d95931a4374238296abfbcb0d0cfba4471bca2cd",
+        "1e9a2b49bf057738b6e9dc811d42e828061938f8ca713584c491656de32f0788",
+        "c1e3839494e1c1be8b0b5ee6960036b20c5907bcf170fffd32435a83a3917d9a",
+        "4d764f330fe1338b58c4c5eeca98cf5f8d05b0633cce5463044a63e45a95ac03",
+        "723f8180322e3953687747788f7065e4e3304533698148122d56e76bc2df3a4f",
+        "45668b7d35256196d1457f0fed10a3eb8cd0a474797d7251fd0deaae7511d543",
+        "ecb039ed6e3723254b76f197307ece02aa7ad163209db367632e2e4a8c721c7f",
+        "a5593d94767aac872788a84039a5a6ea41c068d8d1741c0d81f9d5f6555e68f0",
+        "3faf58adac02da9f996c10128ccd28cf342580fefedaa23058d6a4e06062ae00",
+        "3faf58adac02da9f996c10128ccd28cf342580fefedaa23058d6a4e06062ae00",
+        "09af6f027b06187a29dba160eeb312d3fe608abde7ea718c92fab9703b58ddb9",
+        "4e3779b0f05bc939fe5af51a6fd7c3cfe7406e10b4ec1e9ce2d9dfe3ea6acd87",
+        "ca453c7635580831480973839ccdd0f78ed9320eebddd55b72311fd68d047630",
+        "a2b1ef98201e5ac371be1bb83f7c1d9ae59f356b0b541aceae467674e520905c",
+        "4d5d123a95d5076fcdcc8ed7770bfe45974bc6bb132cfac4f014414c63539ca5",
+        "fca056b67fcf600304e17a3d694b6573d82afce05327e4411fb730fe9f40fbf6",
+        "edf9a1e80b6c109ab01429c73c5377c43918ccb757c6d052febfc378f467b4f6",
+        "cbce28e35875a3a71c47792a429f4d936c8ebd02543030195eabe4a885bbf834",
+        "fca056b67fcf600304e17a3d694b6573d82afce05327e4411fb730fe9f40fbf6",
+        "a2b1ef98201e5ac371be1bb83f7c1d9ae59f356b0b541aceae467674e520905c",
+        "4d5d123a95d5076fcdcc8ed7770bfe45974bc6bb132cfac4f014414c63539ca5",
+        "fca056b67fcf600304e17a3d694b6573d82afce05327e4411fb730fe9f40fbf6",
+        "564605311b7cfb2277c4a4ba9bc835a19ec5d571de62a1e4810880abecc18db8",
+        "8839e45126429055508941a9ce4b0f2d910a2e04d85231c1299dcedd88293e2e",
+        "8839e45126429055508941a9ce4b0f2d910a2e04d85231c1299dcedd88293e2e",
+        "b3155d03d2cda4dadab46ef0150acb05df46889800d13b5fbd70ca36ed9ef130",
+        "54a892ccefd90210f9683ff46ae5f3a9ec6b3b657f14dc0dc3e5fc985d82d110",
+        "4543d4da287f1c12f36fe884826a2c4483c35ddf7a4bf8f105501fcc76b41dbb",
+        "84c1227adfc6852e20bd9eea3aea5fc721335949a4b68a81adb779ade19409dd",
+        "4fdf2c6287e80809fb5ec249e0b6532c6d01b517638237531f7cd5a01cf18d78",
+        "e5f7bb5df867a10c7c15baf075e7bacbcff75eabd96337d93aea5f03a5cfffa4",
+        "1fd38b6c48626791b344efff84136466132765e7b117324d56135b2fd9c25129",
+        "d7a0274e32b344ac0a9a9abd6ed039e15696fd6d2dc1e1f0374c3f817e05c15e",
+        "a29b4e245f8c449dd4d3c26885836f8cf4f842a0dac1fc5a6b3dcfec426abf15",
+        "f775331e150adec46f5e8fa273ccd6de8302c42d99f22820e0631dab7ab55340",
+        "28a934e68acb92854b6cc2f3bbce9f6233d7c57ddf14a56d149befd882459da5",
+        "114a68a22d320d64f23d9d5e1e3d5a02474088f6d4ebba9133fa5fca1b1309f9",
+        "1f899c61c7516a476235581d84d14adc30a5072ba8b3c717fcef43c9c9a01864",
+        "6ca0f39a2e74af3de97f64aa3e409a4a298180b1ac89e60bc15513db018c4b78"
+      ],
+      "video_sha256": "7573157822ad1d04a6df9ed9f33fa3abacc572d598432229abe24b500ee4429b",
+      "output_fps": 60
+    },
+    {
+      "file": "../../../../../../evidence/animal-motion-v2/butterfly-action-stages-v3-60fps-alpha.webm",
+      "frame_sha256": [
+        "13e147b3296f33579233cb6445afe8be835a59e67070f2d05f80f0f646b9a7bc",
+        "57c8964679fa952f19b09d79ef9205df7f438bcf11c38a2ee0ad62d05ef0874b",
+        "74a26c792fe0673dc6827c762f87a39979f9ea73931d1a042f5c6f7c4b47b869",
+        "87a6fc49e9c423df2ba47eb98bd4eee733648da7360da94d00d7dc10b1b5af5b",
+        "3fc5e74dd936beadfc14778439d1546802852004a889c198d74c957a87a57325",
+        "bfb5c21938ae337035f1e501bca492bed099e45fe6cd5a99f10a8f0ff2350056",
+        "aacf72991a788fb229c8d0f0d95931a4374238296abfbcb0d0cfba4471bca2cd",
+        "1e9a2b49bf057738b6e9dc811d42e828061938f8ca713584c491656de32f0788",
+        "c1e3839494e1c1be8b0b5ee6960036b20c5907bcf170fffd32435a83a3917d9a",
+        "4d764f330fe1338b58c4c5eeca98cf5f8d05b0633cce5463044a63e45a95ac03",
+        "723f8180322e3953687747788f7065e4e3304533698148122d56e76bc2df3a4f",
+        "45668b7d35256196d1457f0fed10a3eb8cd0a474797d7251fd0deaae7511d543",
+        "ecb039ed6e3723254b76f197307ece02aa7ad163209db367632e2e4a8c721c7f",
+        "a5593d94767aac872788a84039a5a6ea41c068d8d1741c0d81f9d5f6555e68f0",
+        "3faf58adac02da9f996c10128ccd28cf342580fefedaa23058d6a4e06062ae00",
+        "3faf58adac02da9f996c10128ccd28cf342580fefedaa23058d6a4e06062ae00",
+        "09af6f027b06187a29dba160eeb312d3fe608abde7ea718c92fab9703b58ddb9",
+        "4e3779b0f05bc939fe5af51a6fd7c3cfe7406e10b4ec1e9ce2d9dfe3ea6acd87",
+        "ca453c7635580831480973839ccdd0f78ed9320eebddd55b72311fd68d047630",
+        "a2b1ef98201e5ac371be1bb83f7c1d9ae59f356b0b541aceae467674e520905c",
+        "4d5d123a95d5076fcdcc8ed7770bfe45974bc6bb132cfac4f014414c63539ca5",
+        "fca056b67fcf600304e17a3d694b6573d82afce05327e4411fb730fe9f40fbf6",
+        "edf9a1e80b6c109ab01429c73c5377c43918ccb757c6d052febfc378f467b4f6",
+        "cbce28e35875a3a71c47792a429f4d936c8ebd02543030195eabe4a885bbf834",
+        "fca056b67fcf600304e17a3d694b6573d82afce05327e4411fb730fe9f40fbf6",
+        "a2b1ef98201e5ac371be1bb83f7c1d9ae59f356b0b541aceae467674e520905c",
+        "4d5d123a95d5076fcdcc8ed7770bfe45974bc6bb132cfac4f014414c63539ca5",
+        "fca056b67fcf600304e17a3d694b6573d82afce05327e4411fb730fe9f40fbf6",
+        "564605311b7cfb2277c4a4ba9bc835a19ec5d571de62a1e4810880abecc18db8",
+        "8839e45126429055508941a9ce4b0f2d910a2e04d85231c1299dcedd88293e2e",
+        "8839e45126429055508941a9ce4b0f2d910a2e04d85231c1299dcedd88293e2e",
+        "b3155d03d2cda4dadab46ef0150acb05df46889800d13b5fbd70ca36ed9ef130",
+        "54a892ccefd90210f9683ff46ae5f3a9ec6b3b657f14dc0dc3e5fc985d82d110",
+        "4543d4da287f1c12f36fe884826a2c4483c35ddf7a4bf8f105501fcc76b41dbb",
+        "84c1227adfc6852e20bd9eea3aea5fc721335949a4b68a81adb779ade19409dd",
+        "4fdf2c6287e80809fb5ec249e0b6532c6d01b517638237531f7cd5a01cf18d78",
+        "e5f7bb5df867a10c7c15baf075e7bacbcff75eabd96337d93aea5f03a5cfffa4",
+        "1fd38b6c48626791b344efff84136466132765e7b117324d56135b2fd9c25129",
+        "d7a0274e32b344ac0a9a9abd6ed039e15696fd6d2dc1e1f0374c3f817e05c15e",
+        "a29b4e245f8c449dd4d3c26885836f8cf4f842a0dac1fc5a6b3dcfec426abf15",
+        "f775331e150adec46f5e8fa273ccd6de8302c42d99f22820e0631dab7ab55340",
+        "28a934e68acb92854b6cc2f3bbce9f6233d7c57ddf14a56d149befd882459da5",
+        "114a68a22d320d64f23d9d5e1e3d5a02474088f6d4ebba9133fa5fca1b1309f9",
+        "1f899c61c7516a476235581d84d14adc30a5072ba8b3c717fcef43c9c9a01864",
+        "6ca0f39a2e74af3de97f64aa3e409a4a298180b1ac89e60bc15513db018c4b78"
+      ],
+      "video_sha256": "7f7c542894906a97bea3b7c16190b20b39049cf1b8f8f9b2138eda21eaf358c0",
+      "output_fps": 60
+    }
+  ]
+}

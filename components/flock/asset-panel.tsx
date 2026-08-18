@@ -12,9 +12,8 @@ import {
   type ParsedBirdArtworkManifest,
 } from "@/lib/flock/artwork-manifest"
 import { OUTPUT_VARIANTS } from "@/lib/flock/output-variants"
-import { BUILTIN_BIRD_TEMPLATE, CURATED_BIRD_TEMPLATES, type BirdTemplate, type OutputVariantId, type SceneSource } from "@/lib/flock/types"
+import { BUILTIN_ARTWORK_OPTIONS, BUILTIN_BIRD_TEMPLATE, type BirdTemplate, type OutputVariantId, type SceneSource } from "@/lib/flock/types"
 
-const BUILTIN_ARTWORK_OPTIONS = [BUILTIN_BIRD_TEMPLATE, ...CURATED_BIRD_TEMPLATES]
 const TRACKS: BirdArtworkTrackName[] = ["flight", "approach", "perch", "launch"]
 
 type InputFile = File & { webkitRelativePath?: string }
@@ -386,7 +385,7 @@ export function AssetPanel({ scene, flockName, birdTemplate, activeVariant, view
       </div>
 
       <Disclosure label="Choose or import artwork" summary="Open the visual library only when you want a different design.">
-        <p className="text-[10px] leading-relaxed text-muted-foreground">Select a visible design below, or import one complete identity bundle.</p>
+        <p className="text-[10px] leading-relaxed text-muted-foreground">Choose among {BUILTIN_ARTWORK_OPTIONS.length} complete art designs. Murmur handles their motion frames automatically.</p>
         <div className="grid grid-cols-2 gap-2">
           {BUILTIN_ARTWORK_OPTIONS.map((option) => {
             const selected = option.id === birdTemplate.id
@@ -401,7 +400,8 @@ export function AssetPanel({ scene, flockName, birdTemplate, activeVariant, view
                 <span className="flex h-12 items-center justify-center rounded border border-black/10 bg-[#f3efe6]">
                   <img src={option.previewDataUrl} alt="" className="h-10 w-full object-contain" aria-hidden="true" />
                 </span>
-                <span className="mt-1.5 block text-[10px] leading-tight text-foreground">{option.name}</span>
+                <span className="mt-1.5 block text-xs font-medium leading-tight text-foreground">{option.name}</span>
+                {option.description && <span className="mt-1 block text-[9px] leading-snug text-muted-foreground">{option.description}</span>}
               </button>
             )
           })}

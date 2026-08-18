@@ -1,9 +1,24 @@
+import { existsSync } from "node:fs"
+import { join } from "node:path"
 import { describe, expect, it } from "vitest"
+import { animationFrameLayout, frameIndexForPhase, temporalFrameSamples, usesOperatorSelectedColor } from "./template-renderer"
 import { parseBirdArtworkManifest } from "./artwork-manifest"
 import { buildApplicationGuide, buildBirdArtworkAgentPrompt, buildMotionBriefJson } from "./brief"
-import { defaultProject } from "./defaults"
+import { DARK_THEME_BACKGROUND, LIGHT_THEME_BACKGROUND, defaultProject, themeBackgroundColor } from "./defaults"
 import { buildAllBrowserCommand, buildCompleteHandoffReadme, buildProResCommand, exportDims, projectForTheme, safeExportName } from "./export"
-import { BUILTIN_BIRD_TEMPLATE, CURATED_BIRD_TEMPLATES } from "./types"
+import {
+  BUILTIN_ARTWORK_OPTIONS,
+  BUILTIN_BIRD_TEMPLATE,
+  CURATED_BIRD_TEMPLATES,
+  NATURAL_BAT_TEMPLATE,
+  NATURAL_BUTTERFLY_TEMPLATE,
+  NATURAL_CROW_TEMPLATE,
+  NATURAL_GULL_TEMPLATE,
+  NATURAL_HUMMINGBIRD_TEMPLATE,
+  NATURAL_PIGEON_TEMPLATE,
+  NATURAL_SWALLOW_TEMPLATE,
+  refreshPackagedArtworkTemplate,
+} from "./types"
 
 describe("export naming", () => {
   it("normalizes a user filename once and removes a typed extension", () => {
@@ -55,6 +70,12 @@ describe("application guide", () => {
     expect(readme).toContain("HEVC-with-alpha MOV first")
     expect(projectForTheme(project, "dark").style.previewTheme).toBe("dark")
   })
+
+  it("uses distinct high-contrast neutral surfaces for light and dark previews", () => {
+    const project = defaultProject()
+    expect(themeBackgroundColor(project.style)).toBe(LIGHT_THEME_BACKGROUND)
+    expect(themeBackgroundColor(projectForTheme(project, "dark").style)).toBe(DARK_THEME_BACKGROUND)
+  })
 })
 
 describe("bird artwork handoff", () => {
@@ -90,6 +111,84 @@ describe("bird artwork handoff", () => {
     expect(BUILTIN_BIRD_TEMPLATE.actionFrames?.approach).toHaveLength(32)
     expect(BUILTIN_BIRD_TEMPLATE.actionFrames?.perch).toHaveLength(32)
     expect(BUILTIN_BIRD_TEMPLATE.actionFrames?.launch).toHaveLength(32)
+  })
+
+  it("offers every completed operator-facing artwork design", () => {
+    expect(BUILTIN_ARTWORK_OPTIONS).toEqual([
+      BUILTIN_BIRD_TEMPLATE,
+      NATURAL_GULL_TEMPLATE,
+      NATURAL_SWALLOW_TEMPLATE,
+      NATURAL_CROW_TEMPLATE,
+      NATURAL_PIGEON_TEMPLATE,
+      NATURAL_BUTTERFLY_TEMPLATE,
+      NATURAL_BAT_TEMPLATE,
+      NATURAL_HUMMINGBIRD_TEMPLATE,
+    ])
+    expect(BUILTIN_ARTWORK_OPTIONS.map((template) => template.name)).toEqual([
+      "Calm editorial flock",
+      "Clean-alpha gliding gull",
+      "Natural engraved swallow",
+      "Natural engraved crow",
+      "Natural engraved pigeon",
+      "Natural engraved butterfly",
+      "Natural engraved bat",
+      "Natural engraved hummingbird",
+    ])
+    expect(BUILTIN_ARTWORK_OPTIONS.every((template) => template.kind === "builtin")).toBe(true)
+    expect(BUILTIN_ARTWORK_OPTIONS.every(usesOperatorSelectedColor)).toBe(true)
+    expect(new Set(BUILTIN_ARTWORK_OPTIONS.map((template) => template.id)).size).toBe(8)
+    for (const template of BUILTIN_ARTWORK_OPTIONS.slice(1)) {
+      expect(template.playbackMode).toBe("sequence")
+      expect(template.frames).toHaveLength(template.framesPerVariant ?? template.frames.length)
+      const expectedActionFrames = template === NATURAL_GULL_TEMPLATE ? 8 : 15
+      expect(template.actionFrames?.approach).toHaveLength(expectedActionFrames)
+      expect(template.actionFrames?.perch).toHaveLength(expectedActionFrames)
+      expect(template.actionFrames?.launch).toHaveLength(expectedActionFrames)
+    }
+    expect(NATURAL_HUMMINGBIRD_TEMPLATE.perchPlayback).toBe("loop")
+    for (const asset of BUILTIN_ARTWORK_OPTIONS.flatMap((template) => [
+      ...template.frames,
+      ...(template.actionFrames?.approach ?? []),
+      ...(template.actionFrames?.perch ?? []),
+      ...(template.actionFrames?.launch ?? []),
+    ])) {
+      expect(existsSync(join(process.cwd(), "public", asset.replace(/^\//, "")))).toBe(true)
+    }
+  })
+
+  it("refreshes every saved packaged artwork selection by stable id", () => {
+    for (const template of BUILTIN_ARTWORK_OPTIONS) {
+      expect(refreshPackagedArtworkTemplate({ ...template, frames: ["stale.png"] })).toBe(template)
+    }
+    expect(refreshPackagedArtworkTemplate({ ...NATURAL_GULL_TEMPLATE, id: "builtin-natural-outlined-gull-v1" })).toBe(NATURAL_GULL_TEMPLATE)
+    expect(refreshPackagedArtworkTemplate({ ...NATURAL_GULL_TEMPLATE, id: "natural-outlined-gull-detailed-v2" })).toBe(NATURAL_GULL_TEMPLATE)
+    const imported = { ...NATURAL_GULL_TEMPLATE, id: "custom-sprites", kind: "sprites" as const }
+    expect(refreshPackagedArtworkTemplate(imported)).toBe(imported)
+  })
+
+  it("uses each action track's real frame count when flight has more frames", () => {
+    expect(animationFrameLayout(NATURAL_GULL_TEMPLATE, "flight", 16)).toEqual({ frameCount: 16, variantCount: 1 })
+    expect(animationFrameLayout(NATURAL_GULL_TEMPLATE, "approach", 8)).toEqual({ frameCount: 8, variantCount: 1 })
+    expect(animationFrameLayout(NATURAL_HUMMINGBIRD_TEMPLATE, "flight", NATURAL_HUMMINGBIRD_TEMPLATE.frames.length)).toEqual({ frameCount: 4, variantCount: 1 })
+    expect(animationFrameLayout(NATURAL_HUMMINGBIRD_TEMPLATE, "perch", 8)).toEqual({ frameCount: 8, variantCount: 1 })
+    expect(animationFrameLayout(BUILTIN_BIRD_TEMPLATE, "flight", 32)).toEqual({ frameCount: 8, variantCount: 4 })
+    expect(animationFrameLayout(BUILTIN_BIRD_TEMPLATE, "launch", 32)).toEqual({ frameCount: 8, variantCount: 4 })
+  })
+
+  it("selects chronological source frames at exact phase boundaries", () => {
+    expect(frameIndexForPhase(0, 8)).toBe(0)
+    expect(frameIndexForPhase(0.124999, 8)).toBe(0)
+    expect(frameIndexForPhase(0.125, 8)).toBe(1)
+    expect(frameIndexForPhase(0.999999, 8)).toBe(7)
+    expect(frameIndexForPhase(1, 8)).toBe(0)
+  })
+
+  it("covers the delivery-frame shutter without dropping intermediate wing poses", () => {
+    const samples = temporalFrameSamples(0.25, 12, 0.24)
+    expect(samples.length).toBeGreaterThan(1)
+    expect(samples.reduce((sum, sample) => sum + sample.weight, 0)).toBeCloseTo(1, 8)
+    expect(samples.some((sample) => sample.index < 3)).toBe(true)
+    expect(samples.some((sample) => sample.index > 3)).toBe(true)
   })
 
   it("validates and normalizes a one-identity ordered-sequence manifest", () => {

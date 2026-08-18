@@ -1,0 +1,974 @@
+{
+  "validator": "motion-v2-actions",
+  "passed": true,
+  "passed_gate_count": 38,
+  "gate_count": 38,
+  "gates": [
+    {
+      "name": "metadata_schema_v2",
+      "passed": true,
+      "detail": "authored action metadata"
+    },
+    {
+      "name": "exact_track_set",
+      "passed": true,
+      "detail": "required=('approach', 'perch', 'launch')"
+    },
+    {
+      "name": "approach_eight_ordered_frames",
+      "passed": true,
+      "detail": "count=8"
+    },
+    {
+      "name": "approach_01_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "approach_02_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "approach_03_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "approach_04_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "approach_05_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "approach_06_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "approach_07_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "approach_08_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "perch_eight_ordered_frames",
+      "passed": true,
+      "detail": "count=8"
+    },
+    {
+      "name": "perch_01_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "perch_02_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "perch_03_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "perch_04_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "perch_05_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "perch_06_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "perch_07_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "perch_08_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "launch_eight_ordered_frames",
+      "passed": true,
+      "detail": "count=8"
+    },
+    {
+      "name": "launch_01_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "launch_02_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "launch_03_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "launch_04_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "launch_05_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "launch_06_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "launch_07_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "launch_08_pixels_and_hash",
+      "passed": true,
+      "detail": "pixels=True, hash=True"
+    },
+    {
+      "name": "explicit_authored_landmarks_and_scale",
+      "passed": true,
+      "detail": "24 contact points, body landmarks, and body scales required"
+    },
+    {
+      "name": "body_scale_locked",
+      "passed": true,
+      "detail": "max/min=1.000000, limit=1.03"
+    },
+    {
+      "name": "approach_contact_lock",
+      "passed": true,
+      "detail": "last-three max y residual=0.3968px"
+    },
+    {
+      "name": "perch_contact_lock",
+      "passed": true,
+      "detail": "max contact drift=0.0000px"
+    },
+    {
+      "name": "launch_releases_monotonically",
+      "passed": true,
+      "detail": "direction=decreasing, launch_y=[750.0, 746.2338, 722.6948, 699.1558, 675.6169, 652.0779, 628.539, 605.0]"
+    },
+    {
+      "name": "approach_to_perch_contact_seam",
+      "passed": true,
+      "detail": "delta=0.0000px"
+    },
+    {
+      "name": "perch_to_launch_contact_seam",
+      "passed": true,
+      "detail": "delta=0.0000px"
+    },
+    {
+      "name": "perch_body_hold_stable",
+      "passed": true,
+      "detail": "frames 3-7 max body landmark drift=0.0000px"
+    },
+    {
+      "name": "hash_bound_normal_speed_evidence",
+      "passed": true,
+      "detail": "evidence_count=2"
+    }
+  ],
+  "frames": {
+    "approach": [
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/approach/01_swallow_rig_approach.png",
+        "sha256": "fe5e94cc4bd8b488e4d1a8f8920cbaa1c8afa4c1b888ceda153f3b3e8ef5fe4c",
+        "bytes": 102031,
+        "mtime_ns": 1786958580829639947,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          280,
+          512,
+          1122,
+          748
+        ],
+        "clear_border_px": 280,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/approach/02_swallow_rig_approach.png",
+        "sha256": "aa7e1172244ce2822f5fe43d0f32601d82c1dda7e53f2df6443de68fa45cafac",
+        "bytes": 103724,
+        "mtime_ns": 1786958580987862814,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          377,
+          371,
+          1119,
+          756
+        ],
+        "clear_border_px": 371,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/approach/03_swallow_rig_approach.png",
+        "sha256": "28f9505ca4cc9cb9c76c1fc1703b8d0ebf7394d4b76bef34045732338fbc3090",
+        "bytes": 99925,
+        "mtime_ns": 1786958581143056754,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          481,
+          218,
+          1117,
+          770
+        ],
+        "clear_border_px": 218,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/approach/04_swallow_rig_approach.png",
+        "sha256": "03758a726985af901dc27ed44a8e912500841ee81435ef94fd4886ea4b7d7e88",
+        "bytes": 99823,
+        "mtime_ns": 1786958581303618254,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          481,
+          194,
+          1116,
+          785
+        ],
+        "clear_border_px": 194,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/approach/05_swallow_rig_approach.png",
+        "sha256": "2ab7130ea93ba6f8b1c22d59d4ee39afc92f2ae6adaf0e0af0d0d788ab1a2d30",
+        "bytes": 88697,
+        "mtime_ns": 1786958581460159990,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          482,
+          282,
+          1114,
+          799
+        ],
+        "clear_border_px": 282,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/approach/06_swallow_rig_approach.png",
+        "sha256": "c9bb092104fe2d222bc100970cd229305d8f7102e0b2dbba5bfc34906b2425b5",
+        "bytes": 75385,
+        "mtime_ns": 1786958581608869905,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          483,
+          430,
+          1111,
+          814
+        ],
+        "clear_border_px": 386,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/approach/07_swallow_rig_approach.png",
+        "sha256": "a501cc73db99de4ea853d52026b9e678f8813c17e640a683888a515225dd75ea",
+        "bytes": 61237,
+        "mtime_ns": 1786958581761097250,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          484,
+          518,
+          1109,
+          819
+        ],
+        "clear_border_px": 381,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/approach/08_swallow_rig_approach.png",
+        "sha256": "b541d98ebb44df49b6a2bb10f34db107bee9b352e8450dfc49dd407816fc58dd",
+        "bytes": 58081,
+        "mtime_ns": 1786958581907123448,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          485,
+          511,
+          1106,
+          823
+        ],
+        "clear_border_px": 377,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      }
+    ],
+    "perch": [
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/perch/01_swallow_rig_perch.png",
+        "sha256": "b541d98ebb44df49b6a2bb10f34db107bee9b352e8450dfc49dd407816fc58dd",
+        "bytes": 58081,
+        "mtime_ns": 1786958582051000680,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          485,
+          511,
+          1106,
+          823
+        ],
+        "clear_border_px": 377,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/perch/02_swallow_rig_perch.png",
+        "sha256": "4cc1f4b2eb1fd804f499be9a895063f1c8ded18688a52666825ef911b6d15cfb",
+        "bytes": 57581,
+        "mtime_ns": 1786958582199329511,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          484,
+          514,
+          1108,
+          817
+        ],
+        "clear_border_px": 383,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/perch/03_swallow_rig_perch.png",
+        "sha256": "85b06ee79ae3b0586684ad839984ae0c3d6925a3b7d3c41f1efd62877182f1f7",
+        "bytes": 57446,
+        "mtime_ns": 1786958582346225711,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          483,
+          517,
+          1110,
+          812
+        ],
+        "clear_border_px": 388,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/perch/04_swallow_rig_perch.png",
+        "sha256": "eafeafbe8035d9f37e51d01cead34c9cb04f1ddea2fc4df8483255df47d2f677",
+        "bytes": 57855,
+        "mtime_ns": 1786958582496602592,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          485,
+          512,
+          1107,
+          820
+        ],
+        "clear_border_px": 380,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/perch/05_swallow_rig_perch.png",
+        "sha256": "a9cd05909c16a075ee211f2b5407a42c0b21d2f33c8faaa7b23d6c09a024dd2a",
+        "bytes": 57969,
+        "mtime_ns": 1786958582647122472,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          485,
+          511,
+          1106,
+          823
+        ],
+        "clear_border_px": 377,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/perch/06_swallow_rig_perch.png",
+        "sha256": "b247802a3770726f5ab1d3001c6bfa0356752ad59ddfed9a9ab66d7b0dcde93b",
+        "bytes": 58157,
+        "mtime_ns": 1786958582792088832,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          486,
+          509,
+          1105,
+          825
+        ],
+        "clear_border_px": 375,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/perch/07_swallow_rig_perch.png",
+        "sha256": "52769562a98c6cc55a0b7d5e36808c1a69b387403291045081e2ce7e5fca363a",
+        "bytes": 58021,
+        "mtime_ns": 1786958582938406073,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          485,
+          511,
+          1106,
+          821
+        ],
+        "clear_border_px": 379,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/perch/08_swallow_rig_perch.png",
+        "sha256": "5ab6ba895d3ee434c1f40bebf13e3d44e528f2dfc16ad2ac211f1a98fb5706ce",
+        "bytes": 87533,
+        "mtime_ns": 1786958583091232212,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          488,
+          299,
+          1099,
+          842
+        ],
+        "clear_border_px": 299,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      }
+    ],
+    "launch": [
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/launch/01_swallow_rig_launch.png",
+        "sha256": "5ab6ba895d3ee434c1f40bebf13e3d44e528f2dfc16ad2ac211f1a98fb5706ce",
+        "bytes": 87533,
+        "mtime_ns": 1786958583249723247,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          488,
+          299,
+          1099,
+          842
+        ],
+        "clear_border_px": 299,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/launch/02_swallow_rig_launch.png",
+        "sha256": "8def9f8be20645306632a1934a8462e8f931234b17ea197d528e0221daf9c34e",
+        "bytes": 94225,
+        "mtime_ns": 1786958583404424934,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          489,
+          256,
+          1099,
+          838
+        ],
+        "clear_border_px": 256,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/launch/03_swallow_rig_launch.png",
+        "sha256": "9efdd862ffc0ebe6c170f42b1cac97d179f78ffcf1f2f66a4187b2ad14b21d72",
+        "bytes": 105308,
+        "mtime_ns": 1786958583562110133,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          486,
+          202,
+          1104,
+          808
+        ],
+        "clear_border_px": 202,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/launch/04_swallow_rig_launch.png",
+        "sha256": "0da3d87c897d7a92ba299bbd73b0423a5354717473ace6e7d1e6dd70d5c8b6b1",
+        "bytes": 103675,
+        "mtime_ns": 1786958583719149036,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          344,
+          432,
+          1109,
+          779
+        ],
+        "clear_border_px": 344,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/launch/05_swallow_rig_launch.png",
+        "sha256": "53b202503104f92bb9204fdafead38464977b96d1ec7960b998ef66f9e3dabc0",
+        "bytes": 116507,
+        "mtime_ns": 1786958583875262812,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          395,
+          465,
+          1112,
+          920
+        ],
+        "clear_border_px": 280,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/launch/06_swallow_rig_launch.png",
+        "sha256": "71296e6c1f166318c58333c4dc86ca15b0dba2dadb6590a61dbe2ee03f098a85",
+        "bytes": 129925,
+        "mtime_ns": 1786958584036197272,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          482,
+          453,
+          1116,
+          1089
+        ],
+        "clear_border_px": 111,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/launch/07_swallow_rig_launch.png",
+        "sha256": "1b09b597888d1e60c603e1897dbe3319a9aac193a38376e311eeca4a62a0cd0e",
+        "bytes": 117758,
+        "mtime_ns": 1786958584191566546,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          422,
+          441,
+          1118,
+          908
+        ],
+        "clear_border_px": 292,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      },
+      {
+        "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-actions/launch/08_swallow_rig_launch.png",
+        "sha256": "d38be4a9a90844b195f23837116fe6ea677f630712c085b7cc58ee5a3814e674",
+        "bytes": 101987,
+        "mtime_ns": 1786958584343554057,
+        "format": "PNG",
+        "mode": "RGBA",
+        "size": [
+          1600,
+          1200
+        ],
+        "alpha_extrema": [
+          0,
+          255
+        ],
+        "alpha_bbox": [
+          280,
+          430,
+          1122,
+          667
+        ],
+        "clear_border_px": 280,
+        "edge_alpha_max": 0,
+        "visible_rgb": [
+          [
+            4,
+            58,
+            120
+          ]
+        ],
+        "transparent_rgb_zero": true
+      }
+    ]
+  }
+}

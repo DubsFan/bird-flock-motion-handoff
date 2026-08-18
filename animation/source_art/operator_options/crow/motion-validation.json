@@ -1,0 +1,38 @@
+{
+  "species": "natural-engraved-crow-v1",
+  "passed": true,
+  "gates": {
+    "flight_frame_count_8_to_16": true,
+    "all_action_tracks_have_8_frames": true,
+    "flight_body_anchor_within_12px": true,
+    "perch_or_hover_anchor_within_limit": true,
+    "approach_starts_on_body_anchor": true,
+    "approach_finishes_on_landing_anchor": true,
+    "launch_starts_on_landing_anchor": true,
+    "launch_finishes_on_body_anchor": true,
+    "no_duplicate_or_near_duplicate_flight_neighbors": true,
+    "flight_loop_seam_has_overlap": true,
+    "flight_loop_seam_not_worse_than_internal_motion": true
+  },
+  "metrics": {
+    "flight_frame_count": 8,
+    "flight_body_anchor_max_px": 3.0,
+    "flight_adjacent_silhouette_iou": [
+      0.2737,
+      0.5011,
+      0.2795,
+      0.2738,
+      0.3417,
+      0.2708,
+      0.3309,
+      0.3535
+    ],
+    "flight_loop_seam_iou": 0.3535,
+    "flight_internal_min_iou": 0.2708,
+    "contact_anchor_max_px": 3.606,
+    "approach_start_body_residual_px": 4.123,
+    "approach_end_anchor_residual_px": 1.414,
+    "launch_start_anchor_residual_px": 1.0,
+    "launch_end_body_residual_px": 1.414
+  }
+}

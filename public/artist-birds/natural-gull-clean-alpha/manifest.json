@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "sets": [
+    {
+      "id": "bird-01",
+      "name": "Clean-alpha outlined gull - smooth glide and natural landing",
+      "direction": "left",
+      "canvases": {
+        "flight": {
+          "width": 1600,
+          "height": 1200,
+          "anchor": {
+            "x": 800,
+            "y": 620
+          }
+        },
+        "action": {
+          "width": 1600,
+          "height": 1200,
+          "anchor": {
+            "x": 800,
+            "y": 620
+          }
+        }
+      },
+      "up_direction": "canvas_top",
+      "orientation_metadata": "stripped",
+      "ink_color": "#043A78",
+      "tracks": {
+        "flight": [
+          "01_level_glide.png",
+          "02_glide_feather_adjust.png",
+          "03_shallow_dihedral_glide.png",
+          "04_transition_lift.png",
+          "05_quarter_upstroke.png",
+          "06_half_upstroke.png",
+          "07_three_quarter_upstroke.png",
+          "08_upstroke_peak.png",
+          "09_peak_release.png",
+          "10_quarter_downstroke.png",
+          "11_half_downstroke.png",
+          "12_three_quarter_downstroke.png",
+          "13_full_downstroke.png",
+          "14_recovery_to_level.png",
+          "15_shallow_glide_return.png",
+          "16_level_glide_loop.png"
+        ],
+        "approach": [
+          "01_approach_glide.png",
+          "02_brake_lift.png",
+          "03_brake_peak.png",
+          "04_brake_release.png",
+          "05_contact_lower.png",
+          "06_touchdown.png",
+          "07_settle_fold.png",
+          "08_perch_ready.png"
+        ],
+        "perch": [
+          "01_perch_contact.png",
+          "02_wing_fold.png",
+          "03_settle_1.png",
+          "04_settle_2.png",
+          "05_hold_1.png",
+          "06_micro_lift.png",
+          "07_hold_2.png",
+          "08_ready_launch.png"
+        ],
+        "launch": [
+          "01_crouch_ready.png",
+          "02_release_lift.png",
+          "03_launch_drive.png",
+          "04_launch_peak.png",
+          "05_clear_perch.png",
+          "06_flyoff_glide.png",
+          "07_flyoff_drive.png",
+          "08_depart_recovery.png"
+        ]
+      },
+      "source_method": "generated detailed adult-gull pose sheets matched to the approved reference; chroma removed to true RGBA transparency; single marine-blue outline ink; dust-component filtering; 16 chronological flight poses with gliding micro-motion"
+    }
+  ]
+}

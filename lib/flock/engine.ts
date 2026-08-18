@@ -78,10 +78,13 @@ export function orientationForMotion(
   seq: Pick<Sequence, "entry" | "exit" | "points">,
   heading: number,
   sourceDirection: "left" | "right" = "left",
+  orientationMode: NonNullable<BirdTemplate["orientationMode"]> = "side-profile",
+  sourceHeadingRadians = sourceDirection === "right" ? 0 : Math.PI,
+  curvature = 0,
 ) {
   const horizontal = Math.cos(heading)
   let movingRight: boolean
-  if (Math.abs(horizontal) > 0.12) {
+  if (Math.abs(horizontal) > 0.001) {
     movingRight = horizontal > 0
   } else if (seq.entry === "Enter from left") {
     movingRight = true
@@ -98,11 +101,26 @@ export function orientationForMotion(
   }
 
   const sourceFacesRight = sourceDirection === "right"
+  if (orientationMode === "follow-path") {
+    return {
+      mirrorX: false,
+      rotation: shortestAngle(sourceHeadingRadians, heading),
+      movingRight,
+    }
+  }
+  if (orientationMode === "screen-upright") {
+    return {
+      mirrorX: movingRight !== sourceFacesRight,
+      rotation: clamp(curvature * 0.55, -0.35, 0.35),
+      movingRight,
+    }
+  }
   const horizontalRotation = heading - (movingRight ? 0 : Math.PI)
-  // Artwork is a top/three-quarter-view bird, not an aircraft icon. Mirror it
-  // for direction, but limit banking so a steep spline never turns it sideways
-  // or upside down.
-  const uprightBank = clamp(Math.atan2(Math.sin(horizontalRotation), Math.cos(horizontalRotation)), -0.48, 0.48)
+  // A lateral animal pitches with the local velocity while remaining upright.
+  // Curvature is a small additive lean; it is no longer conflated with travel
+  // heading, which previously made steep paths point the body the wrong way.
+  const travelPitch = Math.atan2(Math.sin(horizontalRotation), Math.cos(horizontalRotation))
+  const uprightBank = clamp(travelPitch + curvature * 0.18, -0.9, 0.9)
   return {
     mirrorX: movingRight !== sourceFacesRight,
     rotation: uprightBank,
@@ -399,8 +417,30 @@ function travelOffset(seq: Sequence, s: BirdSeed, u: number, seconds: number, sc
   }
 }
 
-function landingOffset(role: Sequence["arrivalMode"], s: BirdSeed, seconds: number, lz: { w: number; h: number }) {
+function landingOffset(
+  role: Sequence["arrivalMode"],
+  s: BirdSeed,
+  seconds: number,
+  lz: { w: number; h: number },
+  behavior: BirdTemplate["landingBehavior"] = "perch",
+) {
   if (role === "Perch") {
+    if (behavior === "hover") {
+      // A hummingbird arrests forward motion but does not invent a foot
+      // contact. Keep its body centered in a small, stable hover envelope.
+      return {
+        dx: s.lat * lz.w * 0.24 + Math.sin(seconds * 2.1 + s.bob) * lz.w * 0.012,
+        dy: s.vert * lz.h * 0.18 + Math.sin(seconds * 2.7 + s.bob) * lz.h * 0.018,
+      }
+    }
+    if (behavior === "inverted-roost") {
+      // The action artwork is anchored at the feet, so the body hangs below a
+      // fixed upper contact slot rather than being placed like an upright bird.
+      return {
+        dx: s.lat * lz.w * 0.36,
+        dy: (-0.18 + Math.abs(s.vert) * 0.1) * lz.h,
+      }
+    }
     // Stable individual perch slots with tiny breathing movement, not orbiting.
     return {
       dx: s.lat * lz.w * 0.43,
@@ -461,14 +501,14 @@ export function perchActionPhase(elapsedSeconds: number, dwellSeconds: number) {
   const settleDuration = Math.min(0.8, dwell * 0.4)
   const readyDuration = Math.min(0.35, dwell * 0.18)
   if (elapsed < settleDuration) {
-    return lerp(0, 0.499999, smoothstep(0, settleDuration, elapsed))
+    return lerp(0, 0.624999, smoothstep(0, settleDuration, elapsed))
   }
   if (elapsed >= dwell - readyDuration) {
     return lerp(0.875, 0.999999, smoothstep(dwell - readyDuration, dwell, elapsed))
   }
-  const holdElapsed = elapsed - settleDuration
-  const quietHold = [0.53, 0.66, 0.78, 0.66]
-  return quietHold[Math.floor(holdElapsed / 0.48) % quietHold.length]
+  // Hold the authored quiet pose. Reversing 5→6→7→6 every half second made a
+  // planted animal visibly pop even though its route position was stationary.
+  return 0.5625
 }
 
 export function motionClock(
@@ -485,20 +525,36 @@ export function motionClock(
   const distances = (Array.isArray(landDistance) ? landDistance : [landDistance])
     .filter((distance) => Number.isFinite(distance))
     .sort((a, b) => a - b)
-  if (!dwell || !distances.length) return { distance: Math.min(path.length, seconds * speed), landingBlend: 0, dwelling: false, speed, action: "flight" as const, actionPhase: 0, landingIndex: -1 }
-  const approachDistance = Math.max(path.length * 0.08, Math.min(path.length * 0.18, speed * 1.8))
+  if (role === "Fly through" || !distances.length) return { distance: Math.min(path.length, seconds * speed), landingBlend: 0, dwelling: false, speed, action: "flight" as const, actionPhase: 0, landingIndex: -1 }
+  const approachDistance = landingApproachDistance(path.length, speed)
+  const brakeDistance = (distance: number, stop: number) => {
+    const start = stop - approachDistance
+    if (distance <= start || distance >= stop) return distance
+    const progress = clamp01((distance - start) / approachDistance)
+    // Hermite distance profile: cruise velocity at entry, zero at contact.
+    const eased = -(progress ** 3) + progress ** 2 + progress
+    return start + approachDistance * eased
+  }
+  const launchDistance = (distance: number, stop: number) => {
+    const end = stop + approachDistance
+    if (distance <= stop || distance >= end) return distance
+    const progress = clamp01((distance - stop) / approachDistance)
+    // Complementary profile: zero velocity at release, cruise at exit.
+    const eased = -(progress ** 3) + 2 * progress ** 2
+    return stop + approachDistance * eased
+  }
   let completedDwell = 0
   for (let index = 0; index < distances.length; index++) {
     const stopDistance = distances[index]
     const arriveAt = stopDistance / speed + completedDwell
     const leaveAt = arriveAt + dwell
     if (seconds < arriveAt) {
-      const distance = (seconds - completedDwell) * speed
+      const nominalDistance = (seconds - completedDwell) * speed
       if (index > 0) {
         const previousStop = distances[index - 1]
-        const release = smoothstep(0, approachDistance, distance - previousStop)
+        const release = smoothstep(0, approachDistance, nominalDistance - previousStop)
         if (release < 1) return {
-          distance,
+          distance: launchDistance(nominalDistance, previousStop),
           landingBlend: 1 - release,
           dwelling: false,
           speed,
@@ -507,9 +563,9 @@ export function motionClock(
           landingIndex: index - 1,
         }
       }
-      const blend = smoothstep(Math.max(0, stopDistance - approachDistance), stopDistance, distance)
+      const blend = smoothstep(Math.max(0, stopDistance - approachDistance), stopDistance, nominalDistance)
       return {
-        distance,
+        distance: brakeDistance(nominalDistance, stopDistance),
         landingBlend: blend,
         dwelling: false,
         speed,
@@ -531,10 +587,10 @@ export function motionClock(
   }
   const lastIndex = distances.length - 1
   const lastStop = distances[lastIndex]
-  const distance = (seconds - completedDwell) * speed
-  const release = smoothstep(0, approachDistance, distance - lastStop)
+  const nominalDistance = (seconds - completedDwell) * speed
+  const release = smoothstep(0, approachDistance, nominalDistance - lastStop)
   return {
-    distance: Math.min(path.length, distance),
+    distance: Math.min(path.length, launchDistance(nominalDistance, lastStop)),
     landingBlend: 1 - release,
     dwelling: false,
     speed,
@@ -596,6 +652,125 @@ export function naturalWingPhase(rawPhase: number) {
   return ((rawPhase % 1) + 1) % 1
 }
 
+export function landingApproachDistance(pathLength: number, speed: number) {
+  return Math.max(pathLength * 0.08, Math.min(pathLength * 0.18, speed * 1.8))
+}
+
+export function templatePhysicalCycleRate(
+  template: BirdTemplate,
+  intensity: Sequence["wingIntensity"],
+) {
+  const authoredRate = template.cycleHz?.[intensity]
+  return typeof authoredRate === "number" && Number.isFinite(authoredRate) && authoredRate > 0
+    ? authoredRate
+    : WING_RATE[intensity] * 0.16 * (template.motionRateMultiplier ?? 1)
+}
+
+export function templateCycleRate(
+  template: BirdTemplate,
+  intensity: Sequence["wingIntensity"],
+  speedJitter = 1,
+  travelSpeedMultiplier = 1,
+) {
+  const displayRate = template.samplingPolicy?.mode === "motion-blur-shimmer"
+    || template.samplingPolicy?.mode === "temporal-blur"
+    ? template.samplingPolicy.displayCycleHz[intensity] ?? templatePhysicalCycleRate(template, intensity)
+    : templatePhysicalCycleRate(template, intensity)
+  // Couple the readable authored cycle to route speed. A gentle crossing must
+  // not retain sprint-level flapping, while faster travel still earns a
+  // restrained cadence increase.
+  const travelScale = clamp(Math.sqrt(Math.max(0.05, travelSpeedMultiplier)), 0.55, 1.35)
+  return displayRate * Math.max(0.01, speedJitter) * travelScale
+}
+
+export function requiredTemplateSamplingFps(
+  template: BirdTemplate,
+  intensity: Sequence["wingIntensity"],
+  speedJitter = 1.12,
+) {
+  const declaredMinimum = Math.max(1, Math.ceil(template.samplingPolicy?.minFps ?? 1))
+  if (template.samplingPolicy?.mode === "motion-blur-shimmer" || template.samplingPolicy?.mode === "temporal-blur") return declaredMinimum
+  const frameCount = Math.max(1, template.framesPerVariant ?? template.frames.length)
+  const poseChangesPerSecond = templateCycleRate(template, intensity, speedJitter) * frameCount
+  return Math.max(declaredMinimum, Math.ceil(poseChangesPerSecond))
+}
+
+export function flightPhaseAt(
+  seconds: number,
+  cyclesPerSecond: number,
+  seedPhase: number,
+  rhythm?: BirdTemplate["flightRhythm"],
+) {
+  const rate = Math.max(0.000001, cyclesPerSecond)
+  if (rhythm?.mode !== "flap-glide") return naturalWingPhase(seconds * rate + seedPhase)
+  const flapCycles = Math.max(1, Math.round(rhythm.flapCycles ?? 3))
+  const flapDuration = flapCycles / rate
+  const patternDuration = flapDuration + Math.max(0, rhythm.glideSeconds ?? 0)
+  const shiftedSeconds = seconds + naturalWingPhase(seedPhase) / rate
+  const localSeconds = ((shiftedSeconds % patternDuration) + patternDuration) % patternDuration
+  return localSeconds < flapDuration
+    ? naturalWingPhase(localSeconds * rate)
+    : naturalWingPhase(rhythm.glidePhase ?? 0)
+}
+
+export function assertTemplateSamplingSupported(
+  template: BirdTemplate,
+  intensity: Sequence["wingIntensity"],
+  fps: number,
+  speedJitter = 1.12,
+) {
+  const requiredFps = requiredTemplateSamplingFps(template, intensity, speedJitter)
+  if (!Number.isFinite(fps) || fps < requiredFps) {
+    throw new Error(`${template.name} ${intensity} motion requires at least ${requiredFps} fps; received ${fps} fps.`)
+  }
+}
+
+export function loopFlightPhase(
+  loopProgress: number,
+  movingTime: number,
+  cyclesPerSecond: number,
+  seedPhase: number,
+  rhythm?: BirdTemplate["flightRhythm"],
+) {
+  if (rhythm?.mode === "flap-glide") {
+    const rate = Math.max(0.000001, cyclesPerSecond)
+    const flapCycles = Math.max(1, Math.round(rhythm.flapCycles ?? 3))
+    const patternDuration = flapCycles / rate + Math.max(0, rhythm.glideSeconds ?? 0)
+    const patternCount = Math.max(1, Math.round(Math.max(0.001, movingTime) / patternDuration))
+    return flightPhaseAt(loopProgress * patternCount * patternDuration, rate, seedPhase, rhythm)
+  }
+  const loopCycles = Math.max(1, Math.round(Math.max(0.001, movingTime) * Math.max(0, cyclesPerSecond)))
+  return naturalWingPhase(loopProgress * loopCycles + seedPhase)
+}
+
+export function phaseLockedFlightPhase(
+  distance: number,
+  pathLength: number,
+  landingDistances: number[],
+  approachDistance: number,
+  speed: number,
+  cyclesPerSecond: number,
+  seedPhase = 0,
+) {
+  let segmentStart = 0
+  for (const stop of landingDistances) {
+    const segmentEnd = Math.max(segmentStart, stop - approachDistance)
+    if (distance <= segmentEnd + 0.000001) {
+      const span = Math.max(0.000001, segmentEnd - segmentStart)
+      const cycles = Math.max(1, Math.round((span / Math.max(0.000001, speed)) * cyclesPerSecond))
+      const progress = (distance - segmentStart) / span
+      const startPhase = segmentStart === 0 ? naturalWingPhase(seedPhase) : 0
+      return naturalWingPhase(startPhase + progress * (cycles - startPhase))
+    }
+    segmentStart = Math.min(pathLength, stop + approachDistance)
+  }
+  const span = Math.max(0.000001, pathLength - segmentStart)
+  const cycles = Math.max(1, Math.round((span / Math.max(0.000001, speed)) * cyclesPerSecond))
+  const progress = (distance - segmentStart) / span
+  const startPhase = segmentStart === 0 ? naturalWingPhase(seedPhase) : 0
+  return naturalWingPhase(startPhase + progress * (cycles - startPhase))
+}
+
 export function renderSequence(
   ctx: CanvasRenderingContext2D,
   seq: Sequence,
@@ -603,6 +778,7 @@ export function renderSequence(
   style: Style,
   d: Dims,
   template: BirdTemplate = BUILTIN_BIRD_TEMPLATE,
+  fps = 60,
 ) {
   const { path, landingDistances, orderedLandings, seeds } = prepare(seq, d)
   if (path.points.length < 2 || path.length <= 0) return
@@ -622,7 +798,6 @@ export function renderSequence(
   const count = sequenceBirdCount(seq)
   const densitySize = count > 60 ? 0.7 : count > 30 ? 0.82 : count > 12 ? 0.94 : 1
   const baseSize = scale * 0.055 * densitySize
-  const wingRate = WING_RATE[seq.wingIntensity]
   const ink = style.previewTheme === "dark"
     ? seq.darkColor || "#e2e8f0"
     : seq.lightColor || seq.color || style.inkColor
@@ -664,7 +839,7 @@ export function renderSequence(
           pointAt(path, (aheadU + 0.008) % 1).x - pointAt(path, (aheadU - 0.008 + 1) % 1).x,
         )
       : headingAt(path, aheadU)
-    const bank = tangent + shortestAngle(tangent, ahead) * 0.55
+    const curvature = shortestAngle(tangent, ahead)
     const perspective = birdScaleAt(seq, u, index)
     const offset = travelOffset(seq, s, u, birdSeconds, baseSize * 2.2 * formationSpacingAt(seq, u))
     let x = head.x + offset.dx
@@ -672,7 +847,7 @@ export function renderSequence(
 
     const lz = clock.landingIndex >= 0 ? lzs[clock.landingIndex] : null
     if (lz && role !== "Fly through" && clock.landingBlend > 0) {
-      const target = landingOffset(role, s, birdSeconds, lz)
+      const target = landingOffset(role, s, birdSeconds, lz, template.landingBehavior)
       const settled = resolveLandingPosition(head, offset, target, clock.landingBlend)
       x = settled.x
       y = settled.y
@@ -685,23 +860,36 @@ export function renderSequence(
       baseSize * (seq.sizeScale ?? 1) * s.sizeJ * perspective,
       d.w * 1.25,
     )
-    const targetLoopRate = wingRate * 0.16
-    const loopWingCycles = Math.max(1, Math.round(movingTime * targetLoopRate))
+    const cycleRate = templateCycleRate(template, seq.wingIntensity, s.speedJ, seq.speedMultiplier ?? 1)
     const rawPhase = seq.loopPath
-      ? loopProgress * loopWingCycles + s.phase
-      : birdSeconds * wingRate * s.speedJ * 0.16 + s.phase
-    const flightPhase = naturalWingPhase(rawPhase)
-    const animationTrack: BirdAnimationTrack = clock.action
+      ? loopFlightPhase(loopProgress, movingTime, cycleRate, s.phase, template.flightRhythm)
+      : flightPhaseAt(birdSeconds, cycleRate, s.phase, template.flightRhythm)
+    const approachDistance = landingApproachDistance(path.length, clock.speed)
+    const flightPhase = !seq.loopPath && role === "Perch" && clock.action === "flight"
+      ? phaseLockedFlightPhase(clock.distance, path.length, landingDistances, approachDistance, clock.speed, cycleRate, s.phase)
+      : naturalWingPhase(rawPhase)
+    // Gather is a spatial grouping behavior, not contact. It must never show
+    // feet-planted or roost artwork while orbiting in open air.
+    const animationTrack: BirdAnimationTrack = role === "Gather" ? "flight" : clock.action
     const phase = animationTrack === "flight"
       ? flightPhase
-      : Math.min(0.999999, Math.max(0, clock.actionPhase))
+      : animationTrack === "perch" && template.perchPlayback === "loop"
+        ? naturalWingPhase(birdSeconds * (template.dwellCyclesPerSecond ?? cycleRate) + s.phase)
+        : Math.min(0.999999, Math.max(0, clock.actionPhase))
 
     ctx.save()
     ctx.translate(x, y)
     // Landing birds keep the correct source-facing direction while their bank
     // eases upright at contact and returns smoothly during launch.
     const templateDirection = template.direction ?? "left"
-    const orientation = orientationForMotion(seq, bank, templateDirection)
+    const orientation = orientationForMotion(
+      seq,
+      tangent,
+      templateDirection,
+      template.orientationMode ?? "side-profile",
+      template.sourceHeadingRadians,
+      curvature,
+    )
     const uprightBlend = role === "Fly through" ? 0 : clock.landingBlend
     ctx.rotate(lerp(orientation.rotation, 0, uprightBlend))
     if (orientation.mirrorX) ctx.scale(-1, 1)
@@ -711,7 +899,13 @@ export function renderSequence(
     // Never substitute a procedural bird while source artwork is loading or
     // unavailable. The Stage preloads the assigned templates and surfaces an
     // honest loading/error state; exports reject missing assets before render.
-    drawBirdTemplate(ctx, template, phase, size, alpha, ink, s.asset, wingStrength, animationTrack)
+    let temporalPhaseSpan = 0
+    if (animationTrack === "flight" && template.samplingPolicy?.mode === "temporal-blur") {
+      temporalPhaseSpan = cycleRate / Math.max(template.samplingPolicy.minFps, fps) * template.samplingPolicy.shutterFraction
+    } else if (animationTrack === "perch" && template.samplingPolicy?.mode === "motion-blur-shimmer" && template.perchPlayback === "loop") {
+      temporalPhaseSpan = (template.dwellCyclesPerSecond ?? cycleRate) / Math.max(template.samplingPolicy.minFps, fps) * 0.8
+    }
+    drawBirdTemplate(ctx, template, phase, size, alpha, ink, s.asset, wingStrength, animationTrack, temporalPhaseSpan)
     ctx.restore()
   })
 }
@@ -723,10 +917,11 @@ export function renderFrame(
   style: Style,
   d: Dims,
   template: BirdTemplate = BUILTIN_BIRD_TEMPLATE,
+  fps = 60,
 ) {
   ctx.clearRect(0, 0, d.w, d.h)
   sequences.forEach((seq) => {
-    if (seq.points.length >= 2) renderSequence(ctx, seq, t, style, d, seq.birdTemplate ?? template)
+    if (seq.points.length >= 2) renderSequence(ctx, seq, t, style, d, seq.birdTemplate ?? template, fps)
   })
 }
 
@@ -742,6 +937,7 @@ export function renderProjectFrame(
   d: Dims,
   total?: number,
   template: BirdTemplate = BUILTIN_BIRD_TEMPLATE,
+  fps = 60,
 ) {
   ctx.clearRect(0, 0, d.w, d.h)
   const duration = total ?? projectDuration(sequences)
@@ -755,6 +951,7 @@ export function renderProjectFrame(
       style,
       d,
       sequence.birdTemplate ?? template,
+      fps,
     )
   })
 }

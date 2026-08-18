@@ -1,0 +1,364 @@
+{
+  "schema_version": "2.0",
+  "validator": "animation/validate_motion_v2.py",
+  "passed": true,
+  "frames_dir": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-flight",
+  "metadata": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/authored-motion-v2.json",
+  "policy": {
+    "minimum_clear_border_px": 64,
+    "expected_visible_rgb": [
+      4,
+      58,
+      120
+    ],
+    "landmarks_and_scale": "explicit-authored-metadata-only; no pixel-derived fallback",
+    "evidence_freshness": "exact ordered frame hashes when declared, otherwise file mtime"
+  },
+  "gates": [
+    {
+      "name": "frames_directory_exists",
+      "passed": true,
+      "detail": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-flight"
+    },
+    {
+      "name": "frames_present",
+      "passed": true,
+      "detail": "matched 4 files with '*.png'"
+    },
+    {
+      "name": "metadata_decodes",
+      "passed": true,
+      "detail": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/authored-motion-v2.json"
+    },
+    {
+      "name": "metadata_visible_rgb",
+      "passed": true,
+      "detail": "visible_rgb=[4, 58, 120]"
+    },
+    {
+      "name": "all_frame_pixel_gates",
+      "passed": true,
+      "detail": "4/4 frames passed"
+    },
+    {
+      "name": "bundle_one_visible_rgb",
+      "passed": true,
+      "detail": "colors=[[4, 58, 120]]"
+    },
+    {
+      "name": "authored_metadata_present",
+      "passed": true,
+      "detail": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/authored-motion-v2.json"
+    },
+    {
+      "name": "metadata_schema_v2",
+      "passed": true,
+      "detail": "schema_version='2.0', authored=True"
+    },
+    {
+      "name": "metadata_exact_frame_set",
+      "passed": true,
+      "detail": "4 ordered frames"
+    },
+    {
+      "name": "frame_hashes_match_authored_metadata",
+      "passed": true,
+      "detail": "4 hashes match"
+    },
+    {
+      "name": "explicit_body_landmarks",
+      "passed": true,
+      "detail": "reference_max=3.2280px, limit=4.0000px"
+    },
+    {
+      "name": "explicit_body_scales",
+      "passed": true,
+      "detail": "adjacent_max=1.00000 limit=1.08000; track=1.00000 limit=1.12000"
+    },
+    {
+      "name": "evidence_fresh",
+      "passed": true,
+      "detail": "hummingbird-flight-v2-shimmer-60fps.mp4: frame_sha256 PASS (ordered source frame hashes match); hummingbird-flight-v2-shimmer-60fps-alpha.webm: frame_sha256 PASS (ordered source frame hashes match)"
+    }
+  ],
+  "metrics": {
+    "body_landmark_adjacent_delta_px": [
+      3.228,
+      1.0488,
+      3.228
+    ],
+    "body_landmark_seam_delta_px": 1.0488,
+    "body_landmark_reference_max_px": 3.228,
+    "body_scale_adjacent_ratio": [
+      1.0,
+      1.0,
+      1.0
+    ],
+    "body_scale_seam_ratio": 1.0,
+    "body_scale_track_ratio": 1.0
+  },
+  "frames": [
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-flight/01_hummingbird_rig_flight.png",
+      "sha256": "33b0fdbfab984a53729e87efdf422b4ae1b1e2beddbbe90d2a97f4ed7927815f",
+      "bytes": 109224,
+      "mtime_ns": 1786956658072301200,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        532,
+        350,
+        1044,
+        672
+      ],
+      "clear_border_px": 350,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(532, 350, 1044, 672)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=350px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-flight/02_hummingbird_rig_flight.png",
+      "sha256": "0d5011ae81a524cad7e5ca1adb5cf7892d5ded7add08375fd90d77512f828417",
+      "bytes": 116800,
+      "mtime_ns": 1786956658164968167,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        541,
+        348,
+        1049,
+        668
+      ],
+      "clear_border_px": 348,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(541, 348, 1049, 668)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=348px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-flight/03_hummingbird_rig_flight.png",
+      "sha256": "87191ad4b86a23ac8e68ef256f80d8bf57c35e476678a7f5f3497f7771b38c5a",
+      "bytes": 115191,
+      "mtime_ns": 1786956658264841869,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        545,
+        348,
+        1047,
+        671
+      ],
+      "clear_border_px": 348,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(545, 348, 1047, 671)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=348px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/hummingbird/rig-v2/baked-flight/04_hummingbird_rig_flight.png",
+      "sha256": "e7632955aedd1dd1ac865599ced8bca9c6120d809a36fd7a06249c564a486bfb",
+      "bytes": 112185,
+      "mtime_ns": 1786956658357318793,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        535,
+        351,
+        1043,
+        675
+      ],
+      "clear_border_px": 351,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(535, 351, 1043, 675)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=351px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "evidence": [
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/evidence/animal-motion-v2/hummingbird-flight-v2-shimmer-60fps.mp4",
+      "exists": true,
+      "sha256": "3e4e4ebc6887b2b537002a95826b80f04e4b5119bab1bfdcb9c02a79ea6bb4e2",
+      "bytes": 398250,
+      "mtime_ns": 1786956884491184119,
+      "passed": true,
+      "method": "frame_sha256",
+      "detail": "ordered source frame hashes match"
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/evidence/animal-motion-v2/hummingbird-flight-v2-shimmer-60fps-alpha.webm",
+      "exists": true,
+      "sha256": "15c514e164e7a5c0d18984dab92982a93f30e8d825f341b8759a1668d5793451",
+      "bytes": 1119885,
+      "mtime_ns": 1786956891198749400,
+      "passed": true,
+      "method": "frame_sha256",
+      "detail": "ordered source frame hashes match"
+    }
+  ]
+}

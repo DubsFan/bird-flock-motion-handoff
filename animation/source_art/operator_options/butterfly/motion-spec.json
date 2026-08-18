@@ -1,0 +1,13 @@
+{
+  "id": "natural-engraved-butterfly-v1",
+  "name": "Natural engraved butterfly",
+  "direction": "right",
+  "ink_color": "#043A78",
+  "source_method": "re-authored from the operator-supplied butterfly identity as a single right-facing camera plane; chronological four-wing flap, alight, fixed-foot closed-wing settle, and relaunch; semantic thorax/contact anchoring and blue-ink extraction to true alpha",
+  "tracks": [
+    {"output":"flight","sheet":"flight-sheet-v2.png","rows":2,"anchor_mode":"body","target_span":650,"frames":["01_open_plane.png","02_wings_rise.png","03_closed_peak.png","04_reopening.png","05_broad_downstroke.png","06_low_open.png","07_recovery.png","08_open_loop.png"]},
+    {"output":"approach","sheet":"approach-sheet-v2.png","rows":2,"anchor_mode":"approach","contact_offset":[0.0,0.0],"contact_edge":"bottom","contact_x_range":[0.45,0.85],"dest_anchor":[800,750],"target_span":570,"frames":["01_approach_flutter.png","02_decelerate.png","03_pitch_upright.png","04_legs_extend.png","05_contact.png","06_brake_high.png","07_wings_close.png","08_alight_ready.png"]},
+    {"output":"perch","sheet":"perch-sheet-v3.png","rows":2,"anchor_mode":"contact","contact_offset":[0.0,0.0],"contact_edge":"bottom","contact_x_range":[0.45,0.85],"dest_anchor":[800,750],"target_span":500,"frames":["01_take_weight.png","02_wings_close.png","03_closed_profile.png","04_compression.png","05_hold.png","06_micro_adjust.png","07_hold_2.png","08_launch_preload.png"]},
+    {"output":"launch","sheet":"launch-sheet-v3.png","rows":2,"anchor_mode":"launch","contact_offset":[0.0,0.0],"contact_edge":"bottom","contact_x_range":[0.45,0.85],"dest_anchor":[800,750],"target_span":420,"frames":["01_launch_preload.png","02_wings_open.png","03_first_clap.png","04_clear_contact.png","05_rebound_upstroke.png","06_second_downstroke.png","07_fast_flutter.png","08_departure.png"]}
+  ]
+}

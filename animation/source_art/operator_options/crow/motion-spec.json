@@ -1,0 +1,26 @@
+{
+  "id": "natural-engraved-crow-v1",
+  "name": "Natural engraved crow",
+  "direction": "right",
+  "ink_color": "#043A78",
+  "source_method": "re-authored from the operator-supplied crow identity as a locked right-facing lateral camera plane; eight chronological flight keys and matched braking, contact, quiet-perch, and launch tracks; neutral-background blue-ink extraction to true alpha",
+  "tracks": [
+    {
+      "output": "flight", "sheet": "flight-sheet-v2.png", "rows": 2, "anchor_mode": "body", "direction": "right", "target_span": 690,
+      "output_offsets": [[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[0,0],[128,-91]],
+      "frames": ["01_level_glide.png", "02_early_upstroke.png", "03_compact_upstroke.png", "04_upstroke_peak.png", "05_reopen_level.png", "06_early_downstroke.png", "07_downstroke_peak.png", "08_recovery_loop.png"]
+    },
+    {
+      "output": "approach", "sheet": "approach-sheet-v2.png", "rows": 2, "anchor_mode": "approach", "direction": "right", "contact_edge": "bottom", "contact_offset": [0.0, 0.0], "dest_anchor": [800, 750], "target_span": 610,
+      "frames": ["01_approach_glide.png", "02_tail_brake.png", "03_controlled_flare.png", "04_broad_flare.png", "05_feet_lower.png", "06_contact.png", "07_wing_fold.png", "08_perch_ready.png"]
+    },
+    {
+      "output": "perch", "sheet": "perch-sheet-v2.png", "rows": 2, "anchor_mode": "contact", "direction": "right", "contact_edge": "bottom", "contact_offset": [0.0, 0.0], "dest_anchor": [800, 750], "target_span": 510,
+      "frames": ["01_take_weight.png", "02_wing_fold.png", "03_compression.png", "04_rebound.png", "05_hold.png", "06_micro_adjust.png", "07_hold_2.png", "08_launch_preload.png"]
+    },
+    {
+      "output": "launch", "sheet": "launch-sheet-v2.png", "rows": 2, "anchor_mode": "launch", "direction": "right", "contact_edge": "bottom", "contact_offset": [0.0, 0.0], "dest_anchor": [800, 750], "target_span": 570,
+      "frames": ["01_launch_preload.png", "02_release_drop.png", "03_wings_high.png", "04_power_downstroke.png", "05_clear_contact.png", "06_acceleration_glide.png", "07_second_beat.png", "08_departure_recovery.png"]
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "schema_version": "2.0",
+  "authored": true,
+  "visible_rgb": [
+    4,
+    58,
+    120
+  ],
+  "minimum_clear_border_px": 64,
+  "landmark_tolerance_px": 4.0,
+  "adjacent_scale_ratio_limit": 1.08,
+  "track_scale_ratio_limit": 1.12,
+  "species": "pigeon",
+  "track": "flight",
+  "frames": [
+    {
+      "file": "baked-flight/01_pigeon_rig_flight.png",
+      "sha256": "14f13b4ba2a6f0091b65974fff3a89865565ec8e11bdc41962199ac0c6d82548",
+      "body_landmark_px": [
+        800.0,
+        501.0895771993749
+      ],
+      "body_scale_px": 594.66
+    },
+    {
+      "file": "baked-flight/02_pigeon_rig_flight.png",
+      "sha256": "038f7d77a01542fc4f6bd4501119d6e4be45614f68758d744b9963cf1f1fc3bc",
+      "body_landmark_px": [
+        800.0,
+        499.62455728390347
+      ],
+      "body_scale_px": 594.66
+    },
+    {
+      "file": "baked-flight/03_pigeon_rig_flight.png",
+      "sha256": "7a3bc5ccf776e61d2b52ecb5e566212ae63b1d7c529ba441d5aed8dc1d2fbe54",
+      "body_landmark_px": [
+        800.0,
+        498.30294372515226
+      ],
+      "body_scale_px": 594.66
+    },
+    {
+      "file": "baked-flight/04_pigeon_rig_flight.png",
+      "sha256": "7a0b0e0c55bb6dfd0472c6bde55095bfb3f2ce1174cb975a70fc483e8157eec2",
+      "body_landmark_px": [
+        800.0,
+        497.6295479825717
+      ],
+      "body_scale_px": 594.66
+    },
+    {
+      "file": "baked-flight/05_pigeon_rig_flight.png",
+      "sha256": "97a4ee55c8fe598a9d1c9ae11cabed4255362e6825af7b2883e6da751e63730e",
+      "body_landmark_px": [
+        800.0,
+        497.8615843419479
+      ],
+      "body_scale_px": 594.66
+    },
+    {
+      "file": "baked-flight/06_pigeon_rig_flight.png",
+      "sha256": "f8813453d3031ccd22f94a8d65b320239c9fa753aba4dd5738acc863e06c64b2",
+      "body_landmark_px": [
+        800.0,
+        498.9104228006251
+      ],
+      "body_scale_px": 594.66
+    },
+    {
+      "file": "baked-flight/07_pigeon_rig_flight.png",
+      "sha256": "67133019c37df966610a27d20978b097ed1837db95b761c05504ec426656dcb9",
+      "body_landmark_px": [
+        800.0,
+        500.37544271609653
+      ],
+      "body_scale_px": 594.66
+    },
+    {
+      "file": "baked-flight/08_pigeon_rig_flight.png",
+      "sha256": "e392122f4ac042b469f844b54a724f2831b3210d040847eb4f3afb317a79c452",
+      "body_landmark_px": [
+        800.0,
+        501.69705627484774
+      ],
+      "body_scale_px": 594.66
+    },
+    {
+      "file": "baked-flight/09_pigeon_rig_flight.png",
+      "sha256": "4016a596245dd7137fabbfe38b73eff80b19a4a7deb9e11f68a390e1e3d9317e",
+      "body_landmark_px": [
+        800.0,
+        502.3704520174283
+      ],
+      "body_scale_px": 594.66
+    },
+    {
+      "file": "baked-flight/10_pigeon_rig_flight.png",
+      "sha256": "c9297a583ec0bf8e4b13c284f9b2249ff6909146b5f5c3dec98aa1a5b1dda4f1",
+      "body_landmark_px": [
+        800.0,
+        502.1384156580521
+      ],
+      "body_scale_px": 594.66
+    }
+  ],
+  "evidence": [
+    {
+      "file": "../../../../../evidence/animal-motion-v2/pigeon-flight-v2-6hz-60fps.mp4",
+      "frame_sha256": [
+        "14f13b4ba2a6f0091b65974fff3a89865565ec8e11bdc41962199ac0c6d82548",
+        "038f7d77a01542fc4f6bd4501119d6e4be45614f68758d744b9963cf1f1fc3bc",
+        "7a3bc5ccf776e61d2b52ecb5e566212ae63b1d7c529ba441d5aed8dc1d2fbe54",
+        "7a0b0e0c55bb6dfd0472c6bde55095bfb3f2ce1174cb975a70fc483e8157eec2",
+        "97a4ee55c8fe598a9d1c9ae11cabed4255362e6825af7b2883e6da751e63730e",
+        "f8813453d3031ccd22f94a8d65b320239c9fa753aba4dd5738acc863e06c64b2",
+        "67133019c37df966610a27d20978b097ed1837db95b761c05504ec426656dcb9",
+        "e392122f4ac042b469f844b54a724f2831b3210d040847eb4f3afb317a79c452",
+        "4016a596245dd7137fabbfe38b73eff80b19a4a7deb9e11f68a390e1e3d9317e",
+        "c9297a583ec0bf8e4b13c284f9b2249ff6909146b5f5c3dec98aa1a5b1dda4f1"
+      ],
+      "video_sha256": "692d0bcfabbf58e19ee16d1341927f0fddd56e47f1c31211ec730babde6171b4",
+      "cycle_hz": 6.0,
+      "input_pose_fps": 60.0,
+      "output_fps": 60,
+      "duration_seconds": 3.0
+    },
+    {
+      "file": "../../../../../evidence/animal-motion-v2/pigeon-flight-v2-6hz-60fps-alpha.webm",
+      "frame_sha256": [
+        "14f13b4ba2a6f0091b65974fff3a89865565ec8e11bdc41962199ac0c6d82548",
+        "038f7d77a01542fc4f6bd4501119d6e4be45614f68758d744b9963cf1f1fc3bc",
+        "7a3bc5ccf776e61d2b52ecb5e566212ae63b1d7c529ba441d5aed8dc1d2fbe54",
+        "7a0b0e0c55bb6dfd0472c6bde55095bfb3f2ce1174cb975a70fc483e8157eec2",
+        "97a4ee55c8fe598a9d1c9ae11cabed4255362e6825af7b2883e6da751e63730e",
+        "f8813453d3031ccd22f94a8d65b320239c9fa753aba4dd5738acc863e06c64b2",
+        "67133019c37df966610a27d20978b097ed1837db95b761c05504ec426656dcb9",
+        "e392122f4ac042b469f844b54a724f2831b3210d040847eb4f3afb317a79c452",
+        "4016a596245dd7137fabbfe38b73eff80b19a4a7deb9e11f68a390e1e3d9317e",
+        "c9297a583ec0bf8e4b13c284f9b2249ff6909146b5f5c3dec98aa1a5b1dda4f1"
+      ],
+      "video_sha256": "793e101e2e58431b48e56cf2558399f1851f2773bb59dbb73798e22e86640a5e",
+      "cycle_hz": 6.0,
+      "input_pose_fps": 60.0,
+      "output_fps": 60,
+      "duration_seconds": 3.0
+    }
+  ]
+}

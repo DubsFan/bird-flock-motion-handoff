@@ -5,16 +5,35 @@ import {
   buildMotionPath,
   depthScaleAt,
   formationSpacingAt,
+  flightPhaseAt,
+  assertTemplateSamplingSupported,
   landingCounts,
   landingZones,
+  loopFlightPhase,
   motionClock,
   naturalWingPhase,
   orientationForMotion,
+  phaseLockedFlightPhase,
   perchActionPhase,
   resolveLandingPosition,
+  requiredTemplateSamplingFps,
   sequenceBirdCount,
   sequenceDuration,
+  templateCycleRate,
+  templatePhysicalCycleRate,
 } from "./engine"
+import { frameIndexForPhase } from "./template-renderer"
+import {
+  BUILTIN_ARTWORK_OPTIONS,
+  NATURAL_BAT_TEMPLATE,
+  NATURAL_BUTTERFLY_TEMPLATE,
+  NATURAL_CROW_TEMPLATE,
+  NATURAL_HUMMINGBIRD_TEMPLATE,
+  NATURAL_PIGEON_TEMPLATE,
+  NATURAL_SWALLOW_TEMPLATE,
+  type BirdTemplate,
+  type WingIntensity,
+} from "./types"
 
 describe("flock motion timing", () => {
   it("changes runtime predictably with the speed multiplier", () => {
@@ -45,7 +64,7 @@ describe("flock motion timing", () => {
     expect(nearest).toBeLessThan(1)
   })
 
-  it("keeps the same travel speed into the landing instead of rushing", () => {
+  it("decelerates continuously into contact instead of hitting a hard stop", () => {
     const sequence = makeSequence("Dive and Pullout")
     sequence.landing = { x: 0.5, y: 0.5, w: 0.12, h: 0.1 }
     sequence.arrivalMode = "Perch"
@@ -55,11 +74,16 @@ describe("flock motion timing", () => {
     const { path, landDistance } = buildMotionPath(sequence, { w: 1000, h: 600 })
     const initial = motionClock(sequence, path, landDistance, 0)
     const arrivalTime = landDistance / initial.speed
-    const beforeA = motionClock(sequence, path, landDistance, arrivalTime - 0.2)
-    const beforeB = motionClock(sequence, path, landDistance, arrivalTime - 0.1)
+    const beforeA = motionClock(sequence, path, landDistance, arrivalTime - 0.3)
+    const beforeB = motionClock(sequence, path, landDistance, arrivalTime - 0.2)
+    const beforeC = motionClock(sequence, path, landDistance, arrivalTime - 0.1)
     const dwelling = motionClock(sequence, path, landDistance, arrivalTime + 0.2)
 
-    expect((beforeB.distance - beforeA.distance) / 0.1).toBeCloseTo(initial.speed, 5)
+    const earlierSpeed = (beforeB.distance - beforeA.distance) / 0.1
+    const laterSpeed = (beforeC.distance - beforeB.distance) / 0.1
+    expect(earlierSpeed).toBeGreaterThan(laterSpeed)
+    expect(laterSpeed).toBeGreaterThan(0)
+    expect(laterSpeed).toBeLessThan(initial.speed)
     expect(dwelling.distance).toBeCloseTo(landDistance, 5)
     expect(dwelling.dwelling).toBe(true)
   })
@@ -79,6 +103,19 @@ describe("flock motion timing", () => {
     expect(motionClock(sequence, path, landDistance, arriveAt + 0.2, "Perch").action).toBe("perch")
     expect(motionClock(sequence, path, landDistance, arriveAt + sequence.dwellSeconds + 0.05, "Perch").action).toBe("launch")
     expect(motionClock(sequence, path, landDistance, arriveAt + sequence.dwellSeconds + 3, "Perch").action).toBe("flight")
+  })
+
+  it("still runs approach and launch when dwell is zero", () => {
+    const sequence = makeSequence("Dive and Pullout")
+    sequence.landing = { x: 0.5, y: 0.5, w: 0.12, h: 0.1 }
+    sequence.perchCount = 1
+    sequence.dwellSeconds = 0
+    const { path, landDistance } = buildMotionPath(sequence, { w: 1000, h: 600 })
+    const base = motionClock(sequence, path, landDistance, 0, "Perch")
+    const arriveAt = landDistance / base.speed
+
+    expect(motionClock(sequence, path, landDistance, arriveAt - 0.05, "Perch").action).toBe("approach")
+    expect(motionClock(sequence, path, landDistance, arriveAt + 0.05, "Perch").action).toBe("launch")
   })
 
   it("folds and settles once, holds quietly, then prepares for launch automatically", () => {
@@ -299,12 +336,22 @@ describe("artwork directionality", () => {
     expect(orientation.rotation).toBeCloseTo(0, 8)
   })
 
-  it("limits steep path banking so artwork can never turn upside down", () => {
+  it("pitches a side profile toward steep travel without turning it upside down", () => {
     const sequence = makeSequence("Calm Glide")
     for (const heading of [-Math.PI * 1.5, -Math.PI / 2, Math.PI / 2, Math.PI * 1.5]) {
       const orientation = orientationForMotion(sequence, heading, "left")
-      expect(Math.abs(orientation.rotation)).toBeLessThanOrEqual(0.48)
+      expect(Math.abs(orientation.rotation)).toBeLessThanOrEqual(0.9)
     }
+  })
+
+  it("rotates top-down artwork from its authored forward axis onto travel", () => {
+    const sequence = makeSequence("Calm Glide")
+    const rightward = orientationForMotion(sequence, 0, "right", "follow-path", -Math.PI / 2)
+    const downward = orientationForMotion(sequence, Math.PI / 2, "right", "follow-path", -Math.PI / 2)
+
+    expect(rightward.mirrorX).toBe(false)
+    expect(rightward.rotation).toBeCloseTo(Math.PI / 2, 8)
+    expect(downward.rotation).toBeCloseTo(Math.PI, 8)
   })
 })
 
@@ -315,6 +362,135 @@ describe("natural wing cadence", () => {
     expect(naturalWingPhase(0.5)).toBeCloseTo(0.5, 8)
     expect(naturalWingPhase(0.75)).toBeCloseTo(0.75, 8)
     expect(naturalWingPhase(-0.25)).toBeCloseTo(0.75, 8)
+  })
+
+  it("uses physical cycle rates that do not change with authored frame count", () => {
+    const eightFrames: BirdTemplate = {
+      id: "eight",
+      name: "Eight",
+      kind: "sprites",
+      frames: Array.from({ length: 8 }, (_, index) => `${index}.png`),
+      cycleHz: { Medium: 1.4 },
+    }
+    const sixteenFrames = { ...eightFrames, id: "sixteen", frames: [...eightFrames.frames, ...eightFrames.frames] }
+
+    expect(templateCycleRate(eightFrames, "Medium")).toBe(1.4)
+    expect(templateCycleRate(sixteenFrames, "Medium")).toBe(1.4)
+  })
+
+  it("keeps the multiplier fallback for legacy saved and imported templates", () => {
+    const legacy: BirdTemplate = {
+      id: "legacy",
+      name: "Legacy",
+      kind: "sprites",
+      frames: ["01.png", "02.png"],
+      motionRateMultiplier: 1.6,
+    }
+
+    expect(templateCycleRate(legacy, "Medium", 1.1)).toBeCloseTo(1.76, 8)
+  })
+
+  it("retains physical species cadence as source metadata", () => {
+    expect(NATURAL_CROW_TEMPLATE.cycleHz).toEqual({ Soft: 4, Medium: 4.5, Strong: 5 })
+    expect(NATURAL_PIGEON_TEMPLATE.cycleHz).toEqual({ Soft: 5, Medium: 6, Strong: 7 })
+    expect(NATURAL_SWALLOW_TEMPLATE.cycleHz).toEqual({ Soft: 7, Medium: 8, Strong: 9 })
+    expect(NATURAL_BUTTERFLY_TEMPLATE.cycleHz).toEqual({ Soft: 8, Medium: 10, Strong: 12 })
+    expect(NATURAL_BAT_TEMPLATE.cycleHz).toEqual({ Soft: 8, Medium: 10, Strong: 12 })
+  })
+
+  it("uses readable species display cadence coupled to route speed", () => {
+    expect(templateCycleRate(NATURAL_CROW_TEMPLATE, "Medium", 1, 1)).toBe(2)
+    expect(templateCycleRate(NATURAL_PIGEON_TEMPLATE, "Medium", 1, 1)).toBe(2.6)
+    expect(templateCycleRate(NATURAL_SWALLOW_TEMPLATE, "Medium", 1, 1)).toBe(3.2)
+    expect(templateCycleRate(NATURAL_BUTTERFLY_TEMPLATE, "Medium", 1, 1)).toBe(4)
+    expect(templateCycleRate(NATURAL_BAT_TEMPLATE, "Medium", 1, 1)).toBe(3.3)
+    expect(templateCycleRate(NATURAL_CROW_TEMPLATE, "Medium", 1, 0.25)).toBe(1.1)
+    expect(templateCycleRate(NATURAL_CROW_TEMPLATE, "Medium", 1, 2.25)).toBe(2.7)
+  })
+
+  it("adds real flap-glide holds without reversing the authored wing cycle", () => {
+    const rhythm = NATURAL_CROW_TEMPLATE.flightRhythm
+    const rate = templateCycleRate(NATURAL_CROW_TEMPLATE, "Medium", 1)
+    const flapDuration = 3 / rate
+    const duringFlap = flightPhaseAt(flapDuration - 0.01, rate, 0, rhythm)
+    const duringGlideA = flightPhaseAt(flapDuration + 0.05, rate, 0, rhythm)
+    const duringGlideB = flightPhaseAt(flapDuration + 0.3, rate, 0, rhythm)
+
+    expect(duringFlap).not.toBeCloseTo(0, 3)
+    expect(duringGlideA).toBeCloseTo(0, 8)
+    expect(duringGlideB).toBeCloseTo(0, 8)
+  })
+
+  it("supports every packaged fast animal at the normal 30 fps delivery rate", () => {
+    const fastAnimals = [
+      NATURAL_CROW_TEMPLATE,
+      NATURAL_PIGEON_TEMPLATE,
+      NATURAL_SWALLOW_TEMPLATE,
+      NATURAL_BUTTERFLY_TEMPLATE,
+      NATURAL_BAT_TEMPLATE,
+    ]
+    for (const template of fastAnimals) {
+      expect(template.samplingPolicy?.mode).toBe("temporal-blur")
+      expect(() => assertTemplateSamplingSupported(template, "Strong", 30)).not.toThrow()
+      expect(requiredTemplateSamplingFps(template, "Strong")).toBe(30)
+    }
+  })
+
+  it("enforces chronological sampling policy at 24, 30, and 60 fps", () => {
+    const intensities: WingIntensity[] = ["Soft", "Medium", "Strong"]
+    const fpsValues = [24, 30, 60]
+    const fastestSeedJitter = 1.12
+    const expectNoPoseSkip = (template: BirdTemplate, intensity: WingIntensity, fps: number) => {
+      const frameCount = Math.max(1, template.framesPerVariant ?? template.frames.length)
+      const rate = templateCycleRate(template, intensity, fastestSeedJitter)
+      let previous = frameIndexForPhase(0.37, frameCount)
+      for (let frame = 1; frame <= fps * 5; frame++) {
+        const phase = frame / fps * rate + 0.37
+        const current = frameIndexForPhase(phase, frameCount)
+        const advance = (current - previous + frameCount) % frameCount
+        expect(advance, `${template.id} ${intensity} at ${fps} fps`).toBeLessThanOrEqual(1)
+        previous = current
+      }
+    }
+
+    for (const template of BUILTIN_ARTWORK_OPTIONS.filter((option) => option.samplingPolicy?.mode === "chronological")) {
+      for (const intensity of intensities) {
+        expect(template.cycleHz?.[intensity], `${template.id} ${intensity} cycleHz`).toBeGreaterThan(0)
+        const requiredFps = requiredTemplateSamplingFps(template, intensity, fastestSeedJitter)
+        for (const fps of fpsValues) {
+          if (fps < requiredFps) {
+            expect(() => assertTemplateSamplingSupported(template, intensity, fps, fastestSeedJitter)).toThrow(/requires at least/)
+            continue
+          }
+          expect(() => assertTemplateSamplingSupported(template, intensity, fps, fastestSeedJitter)).not.toThrow()
+          expectNoPoseSkip(template, intensity, fps)
+        }
+        expect(() => assertTemplateSamplingSupported(template, intensity, requiredFps, fastestSeedJitter)).not.toThrow()
+        expectNoPoseSkip(template, intensity, requiredFps)
+      }
+    }
+  })
+
+  it("declares hummingbird physical motion separately from its motion-blur shimmer", () => {
+    expect(NATURAL_HUMMINGBIRD_TEMPLATE.samplingPolicy?.mode).toBe("motion-blur-shimmer")
+    expect(templatePhysicalCycleRate(NATURAL_HUMMINGBIRD_TEMPLATE, "Medium")).toBe(50)
+    expect(templateCycleRate(NATURAL_HUMMINGBIRD_TEMPLATE, "Medium")).toBe(2.1)
+    expect(() => assertTemplateSamplingSupported(NATURAL_HUMMINGBIRD_TEMPLATE, "Strong", 24)).toThrow(/at least 30 fps/)
+    expect(() => assertTemplateSamplingSupported(NATURAL_HUMMINGBIRD_TEMPLATE, "Strong", 30)).not.toThrow()
+    expect(() => assertTemplateSamplingSupported(NATURAL_HUMMINGBIRD_TEMPLATE, "Strong", 60)).not.toThrow()
+  })
+
+  it("samples a loop deterministically and returns to the seeded seam phase", () => {
+    const rate = templateCycleRate(NATURAL_HUMMINGBIRD_TEMPLATE, "Strong", 1.07)
+    const samples = [0.83, 0.12, 0.83, 0.41].map((progress) => loopFlightPhase(progress, 9.4, rate, 0.37))
+
+    expect(samples[0]).toBeCloseTo(samples[2], 12)
+    expect(loopFlightPhase(0, 9.4, rate, 0.37)).toBeCloseTo(loopFlightPhase(1, 9.4, rate, 0.37), 12)
+  })
+
+  it("closes each landing-adjacent flight segment on the seam pose", () => {
+    expect(phaseLockedFlightPhase(400, 1000, [500], 100, 100, 1.6)).toBeCloseTo(0, 8)
+    expect(phaseLockedFlightPhase(600, 1000, [500], 100, 100, 1.6)).toBeCloseTo(0, 8)
   })
 })
 

@@ -1,0 +1,83 @@
+{
+  "schema_version": "2.0",
+  "authored": true,
+  "visible_rgb": [
+    4,
+    58,
+    120
+  ],
+  "minimum_clear_border_px": 64,
+  "landmark_tolerance_px": 4.0,
+  "adjacent_scale_ratio_limit": 1.08,
+  "track_scale_ratio_limit": 1.12,
+  "species": "hummingbird",
+  "track": "flight",
+  "frames": [
+    {
+      "file": "baked-flight/01_hummingbird_rig_flight.png",
+      "sha256": "33b0fdbfab984a53729e87efdf422b4ae1b1e2beddbbe90d2a97f4ed7927815f",
+      "body_landmark_px": [
+        800.0,
+        501.0895771993749
+      ],
+      "body_scale_px": 499.72
+    },
+    {
+      "file": "baked-flight/02_hummingbird_rig_flight.png",
+      "sha256": "0d5011ae81a524cad7e5ca1adb5cf7892d5ded7add08375fd90d77512f828417",
+      "body_landmark_px": [
+        800.0,
+        497.8615843419479
+      ],
+      "body_scale_px": 499.72
+    },
+    {
+      "file": "baked-flight/03_hummingbird_rig_flight.png",
+      "sha256": "87191ad4b86a23ac8e68ef256f80d8bf57c35e476678a7f5f3497f7771b38c5a",
+      "body_landmark_px": [
+        800.0,
+        498.9104228006251
+      ],
+      "body_scale_px": 499.72
+    },
+    {
+      "file": "baked-flight/04_hummingbird_rig_flight.png",
+      "sha256": "e7632955aedd1dd1ac865599ced8bca9c6120d809a36fd7a06249c564a486bfb",
+      "body_landmark_px": [
+        800.0,
+        502.1384156580521
+      ],
+      "body_scale_px": 499.72
+    }
+  ],
+  "evidence": [
+    {
+      "file": "../../../../../evidence/animal-motion-v2/hummingbird-flight-v2-shimmer-60fps.mp4",
+      "frame_sha256": [
+        "33b0fdbfab984a53729e87efdf422b4ae1b1e2beddbbe90d2a97f4ed7927815f",
+        "0d5011ae81a524cad7e5ca1adb5cf7892d5ded7add08375fd90d77512f828417",
+        "87191ad4b86a23ac8e68ef256f80d8bf57c35e476678a7f5f3497f7771b38c5a",
+        "e7632955aedd1dd1ac865599ced8bca9c6120d809a36fd7a06249c564a486bfb"
+      ],
+      "video_sha256": "3e4e4ebc6887b2b537002a95826b80f04e4b5119bab1bfdcb9c02a79ea6bb4e2",
+      "cycle_hz": 2.3,
+      "input_pose_fps": 9.2,
+      "output_fps": 60,
+      "duration_seconds": 3.0
+    },
+    {
+      "file": "../../../../../evidence/animal-motion-v2/hummingbird-flight-v2-shimmer-60fps-alpha.webm",
+      "frame_sha256": [
+        "33b0fdbfab984a53729e87efdf422b4ae1b1e2beddbbe90d2a97f4ed7927815f",
+        "0d5011ae81a524cad7e5ca1adb5cf7892d5ded7add08375fd90d77512f828417",
+        "87191ad4b86a23ac8e68ef256f80d8bf57c35e476678a7f5f3497f7771b38c5a",
+        "e7632955aedd1dd1ac865599ced8bca9c6120d809a36fd7a06249c564a486bfb"
+      ],
+      "video_sha256": "15c514e164e7a5c0d18984dab92982a93f30e8d825f341b8759a1668d5793451",
+      "cycle_hz": 2.3,
+      "input_pose_fps": 9.2,
+      "output_fps": 60,
+      "duration_seconds": 3.0
+    }
+  ]
+}

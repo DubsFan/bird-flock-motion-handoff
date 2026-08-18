@@ -1,0 +1,488 @@
+{
+  "schema_version": "2.0",
+  "validator": "animation/validate_motion_v2.py",
+  "passed": true,
+  "frames_dir": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/bat/rig-v2/baked-flight",
+  "metadata": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/bat/rig-v2/authored-motion-v2.json",
+  "policy": {
+    "minimum_clear_border_px": 64,
+    "expected_visible_rgb": [
+      4,
+      58,
+      120
+    ],
+    "landmarks_and_scale": "explicit-authored-metadata-only; no pixel-derived fallback",
+    "evidence_freshness": "exact ordered frame hashes when declared, otherwise file mtime"
+  },
+  "gates": [
+    {
+      "name": "frames_directory_exists",
+      "passed": true,
+      "detail": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/bat/rig-v2/baked-flight"
+    },
+    {
+      "name": "frames_present",
+      "passed": true,
+      "detail": "matched 6 files with '*.png'"
+    },
+    {
+      "name": "metadata_decodes",
+      "passed": true,
+      "detail": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/bat/rig-v2/authored-motion-v2.json"
+    },
+    {
+      "name": "metadata_visible_rgb",
+      "passed": true,
+      "detail": "visible_rgb=[4, 58, 120]"
+    },
+    {
+      "name": "all_frame_pixel_gates",
+      "passed": true,
+      "detail": "6/6 frames passed"
+    },
+    {
+      "name": "bundle_one_visible_rgb",
+      "passed": true,
+      "detail": "colors=[[4, 58, 120]]"
+    },
+    {
+      "name": "authored_metadata_present",
+      "passed": true,
+      "detail": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/bat/rig-v2/authored-motion-v2.json"
+    },
+    {
+      "name": "metadata_schema_v2",
+      "passed": true,
+      "detail": "schema_version='2.0', authored=True"
+    },
+    {
+      "name": "metadata_exact_frame_set",
+      "passed": true,
+      "detail": "6 ordered frames"
+    },
+    {
+      "name": "frame_hashes_match_authored_metadata",
+      "passed": true,
+      "detail": "6 hashes match"
+    },
+    {
+      "name": "explicit_body_landmarks",
+      "passed": true,
+      "detail": "reference_max=3.4863px, limit=4.0000px"
+    },
+    {
+      "name": "explicit_body_scales",
+      "passed": true,
+      "detail": "adjacent_max=1.00000 limit=1.08000; track=1.00000 limit=1.12000"
+    },
+    {
+      "name": "evidence_fresh",
+      "passed": true,
+      "detail": "bat-flight-v2-10hz-60fps.mp4: frame_sha256 PASS (ordered source frame hashes match); bat-flight-v2-10hz-60fps-alpha.webm: frame_sha256 PASS (ordered source frame hashes match)"
+    }
+  ],
+  "metrics": {
+    "body_landmark_adjacent_delta_px": [
+      2.3967,
+      1.0896,
+      1.3071,
+      2.3967,
+      1.0896
+    ],
+    "body_landmark_seam_delta_px": 1.3071,
+    "body_landmark_reference_max_px": 3.4863,
+    "body_scale_adjacent_ratio": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "body_scale_seam_ratio": 1.0,
+    "body_scale_track_ratio": 1.0
+  },
+  "frames": [
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/bat/rig-v2/baked-flight/01_bat_rig_flight.png",
+      "sha256": "e54e95a944ece74bf6dd8b27002d2977d1e629a845a42379801f0b8a1db3204e",
+      "bytes": 129497,
+      "mtime_ns": 1786956530632446214,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        568,
+        274,
+        994,
+        758
+      ],
+      "clear_border_px": 274,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(568, 274, 994, 758)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=274px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/bat/rig-v2/baked-flight/02_bat_rig_flight.png",
+      "sha256": "856d1ad470eaf62aa7b84493a70d2e1690d4aac6511ea1169b517d5263c85da5",
+      "bytes": 93065,
+      "mtime_ns": 1786956530774555571,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        587,
+        309,
+        994,
+        599
+      ],
+      "clear_border_px": 309,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(587, 309, 994, 599)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=309px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/bat/rig-v2/baked-flight/03_bat_rig_flight.png",
+      "sha256": "d4a941b1e35d110b34233d445f2935e56a8fb9773627006cf4638df6c0c90028",
+      "bytes": 87296,
+      "mtime_ns": 1786956530910276280,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        604,
+        330,
+        994,
+        598
+      ],
+      "clear_border_px": 330,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(604, 330, 994, 598)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=330px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/bat/rig-v2/baked-flight/04_bat_rig_flight.png",
+      "sha256": "744a6b16281e5e9679caefa786b16e2f80facc01318b2a475644b786b8eba905",
+      "bytes": 124962,
+      "mtime_ns": 1786956531053686517,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        566,
+        274,
+        994,
+        760
+      ],
+      "clear_border_px": 274,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(566, 274, 994, 760)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=274px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/bat/rig-v2/baked-flight/05_bat_rig_flight.png",
+      "sha256": "9f0855409b15e8e55ebd234e74f2a3bcbfe6da9aa1193618ddc951bcd1dc9c51",
+      "bytes": 126540,
+      "mtime_ns": 1786956531199326721,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        502,
+        407,
+        994,
+        742
+      ],
+      "clear_border_px": 407,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(502, 407, 994, 742)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=407px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/bat/rig-v2/baked-flight/06_bat_rig_flight.png",
+      "sha256": "ea167ea941e18c68777d084fcfcb1fa6f09449c97bb667be372265e0f2a11af6",
+      "bytes": 119296,
+      "mtime_ns": 1786956531338784444,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        511,
+        385,
+        994,
+        754
+      ],
+      "clear_border_px": 385,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(511, 385, 994, 754)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=385px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "evidence": [
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/evidence/animal-motion-v2/bat-flight-v2-10hz-60fps.mp4",
+      "exists": true,
+      "sha256": "7d792f75cb527f6be598ed8aa8ddbb1d6e887054d9b9f2fe4285d29037d101b1",
+      "bytes": 307253,
+      "mtime_ns": 1786956874915389177,
+      "passed": true,
+      "method": "frame_sha256",
+      "detail": "ordered source frame hashes match"
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/evidence/animal-motion-v2/bat-flight-v2-10hz-60fps-alpha.webm",
+      "exists": true,
+      "sha256": "c3d4886c5e40aea7f45ef9ee7856eb5b540b889e598d80ac23b3592220daf734",
+      "bytes": 4636283,
+      "mtime_ns": 1786956883990447314,
+      "passed": true,
+      "method": "frame_sha256",
+      "detail": "ordered source frame hashes match"
+    }
+  ]
+}

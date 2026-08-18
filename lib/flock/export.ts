@@ -3,6 +3,7 @@ import {
   buildDesignerBriefMarkdown,
   buildMotionBriefJson,
 } from "./brief"
+import { themeBackgroundColor } from "./defaults"
 import { projectDuration, renderProjectFrame, renderSequence, sequenceDuration } from "./engine"
 import { preloadBirdTemplate } from "./template-renderer"
 import type { Project } from "./types"
@@ -133,6 +134,7 @@ function renderFlocksOnly(
   globalT: number,
   project: Project,
   total: number,
+  fps: number,
 ) {
   const seconds = Math.max(0, Math.min(1, globalT)) * total
   for (const sequence of project.sequences) {
@@ -145,6 +147,7 @@ function renderFlocksOnly(
       project.style,
       { w: ctx.canvas.width, h: ctx.canvas.height },
       sequence.birdTemplate ?? project.birdTemplate,
+      fps,
     )
   }
 }
@@ -156,17 +159,18 @@ function composeFrame(
   total: number,
   transparent: boolean,
   background: HTMLImageElement | null,
+  fps: number,
 ) {
   const { width, height } = ctx.canvas
   ctx.clearRect(0, 0, width, height)
   if (!transparent) {
-    ctx.fillStyle = project.style.backgroundColor || "#0b1220"
+    ctx.fillStyle = themeBackgroundColor(project.style)
     ctx.fillRect(0, 0, width, height)
     if (background) {
       drawImageContain(ctx, background, width, height)
     }
   }
-  renderFlocksOnly(ctx, t, project, total)
+  renderFlocksOnly(ctx, t, project, total, fps)
 }
 
 function drawImageContain(
@@ -239,7 +243,7 @@ async function encodeVideoBlob(
     for (let index = 0; index < frameCount; index++) {
       if (options.signal?.cancelled) throw new Error("cancelled")
       const t = frameCount <= 1 ? 0 : index / (frameCount - 1)
-      composeFrame(ctx, t, project, total, transparent, background)
+      composeFrame(ctx, t, project, total, transparent, background, fps)
       await source.add(index / fps, 1 / fps, { keyFrame: index % Math.max(1, fps * 2) === 0 })
       options.onProgress?.((index + 1) / frameCount)
     }
@@ -306,6 +310,7 @@ async function exportFrameBundle(
       { w: width, h: height },
       total,
       project.birdTemplate,
+      fps,
     )
     const blob = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/png"))
     if (!blob) throw new Error(`Could not render frame ${index + 1}.`)
@@ -461,7 +466,7 @@ export async function exportCompleteHandoff(project: Project, options: BaseExpor
     for (let index = 0; index < frames; index++) {
       if (options.signal?.cancelled) throw new Error("cancelled")
       const t = frames <= 1 ? 0 : index / (frames - 1)
-      renderProjectFrame(ctx, t, themed.sequences, themed.style, { w: width, h: height }, total, themed.birdTemplate)
+      renderProjectFrame(ctx, t, themed.sequences, themed.style, { w: width, h: height }, total, themed.birdTemplate, fps)
       const frame = await new Promise<Blob | null>((resolve) => canvas.toBlob(resolve, "image/png"))
       if (!frame) throw new Error(`Could not render ${theme} frame ${index + 1}.`)
       folder.file(`frame_${String(index).padStart(pad, "0")}.png`, frame)

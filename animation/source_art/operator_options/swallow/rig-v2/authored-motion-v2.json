@@ -1,0 +1,116 @@
+{
+  "schema_version": "2.0",
+  "authored": true,
+  "visible_rgb": [
+    4,
+    58,
+    120
+  ],
+  "minimum_clear_border_px": 64,
+  "landmark_tolerance_px": 4.0,
+  "adjacent_scale_ratio_limit": 1.08,
+  "track_scale_ratio_limit": 1.12,
+  "species": "swallow",
+  "track": "flight",
+  "frames": [
+    {
+      "file": "baked-flight/01_swallow_rig_flight.png",
+      "sha256": "ea8024f988817073b2bf56af2d2468e505047277d392ca23e70b22b00cd2c653",
+      "body_landmark_px": [
+        800.0,
+        501.0895771993749
+      ],
+      "body_scale_px": 666.65
+    },
+    {
+      "file": "baked-flight/02_swallow_rig_flight.png",
+      "sha256": "c266057660014783e4bcc8a323acd0abe7111fff62553c09b9013aa8bfaef76c",
+      "body_landmark_px": [
+        800.0,
+        499.00745958808034
+      ],
+      "body_scale_px": 666.65
+    },
+    {
+      "file": "baked-flight/03_swallow_rig_flight.png",
+      "sha256": "dd6c546bf147a93ac0ad2c30424e4290b7e7398aa4daefa71a61677f05f79595",
+      "body_landmark_px": [
+        800.0,
+        497.67274515109597
+      ],
+      "body_scale_px": 666.65
+    },
+    {
+      "file": "baked-flight/04_swallow_rig_flight.png",
+      "sha256": "5a62c28f68494a568ce309e219b214436e9766c516d6b88a851f32eeac60d3e5",
+      "body_landmark_px": [
+        800.0,
+        498.0905010826837
+      ],
+      "body_scale_px": 666.65
+    },
+    {
+      "file": "baked-flight/05_swallow_rig_flight.png",
+      "sha256": "821e00942025d3a8340ce2d4561c4c4edd940cd053d4eea35ca5379ab527a37b",
+      "body_landmark_px": [
+        800.0,
+        499.9461486456901
+      ],
+      "body_scale_px": 666.65
+    },
+    {
+      "file": "baked-flight/06_swallow_rig_flight.png",
+      "sha256": "9d69bdaa9c099474b39760eabdc581aefc15c45f40188afa647d0c4c7510dd64",
+      "body_landmark_px": [
+        800.0,
+        501.8423473768592
+      ],
+      "body_scale_px": 666.65
+    },
+    {
+      "file": "baked-flight/07_swallow_rig_flight.png",
+      "sha256": "e9414a0566c6f2706c9a4db3cbdb34a6e7af9dd697b036c9749dad198e129f1b",
+      "body_landmark_px": [
+        800.0,
+        502.35122095621574
+      ],
+      "body_scale_px": 666.65
+    }
+  ],
+  "evidence": [
+    {
+      "file": "../../../../../evidence/animal-motion-v2/swallow-flight-v2-8hz-60fps.mp4",
+      "frame_sha256": [
+        "ea8024f988817073b2bf56af2d2468e505047277d392ca23e70b22b00cd2c653",
+        "c266057660014783e4bcc8a323acd0abe7111fff62553c09b9013aa8bfaef76c",
+        "dd6c546bf147a93ac0ad2c30424e4290b7e7398aa4daefa71a61677f05f79595",
+        "5a62c28f68494a568ce309e219b214436e9766c516d6b88a851f32eeac60d3e5",
+        "821e00942025d3a8340ce2d4561c4c4edd940cd053d4eea35ca5379ab527a37b",
+        "9d69bdaa9c099474b39760eabdc581aefc15c45f40188afa647d0c4c7510dd64",
+        "e9414a0566c6f2706c9a4db3cbdb34a6e7af9dd697b036c9749dad198e129f1b"
+      ],
+      "video_sha256": "d580b322ae142ba016f8d6a9024bc304d3d596b6af0075bcdee2f9ae67915376",
+      "cycle_hz": 8.0,
+      "input_pose_fps": 56.0,
+      "output_fps": 60,
+      "duration_seconds": 3.0
+    },
+    {
+      "file": "../../../../../evidence/animal-motion-v2/swallow-flight-v2-8hz-60fps-alpha.webm",
+      "frame_sha256": [
+        "ea8024f988817073b2bf56af2d2468e505047277d392ca23e70b22b00cd2c653",
+        "c266057660014783e4bcc8a323acd0abe7111fff62553c09b9013aa8bfaef76c",
+        "dd6c546bf147a93ac0ad2c30424e4290b7e7398aa4daefa71a61677f05f79595",
+        "5a62c28f68494a568ce309e219b214436e9766c516d6b88a851f32eeac60d3e5",
+        "821e00942025d3a8340ce2d4561c4c4edd940cd053d4eea35ca5379ab527a37b",
+        "9d69bdaa9c099474b39760eabdc581aefc15c45f40188afa647d0c4c7510dd64",
+        "e9414a0566c6f2706c9a4db3cbdb34a6e7af9dd697b036c9749dad198e129f1b"
+      ],
+      "video_sha256": "e7beee38286b392e1707b76f2b26cfb12681b636ece52b62260f952ccf8f1949",
+      "cycle_hz": 8.0,
+      "input_pose_fps": 56.0,
+      "output_fps": 60,
+      "duration_seconds": 3.0
+    }
+  ]
+}

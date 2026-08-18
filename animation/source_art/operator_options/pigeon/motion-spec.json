@@ -1,0 +1,25 @@
+{
+  "id": "natural-engraved-pigeon-v1",
+  "name": "Natural engraved pigeon",
+  "direction": "right",
+  "ink_color": "#043A78",
+  "source_method": "generated from the operator-supplied pigeon identity; re-authored chronological 8-pose flight loop and explosive launch, repaired braking approach and grounded settle, semantic body/contact anchoring, and blue-ink extraction to true alpha",
+  "tracks": [
+    {
+      "output": "flight", "sheet": "flight-sheet-v3.png", "rows": 2, "anchor_mode": "body", "target_span": 625,
+      "frames": ["01_level_glide.png", "02_early_upstroke.png", "03_compact_upstroke.png", "04_upstroke_peak.png", "05_reopen_level.png", "06_early_downstroke.png", "07_downstroke_peak.png", "08_recovery_loop.png"]
+    },
+    {
+      "output": "approach", "sheet": "approach-sheet-v1.png", "rows": 2, "anchor_mode": "approach", "contact_offset": [0.0, 0.0], "contact_edge": "bottom", "contact_x_range": [0.45, 0.85], "dest_anchor": [800, 750], "target_span": 575,
+      "frames": ["01_approach_glide.png", "02_tail_brake.png", "03_controlled_flare.png", "04_broad_flare.png", "05_feet_lower.png", "06_contact.png", "07_wing_fold.png", "08_perch_ready.png"]
+    },
+    {
+      "output": "perch", "sheet": "perch-sheet-v1.png", "rows": 2, "anchor_mode": "contact", "contact_offset": [0.0, 0.0], "contact_edge": "bottom", "contact_x_range": [0.45, 0.85], "dest_anchor": [800, 750], "target_span": 480,
+      "frames": ["01_take_weight.png", "02_wing_fold.png", "03_compression.png", "04_rebound.png", "05_hold.png", "06_micro_adjust.png", "07_hold_2.png", "08_launch_preload.png"]
+    },
+    {
+      "output": "launch", "sheet": "launch-sheet-v3.png", "rows": 2, "anchor_mode": "launch", "contact_offset": [0.0, 0.0], "contact_edge": "bottom", "contact_x_range": [0.45, 0.85], "dest_anchor": [800, 750], "target_span": 400,
+      "frames": ["01_launch_preload.png", "02_release_drop.png", "03_wings_high.png", "04_power_downstroke.png", "05_clear_contact.png", "06_acceleration_glide.png", "07_second_beat.png", "08_departure_recovery.png"]
+    }
+  ]
+}

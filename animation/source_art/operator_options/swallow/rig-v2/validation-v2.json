@@ -1,0 +1,550 @@
+{
+  "schema_version": "2.0",
+  "validator": "animation/validate_motion_v2.py",
+  "passed": true,
+  "frames_dir": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-flight",
+  "metadata": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/authored-motion-v2.json",
+  "policy": {
+    "minimum_clear_border_px": 64,
+    "expected_visible_rgb": [
+      4,
+      58,
+      120
+    ],
+    "landmarks_and_scale": "explicit-authored-metadata-only; no pixel-derived fallback",
+    "evidence_freshness": "exact ordered frame hashes when declared, otherwise file mtime"
+  },
+  "gates": [
+    {
+      "name": "frames_directory_exists",
+      "passed": true,
+      "detail": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-flight"
+    },
+    {
+      "name": "frames_present",
+      "passed": true,
+      "detail": "matched 7 files with '*.png'"
+    },
+    {
+      "name": "metadata_decodes",
+      "passed": true,
+      "detail": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/authored-motion-v2.json"
+    },
+    {
+      "name": "metadata_visible_rgb",
+      "passed": true,
+      "detail": "visible_rgb=[4, 58, 120]"
+    },
+    {
+      "name": "all_frame_pixel_gates",
+      "passed": true,
+      "detail": "7/7 frames passed"
+    },
+    {
+      "name": "bundle_one_visible_rgb",
+      "passed": true,
+      "detail": "colors=[[4, 58, 120]]"
+    },
+    {
+      "name": "authored_metadata_present",
+      "passed": true,
+      "detail": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/authored-motion-v2.json"
+    },
+    {
+      "name": "metadata_schema_v2",
+      "passed": true,
+      "detail": "schema_version='2.0', authored=True"
+    },
+    {
+      "name": "metadata_exact_frame_set",
+      "passed": true,
+      "detail": "7 ordered frames"
+    },
+    {
+      "name": "frame_hashes_match_authored_metadata",
+      "passed": true,
+      "detail": "7 hashes match"
+    },
+    {
+      "name": "explicit_body_landmarks",
+      "passed": true,
+      "detail": "reference_max=3.4168px, limit=4.0000px"
+    },
+    {
+      "name": "explicit_body_scales",
+      "passed": true,
+      "detail": "adjacent_max=1.00000 limit=1.08000; track=1.00000 limit=1.12000"
+    },
+    {
+      "name": "evidence_fresh",
+      "passed": true,
+      "detail": "swallow-flight-v2-8hz-60fps.mp4: frame_sha256 PASS (ordered source frame hashes match); swallow-flight-v2-8hz-60fps-alpha.webm: frame_sha256 PASS (ordered source frame hashes match)"
+    }
+  ],
+  "metrics": {
+    "body_landmark_adjacent_delta_px": [
+      2.0821,
+      1.3347,
+      0.4178,
+      1.8556,
+      1.8962,
+      0.5089
+    ],
+    "body_landmark_seam_delta_px": 1.2616,
+    "body_landmark_reference_max_px": 3.4168,
+    "body_scale_adjacent_ratio": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "body_scale_seam_ratio": 1.0,
+    "body_scale_track_ratio": 1.0
+  },
+  "frames": [
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-flight/01_swallow_rig_flight.png",
+      "sha256": "ea8024f988817073b2bf56af2d2468e505047277d392ca23e70b22b00cd2c653",
+      "bytes": 99907,
+      "mtime_ns": 1786956827749463426,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        242,
+        402,
+        1086,
+        623
+      ],
+      "clear_border_px": 242,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(242, 402, 1086, 623)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=242px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-flight/02_swallow_rig_flight.png",
+      "sha256": "c266057660014783e4bcc8a323acd0abe7111fff62553c09b9013aa8bfaef76c",
+      "bytes": 90047,
+      "mtime_ns": 1786956827862584760,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        441,
+        171,
+        1086,
+        606
+      ],
+      "clear_border_px": 171,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(441, 171, 1086, 606)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=171px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-flight/03_swallow_rig_flight.png",
+      "sha256": "dd6c546bf147a93ac0ad2c30424e4290b7e7398aa4daefa71a61677f05f79595",
+      "bytes": 95192,
+      "mtime_ns": 1786956827975200633,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        441,
+        148,
+        1086,
+        605
+      ],
+      "clear_border_px": 148,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(441, 148, 1086, 605)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=148px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-flight/04_swallow_rig_flight.png",
+      "sha256": "5a62c28f68494a568ce309e219b214436e9766c516d6b88a851f32eeac60d3e5",
+      "bytes": 103122,
+      "mtime_ns": 1786956828088060592,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        235,
+        398,
+        1085,
+        634
+      ],
+      "clear_border_px": 235,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(235, 398, 1085, 634)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=235px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-flight/05_swallow_rig_flight.png",
+      "sha256": "821e00942025d3a8340ce2d4561c4c4edd940cd053d4eea35ca5379ab527a37b",
+      "bytes": 138732,
+      "mtime_ns": 1786956828212696884,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        441,
+        398,
+        1085,
+        1043
+      ],
+      "clear_border_px": 157,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(441, 398, 1085, 1043)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=157px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-flight/06_swallow_rig_flight.png",
+      "sha256": "9d69bdaa9c099474b39760eabdc581aefc15c45f40188afa647d0c4c7510dd64",
+      "bytes": 111077,
+      "mtime_ns": 1786956828337658470,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        284,
+        399,
+        1085,
+        717
+      ],
+      "clear_border_px": 284,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(284, 399, 1085, 717)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=284px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/animation/source_art/operator_options/swallow/rig-v2/baked-flight/07_swallow_rig_flight.png",
+      "sha256": "e9414a0566c6f2706c9a4db3cbdb34a6e7af9dd697b036c9749dad198e129f1b",
+      "bytes": 97550,
+      "mtime_ns": 1786956828456473075,
+      "format": "PNG",
+      "mode": "RGBA",
+      "size": [
+        1600,
+        1200
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        241,
+        401,
+        1085,
+        625
+      ],
+      "clear_border_px": 241,
+      "edge_alpha_max": 0,
+      "visible_rgb": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "transparent_rgb_zero": true,
+      "gates": [
+        {
+          "name": "exact_png_rgba8",
+          "passed": true,
+          "detail": "format='PNG', mode='RGBA', bands=('R', 'G', 'B', 'A')"
+        },
+        {
+          "name": "nonempty_true_alpha",
+          "passed": true,
+          "detail": "alpha_extrema=(0, 255), bbox=(241, 401, 1085, 625)"
+        },
+        {
+          "name": "clear_border",
+          "passed": true,
+          "detail": "clear=241px, required=64px, edge_alpha_max=0"
+        },
+        {
+          "name": "one_visible_rgb",
+          "passed": true,
+          "detail": "colors=[[4, 58, 120]], expected=[4, 58, 120]"
+        },
+        {
+          "name": "transparent_rgb_zero",
+          "passed": true,
+          "detail": "RGB must be zero wherever alpha is zero"
+        }
+      ],
+      "passed": true
+    }
+  ],
+  "evidence": [
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/evidence/animal-motion-v2/swallow-flight-v2-8hz-60fps.mp4",
+      "exists": true,
+      "sha256": "d580b322ae142ba016f8d6a9024bc304d3d596b6af0075bcdee2f9ae67915376",
+      "bytes": 651887,
+      "mtime_ns": 1786956855082746613,
+      "passed": true,
+      "method": "frame_sha256",
+      "detail": "ordered source frame hashes match"
+    },
+    {
+      "file": "/Volumes/Sam4T/External Project/bird-flock-motion-handoff/evidence/animal-motion-v2/swallow-flight-v2-8hz-60fps-alpha.webm",
+      "exists": true,
+      "sha256": "e7beee38286b392e1707b76f2b26cfb12681b636ece52b62260f952ccf8f1949",
+      "bytes": 4668204,
+      "mtime_ns": 1786956864038902312,
+      "passed": true,
+      "method": "frame_sha256",
+      "detail": "ordered source frame hashes match"
+    }
+  ]
+}

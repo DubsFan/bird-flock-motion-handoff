@@ -16,3 +16,6 @@ next-env.d.ts
 .DS_Store
 tsconfig.tsbuildinfo
 work/
+__pycache__/
+*.pyc
+Archive.zip

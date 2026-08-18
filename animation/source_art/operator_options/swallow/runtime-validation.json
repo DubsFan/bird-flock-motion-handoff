@@ -1,0 +1,1053 @@
+{
+  "species": "natural-engraved-swallow-v1",
+  "frame_count": 40,
+  "ink_color": "#043A78",
+  "all_true_alpha": true,
+  "all_edges_clear": true,
+  "all_borders_clear": true,
+  "all_one_visible_color": true,
+  "all_transparent_rgb_zero": true,
+  "no_visible_white_fill": true,
+  "frames": [
+    {
+      "file": "flight/01_level_glide.png",
+      "sha256": "081f9768be44c32e0cdcb45b9a971ff283ed1a5e6c103d5981b0ae4e56aee5e7",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        119,
+        545,
+        941,
+        815
+      ],
+      "clear_border": 119,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "flight/02_feather_adjust.png",
+      "sha256": "57cf36c37a6b59d2b2bd4d277fe206292a8f3c780b056ccc2db14f6b7eec6661",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        178,
+        553,
+        931,
+        1019
+      ],
+      "clear_border": 178,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "flight/03_shallow_dihedral.png",
+      "sha256": "f22cc864f00297d4434cd8651878415c89e3ad94a241861a004dd7d421b2d61d",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        221,
+        388,
+        929,
+        894
+      ],
+      "clear_border": 221,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "flight/04_transition_lift.png",
+      "sha256": "57d26b78d587cb7baadfe84900787390fb33fbc148a2ba72e8091208df73316c",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        215,
+        309,
+        932,
+        972
+      ],
+      "clear_border": 215,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "flight/05_quarter_upstroke.png",
+      "sha256": "918dab11f10954b425a3efaf10298510df7ade85faf53da93cd68ee49f3d689f",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        218,
+        286,
+        932,
+        923
+      ],
+      "clear_border": 218,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "flight/06_half_upstroke.png",
+      "sha256": "a4a0c7ad0c9bea7268aa500ee15a71ea61290468c3b4031734f051dcb4526f21",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        235,
+        253,
+        932,
+        911
+      ],
+      "clear_border": 235,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "flight/07_three_quarter_upstroke.png",
+      "sha256": "7199dc94bc872ea3d715b1a92ed1d03cf8ccab003d4628d14ff402d078a7ae08",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        247,
+        226,
+        927,
+        902
+      ],
+      "clear_border": 226,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "flight/08_upstroke_peak.png",
+      "sha256": "0e684b20a4a77676911d5889f2325053cb1b2362c76e653c519c8e990dfba2d6",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        255,
+        163,
+        926,
+        902
+      ],
+      "clear_border": 163,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "flight/09_peak_release.png",
+      "sha256": "cab12d4237fa9ad8cdd853e2ecc6d9b5ed059795511689f409d22c21f864842b",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        252,
+        275,
+        929,
+        887
+      ],
+      "clear_border": 252,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "flight/10_quarter_downstroke.png",
+      "sha256": "85b5719c287e72c87fa6d754a587d935ba9d545996407f34b989fe6234c3f380",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        273,
+        458,
+        923,
+        972
+      ],
+      "clear_border": 228,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "flight/11_half_downstroke.png",
+      "sha256": "6352220236acbdc63660e9a66c0f089fd439021c707ba8c2112aac7579771f02",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        292,
+        512,
+        935,
+        983
+      ],
+      "clear_border": 217,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "flight/12_three_quarter_downstroke.png",
+      "sha256": "4938dc0d0cdeea85fc0fbd764c061c47cbc6ad485a679f6e7c81bcbd4f681d51",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        306,
+        485,
+        968,
+        985
+      ],
+      "clear_border": 215,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "flight/13_full_downstroke.png",
+      "sha256": "aa86a29903b2ba1c7e2bb5a84cc357fac8d4aeb06802693bb5b439e6b7f9b9a7",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        346,
+        499,
+        982,
+        1088
+      ],
+      "clear_border": 112,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "flight/14_recovery.png",
+      "sha256": "4b3c8d568762a5735a32ddedfffa2a712c294fa49ea4b310f5efc1668cce83c1",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        284,
+        451,
+        927,
+        866
+      ],
+      "clear_border": 284,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "flight/15_shallow_glide_return.png",
+      "sha256": "56755ad898a6c226c08ef2644ff3ebbd9c83157024853bc60c9f6406ab150842",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        165,
+        553,
+        931,
+        1073
+      ],
+      "clear_border": 127,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "flight/16_level_glide_loop.png",
+      "sha256": "5aed30f3992c7959ace63fecd8fd3ccb1b805dba874fe9c2e3c7d09eadff3fec",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        156,
+        548,
+        938,
+        820
+      ],
+      "clear_border": 156,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "approach/01_approach_glide.png",
+      "sha256": "241e8b3ac29a2778d093d85a2cd9f594c8e016b8bc104f54c53a05c8d6169a26",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        453,
+        580,
+        948,
+        1073
+      ],
+      "clear_border": 127,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "approach/02_tail_brake.png",
+      "sha256": "dd150f863688c185d9451794728d40fa96735f07ca480010b5a69e6f156af7fe",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        447,
+        563,
+        937,
+        1063
+      ],
+      "clear_border": 137,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "approach/03_controlled_flare.png",
+      "sha256": "8cf9c29aba34aff294a4332bff1cbc12fae9960bca7f521acfee875a45088f59",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        498,
+        495,
+        941,
+        1096
+      ],
+      "clear_border": 104,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "approach/04_broad_flare.png",
+      "sha256": "d9c4587e159b40e4bfb54f6eeb1ff23dfb894ff648947e0677b8cc32cb6c198d",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        508,
+        557,
+        914,
+        1116
+      ],
+      "clear_border": 84,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "approach/05_feet_lower.png",
+      "sha256": "afff43f6c2216a01d44478e2973b236240c9fb71b2e59edc43705319791fa916",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        501,
+        483,
+        959,
+        1097
+      ],
+      "clear_border": 103,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "approach/06_contact.png",
+      "sha256": "97cb3196450e81319dacd5fdecb601c94ec4eff3254d96b789bd99caf4f0a6a4",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        487,
+        526,
+        934,
+        1028
+      ],
+      "clear_border": 172,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "approach/07_wing_fold.png",
+      "sha256": "baf13371275e188f7f37508e40ef2f60ce7dde08cb240659a80dc525ef34a4a0",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        456,
+        565,
+        921,
+        863
+      ],
+      "clear_border": 337,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "approach/08_perch_ready.png",
+      "sha256": "a257c74a59c74098305d2ef2a6390f7f1e81fb42c61e14673b17bd2dca323d4e",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        492,
+        480,
+        928,
+        820
+      ],
+      "clear_border": 380,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "perch/01_take_weight.png",
+      "sha256": "ae623545b66ae85e4cc7e281ba4b248bdfab660b80a90251d8d8038f982cd945",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        424,
+        359,
+        971,
+        850
+      ],
+      "clear_border": 350,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "perch/02_wing_fold.png",
+      "sha256": "dbe6b81d53ded0d76f7906ad4899cee0ae7334897e1bb9eec705261b329277eb",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        421,
+        474,
+        972,
+        848
+      ],
+      "clear_border": 352,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "perch/03_compression.png",
+      "sha256": "3ee4f2acba8a53b545808a7483f1c3020e5e27462286e998905ae5e333e00873",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        420,
+        550,
+        982,
+        845
+      ],
+      "clear_border": 355,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "perch/04_rebound.png",
+      "sha256": "8fb9e60b1bc7034586462b77ec6efc20042add27cd8ac29d7fa46a710650871f",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        444,
+        475,
+        945,
+        845
+      ],
+      "clear_border": 355,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "perch/05_hold.png",
+      "sha256": "90d545a2a2d391213c19848be6360f694a3bb304be0458fde6ec7f8c5a6c9b09",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        440,
+        465,
+        944,
+        871
+      ],
+      "clear_border": 329,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "perch/06_micro_adjust.png",
+      "sha256": "87a1a8fe64ad947ce8ccaf5447b2379e546b708de0b28286e18db9e1bb90cfd4",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        433,
+        451,
+        929,
+        872
+      ],
+      "clear_border": 328,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "perch/07_hold_2.png",
+      "sha256": "11a6c971e34c989c30fc1e088c423f8230b384507f2e94fac976f4060695ea1a",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        443,
+        466,
+        940,
+        872
+      ],
+      "clear_border": 328,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "perch/08_launch_preload.png",
+      "sha256": "ea4a4ab40de9b87088876bbad5bb2e37ecd7270d97465ccd81b6f3d674d1284f",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        449,
+        568,
+        987,
+        860
+      ],
+      "clear_border": 340,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "launch/01_launch_preload.png",
+      "sha256": "f0f53e11a68165b49821e48ed5e954c3a815032ecdd7ed2e7c07b54b5569cde9",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        457,
+        570,
+        1016,
+        785
+      ],
+      "clear_border": 415,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "launch/02_release_drop.png",
+      "sha256": "3dd43568a0c076f3301742b17e392504ac86df83233c75322332169bd6ca434a",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        454,
+        571,
+        1013,
+        855
+      ],
+      "clear_border": 345,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "launch/03_wings_high.png",
+      "sha256": "09f8eefb8db8ccbe680897141e92b7c98a45667ba2cde84f7ef090b89bd09a97",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        409,
+        417,
+        967,
+        935
+      ],
+      "clear_border": 265,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "launch/04_power_downstroke.png",
+      "sha256": "7b40c234a7e548a8924d51c8fa4ab093360a81ee4a17a26346df5570f81dcc9e",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        334,
+        660,
+        901,
+        980
+      ],
+      "clear_border": 220,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "launch/05_clear_contact.png",
+      "sha256": "b6f47812d18f036a887a51854a083416c27325f2983aa400af117d90a80870c9",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        381,
+        469,
+        940,
+        969
+      ],
+      "clear_border": 231,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "launch/06_acceleration_glide.png",
+      "sha256": "be3b083f64b9fcb6fa2294c9479b4c8b85bf7da8079c45898e82ff6b44dbb89e",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        286,
+        711,
+        870,
+        839
+      ],
+      "clear_border": 286,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "launch/07_second_beat.png",
+      "sha256": "1ec0fce8e04d2daec782a3709f557ab33080f47a66554eea1c03e5ff491b8d2b",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        375,
+        455,
+        938,
+        928
+      ],
+      "clear_border": 272,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    },
+    {
+      "file": "launch/08_departure_recovery.png",
+      "sha256": "ed91e24d6c813031fb8778676a01eff8e02e42569bfcabe7c4950362fcaa7445",
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "alpha_bbox": [
+        290,
+        588,
+        868,
+        981
+      ],
+      "clear_border": 219,
+      "edge_alpha_max": 0,
+      "visible_rgb_colors": [
+        [
+          4,
+          58,
+          120
+        ]
+      ],
+      "one_visible_color": true,
+      "transparent_rgb_zero": true,
+      "visible_white_pixels": 0
+    }
+  ]
+}

@@ -532,7 +532,7 @@ export function InspectorPanel({
           </div>
         </Row>
 
-        <Row label="Fallback / MP4 background">
+        <Row label="Light fallback / MP4">
           <div className="flex items-center gap-2">
             {BACKGROUND_SWATCHES.map((color) => (
               <button
@@ -557,7 +557,35 @@ export function InspectorPanel({
               />
             </label>
           </div>
-          <p className="text-[10px] leading-relaxed text-muted-foreground">Used in the stage when no scene is uploaded and baked into opaque MP4/WebM exports. Transparent exports ignore it.</p>
+          <p className="text-[10px] leading-relaxed text-muted-foreground">Used with the light preview when no scene is loaded and baked into light-theme opaque exports.</p>
+        </Row>
+
+        <Row label="Dark fallback / MP4">
+          <div className="flex items-center gap-2">
+            {BACKGROUND_SWATCHES.map((color) => (
+              <button
+                key={color}
+                type="button"
+                onClick={() => onUpdateStyle({ darkBackgroundColor: color })}
+                aria-label={`Dark background color ${color}`}
+                className="h-6 w-6 rounded-full border-2 transition-transform hover:scale-110"
+                style={{
+                  backgroundColor: color,
+                  borderColor: style.darkBackgroundColor === color ? "var(--primary)" : "var(--border)",
+                }}
+              />
+            ))}
+            <label className="relative ml-1 inline-flex">
+              <input
+                type="color"
+                value={style.darkBackgroundColor}
+                onChange={(event) => onUpdateStyle({ darkBackgroundColor: event.target.value })}
+                className="h-6 w-6 cursor-pointer rounded-full border border-border bg-transparent p-0"
+                aria-label="Custom dark background color"
+              />
+            </label>
+          </div>
+          <p className="text-[10px] leading-relaxed text-muted-foreground">Used with the dark preview and baked into dark-theme opaque exports. Transparent exports ignore both backgrounds.</p>
         </Row>
 
         <Row label="Notes (exported to brief)">

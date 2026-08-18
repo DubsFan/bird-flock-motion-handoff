@@ -1,0 +1,711 @@
+{
+  "schema_version": "2.0",
+  "authored": true,
+  "visible_rgb": [
+    4,
+    58,
+    120
+  ],
+  "minimum_clear_border_px": 64,
+  "species": "hummingbird",
+  "launch_contact_direction": "decreasing",
+  "tracks": {
+    "approach": [
+      {
+        "file": "approach/01_hummingbird_rig_approach.png",
+        "sha256": "540ab5364f3a40df6807e19aa9d7a09250ac2f9280986bb1b240eb4228dbce56",
+        "body_landmark_px": [
+          800,
+          570.0
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          570.0
+        ]
+      },
+      {
+        "file": "approach/02_hummingbird_rig_approach.png",
+        "sha256": "17dd047ce97d90eaa96706a70f0fb7e0c4664835488f5d063787d8044afbbd49",
+        "body_landmark_px": [
+          800,
+          574.9603
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          574.9603
+        ]
+      },
+      {
+        "file": "approach/03_hummingbird_rig_approach.png",
+        "sha256": "1c655380c0ce6ceb5af22386d06c1aec09c754aa49bb0289c7a5887aeb3751c1",
+        "body_landmark_px": [
+          800,
+          579.9206
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          579.9206
+        ]
+      },
+      {
+        "file": "approach/04_hummingbird_rig_approach.png",
+        "sha256": "9f69c822798a8c2065948c8e039c18be36423b778488b5f5367ba11cc16d133d",
+        "body_landmark_px": [
+          800,
+          584.881
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          584.881
+        ]
+      },
+      {
+        "file": "approach/05_hummingbird_rig_approach.png",
+        "sha256": "a7eb1d2e99082b27235872fa9cc3d1e970f6276447a00da04115d4b99db3d905",
+        "body_landmark_px": [
+          800,
+          589.8413
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          589.8413
+        ]
+      },
+      {
+        "file": "approach/06_hummingbird_rig_approach.png",
+        "sha256": "e2ae2b1ba1ee1bc6cec2cd7a1a2c8ce9f52fb6dc8cb1f5c869bb668ec217a8b7",
+        "body_landmark_px": [
+          800,
+          594.8016
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          594.8016
+        ]
+      },
+      {
+        "file": "approach/07_hummingbird_rig_approach.png",
+        "sha256": "0dc63cdcdb1aed19ec4956e4775e4b1ef9432da50534580d0e7356769bb741b7",
+        "body_landmark_px": [
+          800,
+          599.7619
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          599.7619
+        ]
+      },
+      {
+        "file": "approach/08_hummingbird_rig_approach.png",
+        "sha256": "29b4b4128f3e767cd55c4846e6fd872ca63517df1780ca54112f90d8bc9ee787",
+        "body_landmark_px": [
+          800,
+          604.7222
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          604.7222
+        ]
+      },
+      {
+        "file": "approach/09_hummingbird_rig_approach.png",
+        "sha256": "d8d3fa3e0be1dc97c06036b090d936b5f910386e0c09134e7006c688aa597173",
+        "body_landmark_px": [
+          800,
+          609.6825
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          609.6825
+        ]
+      },
+      {
+        "file": "approach/10_hummingbird_rig_approach.png",
+        "sha256": "b088c98639d723223fd4a9d9b17dd08375ef4e0ff937bdcf868af1ee57283058",
+        "body_landmark_px": [
+          800,
+          614.6429
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          614.6429
+        ]
+      },
+      {
+        "file": "approach/11_hummingbird_rig_approach.png",
+        "sha256": "c45f709fa04c9a2cf3ae00d1aa1ffc09beeae0659973b4aab027eb530c2da737",
+        "body_landmark_px": [
+          800,
+          619.6032
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          619.6032
+        ]
+      },
+      {
+        "file": "approach/12_hummingbird_rig_approach.png",
+        "sha256": "9bf6d3980309ee8ebbd06046952f74c14ca3e0512b1be26e6c0e98fdc21fa21d",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "approach/13_hummingbird_rig_approach.png",
+        "sha256": "e28c20f57ac508611a80823f3ea3bca1e3f159f56ffc10b9bae8faa6c6a505c4",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "approach/14_hummingbird_rig_approach.png",
+        "sha256": "3d3f27f902bca3da7fd80a0f83d3548518154237a98bba0d980cd62accbc18d8",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "approach/15_hummingbird_rig_approach.png",
+        "sha256": "7e8fee258e15c007d42e260549be0b0362298a2e8b2729963a23a337f65bbd47",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      }
+    ],
+    "perch": [
+      {
+        "file": "perch/01_hummingbird_rig_perch.png",
+        "sha256": "bac54dd7d2e095d9463a08daae7fd3e8dfc8ec058fe9918e409f5dafa7eaec82",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "perch/02_hummingbird_rig_perch.png",
+        "sha256": "183e72fbd36e21eb3469c0a7f4f61b5473c090925ea44f194440fbee26c3fecc",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "perch/03_hummingbird_rig_perch.png",
+        "sha256": "219f5c09c5719afdfab117c75a02f8586bac27eeba7e9865b6cf5513ced6c3f5",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "perch/04_hummingbird_rig_perch.png",
+        "sha256": "4d3d93f05ed46e6a02c5ca43dd70acad722c645fd18d26f07cef53d3763058fc",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "perch/05_hummingbird_rig_perch.png",
+        "sha256": "69aed6f147caf356e139690d7f45f717fb08a12e17a49912de2a96074638b08d",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "perch/06_hummingbird_rig_perch.png",
+        "sha256": "820ca3767a3a5a8a87b45e5deb2267ff7b2fff9bd8bf4b16a6dca124e5a5eada",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "perch/07_hummingbird_rig_perch.png",
+        "sha256": "ff2c89ce2555b7b73e3ee5672aeff08e8ea9512fbb098eed3fd6a5c458699761",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "perch/08_hummingbird_rig_perch.png",
+        "sha256": "4c0cc37edf77f4a32d96b997addd0f63dd03c1f5f96bdd3018b67434c96226d6",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "perch/09_hummingbird_rig_perch.png",
+        "sha256": "2f59853675e034e4571005f5bc8401444d9b388019ba7c8c9f0df48d0bb727a6",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "perch/10_hummingbird_rig_perch.png",
+        "sha256": "0f74964711f144818ad86d0e73c9462eb3e9df2f2ac5e881b428a4169b8f92a9",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "perch/11_hummingbird_rig_perch.png",
+        "sha256": "74f0942b5c28de05048e480490d206a3a0004a35d2b51a61176cad86f182e063",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "perch/12_hummingbird_rig_perch.png",
+        "sha256": "adbbf52be3208645b5202ffde2435ee64007409f91e107566d28e4bbe6148a85",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "perch/13_hummingbird_rig_perch.png",
+        "sha256": "3b88fd5c3c7093e80c27619d0dda9dbf32958bf97b6ad38496392f6ac89bb2b6",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "perch/14_hummingbird_rig_perch.png",
+        "sha256": "9c00c1e5b10cbb89f1d7380b6dc23dec26c53fb989b60bc8e751a602acd8f38f",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "perch/15_hummingbird_rig_perch.png",
+        "sha256": "7e8fee258e15c007d42e260549be0b0362298a2e8b2729963a23a337f65bbd47",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      }
+    ],
+    "launch": [
+      {
+        "file": "launch/01_hummingbird_rig_launch.png",
+        "sha256": "bac54dd7d2e095d9463a08daae7fd3e8dfc8ec058fe9918e409f5dafa7eaec82",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "launch/02_hummingbird_rig_launch.png",
+        "sha256": "97683b75fb0e9b66f5606b2181b202510b583dd99900e9d8aa551cab8f6c2533",
+        "body_landmark_px": [
+          800,
+          620
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          620
+        ]
+      },
+      {
+        "file": "launch/03_hummingbird_rig_launch.png",
+        "sha256": "8829b452d150924dabdb7aec35f93f457b52377a08817dea5b669a50d4fb1a8c",
+        "body_landmark_px": [
+          800,
+          617.4026
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          617.4026
+        ]
+      },
+      {
+        "file": "launch/04_hummingbird_rig_launch.png",
+        "sha256": "a8a1ae6399df67afc2f87d312aefa95c7ca283b2cde28dd410fcc21d004e4fb6",
+        "body_landmark_px": [
+          800,
+          609.2857
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          609.2857
+        ]
+      },
+      {
+        "file": "launch/05_hummingbird_rig_launch.png",
+        "sha256": "6e61108c14cb575987995cfb65748355cdade5cba5a2bb20eb3abc9beda3319e",
+        "body_landmark_px": [
+          800,
+          601.1688
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          601.1688
+        ]
+      },
+      {
+        "file": "launch/06_hummingbird_rig_launch.png",
+        "sha256": "2f7f007e5645e8d1724946915ed25e2e4e7c02dba36923a6d947c0fae1801d00",
+        "body_landmark_px": [
+          800,
+          593.0519
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          593.0519
+        ]
+      },
+      {
+        "file": "launch/07_hummingbird_rig_launch.png",
+        "sha256": "739dd56bf350bf225743361567f83d781995535fbd781236fe66fabb0fbf4250",
+        "body_landmark_px": [
+          800,
+          584.9351
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          584.9351
+        ]
+      },
+      {
+        "file": "launch/08_hummingbird_rig_launch.png",
+        "sha256": "46b48d2ad35ae6afdafdac61b00935c5c3cf241037981ce36b759c4c78f85fff",
+        "body_landmark_px": [
+          800,
+          576.8182
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          576.8182
+        ]
+      },
+      {
+        "file": "launch/09_hummingbird_rig_launch.png",
+        "sha256": "493af02615e168162ee5c593074909b494f4db2384b23f7a744a558e09fa20e0",
+        "body_landmark_px": [
+          800,
+          568.7013
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          568.7013
+        ]
+      },
+      {
+        "file": "launch/10_hummingbird_rig_launch.png",
+        "sha256": "c4d19754e12d8d1f64ef91932c7e55c966e9f016364e895900c33e1a14375854",
+        "body_landmark_px": [
+          800,
+          560.5844
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          560.5844
+        ]
+      },
+      {
+        "file": "launch/11_hummingbird_rig_launch.png",
+        "sha256": "25c69cd825288f31f98ea82a4a3662c18fde3cb6199b382fb11c94a5c8eca4c8",
+        "body_landmark_px": [
+          800,
+          552.4675
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          552.4675
+        ]
+      },
+      {
+        "file": "launch/12_hummingbird_rig_launch.png",
+        "sha256": "435ba2f1840935bc46da266c4f4d506be67d676f66c1c8ef3dbde41405d060b2",
+        "body_landmark_px": [
+          800,
+          544.3506
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          544.3506
+        ]
+      },
+      {
+        "file": "launch/13_hummingbird_rig_launch.png",
+        "sha256": "f5e56b90894bec68d3372bfbff4d8dfdbe55dcdcb1e487ac611ca12c300b5ff7",
+        "body_landmark_px": [
+          800,
+          536.2338
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          536.2338
+        ]
+      },
+      {
+        "file": "launch/14_hummingbird_rig_launch.png",
+        "sha256": "b7cbe66b752e4d10a3f61118b9026a7fc4c0d43c27d6c474b7885d7545653b81",
+        "body_landmark_px": [
+          800,
+          528.1169
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          528.1169
+        ]
+      },
+      {
+        "file": "launch/15_hummingbird_rig_launch.png",
+        "sha256": "3fa23163cb3e4552dd1f2129eff3ababf7cd9d10d6979c0e576a4b664474084a",
+        "body_landmark_px": [
+          800,
+          520.0
+        ],
+        "body_scale_px": 499.72,
+        "contact_landmark_px": [
+          800,
+          520.0
+        ]
+      }
+    ]
+  },
+  "evidence": [
+    {
+      "file": "../../../../../../evidence/animal-motion-v2/hummingbird-action-stages-v3-60fps.mp4",
+      "frame_sha256": [
+        "540ab5364f3a40df6807e19aa9d7a09250ac2f9280986bb1b240eb4228dbce56",
+        "17dd047ce97d90eaa96706a70f0fb7e0c4664835488f5d063787d8044afbbd49",
+        "1c655380c0ce6ceb5af22386d06c1aec09c754aa49bb0289c7a5887aeb3751c1",
+        "9f69c822798a8c2065948c8e039c18be36423b778488b5f5367ba11cc16d133d",
+        "a7eb1d2e99082b27235872fa9cc3d1e970f6276447a00da04115d4b99db3d905",
+        "e2ae2b1ba1ee1bc6cec2cd7a1a2c8ce9f52fb6dc8cb1f5c869bb668ec217a8b7",
+        "0dc63cdcdb1aed19ec4956e4775e4b1ef9432da50534580d0e7356769bb741b7",
+        "29b4b4128f3e767cd55c4846e6fd872ca63517df1780ca54112f90d8bc9ee787",
+        "d8d3fa3e0be1dc97c06036b090d936b5f910386e0c09134e7006c688aa597173",
+        "b088c98639d723223fd4a9d9b17dd08375ef4e0ff937bdcf868af1ee57283058",
+        "c45f709fa04c9a2cf3ae00d1aa1ffc09beeae0659973b4aab027eb530c2da737",
+        "9bf6d3980309ee8ebbd06046952f74c14ca3e0512b1be26e6c0e98fdc21fa21d",
+        "e28c20f57ac508611a80823f3ea3bca1e3f159f56ffc10b9bae8faa6c6a505c4",
+        "3d3f27f902bca3da7fd80a0f83d3548518154237a98bba0d980cd62accbc18d8",
+        "7e8fee258e15c007d42e260549be0b0362298a2e8b2729963a23a337f65bbd47",
+        "bac54dd7d2e095d9463a08daae7fd3e8dfc8ec058fe9918e409f5dafa7eaec82",
+        "183e72fbd36e21eb3469c0a7f4f61b5473c090925ea44f194440fbee26c3fecc",
+        "219f5c09c5719afdfab117c75a02f8586bac27eeba7e9865b6cf5513ced6c3f5",
+        "4d3d93f05ed46e6a02c5ca43dd70acad722c645fd18d26f07cef53d3763058fc",
+        "69aed6f147caf356e139690d7f45f717fb08a12e17a49912de2a96074638b08d",
+        "820ca3767a3a5a8a87b45e5deb2267ff7b2fff9bd8bf4b16a6dca124e5a5eada",
+        "ff2c89ce2555b7b73e3ee5672aeff08e8ea9512fbb098eed3fd6a5c458699761",
+        "4c0cc37edf77f4a32d96b997addd0f63dd03c1f5f96bdd3018b67434c96226d6",
+        "2f59853675e034e4571005f5bc8401444d9b388019ba7c8c9f0df48d0bb727a6",
+        "0f74964711f144818ad86d0e73c9462eb3e9df2f2ac5e881b428a4169b8f92a9",
+        "74f0942b5c28de05048e480490d206a3a0004a35d2b51a61176cad86f182e063",
+        "adbbf52be3208645b5202ffde2435ee64007409f91e107566d28e4bbe6148a85",
+        "3b88fd5c3c7093e80c27619d0dda9dbf32958bf97b6ad38496392f6ac89bb2b6",
+        "9c00c1e5b10cbb89f1d7380b6dc23dec26c53fb989b60bc8e751a602acd8f38f",
+        "7e8fee258e15c007d42e260549be0b0362298a2e8b2729963a23a337f65bbd47",
+        "bac54dd7d2e095d9463a08daae7fd3e8dfc8ec058fe9918e409f5dafa7eaec82",
+        "97683b75fb0e9b66f5606b2181b202510b583dd99900e9d8aa551cab8f6c2533",
+        "8829b452d150924dabdb7aec35f93f457b52377a08817dea5b669a50d4fb1a8c",
+        "a8a1ae6399df67afc2f87d312aefa95c7ca283b2cde28dd410fcc21d004e4fb6",
+        "6e61108c14cb575987995cfb65748355cdade5cba5a2bb20eb3abc9beda3319e",
+        "2f7f007e5645e8d1724946915ed25e2e4e7c02dba36923a6d947c0fae1801d00",
+        "739dd56bf350bf225743361567f83d781995535fbd781236fe66fabb0fbf4250",
+        "46b48d2ad35ae6afdafdac61b00935c5c3cf241037981ce36b759c4c78f85fff",
+        "493af02615e168162ee5c593074909b494f4db2384b23f7a744a558e09fa20e0",
+        "c4d19754e12d8d1f64ef91932c7e55c966e9f016364e895900c33e1a14375854",
+        "25c69cd825288f31f98ea82a4a3662c18fde3cb6199b382fb11c94a5c8eca4c8",
+        "435ba2f1840935bc46da266c4f4d506be67d676f66c1c8ef3dbde41405d060b2",
+        "f5e56b90894bec68d3372bfbff4d8dfdbe55dcdcb1e487ac611ca12c300b5ff7",
+        "b7cbe66b752e4d10a3f61118b9026a7fc4c0d43c27d6c474b7885d7545653b81",
+        "3fa23163cb3e4552dd1f2129eff3ababf7cd9d10d6979c0e576a4b664474084a"
+      ],
+      "video_sha256": "0e4c6c8e21c4e76170b5fb473fcd5fffa7d4d1f32e6acf73340c16f9a375d746",
+      "output_fps": 60
+    },
+    {
+      "file": "../../../../../../evidence/animal-motion-v2/hummingbird-action-stages-v3-60fps-alpha.webm",
+      "frame_sha256": [
+        "540ab5364f3a40df6807e19aa9d7a09250ac2f9280986bb1b240eb4228dbce56",
+        "17dd047ce97d90eaa96706a70f0fb7e0c4664835488f5d063787d8044afbbd49",
+        "1c655380c0ce6ceb5af22386d06c1aec09c754aa49bb0289c7a5887aeb3751c1",
+        "9f69c822798a8c2065948c8e039c18be36423b778488b5f5367ba11cc16d133d",
+        "a7eb1d2e99082b27235872fa9cc3d1e970f6276447a00da04115d4b99db3d905",
+        "e2ae2b1ba1ee1bc6cec2cd7a1a2c8ce9f52fb6dc8cb1f5c869bb668ec217a8b7",
+        "0dc63cdcdb1aed19ec4956e4775e4b1ef9432da50534580d0e7356769bb741b7",
+        "29b4b4128f3e767cd55c4846e6fd872ca63517df1780ca54112f90d8bc9ee787",
+        "d8d3fa3e0be1dc97c06036b090d936b5f910386e0c09134e7006c688aa597173",
+        "b088c98639d723223fd4a9d9b17dd08375ef4e0ff937bdcf868af1ee57283058",
+        "c45f709fa04c9a2cf3ae00d1aa1ffc09beeae0659973b4aab027eb530c2da737",
+        "9bf6d3980309ee8ebbd06046952f74c14ca3e0512b1be26e6c0e98fdc21fa21d",
+        "e28c20f57ac508611a80823f3ea3bca1e3f159f56ffc10b9bae8faa6c6a505c4",
+        "3d3f27f902bca3da7fd80a0f83d3548518154237a98bba0d980cd62accbc18d8",
+        "7e8fee258e15c007d42e260549be0b0362298a2e8b2729963a23a337f65bbd47",
+        "bac54dd7d2e095d9463a08daae7fd3e8dfc8ec058fe9918e409f5dafa7eaec82",
+        "183e72fbd36e21eb3469c0a7f4f61b5473c090925ea44f194440fbee26c3fecc",
+        "219f5c09c5719afdfab117c75a02f8586bac27eeba7e9865b6cf5513ced6c3f5",
+        "4d3d93f05ed46e6a02c5ca43dd70acad722c645fd18d26f07cef53d3763058fc",
+        "69aed6f147caf356e139690d7f45f717fb08a12e17a49912de2a96074638b08d",
+        "820ca3767a3a5a8a87b45e5deb2267ff7b2fff9bd8bf4b16a6dca124e5a5eada",
+        "ff2c89ce2555b7b73e3ee5672aeff08e8ea9512fbb098eed3fd6a5c458699761",
+        "4c0cc37edf77f4a32d96b997addd0f63dd03c1f5f96bdd3018b67434c96226d6",
+        "2f59853675e034e4571005f5bc8401444d9b388019ba7c8c9f0df48d0bb727a6",
+        "0f74964711f144818ad86d0e73c9462eb3e9df2f2ac5e881b428a4169b8f92a9",
+        "74f0942b5c28de05048e480490d206a3a0004a35d2b51a61176cad86f182e063",
+        "adbbf52be3208645b5202ffde2435ee64007409f91e107566d28e4bbe6148a85",
+        "3b88fd5c3c7093e80c27619d0dda9dbf32958bf97b6ad38496392f6ac89bb2b6",
+        "9c00c1e5b10cbb89f1d7380b6dc23dec26c53fb989b60bc8e751a602acd8f38f",
+        "7e8fee258e15c007d42e260549be0b0362298a2e8b2729963a23a337f65bbd47",
+        "bac54dd7d2e095d9463a08daae7fd3e8dfc8ec058fe9918e409f5dafa7eaec82",
+        "97683b75fb0e9b66f5606b2181b202510b583dd99900e9d8aa551cab8f6c2533",
+        "8829b452d150924dabdb7aec35f93f457b52377a08817dea5b669a50d4fb1a8c",
+        "a8a1ae6399df67afc2f87d312aefa95c7ca283b2cde28dd410fcc21d004e4fb6",
+        "6e61108c14cb575987995cfb65748355cdade5cba5a2bb20eb3abc9beda3319e",
+        "2f7f007e5645e8d1724946915ed25e2e4e7c02dba36923a6d947c0fae1801d00",
+        "739dd56bf350bf225743361567f83d781995535fbd781236fe66fabb0fbf4250",
+        "46b48d2ad35ae6afdafdac61b00935c5c3cf241037981ce36b759c4c78f85fff",
+        "493af02615e168162ee5c593074909b494f4db2384b23f7a744a558e09fa20e0",
+        "c4d19754e12d8d1f64ef91932c7e55c966e9f016364e895900c33e1a14375854",
+        "25c69cd825288f31f98ea82a4a3662c18fde3cb6199b382fb11c94a5c8eca4c8",
+        "435ba2f1840935bc46da266c4f4d506be67d676f66c1c8ef3dbde41405d060b2",
+        "f5e56b90894bec68d3372bfbff4d8dfdbe55dcdcb1e487ac611ca12c300b5ff7",
+        "b7cbe66b752e4d10a3f61118b9026a7fc4c0d43c27d6c474b7885d7545653b81",
+        "3fa23163cb3e4552dd1f2129eff3ababf7cd9d10d6979c0e576a4b664474084a"
+      ],
+      "video_sha256": "c3163a85ef4d6930584c6b214d48e4091072b0ef05ceffdbcacd051fd8a9e39f",
+      "output_fps": 60
+    }
+  ]
+}

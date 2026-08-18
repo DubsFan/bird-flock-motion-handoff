@@ -1,0 +1,105 @@
+{
+  "schema_version": "2.0",
+  "authored": true,
+  "visible_rgb": [
+    4,
+    58,
+    120
+  ],
+  "minimum_clear_border_px": 64,
+  "landmark_tolerance_px": 4.0,
+  "adjacent_scale_ratio_limit": 1.08,
+  "track_scale_ratio_limit": 1.12,
+  "species": "butterfly",
+  "track": "flight",
+  "frames": [
+    {
+      "file": "baked-flight/01_butterfly_rig_flight.png",
+      "sha256": "d46088a1ed5b5978c095f3b1b6c05215728a410b0784c6251881e4b15951bbf3",
+      "body_landmark_px": [
+        800.0,
+        501.0895771993749
+      ],
+      "body_scale_px": 483.7
+    },
+    {
+      "file": "baked-flight/02_butterfly_rig_flight.png",
+      "sha256": "fcfc7e84efd3d766b0c7f71063ebeaf2102e13a1c880219a160a54e45e395c01",
+      "body_landmark_px": [
+        800.0,
+        498.69286631596395
+      ],
+      "body_scale_px": 483.7
+    },
+    {
+      "file": "baked-flight/03_butterfly_rig_flight.png",
+      "sha256": "e85ec004cb2c940879ac20bf396f72f2222cf73a88d661cc76a3d34332106125",
+      "body_landmark_px": [
+        800.0,
+        497.603289116589
+      ],
+      "body_scale_px": 483.7
+    },
+    {
+      "file": "baked-flight/04_butterfly_rig_flight.png",
+      "sha256": "945c3c446785dd4a7437e56a12aa7d6148256a7a5a08aeed50f34c45c304078e",
+      "body_landmark_px": [
+        800.0,
+        498.9104228006251
+      ],
+      "body_scale_px": 483.7
+    },
+    {
+      "file": "baked-flight/05_butterfly_rig_flight.png",
+      "sha256": "2d35fc158747d4aa861e1e059ae78b2713dc51c5c38eaf0591ca33880022b160",
+      "body_landmark_px": [
+        800.0,
+        501.30713368403605
+      ],
+      "body_scale_px": 483.7
+    },
+    {
+      "file": "baked-flight/06_butterfly_rig_flight.png",
+      "sha256": "491e2b75b8158411eb39ebf637e173f34d44645c7eb8500c3dce364ac41248b1",
+      "body_landmark_px": [
+        800.0,
+        502.396710883411
+      ],
+      "body_scale_px": 483.7
+    }
+  ],
+  "evidence": [
+    {
+      "file": "../../../../../evidence/animal-motion-v2/butterfly-flight-v2-10hz-60fps.mp4",
+      "frame_sha256": [
+        "d46088a1ed5b5978c095f3b1b6c05215728a410b0784c6251881e4b15951bbf3",
+        "fcfc7e84efd3d766b0c7f71063ebeaf2102e13a1c880219a160a54e45e395c01",
+        "e85ec004cb2c940879ac20bf396f72f2222cf73a88d661cc76a3d34332106125",
+        "945c3c446785dd4a7437e56a12aa7d6148256a7a5a08aeed50f34c45c304078e",
+        "2d35fc158747d4aa861e1e059ae78b2713dc51c5c38eaf0591ca33880022b160",
+        "491e2b75b8158411eb39ebf637e173f34d44645c7eb8500c3dce364ac41248b1"
+      ],
+      "video_sha256": "aaba97f7962c2fba5f509e44b95deebbe56c67e4cac99ba1bacdbfd15088c6f7",
+      "cycle_hz": 10.0,
+      "input_pose_fps": 60.0,
+      "output_fps": 60,
+      "duration_seconds": 3.0
+    },
+    {
+      "file": "../../../../../evidence/animal-motion-v2/butterfly-flight-v2-10hz-60fps-alpha.webm",
+      "frame_sha256": [
+        "d46088a1ed5b5978c095f3b1b6c05215728a410b0784c6251881e4b15951bbf3",
+        "fcfc7e84efd3d766b0c7f71063ebeaf2102e13a1c880219a160a54e45e395c01",
+        "e85ec004cb2c940879ac20bf396f72f2222cf73a88d661cc76a3d34332106125",
+        "945c3c446785dd4a7437e56a12aa7d6148256a7a5a08aeed50f34c45c304078e",
+        "2d35fc158747d4aa861e1e059ae78b2713dc51c5c38eaf0591ca33880022b160",
+        "491e2b75b8158411eb39ebf637e173f34d44645c7eb8500c3dce364ac41248b1"
+      ],
+      "video_sha256": "4d3efffa4e21f813c6d4edf7df4fd8c3170453f93f77c32b5201942cf5699b20",
+      "cycle_hz": 10.0,
+      "input_pose_fps": 60.0,
+      "output_fps": 60,
+      "duration_seconds": 3.0
+    }
+  ]
+}

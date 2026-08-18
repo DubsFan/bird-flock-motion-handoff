@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "sets": [
+    {
+      "id": "natural-engraved-butterfly-v1",
+      "name": "Natural engraved butterfly",
+      "direction": "right",
+      "canvases": {
+        "flight": {
+          "width": 1600,
+          "height": 1200,
+          "anchor": {
+            "x": 800,
+            "y": 501
+          }
+        },
+        "action": {
+          "width": 1600,
+          "height": 1200,
+          "anchor": {
+            "x": 801,
+            "y": 750
+          }
+        }
+      },
+      "up_direction": "canvas_top",
+      "orientation_metadata": "stripped",
+      "ink_color": "#043A78",
+      "tracks": {
+        "flight": [
+          "01_butterfly_rig_flight.png",
+          "02_butterfly_rig_flight.png",
+          "03_butterfly_rig_flight.png",
+          "04_butterfly_rig_flight.png",
+          "05_butterfly_rig_flight.png",
+          "06_butterfly_rig_flight.png"
+        ],
+        "approach": [
+          "01_approach.png",
+          "02_approach.png",
+          "03_approach.png",
+          "04_approach.png",
+          "05_approach.png",
+          "06_approach.png",
+          "07_approach.png",
+          "08_approach.png",
+          "09_approach.png",
+          "10_approach.png",
+          "11_approach.png",
+          "12_approach.png",
+          "13_approach.png",
+          "14_approach.png",
+          "15_approach.png"
+        ],
+        "perch": [
+          "01_perch.png",
+          "02_perch.png",
+          "03_perch.png",
+          "04_perch.png",
+          "05_perch.png",
+          "06_perch.png",
+          "07_perch.png",
+          "08_perch.png",
+          "09_perch.png",
+          "10_perch.png",
+          "11_perch.png",
+          "12_perch.png",
+          "13_perch.png",
+          "14_perch.png",
+          "15_perch.png"
+        ],
+        "launch": [
+          "01_launch.png",
+          "02_launch.png",
+          "03_launch.png",
+          "04_launch.png",
+          "05_launch.png",
+          "06_launch.png",
+          "07_launch.png",
+          "08_launch.png",
+          "09_launch.png",
+          "10_launch.png",
+          "11_launch.png",
+          "12_launch.png",
+          "13_launch.png",
+          "14_launch.png",
+          "15_launch.png"
+        ]
+      },
+      "source_method": "V2 layered identity rig baked offline to chronological one-color true-alpha PNGs; flight and action tracks published only after explicit landmark/scale, contact-lock, clear-border, exact frame-hash, and hash-bound normal-speed proof validation"
+    }
+  ]
+}

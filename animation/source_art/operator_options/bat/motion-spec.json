@@ -1,0 +1,13 @@
+{
+  "id": "natural-engraved-bat-v1",
+  "name": "Natural engraved bat",
+  "direction": "right",
+  "ink_color": "#043A78",
+  "source_method": "re-authored from the operator-supplied bat identity; right-facing anatomical membrane wingbeat, retained overhead-roost approach and fixed-foot inverted hang, and re-authored gravity drop-launch; semantic torso/roost anchoring and blue-ink extraction to true alpha",
+  "tracks": [
+    {"output":"flight","sheet":"flight-sheet-v7.png","rows":2,"anchor_mode":"body","target_span":500,"frames":["01_level_flight.png","02_early_upstroke.png","03_half_upstroke.png","04_compact_peak.png","05_reopening.png","06_loaded_downstroke.png","07_broad_power.png","08_rebound.png","09_late_recovery.png","10_loop_recovery.png"]},
+    {"output":"approach","sheet":"approach-sheet-v1.png","rows":2,"anchor_mode":"approach","contact_offset":[0.0,0.0],"contact_edge":"top","dest_anchor":[800,450],"target_span":360,"frames":["01_approach_flight.png","02_brake.png","03_feet_reach_up.png","04_rotate_head_down.png","05_overhead_contact.png","06_wings_fold.png","07_inverted_settle.png","08_roost_ready.png"]},
+    {"output":"perch","sheet":"perch-sheet-v1.png","rows":2,"anchor_mode":"contact","contact_offset":[0.0,0.0],"contact_edge":"top","dest_anchor":[800,450],"target_span":490,"frames":["01_take_weight.png","02_membranes_fold.png","03_compact_hang.png","04_tiny_sway.png","05_hold.png","06_micro_adjust.png","07_hold_2.png","08_launch_preload.png"]},
+    {"output":"launch","sheet":"launch-sheet-v2.png","rows":2,"anchor_mode":"launch","contact_offset":[0.0,0.0],"contact_edge":"top","dest_anchor":[800,450],"target_span":450,"frames":["01_inverted_preload.png","02_drop_release.png","03_membranes_open.png","04_rotate_to_travel.png","05_power_downstroke.png","06_acceleration.png","07_recovery_upstroke.png","08_departure.png"]}
+  ]
+}

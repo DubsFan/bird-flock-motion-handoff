@@ -112,10 +112,10 @@ export function Toolbar({
           aria-pressed={previewTheme === "dark"}
           onClick={() => onPreviewTheme(previewTheme === "light" ? "dark" : "light")}
           className="inline-flex items-center gap-1.5 rounded-md border border-border bg-card px-2.5 py-2 text-xs text-muted-foreground hover:border-primary/50 hover:text-foreground"
-          title="Switch only the bird palette; the authored motion and background stay aligned"
+          title="Switch the bird palette and the neutral preview surface; placed scenes stay aligned"
         >
           {previewTheme === "light" ? <Sun className="h-3.5 w-3.5" /> : <Moon className="h-3.5 w-3.5" />}
-          {previewTheme === "light" ? "Light-theme birds" : "Dark-theme birds"}
+          {previewTheme === "light" ? "Preview: Light" : "Preview: Dark"}
         </button>
 
         <div className="ml-auto flex items-center gap-2">

@@ -1,0 +1,67 @@
+{
+  "id": "natural-engraved-swallow-v1",
+  "name": "Natural engraved swallow",
+  "direction": "right",
+  "ink_color": "#043A78",
+  "source_method": "generated from the operator-supplied swallow identity; retained coherent 16-pose flight loop plus re-authored chronological approach, planted perch, and launch tracks; semantic body/contact anchoring and blue-ink extraction to true alpha",
+  "tracks": [
+    {
+      "output": "flight",
+      "sheet": "flight-sheet-v1.png",
+      "rows": 4,
+      "anchor_mode": "body",
+      "target_span": 700,
+      "frames": [
+        "01_level_glide.png", "02_feather_adjust.png", "03_shallow_dihedral.png", "04_transition_lift.png",
+        "05_quarter_upstroke.png", "06_half_upstroke.png", "07_three_quarter_upstroke.png", "08_upstroke_peak.png",
+        "09_peak_release.png", "10_quarter_downstroke.png", "11_half_downstroke.png", "12_three_quarter_downstroke.png",
+        "13_full_downstroke.png", "14_recovery.png", "15_shallow_glide_return.png", "16_level_glide_loop.png"
+      ]
+    },
+    {
+      "output": "approach",
+      "sheet": "approach-sheet-v3.png",
+      "rows": 2,
+      "anchor_mode": "approach",
+      "contact_offset": [0.0, 0.0],
+      "contact_edge": "bottom",
+      "contact_x_range": [0.48, 0.82],
+      "dest_anchor": [800, 750],
+      "target_span": 500,
+      "frames": [
+        "01_approach_glide.png", "02_tail_brake.png", "03_controlled_flare.png", "04_broad_flare.png",
+        "05_feet_lower.png", "06_contact.png", "07_wing_fold.png", "08_perch_ready.png"
+      ]
+    },
+    {
+      "output": "perch",
+      "sheet": "perch-sheet-v3.png",
+      "rows": 2,
+      "anchor_mode": "contact",
+      "contact_offset": [0.0, 0.0],
+      "contact_edge": "bottom",
+      "contact_x_range": [0.48, 0.82],
+      "dest_anchor": [800, 750],
+      "target_span": 520,
+      "frames": [
+        "01_take_weight.png", "02_wing_fold.png", "03_compression.png", "04_rebound.png",
+        "05_hold.png", "06_micro_adjust.png", "07_hold_2.png", "08_launch_preload.png"
+      ]
+    },
+    {
+      "output": "launch",
+      "sheet": "launch-sheet-v3.png",
+      "rows": 2,
+      "anchor_mode": "launch",
+      "contact_offset": [0.0, 0.0],
+      "contact_edge": "bottom",
+      "contact_x_range": [0.48, 0.82],
+      "dest_anchor": [800, 750],
+      "target_span": 560,
+      "frames": [
+        "01_launch_preload.png", "02_release_drop.png", "03_wings_high.png", "04_power_downstroke.png",
+        "05_clear_contact.png", "06_acceleration_glide.png", "07_second_beat.png", "08_departure_recovery.png"
+      ]
+    }
+  ]
+}

@@ -4,6 +4,43 @@ const cache = new Map<string, HTMLImageElement[]>()
 const tintCache = new Map<string, HTMLCanvasElement>()
 export type BirdAnimationTrack = "flight" | "approach" | "perch" | "launch"
 
+export function frameIndexForPhase(phase: number, frameCount: number) {
+  const count = Math.max(1, Math.floor(frameCount))
+  const normalized = ((phase % 1) + 1) % 1
+  return Math.min(count - 1, Math.floor(normalized * count))
+}
+
+export function temporalFrameSamples(phase: number, frameCount: number, phaseSpan: number) {
+  const count = Math.max(1, Math.floor(frameCount))
+  if (!Number.isFinite(phaseSpan) || phaseSpan <= 0 || count === 1) {
+    return [{ index: frameIndexForPhase(phase, count), weight: 1 }]
+  }
+  const offsets = [-0.5, -0.25, 0, 0.25, 0.5]
+  const weights = [0.08, 0.18, 0.48, 0.18, 0.08]
+  const combined = new Map<number, number>()
+  offsets.forEach((offset, sampleIndex) => {
+    const index = frameIndexForPhase(phase + offset * phaseSpan, count)
+    combined.set(index, (combined.get(index) ?? 0) + weights[sampleIndex])
+  })
+  return [...combined.entries()].map(([index, weight]) => ({ index, weight }))
+}
+
+export function animationFrameLayout(
+  template: BirdTemplate,
+  track: BirdAnimationTrack,
+  imageCount: number,
+) {
+  const flightFrameCount = Math.max(1, template.framesPerVariant ?? template.frames.length)
+  const flightVariantCount = Math.max(1, Math.floor(template.frames.length / flightFrameCount))
+  const frameCount = track === "flight"
+    ? Math.min(imageCount, flightFrameCount)
+    : Math.max(1, Math.floor(imageCount / flightVariantCount))
+  return {
+    frameCount,
+    variantCount: Math.max(1, Math.floor(imageCount / frameCount)),
+  }
+}
+
 // Ratios measured at the center notch in the approved C/A/B/D source crops.
 const ARTIST_PIVOTS = [
   { x: 0.53, y: 0.66 },
@@ -48,6 +85,10 @@ function tintedSource(image: HTMLImageElement, color: string) {
   ctx.fillRect(0, 0, canvas.width, canvas.height)
   tintCache.set(key, canvas)
   return canvas
+}
+
+export function usesOperatorSelectedColor(template: BirdTemplate) {
+  return template.kind === "builtin"
 }
 
 function drawArtistContour(
@@ -152,35 +193,45 @@ export function drawBirdTemplate(
   variant = 0,
   wingStrength = 1,
   track: BirdAnimationTrack = "flight",
+  temporalPhaseSpan = 0,
 ): boolean {
+  let resolvedTrack = track
   let images = imagesFor(template, track)
-  if (!images.length && track !== "flight") images = imagesFor(template, "flight")
+  if (!images.length && track !== "flight") {
+    images = imagesFor(template, "flight")
+    resolvedTrack = "flight"
+  }
   if (!images.length || images.some((image) => !image.complete || !image.naturalWidth)) return false
   const normalized = ((phase % 1) + 1) % 1
   ctx.imageSmoothingEnabled = true
   ctx.imageSmoothingQuality = "high"
 
-  const drawExactFrame = (image: HTMLImageElement) => {
-    const source = template.kind === "builtin" ? tintedSource(image, color) : image
+  const drawExactFrame = (image: HTMLImageElement, opacity = 1) => {
+    const source = usesOperatorSelectedColor(template) ? tintedSource(image, color) : image
     const aspect = image.naturalWidth / Math.max(1, image.naturalHeight)
     const width = size
     const height = Math.min(size * 1.2, width / Math.max(0.35, aspect))
+    const anchor = template.trackAnchors?.[resolvedTrack] ?? { x: 0.5, y: 0.5 }
+    const x = -width * anchor.x
+    const y = -height * anchor.y
     ctx.save()
-    ctx.globalAlpha = alpha
-    ctx.drawImage(source, -width / 2, -height / 2, width, height)
+    ctx.globalAlpha = alpha * opacity
+    ctx.drawImage(source, x, y, width, height)
     if (width < 92) {
-      ctx.globalAlpha = alpha * (width < 48 ? 0.62 : 0.42)
-      ctx.drawImage(source, -width / 2, -height / 2, width, height)
+      ctx.globalAlpha = alpha * opacity * (width < 48 ? 0.62 : 0.42)
+      ctx.drawImage(source, x, y, width, height)
     }
     ctx.restore()
   }
 
-  if (template.playbackMode === "sequence" && (template.framesPerVariant ?? images.length) > 1) {
-    const frameCount = template.framesPerVariant ?? images.length
-    const variantCount = Math.max(1, Math.floor(images.length / frameCount))
+  const layout = animationFrameLayout(template, resolvedTrack, images.length)
+  if (template.playbackMode === "sequence" && layout.frameCount > 1) {
+    const { frameCount, variantCount } = layout
     const variantIndex = Math.abs(Math.floor(variant)) % variantCount
-    const frameIndex = Math.min(frameCount - 1, Math.floor(normalized * frameCount))
-    drawExactFrame(images[variantIndex * frameCount + frameIndex])
+    const samples = temporalFrameSamples(normalized, frameCount, temporalPhaseSpan)
+    for (const sample of samples) {
+      drawExactFrame(images[variantIndex * frameCount + sample.index], sample.weight)
+    }
     return true
   }
   if ((template.kind === "raster" || template.kind === "sprites") && template.wingPivot && template.playbackMode !== "sequence") {
