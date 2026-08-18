@@ -1,0 +1,240 @@
+[
+  {
+    "file": "artwork/smoke-cloud/baseline/smoke-cloud-diffuse-v1.png",
+    "mode": "RGBA",
+    "width": 1672,
+    "height": 941,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 56.815,
+    "partial_alpha_pct": 43.185,
+    "visible_bbox_alpha_gte_8": [
+      91,
+      99,
+      1575,
+      812
+    ],
+    "padding_alpha_gte_8": {
+      "left": 91,
+      "top": 99,
+      "right": 97,
+      "bottom": 129
+    },
+    "colored_soft_edge_pct": 0.0784,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": false,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": false
+  },
+  {
+    "file": "artwork/smoke-cloud/baseline/smoke-cloud-turbulent-v1.png",
+    "mode": "RGBA",
+    "width": 1672,
+    "height": 940,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 58.077,
+    "partial_alpha_pct": 41.923,
+    "visible_bbox_alpha_gte_8": [
+      53,
+      110,
+      1612,
+      831
+    ],
+    "padding_alpha_gte_8": {
+      "left": 53,
+      "top": 110,
+      "right": 60,
+      "bottom": 109
+    },
+    "colored_soft_edge_pct": 1.0188,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": false,
+      "minimum_80px_padding": false,
+      "neutral_soft_edges": false
+    },
+    "passed": false
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/approved/gather-compressed-extreme-v1.png",
+    "mode": "RGBA",
+    "width": 1672,
+    "height": 941,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 78.75,
+    "partial_alpha_pct": 21.25,
+    "visible_bbox_alpha_gte_8": [
+      430,
+      149,
+      1285,
+      766
+    ],
+    "padding_alpha_gte_8": {
+      "left": 430,
+      "top": 149,
+      "right": 387,
+      "bottom": 175
+    },
+    "colored_soft_edge_pct": 0.2166,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/approved/twirl-vortex-extreme-v1.png",
+    "mode": "RGBA",
+    "width": 1672,
+    "height": 941,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 55.622,
+    "partial_alpha_pct": 44.378,
+    "visible_bbox_alpha_gte_8": [
+      75,
+      90,
+      1620,
+      843
+    ],
+    "padding_alpha_gte_8": {
+      "left": 75,
+      "top": 90,
+      "right": 52,
+      "bottom": 98
+    },
+    "colored_soft_edge_pct": 0.0933,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": false,
+      "minimum_80px_padding": false,
+      "neutral_soft_edges": true
+    },
+    "passed": false
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/review/dissipate-release-extreme-v2.png",
+    "mode": "RGBA",
+    "width": 1672,
+    "height": 941,
+    "alpha_min": 0,
+    "alpha_max": 253,
+    "transparent_pct": 71.411,
+    "partial_alpha_pct": 28.589,
+    "visible_bbox_alpha_gte_8": [
+      118,
+      181,
+      1554,
+      770
+    ],
+    "padding_alpha_gte_8": {
+      "left": 118,
+      "top": 181,
+      "right": 118,
+      "bottom": 171
+    },
+    "colored_soft_edge_pct": 0.0889,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/review/spread-bloom-extreme-v1.png",
+    "mode": "RGBA",
+    "width": 1672,
+    "height": 941,
+    "alpha_min": 0,
+    "alpha_max": 253,
+    "transparent_pct": 60.518,
+    "partial_alpha_pct": 39.482,
+    "visible_bbox_alpha_gte_8": [
+      110,
+      105,
+      1534,
+      838
+    ],
+    "padding_alpha_gte_8": {
+      "left": 110,
+      "top": 105,
+      "right": 138,
+      "bottom": 103
+    },
+    "colored_soft_edge_pct": 0.308,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": false,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": false
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/rejected/dissipate-release-extreme-v1.png",
+    "mode": "RGBA",
+    "width": 1672,
+    "height": 941,
+    "alpha_min": 0,
+    "alpha_max": 248,
+    "transparent_pct": 62.313,
+    "partial_alpha_pct": 37.687,
+    "visible_bbox_alpha_gte_8": [
+      30,
+      101,
+      1634,
+      822
+    ],
+    "padding_alpha_gte_8": {
+      "left": 30,
+      "top": 101,
+      "right": 38,
+      "bottom": 119
+    },
+    "colored_soft_edge_pct": 0.0901,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": false,
+      "minimum_80px_padding": false,
+      "neutral_soft_edges": true
+    },
+    "passed": false
+  }
+]

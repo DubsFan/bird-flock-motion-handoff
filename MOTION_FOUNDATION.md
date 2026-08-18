@@ -1,6 +1,6 @@
 # Murmur Motion Foundation
 
-This file is the regression guard for bird artwork and motion. Read it before changing the renderer, presets, asset intake, or export proofs.
+This file is the regression guard for authored artwork and motion. Read it before changing the renderer, presets, asset intake, or export proofs. For the current plain-language status, open `HANDOFF_DASHBOARD.html`; for exact next-agent paths, read `NEXT_AGENT_HANDOFF.md`.
 
 ## Canonical repository and legacy archive
 
@@ -68,9 +68,25 @@ Newer accepted evidence supersedes older experiments. A technically valid file i
 
 ## Custom source intake
 
-- Lowest friction is one ZIP per bird identity: one manifest, eight flight PNGs, and—when landing is needed—eight approach, eight perch/settle, and eight launch/flyoff PNGs.
-- The ZIP is directly importable. Murmur validates all 32 frames and stores the imported bundle in IndexedDB so large RGBA data survives reload without localStorage quota loss.
+- Lowest friction is one ZIP per identity: one manifest plus matched chronological flight, approach, perch/settle, and launch/flyoff PNG tracks. Each track may contain 2–16 frames; all four counts must match.
+- The ZIP is directly importable. Murmur validates every declared frame and stores the imported bundle in IndexedDB so large RGBA data survives reload without localStorage quota loss.
 - One identity can drive 1–8 or more visible birds through independent timing, scale, and formation offsets. Create another Flock tab and import another identity only when the composition needs a distinct bird design.
+
+## Current non-bird contracts
+
+### Silver Vortex Smoke
+
+- Canonical import: `artwork/smoke-cloud/delivery/silver-vortex-smoke-v1.zip`.
+- Sixty completed 2048×1280 RGBA frames: 15 each for flow, gather/compress, compressed micro-twirl hold, and release/bloom/dissipate/reform.
+- Shared anchor: `(1024, 640)`. Use the manifest anchor; do not recenter individual tracks.
+- The runtime must play the frames directly. Do not replace the material with particles, procedural blur, or a single warped still.
+
+### Quarter Note — Gentle Orbit
+
+- Canonical import: `deliverables/quarter-note-murmur/quarter-note-01-murmur.zip`.
+- Sixty-four completed 1600×1200 RGBA frames: 16 per track, with shared anchor `(800, 900)`.
+- Preserve the exact source silhouette at constant scale. Rotation and translation are allowed; squash, stretch, shear, tracing, redraw, and AI identity morphing are rejected.
+- The rejected 32-frame Beat Bop pass is superseded and intentionally absent from the handoff.
 
 ## Required validation after a material motion change
 

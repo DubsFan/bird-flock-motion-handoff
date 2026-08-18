@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0",
+  "sets": [
+    {
+      "id": "silver-vortex-smoke-v1",
+      "name": "Silver Vortex Smoke",
+      "direction": "right",
+      "canvases": {
+        "flight": {
+          "width": 2048,
+          "height": 1280,
+          "anchor": {
+            "x": 1024,
+            "y": 640
+          }
+        },
+        "action": {
+          "width": 2048,
+          "height": 1280,
+          "anchor": {
+            "x": 1024,
+            "y": 640
+          }
+        }
+      },
+      "up_direction": "canvas_top",
+      "orientation_metadata": "stripped",
+      "ink_color": "neutral pearl-gray volumetric alpha",
+      "tracks": {
+        "flight": [
+          "01_neutral_flow.png",
+          "02_shear_build_a.png",
+          "03_shear_a.png",
+          "04_twirl_entry.png",
+          "05_twirl_forward_1.png",
+          "06_twirl_forward_2.png",
+          "07_twirl_peak.png",
+          "08_shear_cross.png",
+          "09_shear_b.png",
+          "10_reverse_entry.png",
+          "11_reverse_turn.png",
+          "12_reverse_peak.png",
+          "13_neutral_return_1.png",
+          "14_neutral_return_2.png",
+          "15_neutral_seam.png"
+        ],
+        "approach": [
+          "01_neutral_approach.png",
+          "02_draw_in_1.png",
+          "03_draw_in_2.png",
+          "04_draw_in_3.png",
+          "05_gather_half.png",
+          "06_compress_1.png",
+          "07_compress_2.png",
+          "08_compress_3.png",
+          "09_compress_4.png",
+          "10_compressed_contact.png",
+          "11_microtwirl_entry.png",
+          "12_microtwirl_hold.png",
+          "13_microtwirl_peak.png",
+          "14_compressed_return.png",
+          "15_compressed_ready.png"
+        ],
+        "perch": [
+          "01_compressed_contact.png",
+          "02_hold_turn_1.png",
+          "03_hold_turn_2.png",
+          "04_hold_turn_3.png",
+          "05_microtwirl_peak_1.png",
+          "06_settle_1.png",
+          "07_settle_2.png",
+          "08_compressed_hold.png",
+          "09_hold_turn_4.png",
+          "10_hold_turn_5.png",
+          "11_hold_turn_6.png",
+          "12_microtwirl_peak_2.png",
+          "13_ready_settle_1.png",
+          "14_ready_settle_2.png",
+          "15_ready_release.png"
+        ],
+        "launch": [
+          "01_compressed_ready.png",
+          "02_release_1.png",
+          "03_release_2.png",
+          "04_release_half.png",
+          "05_unfurl_1.png",
+          "06_unfurl_2.png",
+          "07_twirl_release.png",
+          "08_bloom_1.png",
+          "09_bloom_2.png",
+          "10_spread_peak.png",
+          "11_dissipate_1.png",
+          "12_dissipate_peak.png",
+          "13_reform_1.png",
+          "14_reform_2.png",
+          "15_reformed_flow.png"
+        ]
+      },
+      "source_method": "11 image-generated RGBA key poses with fixed-center, premultiplied-alpha authored in-betweens; direct chronological playback"
+    }
+  ]
+}

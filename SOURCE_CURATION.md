@@ -31,3 +31,14 @@ Each retained identity includes its eight-frame flight cycle and the matched eig
 | `d_distant_drop` | Pre-baked bank is nearly indistinguishable when small; engine banking is cleaner. |
 
 Quarantined files can be reconsidered after normal-speed user review, but they are not silently mixed into current flocks.
+
+## Non-bird custom identities
+
+| Identity | Canonical source | Delivery | Curation decision |
+| --- | --- | --- | --- |
+| Silver Vortex Smoke | Eleven normalized key poses under `artwork/smoke-cloud/keyposes/normalized-v2/` | `artwork/smoke-cloud/delivery/silver-vortex-smoke-v1.zip` | Approved 60-frame bundle. Files under `review/` and `rejected/` are labeled provenance only. The earlier five-pose normalization was removed as superseded. |
+| Quarter Note — Gentle Orbit | `deliverables/quarter-note-murmur/source/quarter-note-master.png` | `deliverables/quarter-note-murmur/quarter-note-01-murmur.zip` | Approved 64-frame rigid-transform bundle. The 32-frame Beat Bop squash/stretch bundle was rejected and removed. |
+
+The pool image used as the alignment and visual-review scene is retained at `artwork/references/pool-scene-reference.png`. It is a review reference, not baked into either transparent bundle.
+
+The six files under `public/quarter-notes/` record the initial silhouette exploration. `quarter-note-01-classic.png` is the selected source design; the other five remain named alternatives and are not silently used by the runtime.

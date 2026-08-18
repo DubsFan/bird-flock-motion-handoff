@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "bundle_zip": "quarter-note-01-murmur.zip",
+  "zip_sha256": "33f43b8b86d5dd17878052f6c96ccb8ba663c14f40cece4b1614cb7d95d86566",
+  "manifest_sha256": "a54f4b51fa992a256c671b7d77cb6a3c6c52cb67fc347c4a97fed48cfde48bb5",
+  "ffmpeg": [
+    "created quarter-note-01-flight-12fps.mp4",
+    "created quarter-note-01-flight-16fps.mp4",
+    "created quarter-note-01-flight-20fps.mp4",
+    "created quarter-note-01-action-motion-review.mp4"
+  ]
+}

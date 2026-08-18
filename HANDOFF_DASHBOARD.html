@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Plain-language status and next steps for the Murmur smoke and quarter-note artwork bundles.">
+  <title>Murmur artwork handoff</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --ink: #f7f8fb;
+      --muted: #aeb7c5;
+      --panel: #151a22;
+      --panel-2: #1b222d;
+      --line: #313b49;
+      --green: #6ee7a8;
+      --green-deep: #143a2b;
+      --blue: #72b8ff;
+      --smoke: #d8dde5;
+      --warning: #ffd27a;
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: #0d1117;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 17px;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+
+    button, a.button {
+      min-height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 12px 16px;
+      background: var(--ink);
+      color: #11161d;
+      font: inherit;
+      font-weight: 750;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    a.button.secondary, button.secondary {
+      background: transparent;
+      color: var(--ink);
+    }
+
+    button:hover, a.button:hover { transform: translateY(-1px); }
+    button:focus-visible, a:focus-visible, summary:focus-visible {
+      outline: 3px solid var(--blue);
+      outline-offset: 3px;
+    }
+
+    .wrap { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(13, 17, 23, .92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+    }
+
+    nav {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand { font-weight: 850; letter-spacing: -.02em; }
+    .nav-links { display: flex; gap: 18px; font-size: 14px; color: var(--muted); }
+    .nav-links a { text-decoration: none; }
+
+    main { padding: 46px 0 80px; }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap: 28px;
+      align-items: stretch;
+      margin-bottom: 28px;
+    }
+
+    .hero-copy, .hero-status, .panel, .bundle, details {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .hero-copy { padding: clamp(28px, 5vw, 60px); }
+    .hero-status { padding: 28px; display: flex; flex-direction: column; justify-content: space-between; }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--green);
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 13px;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 18px; max-width: 780px; font-size: clamp(39px, 6vw, 72px); line-height: .98; letter-spacing: -.055em; }
+    h2 { margin-bottom: 8px; font-size: clamp(28px, 4vw, 42px); line-height: 1.08; letter-spacing: -.035em; }
+    h3 { margin-bottom: 8px; font-size: 22px; letter-spacing: -.02em; }
+    .lede { max-width: 760px; margin-bottom: 0; color: var(--muted); font-size: clamp(18px, 2.1vw, 23px); }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: 9px;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: var(--green-deep);
+      color: var(--green);
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 5px rgba(110, 231, 168, .12); }
+    .big-number { margin: 24px 0 0; font-size: 80px; line-height: 1; font-weight: 900; letter-spacing: -.07em; }
+    .status-label { color: var(--muted); font-weight: 650; }
+
+    .quick-step {
+      margin: 0 0 44px;
+      padding: 24px 28px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 20px;
+      align-items: center;
+      background: #eef3f8;
+      color: #10151c;
+      border-radius: var(--radius);
+    }
+
+    .step-number { font-size: 42px; font-weight: 900; color: #1675c1; }
+    .quick-step strong { display: block; font-size: 21px; }
+    .quick-step p { margin: 2px 0 0; color: #4b5563; }
+    .quick-step .button { background: #10151c; color: white; }
+
+    section { margin-top: 54px; scroll-margin-top: 88px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 20px; }
+    .section-head p { margin: 0; color: var(--muted); }
+
+    .bundles { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+    .bundle { overflow: hidden; }
+
+    .art {
+      height: 290px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background: #202733;
+    }
+
+    .bundle.note .art { background: #f2f4f7; }
+    .art img { width: 100%; height: 100%; object-fit: contain; padding: 24px; }
+    .bundle-body { padding: 26px; }
+    .bundle-title { display: flex; align-items: start; justify-content: space-between; gap: 14px; }
+
+    .badge {
+      white-space: nowrap;
+      padding: 5px 9px;
+      border: 1px solid #2d7758;
+      border-radius: 999px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .plain { color: var(--muted); min-height: 54px; }
+    .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 9px; margin: 22px 0; }
+    .fact { padding: 12px; background: var(--panel-2); border-radius: 12px; }
+    .fact strong, .fact span { display: block; }
+    .fact strong { font-size: 20px; }
+    .fact span { color: var(--muted); font-size: 12px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .decision-grid, .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .panel { padding: 23px; }
+    .panel .icon { font-size: 28px; margin-bottom: 14px; }
+    .panel p { margin-bottom: 0; color: var(--muted); font-size: 15px; }
+    .panel a { color: var(--blue); font-weight: 750; }
+
+    .walkthrough { counter-reset: steps; display: grid; gap: 12px; }
+    .walkthrough .panel { display: grid; grid-template-columns: 54px 1fr; gap: 18px; align-items: start; }
+    .walkthrough .panel::before {
+      counter-increment: steps;
+      content: counter(steps);
+      display: grid;
+      place-items: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 15px;
+      background: #223145;
+      color: var(--blue);
+      font-size: 24px;
+      font-weight: 900;
+    }
+
+    .walkthrough p { margin-bottom: 0; color: var(--muted); }
+    code { padding: 2px 6px; border-radius: 6px; background: #272f3b; font: 14px ui-monospace, SFMono-Regular, Menlo, monospace; overflow-wrap: anywhere; }
+
+    details { margin-top: 12px; padding: 0 22px; }
+    summary { padding: 20px 0; cursor: pointer; font-weight: 800; }
+    details > div { padding-bottom: 22px; color: var(--muted); }
+    details ul { margin-bottom: 0; }
+
+    .footer-note { margin-top: 54px; padding-top: 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+
+    .copy-result { min-height: 24px; margin-top: 10px; color: var(--green); font-size: 14px; }
+
+    @media (max-width: 860px) {
+      .hero, .bundles { grid-template-columns: 1fr; }
+      .hero-status { min-height: 210px; }
+      .decision-grid, .proof-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .quick-step { grid-template-columns: auto 1fr; }
+      .quick-step .button { grid-column: 1 / -1; }
+    }
+
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .wrap { width: min(100% - 22px, 1160px); }
+      main { padding-top: 22px; }
+      .nav-links { display: none; }
+      .hero-copy, .hero-status, .bundle-body, .panel { padding: 21px; }
+      .quick-step { padding: 20px; }
+      .decision-grid, .proof-grid { grid-template-columns: 1fr; }
+      .facts { grid-template-columns: 1fr 1fr; }
+      .art { height: 230px; }
+      .actions .button, .actions button { width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      button:hover, a.button:hover { transform: none; }
+    }
+
+    @media print {
+      header, .actions, .quick-step .button { display: none; }
+      body { background: white; color: black; }
+      .hero-copy, .hero-status, .panel, .bundle, details { background: white; color: black; border-color: #bbb; break-inside: avoid; }
+      .plain, .panel p, .section-head p, .footer-note, details > div { color: #333; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="wrap" aria-label="Page sections">
+      <div class="brand">Murmur handoff</div>
+      <div class="nav-links">
+        <a href="#bundles">Pick a bundle</a>
+        <a href="#walkthrough">How to use it</a>
+        <a href="#proof">Proof</a>
+        <a href="#next">What next?</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <div class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">You can safely pick this up elsewhere</p>
+        <h1>Two finished art bundles. One easy choice.</h1>
+        <p class="lede">Choose smoke if you want an expressive cloud. Choose the blue note if you want a clean symbol. Both already work with the same Murmur controls as the birds.</p>
+      </div>
+      <aside class="hero-status" aria-label="Overall readiness">
+        <div class="status-pill"><span class="dot"></span> Ready to import</div>
+        <div>
+          <div class="big-number">2</div>
+          <div class="status-label">tested bundles</div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="quick-step">
+      <div class="step-number">1</div>
+      <div>
+        <strong>If you only remember one thing</strong>
+        <p>Open Murmur → choose a Flock → click the Bird preview card → pick one ZIP below.</p>
+      </div>
+      <a class="button" href="#bundles">Show me the ZIPs ↓</a>
+    </div>
+
+    <section id="bundles">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Pick one</p>
+          <h2>Which thing do you want on screen?</h2>
+        </div>
+      </div>
+
+      <div class="bundles">
+        <article class="bundle smoke">
+          <div class="art">
+            <img src="./artwork/smoke-cloud/keyposes/normalized-v2/01_neutral_anchor.png" alt="A soft silver-gray smoke cloud on a dark background">
+          </div>
+          <div class="bundle-body">
+            <div class="bundle-title">
+              <div>
+                <p class="eyebrow">Best for organic motion</p>
+                <h3>Silver Vortex Smoke</h3>
+              </div>
+              <span class="badge">Passed</span>
+            </div>
+            <p class="plain">It drifts and twirls while moving, gathers into a tight cloud at a landing point, then blooms, dissipates, and reforms as it leaves.</p>
+            <div class="facts" aria-label="Smoke bundle facts">
+              <div class="fact"><strong>60</strong><span>finished images</span></div>
+              <div class="fact"><strong>4</strong><span>motion stages</span></div>
+              <div class="fact"><strong>15</strong><span>images per stage</span></div>
+            </div>
+            <div class="actions">
+              <a class="button" download href="./artwork/smoke-cloud/delivery/silver-vortex-smoke-v1.zip">Get smoke ZIP</a>
+              <a class="button secondary" href="./artwork/smoke-cloud/qa/previews/full-action-8fps-dark.mp4">Watch motion</a>
+              <button class="secondary" type="button" data-copy="artwork/smoke-cloud/delivery/silver-vortex-smoke-v1.zip">Copy location</button>
+            </div>
+            <div class="copy-result" aria-live="polite"></div>
+          </div>
+        </article>
+
+        <article class="bundle note">
+          <div class="art">
+            <img src="./deliverables/quarter-note-murmur/quarter-note-01/preview.png" alt="A clean blue quarter note on a light background">
+          </div>
+          <div class="bundle-body">
+            <div class="bundle-title">
+              <div>
+                <p class="eyebrow">Best for graphic clarity</p>
+                <h3>Quarter Note — Gentle Orbit</h3>
+              </div>
+              <span class="badge">Passed</span>
+            </div>
+            <p class="plain">It floats in a gentle orbit, eases into a landing point, rests with tiny movement, and lifts away without bending or changing shape.</p>
+            <div class="facts" aria-label="Quarter-note bundle facts">
+              <div class="fact"><strong>64</strong><span>finished images</span></div>
+              <div class="fact"><strong>4</strong><span>motion stages</span></div>
+              <div class="fact"><strong>16</strong><span>images per stage</span></div>
+            </div>
+            <div class="actions">
+              <a class="button" download href="./deliverables/quarter-note-murmur/quarter-note-01-murmur.zip">Get note ZIP</a>
+              <a class="button secondary" href="./deliverables/quarter-note-murmur/qa/quarter-note-01-action-motion-review.mp4">Watch motion</a>
+              <button class="secondary" type="button" data-copy="deliverables/quarter-note-murmur/quarter-note-01-murmur.zip">Copy location</button>
+            </div>
+            <div class="copy-result" aria-live="polite"></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="walkthrough">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">No jargon</p>
+          <h2>Walk me through it</h2>
+        </div>
+        <p>About one minute</p>
+      </div>
+      <div class="walkthrough">
+        <div class="panel"><div><h3>Open Murmur</h3><p>Start the normal Murmur editor. You do not need a special smoke tool.</p></div></div>
+        <div class="panel"><div><h3>Pick a Flock tab</h3><p>Each Flock tab is one kind of moving thing. Use a fresh tab if you do not want to replace your current birds.</p></div></div>
+        <div class="panel"><div><h3>Click the Bird picture</h3><p>That picture is also the artwork-import button. The label still says “Bird,” but it accepts smoke and symbols too.</p></div></div>
+        <div class="panel"><div><h3>Choose one ZIP</h3><p>Use the smoke ZIP for a cloud or the quarter-note ZIP for the blue note. Do not unzip it first.</p></div></div>
+        <div class="panel"><div><h3>Draw the same route as usual</h3><p>Enter = comes in. Path = travels. Landing = gathers or rests. Exit = releases and leaves. Murmur switches the four image groups for you.</p></div></div>
+      </div>
+    </section>
+
+    <section id="proof">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Why trust it?</p>
+          <h2>The simple proof</h2>
+        </div>
+      </div>
+      <div class="proof-grid">
+        <div class="panel"><div class="icon">✓</div><h3>Loaded for real</h3><p>Both ZIPs were imported through Murmur’s actual artwork control.</p></div>
+        <div class="panel"><div class="icon">▶</div><h3>Watched at speed</h3><p>Movement was reviewed in the running editor, not just as still pictures.</p></div>
+        <div class="panel"><div class="icon">↻</div><h3>Survived reload</h3><p>The custom name and all four motion stages stayed saved after refresh.</p></div>
+        <div class="panel"><div class="icon">◇</div><h3>Clean edges</h3><p>Every finished image passed transparency, spacing, size, and package checks.</p></div>
+      </div>
+      <details>
+        <summary>Show me the detailed proof files</summary>
+        <div>
+          <ul>
+            <li><a href="./artwork/smoke-cloud/QA_REPORT.md">Smoke QA report</a> and <a href="./artwork/smoke-cloud/qa/flight-contact-sheet-dark.png">flight contact sheet</a></li>
+            <li><a href="./deliverables/quarter-note-murmur/AUDIT_LOG.md">Quarter-note audit</a> and <a href="./deliverables/quarter-note-murmur/qa/quarter-note-01-action-contact-sheet.png">full action contact sheet</a></li>
+            <li><a href="./AUDIT_LOG.md">Whole-project audit history</a></li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section id="next">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Decision guide</p>
+          <h2>What should happen next?</h2>
+        </div>
+      </div>
+      <div class="decision-grid">
+        <div class="panel"><div class="icon">☁</div><h3>Want smoke now?</h3><p>Import the smoke ZIP. This is the strongest next demo because it is the most different from a bird.</p></div>
+        <div class="panel"><div class="icon">♪</div><h3>Want a symbol?</h3><p>Import the note ZIP. It is intentionally rigid and clean, with no squash or shape wobble.</p></div>
+        <div class="panel"><div class="icon">✎</div><h3>Want changes?</h3><p>Tell the next agent which moment feels wrong: moving, gathering, holding, or releasing. That is enough direction.</p></div>
+        <div class="panel"><div class="icon">→</div><h3>Handing off?</h3><p>Start with <a href="./NEXT_AGENT_HANDOFF.md">NEXT_AGENT_HANDOFF.md</a>. It has paths, rules, rebuild steps, and known rejected ideas.</p></div>
+      </div>
+      <details open>
+        <summary>What is not decided yet?</summary>
+        <div>No required work is left unfinished. The next decision is creative: use either bundle as-is, tune one of its four motion stages, or place it into a specific scene and export the result.</div>
+      </details>
+      <details>
+        <summary>What must the next agent never accidentally restore?</summary>
+        <div>The rejected 32-frame “Beat Bop” quarter note changed shape through squash, stretch, and shear. It was replaced by the 64-frame Gentle Orbit version. Smoke candidates inside <code>review</code> and <code>rejected</code> folders are provenance only; the import ZIP is the approved delivery.</div>
+      </details>
+    </section>
+
+    <p class="footer-note">Last content review: August 18, 2026. This is a single self-contained HTML page with no online dependency. Keep it beside the project folders so its preview and download links continue to work.</p>
+  </main>
+
+  <script>
+    document.querySelectorAll('[data-copy]').forEach((button) => {
+      button.addEventListener('click', async () => {
+        const text = button.dataset.copy;
+        const result = button.closest('.bundle-body').querySelector('.copy-result');
+        try {
+          await navigator.clipboard.writeText(text);
+          result.textContent = 'Copied: ' + text;
+        } catch {
+          result.textContent = 'Location: ' + text;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+{
+  "schema_version": "1.0",
+  "sets": [
+    {
+      "id": "quarter-note-01",
+      "name": "Quarter Note \u2014 Gentle Orbit",
+      "direction": "right",
+      "canvases": {
+        "flight": {
+          "width": 1600,
+          "height": 1200,
+          "anchor": {
+            "x": 800,
+            "y": 900
+          }
+        },
+        "action": {
+          "width": 1600,
+          "height": 1200,
+          "anchor": {
+            "x": 800,
+            "y": 900
+          }
+        }
+      },
+      "up_direction": "canvas_top",
+      "orientation_metadata": "stripped",
+      "ink_color": "#0D8EEB",
+      "tracks": {
+        "flight": [
+          "01_neutral.png",
+          "02_rise_start.png",
+          "03_rise.png",
+          "04_lift.png",
+          "05_lift_apex.png",
+          "06_lift_return.png",
+          "07_rebound.png",
+          "08_centering.png",
+          "09_pass_center.png",
+          "10_fall_start.png",
+          "11_fall.png",
+          "12_fall_apex.png",
+          "13_fall_return.png",
+          "14_recover.png",
+          "15_near_neutral.png",
+          "16_loop_seam.png"
+        ],
+        "approach": [
+          "01_cruise_in.png",
+          "02_brake_start.png",
+          "03_brake_lean.png",
+          "04_brake_rise.png",
+          "05_brake_lift.png",
+          "06_brake_peak.png",
+          "07_brake_hold.png",
+          "08_brake_release.png",
+          "09_descend_start.png",
+          "10_descend.png",
+          "11_contact.png",
+          "12_contact_rebound.png",
+          "13_settle.png",
+          "14_settle_return.png",
+          "15_perch_ready.png",
+          "16_anchor_hold.png"
+        ],
+        "perch": [
+          "01_anchor_hold.png",
+          "02_settle_left.png",
+          "03_settle_left_peak.png",
+          "04_settle_left_return.png",
+          "05_quiet_center.png",
+          "06_micro_right.png",
+          "07_micro_right_peak.png",
+          "08_micro_right_return.png",
+          "09_quiet_hold.png",
+          "10_micro_left.png",
+          "11_micro_left_peak.png",
+          "12_micro_left_return.png",
+          "13_breathe_right.png",
+          "14_breathe_right_peak.png",
+          "15_ready.png",
+          "16_prelaunch.png"
+        ],
+        "launch": [
+          "01_prelaunch.png",
+          "02_anticipate.png",
+          "03_anticipate_deep.png",
+          "04_release_ready.png",
+          "05_release.png",
+          "06_rise_start.png",
+          "07_rise.png",
+          "08_rise_clear.png",
+          "09_rise_apex.png",
+          "10_airborne.png",
+          "11_airborne_return.png",
+          "12_flyoff.png",
+          "13_flyoff_recover.png",
+          "14_near_flight.png",
+          "15_flight_ready.png",
+          "16_neutral.png"
+        ]
+      },
+      "source_method": "Exact supplied quarter-note alpha silhouette; 64 deterministic rigid-transform poses using rotation and translation only at constant scale; no redraw, squash, stretch, shear, or identity morph; direct chronological playback"
+    }
+  ]
+}

@@ -266,6 +266,14 @@ export function AssetPanel({ scene, flockName, birdTemplate, activeVariant, view
       frames,
       previewDataUrl: frames[0],
       wingPivot: manifestRig?.normalizedPivot ?? (kind === "raster" ? { x: 0.5, y: 0.5 } : undefined),
+      trackAnchors: manifestRig ? {
+        flight: manifestRig.canvases.flight.normalizedAnchor,
+        ...(manifestRig.canvases.action ? {
+          approach: manifestRig.canvases.action.normalizedAnchor,
+          perch: manifestRig.canvases.action.normalizedAnchor,
+          launch: manifestRig.canvases.action.normalizedAnchor,
+        } : {}),
+      } : undefined,
       actionFrames: dataTracks.approach && dataTracks.perch && dataTracks.launch ? {
         approach: dataTracks.approach,
         perch: dataTracks.perch,

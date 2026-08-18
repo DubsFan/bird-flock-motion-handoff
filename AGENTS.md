@@ -10,7 +10,9 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 # Murmur export application contract
 
-Before changing bird artwork or motion, read `MOTION_FOUNDATION.md` and `SOURCE_CURATION.md`. They record the handed-off source chronology, canonical frame/action contracts, retained identities, and rejected regressions.
+Start with `NEXT_AGENT_HANDOFF.md`. Before changing artwork or motion, read `MOTION_FOUNDATION.md` and `SOURCE_CURATION.md`. They record the handed-off source chronology, canonical frame/action contracts, retained identities, current non-bird bundles, and rejected regressions. `HANDOFF_DASHBOARD.html` is the plain-language operator view and must stay consistent with those source-of-truth documents.
+
+Custom identities use the same four-track Murmur contract as birds, but their motion semantics differ. Do not impose wing anatomy on smoke or symbols. Preserve each manifest's authored canvas and normalized anchor, and use the completed chronological PNGs directly.
 
 When applying a Murmur export to a selected background, preserve the exact authored viewport and do not independently crop the bird layer. The uploaded image, HTML/CSS scene, or URL scene is an alignment reference; only image scenes can be directly composited into opaque exports.
 

@@ -1,0 +1,236 @@
+{
+  "schema_version": "1.0",
+  "identity": "quarter-note-01",
+  "master_sha256": "b156a1d8ce6178ac95ea5bef0d7723c77eda69e80cbc0b1d61b6e585e2cb088b",
+  "passed": true,
+  "keyposes": [
+    {
+      "file": "artwork/quarter-note/keyposes/normalized/01_neutral_anchor.png",
+      "sha256": "c4b0e70111fe2e4fb1e012052aa88b353843bf356420c191feb31ae470640732",
+      "mode": "RGBA",
+      "width": 1600,
+      "height": 1200,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "visible_bbox": [
+        583,
+        265,
+        1001,
+        1005
+      ],
+      "padding": {
+        "left": 583,
+        "top": 265,
+        "right": 599,
+        "bottom": 195
+      },
+      "anchor": {
+        "x": 800,
+        "y": 900,
+        "alpha": 254
+      },
+      "checks": {
+        "rgba": true,
+        "canvas_1600x1200": true,
+        "contains_fully_transparent_pixels": true,
+        "contains_fully_visible_pixels": true,
+        "transparent_outer_border": true,
+        "minimum_80px_padding": true,
+        "anchor_pixel_visible": true,
+        "one_visible_color": true,
+        "transparent_rgb_zero": true
+      },
+      "passed": true
+    },
+    {
+      "file": "artwork/quarter-note/keyposes/normalized/02_lift_apex.png",
+      "sha256": "c920c8434a967659b427d609fa1f604919cfc7c34f1b0843dc15890c076619ad",
+      "mode": "RGBA",
+      "width": 1600,
+      "height": 1200,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "visible_bbox": [
+        593,
+        236,
+        1006,
+        1002
+      ],
+      "padding": {
+        "left": 593,
+        "top": 236,
+        "right": 594,
+        "bottom": 198
+      },
+      "anchor": {
+        "x": 800,
+        "y": 900,
+        "alpha": 254
+      },
+      "checks": {
+        "rgba": true,
+        "canvas_1600x1200": true,
+        "contains_fully_transparent_pixels": true,
+        "contains_fully_visible_pixels": true,
+        "transparent_outer_border": true,
+        "minimum_80px_padding": true,
+        "anchor_pixel_visible": true,
+        "one_visible_color": true,
+        "transparent_rgb_zero": true
+      },
+      "passed": true
+    },
+    {
+      "file": "artwork/quarter-note/keyposes/normalized/03_fall_apex.png",
+      "sha256": "4652106888480ce0b1d37fa7bb9dc4ba09c2ac31432181972321f3d940b723e6",
+      "mode": "RGBA",
+      "width": 1600,
+      "height": 1200,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "visible_bbox": [
+        574,
+        289,
+        1050,
+        1013
+      ],
+      "padding": {
+        "left": 574,
+        "top": 289,
+        "right": 550,
+        "bottom": 187
+      },
+      "anchor": {
+        "x": 800,
+        "y": 900,
+        "alpha": 254
+      },
+      "checks": {
+        "rgba": true,
+        "canvas_1600x1200": true,
+        "contains_fully_transparent_pixels": true,
+        "contains_fully_visible_pixels": true,
+        "transparent_outer_border": true,
+        "minimum_80px_padding": true,
+        "anchor_pixel_visible": true,
+        "one_visible_color": true,
+        "transparent_rgb_zero": true
+      },
+      "passed": true
+    },
+    {
+      "file": "artwork/quarter-note/keyposes/normalized/04_contact.png",
+      "sha256": "913d35491f11c4fdf2f4b499b54cde0c81ee5adfb17ac85b0a93a66c40a23807",
+      "mode": "RGBA",
+      "width": 1600,
+      "height": 1200,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "visible_bbox": [
+        582,
+        278,
+        1025,
+        1012
+      ],
+      "padding": {
+        "left": 582,
+        "top": 278,
+        "right": 575,
+        "bottom": 188
+      },
+      "anchor": {
+        "x": 800,
+        "y": 900,
+        "alpha": 254
+      },
+      "checks": {
+        "rgba": true,
+        "canvas_1600x1200": true,
+        "contains_fully_transparent_pixels": true,
+        "contains_fully_visible_pixels": true,
+        "transparent_outer_border": true,
+        "minimum_80px_padding": true,
+        "anchor_pixel_visible": true,
+        "one_visible_color": true,
+        "transparent_rgb_zero": true
+      },
+      "passed": true
+    },
+    {
+      "file": "artwork/quarter-note/keyposes/normalized/05_quiet_hold.png",
+      "sha256": "ccf40430ddd8ce582630628d4552956e8b5905c47446496fae0432c61212de7d",
+      "mode": "RGBA",
+      "width": 1600,
+      "height": 1200,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "visible_bbox": [
+        582,
+        265,
+        1003,
+        1005
+      ],
+      "padding": {
+        "left": 582,
+        "top": 265,
+        "right": 597,
+        "bottom": 195
+      },
+      "anchor": {
+        "x": 800,
+        "y": 900,
+        "alpha": 254
+      },
+      "checks": {
+        "rgba": true,
+        "canvas_1600x1200": true,
+        "contains_fully_transparent_pixels": true,
+        "contains_fully_visible_pixels": true,
+        "transparent_outer_border": true,
+        "minimum_80px_padding": true,
+        "anchor_pixel_visible": true,
+        "one_visible_color": true,
+        "transparent_rgb_zero": true
+      },
+      "passed": true
+    },
+    {
+      "file": "artwork/quarter-note/keyposes/normalized/06_airborne.png",
+      "sha256": "a14d102b20468f7ced818c5580e28c592847f4f79e9a5cad5f2c9e0f2c97c34c",
+      "mode": "RGBA",
+      "width": 1600,
+      "height": 1200,
+      "alpha_min": 0,
+      "alpha_max": 255,
+      "visible_bbox": [
+        587,
+        237,
+        1003,
+        994
+      ],
+      "padding": {
+        "left": 587,
+        "top": 237,
+        "right": 597,
+        "bottom": 206
+      },
+      "anchor": {
+        "x": 800,
+        "y": 900,
+        "alpha": 254
+      },
+      "checks": {
+        "rgba": true,
+        "canvas_1600x1200": true,
+        "contains_fully_transparent_pixels": true,
+        "contains_fully_visible_pixels": true,
+        "transparent_outer_border": true,
+        "minimum_80px_padding": true,
+        "anchor_pixel_visible": true,
+        "one_visible_color": true,
+        "transparent_rgb_zero": true
+      },
+      "passed": true
+    }
+  ]
+}

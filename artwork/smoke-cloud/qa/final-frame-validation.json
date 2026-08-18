@@ -1,0 +1,2042 @@
+[
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/flight/01_neutral_flow.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 74.081,
+    "partial_alpha_pct": 25.919,
+    "visible_bbox_alpha_gte_8": [
+      279,
+      268,
+      1763,
+      981
+    ],
+    "padding_alpha_gte_8": {
+      "left": 279,
+      "top": 268,
+      "right": 285,
+      "bottom": 299
+    },
+    "colored_soft_edge_pct": 0.0784,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/flight/02_shear_build_a.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 72.662,
+    "partial_alpha_pct": 27.338,
+    "visible_bbox_alpha_gte_8": [
+      266,
+      269,
+      1795,
+      980
+    ],
+    "padding_alpha_gte_8": {
+      "left": 266,
+      "top": 269,
+      "right": 253,
+      "bottom": 300
+    },
+    "colored_soft_edge_pct": 0.003,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/flight/03_shear_a.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 73.222,
+    "partial_alpha_pct": 26.778,
+    "visible_bbox_alpha_gte_8": [
+      265,
+      284,
+      1796,
+      972
+    ],
+    "padding_alpha_gte_8": {
+      "left": 265,
+      "top": 284,
+      "right": 252,
+      "bottom": 308
+    },
+    "colored_soft_edge_pct": 0.0016,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/flight/04_twirl_entry.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 80.102,
+    "partial_alpha_pct": 19.898,
+    "visible_bbox_alpha_gte_8": [
+      265,
+      397,
+      1797,
+      859
+    ],
+    "padding_alpha_gte_8": {
+      "left": 265,
+      "top": 397,
+      "right": 251,
+      "bottom": 421
+    },
+    "colored_soft_edge_pct": 0.0636,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/flight/05_twirl_forward_1.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 253,
+    "transparent_pct": 71.807,
+    "partial_alpha_pct": 28.193,
+    "visible_bbox_alpha_gte_8": [
+      265,
+      263,
+      1804,
+      1011
+    ],
+    "padding_alpha_gte_8": {
+      "left": 265,
+      "top": 263,
+      "right": 244,
+      "bottom": 269
+    },
+    "colored_soft_edge_pct": 0.0013,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/flight/06_twirl_forward_2.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 71.269,
+    "partial_alpha_pct": 28.731,
+    "visible_bbox_alpha_gte_8": [
+      264,
+      260,
+      1807,
+      1012
+    ],
+    "padding_alpha_gte_8": {
+      "left": 264,
+      "top": 260,
+      "right": 241,
+      "bottom": 268
+    },
+    "colored_soft_edge_pct": 0.0041,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/flight/07_twirl_peak.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 73.365,
+    "partial_alpha_pct": 26.635,
+    "visible_bbox_alpha_gte_8": [
+      263,
+      259,
+      1808,
+      1012
+    ],
+    "padding_alpha_gte_8": {
+      "left": 263,
+      "top": 259,
+      "right": 240,
+      "bottom": 268
+    },
+    "colored_soft_edge_pct": 0.0933,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/flight/08_shear_cross.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 71.091,
+    "partial_alpha_pct": 28.909,
+    "visible_bbox_alpha_gte_8": [
+      245,
+      261,
+      1806,
+      1012
+    ],
+    "padding_alpha_gte_8": {
+      "left": 245,
+      "top": 261,
+      "right": 242,
+      "bottom": 268
+    },
+    "colored_soft_edge_pct": 0.0006,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/flight/09_shear_b.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 78.344,
+    "partial_alpha_pct": 21.656,
+    "visible_bbox_alpha_gte_8": [
+      245,
+      318,
+      1769,
+      907
+    ],
+    "padding_alpha_gte_8": {
+      "left": 245,
+      "top": 318,
+      "right": 279,
+      "bottom": 373
+    },
+    "colored_soft_edge_pct": 0.0586,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/flight/10_reverse_entry.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 253,
+    "transparent_pct": 72.821,
+    "partial_alpha_pct": 27.179,
+    "visible_bbox_alpha_gte_8": [
+      245,
+      259,
+      1802,
+      963
+    ],
+    "padding_alpha_gte_8": {
+      "left": 245,
+      "top": 259,
+      "right": 246,
+      "bottom": 317
+    },
+    "colored_soft_edge_pct": 0.0015,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/flight/11_reverse_turn.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 72.549,
+    "partial_alpha_pct": 27.451,
+    "visible_bbox_alpha_gte_8": [
+      245,
+      258,
+      1803,
+      965
+    ],
+    "padding_alpha_gte_8": {
+      "left": 245,
+      "top": 258,
+      "right": 245,
+      "bottom": 315
+    },
+    "colored_soft_edge_pct": 0.0014,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/flight/12_reverse_peak.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 76.568,
+    "partial_alpha_pct": 23.432,
+    "visible_bbox_alpha_gte_8": [
+      244,
+      258,
+      1804,
+      966
+    ],
+    "padding_alpha_gte_8": {
+      "left": 244,
+      "top": 258,
+      "right": 244,
+      "bottom": 314
+    },
+    "colored_soft_edge_pct": 0.0512,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/flight/13_neutral_return_1.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 70.675,
+    "partial_alpha_pct": 29.325,
+    "visible_bbox_alpha_gte_8": [
+      245,
+      258,
+      1803,
+      972
+    ],
+    "padding_alpha_gte_8": {
+      "left": 245,
+      "top": 258,
+      "right": 245,
+      "bottom": 308
+    },
+    "colored_soft_edge_pct": 0.0014,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/flight/14_neutral_return_2.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 253,
+    "transparent_pct": 70.52,
+    "partial_alpha_pct": 29.48,
+    "visible_bbox_alpha_gte_8": [
+      246,
+      259,
+      1802,
+      980
+    ],
+    "padding_alpha_gte_8": {
+      "left": 246,
+      "top": 259,
+      "right": 246,
+      "bottom": 300
+    },
+    "colored_soft_edge_pct": 0.0029,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/flight/15_neutral_seam.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 74.081,
+    "partial_alpha_pct": 25.919,
+    "visible_bbox_alpha_gte_8": [
+      279,
+      268,
+      1763,
+      981
+    ],
+    "padding_alpha_gte_8": {
+      "left": 279,
+      "top": 268,
+      "right": 285,
+      "bottom": 299
+    },
+    "colored_soft_edge_pct": 0.0784,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/01_landing_approach/01_neutral_approach.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 74.081,
+    "partial_alpha_pct": 25.919,
+    "visible_bbox_alpha_gte_8": [
+      279,
+      268,
+      1763,
+      981
+    ],
+    "padding_alpha_gte_8": {
+      "left": 279,
+      "top": 268,
+      "right": 285,
+      "bottom": 299
+    },
+    "colored_soft_edge_pct": 0.0784,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/01_landing_approach/02_draw_in_1.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 253,
+    "transparent_pct": 73.066,
+    "partial_alpha_pct": 26.934,
+    "visible_bbox_alpha_gte_8": [
+      279,
+      268,
+      1763,
+      981
+    ],
+    "padding_alpha_gte_8": {
+      "left": 279,
+      "top": 268,
+      "right": 285,
+      "bottom": 299
+    },
+    "colored_soft_edge_pct": 0.0046,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/01_landing_approach/03_draw_in_2.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 73.794,
+    "partial_alpha_pct": 26.206,
+    "visible_bbox_alpha_gte_8": [
+      284,
+      277,
+      1762,
+      978
+    ],
+    "padding_alpha_gte_8": {
+      "left": 284,
+      "top": 277,
+      "right": 286,
+      "bottom": 302
+    },
+    "colored_soft_edge_pct": 0.0022,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/01_landing_approach/04_draw_in_3.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 74.056,
+    "partial_alpha_pct": 25.944,
+    "visible_bbox_alpha_gte_8": [
+      296,
+      286,
+      1752,
+      963
+    ],
+    "padding_alpha_gte_8": {
+      "left": 296,
+      "top": 286,
+      "right": 296,
+      "bottom": 317
+    },
+    "colored_soft_edge_pct": 0.0015,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/01_landing_approach/05_gather_half.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 80.98,
+    "partial_alpha_pct": 19.02,
+    "visible_bbox_alpha_gte_8": [
+      432,
+      302,
+      1726,
+      963
+    ],
+    "padding_alpha_gte_8": {
+      "left": 432,
+      "top": 302,
+      "right": 322,
+      "bottom": 317
+    },
+    "colored_soft_edge_pct": 0.0869,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/01_landing_approach/06_compress_1.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 80.545,
+    "partial_alpha_pct": 19.455,
+    "visible_bbox_alpha_gte_8": [
+      432,
+      302,
+      1726,
+      963
+    ],
+    "padding_alpha_gte_8": {
+      "left": 432,
+      "top": 302,
+      "right": 322,
+      "bottom": 317
+    },
+    "colored_soft_edge_pct": 0.0123,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/01_landing_approach/07_compress_2.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 80.523,
+    "partial_alpha_pct": 19.477,
+    "visible_bbox_alpha_gte_8": [
+      432,
+      303,
+      1726,
+      963
+    ],
+    "padding_alpha_gte_8": {
+      "left": 432,
+      "top": 303,
+      "right": 322,
+      "bottom": 317
+    },
+    "colored_soft_edge_pct": 0.0065,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/01_landing_approach/08_compress_3.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 80.906,
+    "partial_alpha_pct": 19.094,
+    "visible_bbox_alpha_gte_8": [
+      433,
+      303,
+      1726,
+      962
+    ],
+    "padding_alpha_gte_8": {
+      "left": 433,
+      "top": 303,
+      "right": 322,
+      "bottom": 318
+    },
+    "colored_soft_edge_pct": 0.0,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/01_landing_approach/09_compress_4.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 81.147,
+    "partial_alpha_pct": 18.853,
+    "visible_bbox_alpha_gte_8": [
+      436,
+      305,
+      1723,
+      961
+    ],
+    "padding_alpha_gte_8": {
+      "left": 436,
+      "top": 305,
+      "right": 325,
+      "bottom": 319
+    },
+    "colored_soft_edge_pct": 0.0006,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/01_landing_approach/10_compressed_contact.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 87.246,
+    "partial_alpha_pct": 12.754,
+    "visible_bbox_alpha_gte_8": [
+      618,
+      318,
+      1473,
+      935
+    ],
+    "padding_alpha_gte_8": {
+      "left": 618,
+      "top": 318,
+      "right": 575,
+      "bottom": 345
+    },
+    "colored_soft_edge_pct": 0.2166,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/01_landing_approach/11_microtwirl_entry.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 85.292,
+    "partial_alpha_pct": 14.708,
+    "visible_bbox_alpha_gte_8": [
+      593,
+      311,
+      1520,
+      935
+    ],
+    "padding_alpha_gte_8": {
+      "left": 593,
+      "top": 311,
+      "right": 528,
+      "bottom": 345
+    },
+    "colored_soft_edge_pct": 0.0022,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/01_landing_approach/12_microtwirl_hold.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 85.325,
+    "partial_alpha_pct": 14.675,
+    "visible_bbox_alpha_gte_8": [
+      592,
+      310,
+      1520,
+      934
+    ],
+    "padding_alpha_gte_8": {
+      "left": 592,
+      "top": 310,
+      "right": 528,
+      "bottom": 346
+    },
+    "colored_soft_edge_pct": 0.0038,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/01_landing_approach/13_microtwirl_peak.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 87.546,
+    "partial_alpha_pct": 12.454,
+    "visible_bbox_alpha_gte_8": [
+      592,
+      310,
+      1521,
+      930
+    ],
+    "padding_alpha_gte_8": {
+      "left": 592,
+      "top": 310,
+      "right": 527,
+      "bottom": 350
+    },
+    "colored_soft_edge_pct": 0.1254,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/01_landing_approach/14_compressed_return.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 85.476,
+    "partial_alpha_pct": 14.524,
+    "visible_bbox_alpha_gte_8": [
+      592,
+      311,
+      1520,
+      934
+    ],
+    "padding_alpha_gte_8": {
+      "left": 592,
+      "top": 311,
+      "right": 528,
+      "bottom": 346
+    },
+    "colored_soft_edge_pct": 0.0007,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/01_landing_approach/15_compressed_ready.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 87.246,
+    "partial_alpha_pct": 12.754,
+    "visible_bbox_alpha_gte_8": [
+      618,
+      318,
+      1473,
+      935
+    ],
+    "padding_alpha_gte_8": {
+      "left": 618,
+      "top": 318,
+      "right": 575,
+      "bottom": 345
+    },
+    "colored_soft_edge_pct": 0.2166,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/02_perch_settle_hold/01_compressed_contact.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 87.246,
+    "partial_alpha_pct": 12.754,
+    "visible_bbox_alpha_gte_8": [
+      618,
+      318,
+      1473,
+      935
+    ],
+    "padding_alpha_gte_8": {
+      "left": 618,
+      "top": 318,
+      "right": 575,
+      "bottom": 345
+    },
+    "colored_soft_edge_pct": 0.2166,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/02_perch_settle_hold/02_hold_turn_1.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 85.369,
+    "partial_alpha_pct": 14.631,
+    "visible_bbox_alpha_gte_8": [
+      593,
+      311,
+      1520,
+      935
+    ],
+    "padding_alpha_gte_8": {
+      "left": 593,
+      "top": 311,
+      "right": 528,
+      "bottom": 345
+    },
+    "colored_soft_edge_pct": 0.0036,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/02_perch_settle_hold/03_hold_turn_2.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 85.476,
+    "partial_alpha_pct": 14.524,
+    "visible_bbox_alpha_gte_8": [
+      592,
+      311,
+      1520,
+      934
+    ],
+    "padding_alpha_gte_8": {
+      "left": 592,
+      "top": 311,
+      "right": 528,
+      "bottom": 346
+    },
+    "colored_soft_edge_pct": 0.0007,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/02_perch_settle_hold/04_hold_turn_3.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 85.408,
+    "partial_alpha_pct": 14.592,
+    "visible_bbox_alpha_gte_8": [
+      592,
+      310,
+      1521,
+      934
+    ],
+    "padding_alpha_gte_8": {
+      "left": 592,
+      "top": 310,
+      "right": 527,
+      "bottom": 346
+    },
+    "colored_soft_edge_pct": 0.0054,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/02_perch_settle_hold/05_microtwirl_peak_1.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 87.546,
+    "partial_alpha_pct": 12.454,
+    "visible_bbox_alpha_gte_8": [
+      592,
+      310,
+      1521,
+      930
+    ],
+    "padding_alpha_gte_8": {
+      "left": 592,
+      "top": 310,
+      "right": 527,
+      "bottom": 350
+    },
+    "colored_soft_edge_pct": 0.1254,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/02_perch_settle_hold/06_settle_1.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 85.325,
+    "partial_alpha_pct": 14.675,
+    "visible_bbox_alpha_gte_8": [
+      592,
+      310,
+      1520,
+      934
+    ],
+    "padding_alpha_gte_8": {
+      "left": 592,
+      "top": 310,
+      "right": 528,
+      "bottom": 346
+    },
+    "colored_soft_edge_pct": 0.0038,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/02_perch_settle_hold/07_settle_2.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 85.292,
+    "partial_alpha_pct": 14.708,
+    "visible_bbox_alpha_gte_8": [
+      593,
+      311,
+      1520,
+      935
+    ],
+    "padding_alpha_gte_8": {
+      "left": 593,
+      "top": 311,
+      "right": 528,
+      "bottom": 345
+    },
+    "colored_soft_edge_pct": 0.0022,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/02_perch_settle_hold/08_compressed_hold.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 87.246,
+    "partial_alpha_pct": 12.754,
+    "visible_bbox_alpha_gte_8": [
+      618,
+      318,
+      1473,
+      935
+    ],
+    "padding_alpha_gte_8": {
+      "left": 618,
+      "top": 318,
+      "right": 575,
+      "bottom": 345
+    },
+    "colored_soft_edge_pct": 0.2166,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/02_perch_settle_hold/09_hold_turn_4.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 85.369,
+    "partial_alpha_pct": 14.631,
+    "visible_bbox_alpha_gte_8": [
+      593,
+      311,
+      1520,
+      935
+    ],
+    "padding_alpha_gte_8": {
+      "left": 593,
+      "top": 311,
+      "right": 528,
+      "bottom": 345
+    },
+    "colored_soft_edge_pct": 0.0036,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/02_perch_settle_hold/10_hold_turn_5.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 85.476,
+    "partial_alpha_pct": 14.524,
+    "visible_bbox_alpha_gte_8": [
+      592,
+      311,
+      1520,
+      934
+    ],
+    "padding_alpha_gte_8": {
+      "left": 592,
+      "top": 311,
+      "right": 528,
+      "bottom": 346
+    },
+    "colored_soft_edge_pct": 0.0007,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/02_perch_settle_hold/11_hold_turn_6.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 85.408,
+    "partial_alpha_pct": 14.592,
+    "visible_bbox_alpha_gte_8": [
+      592,
+      310,
+      1521,
+      934
+    ],
+    "padding_alpha_gte_8": {
+      "left": 592,
+      "top": 310,
+      "right": 527,
+      "bottom": 346
+    },
+    "colored_soft_edge_pct": 0.0054,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/02_perch_settle_hold/12_microtwirl_peak_2.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 87.546,
+    "partial_alpha_pct": 12.454,
+    "visible_bbox_alpha_gte_8": [
+      592,
+      310,
+      1521,
+      930
+    ],
+    "padding_alpha_gte_8": {
+      "left": 592,
+      "top": 310,
+      "right": 527,
+      "bottom": 350
+    },
+    "colored_soft_edge_pct": 0.1254,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/02_perch_settle_hold/13_ready_settle_1.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 85.325,
+    "partial_alpha_pct": 14.675,
+    "visible_bbox_alpha_gte_8": [
+      592,
+      310,
+      1520,
+      934
+    ],
+    "padding_alpha_gte_8": {
+      "left": 592,
+      "top": 310,
+      "right": 528,
+      "bottom": 346
+    },
+    "colored_soft_edge_pct": 0.0038,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/02_perch_settle_hold/14_ready_settle_2.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 85.292,
+    "partial_alpha_pct": 14.708,
+    "visible_bbox_alpha_gte_8": [
+      593,
+      311,
+      1520,
+      935
+    ],
+    "padding_alpha_gte_8": {
+      "left": 593,
+      "top": 311,
+      "right": 528,
+      "bottom": 345
+    },
+    "colored_soft_edge_pct": 0.0022,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/02_perch_settle_hold/15_ready_release.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 87.246,
+    "partial_alpha_pct": 12.754,
+    "visible_bbox_alpha_gte_8": [
+      618,
+      318,
+      1473,
+      935
+    ],
+    "padding_alpha_gte_8": {
+      "left": 618,
+      "top": 318,
+      "right": 575,
+      "bottom": 345
+    },
+    "colored_soft_edge_pct": 0.2166,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/03_launch_flyoff/01_compressed_ready.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 87.246,
+    "partial_alpha_pct": 12.754,
+    "visible_bbox_alpha_gte_8": [
+      618,
+      318,
+      1473,
+      935
+    ],
+    "padding_alpha_gte_8": {
+      "left": 618,
+      "top": 318,
+      "right": 575,
+      "bottom": 345
+    },
+    "colored_soft_edge_pct": 0.2166,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/03_launch_flyoff/02_release_1.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 81.352,
+    "partial_alpha_pct": 18.648,
+    "visible_bbox_alpha_gte_8": [
+      404,
+      281,
+      1702,
+      956
+    ],
+    "padding_alpha_gte_8": {
+      "left": 404,
+      "top": 281,
+      "right": 346,
+      "bottom": 324
+    },
+    "colored_soft_edge_pct": 0.0,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/03_launch_flyoff/03_release_2.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 80.749,
+    "partial_alpha_pct": 19.251,
+    "visible_bbox_alpha_gte_8": [
+      404,
+      280,
+      1703,
+      957
+    ],
+    "padding_alpha_gte_8": {
+      "left": 404,
+      "top": 280,
+      "right": 345,
+      "bottom": 323
+    },
+    "colored_soft_edge_pct": 0.0011,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/03_launch_flyoff/04_release_half.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 81.442,
+    "partial_alpha_pct": 18.558,
+    "visible_bbox_alpha_gte_8": [
+      403,
+      280,
+      1703,
+      958
+    ],
+    "padding_alpha_gte_8": {
+      "left": 403,
+      "top": 280,
+      "right": 345,
+      "bottom": 322
+    },
+    "colored_soft_edge_pct": 0.0595,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/03_launch_flyoff/05_unfurl_1.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 74.822,
+    "partial_alpha_pct": 25.178,
+    "visible_bbox_alpha_gte_8": [
+      246,
+      259,
+      1802,
+      963
+    ],
+    "padding_alpha_gte_8": {
+      "left": 246,
+      "top": 259,
+      "right": 246,
+      "bottom": 317
+    },
+    "colored_soft_edge_pct": 0.0,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/03_launch_flyoff/06_unfurl_2.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 74.498,
+    "partial_alpha_pct": 25.502,
+    "visible_bbox_alpha_gte_8": [
+      245,
+      258,
+      1803,
+      965
+    ],
+    "padding_alpha_gte_8": {
+      "left": 245,
+      "top": 258,
+      "right": 245,
+      "bottom": 315
+    },
+    "colored_soft_edge_pct": 0.0017,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/03_launch_flyoff/07_twirl_release.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 76.568,
+    "partial_alpha_pct": 23.432,
+    "visible_bbox_alpha_gte_8": [
+      244,
+      258,
+      1804,
+      966
+    ],
+    "padding_alpha_gte_8": {
+      "left": 244,
+      "top": 258,
+      "right": 244,
+      "bottom": 314
+    },
+    "colored_soft_edge_pct": 0.0512,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/03_launch_flyoff/08_bloom_1.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 71.378,
+    "partial_alpha_pct": 28.622,
+    "visible_bbox_alpha_gte_8": [
+      245,
+      258,
+      1803,
+      985
+    ],
+    "padding_alpha_gte_8": {
+      "left": 245,
+      "top": 258,
+      "right": 245,
+      "bottom": 295
+    },
+    "colored_soft_edge_pct": 0.0014,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/03_launch_flyoff/09_bloom_2.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 253,
+    "transparent_pct": 71.224,
+    "partial_alpha_pct": 28.776,
+    "visible_bbox_alpha_gte_8": [
+      246,
+      255,
+      1802,
+      988
+    ],
+    "padding_alpha_gte_8": {
+      "left": 246,
+      "top": 255,
+      "right": 246,
+      "bottom": 292
+    },
+    "colored_soft_edge_pct": 0.0087,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/03_launch_flyoff/10_spread_peak.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 75.124,
+    "partial_alpha_pct": 24.876,
+    "visible_bbox_alpha_gte_8": [
+      256,
+      253,
+      1798,
+      989
+    ],
+    "padding_alpha_gte_8": {
+      "left": 256,
+      "top": 253,
+      "right": 250,
+      "bottom": 291
+    },
+    "colored_soft_edge_pct": 0.1285,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/03_launch_flyoff/11_dissipate_1.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 253,
+    "transparent_pct": 73.797,
+    "partial_alpha_pct": 26.203,
+    "visible_bbox_alpha_gte_8": [
+      258,
+      256,
+      1797,
+      987
+    ],
+    "padding_alpha_gte_8": {
+      "left": 258,
+      "top": 256,
+      "right": 251,
+      "bottom": 293
+    },
+    "colored_soft_edge_pct": 0.0033,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/03_launch_flyoff/12_dissipate_peak.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 253,
+    "transparent_pct": 82.841,
+    "partial_alpha_pct": 17.159,
+    "visible_bbox_alpha_gte_8": [
+      306,
+      350,
+      1742,
+      939
+    ],
+    "padding_alpha_gte_8": {
+      "left": 306,
+      "top": 350,
+      "right": 306,
+      "bottom": 341
+    },
+    "colored_soft_edge_pct": 0.0889,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/03_launch_flyoff/13_reform_1.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 253,
+    "transparent_pct": 73.126,
+    "partial_alpha_pct": 26.874,
+    "visible_bbox_alpha_gte_8": [
+      293,
+      284,
+      1758,
+      972
+    ],
+    "padding_alpha_gte_8": {
+      "left": 293,
+      "top": 284,
+      "right": 290,
+      "bottom": 308
+    },
+    "colored_soft_edge_pct": 0.0004,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/03_launch_flyoff/14_reform_2.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 253,
+    "transparent_pct": 72.685,
+    "partial_alpha_pct": 27.315,
+    "visible_bbox_alpha_gte_8": [
+      280,
+      269,
+      1763,
+      980
+    ],
+    "padding_alpha_gte_8": {
+      "left": 280,
+      "top": 269,
+      "right": 285,
+      "bottom": 300
+    },
+    "colored_soft_edge_pct": 0.004,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/delivery/silver-vortex-smoke-v1/03_launch_flyoff/15_reformed_flow.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 74.081,
+    "partial_alpha_pct": 25.919,
+    "visible_bbox_alpha_gte_8": [
+      279,
+      268,
+      1763,
+      981
+    ],
+    "padding_alpha_gte_8": {
+      "left": 279,
+      "top": 268,
+      "right": 285,
+      "bottom": 299
+    },
+    "colored_soft_edge_pct": 0.0784,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  }
+]

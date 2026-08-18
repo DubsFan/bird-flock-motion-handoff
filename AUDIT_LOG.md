@@ -561,3 +561,62 @@ The announced candidate delivery has arrived and was audited. Ten identities are
   again at 0.35x. Broad chronological strokes remained readable at normal
   speed and slowed with travel rather than churning in place. The operator
   project was restored to 0.90x and Calm editorial after verification.
+
+## Iteration 25: Silver Vortex Smoke 60-frame identity
+
+- Created a new non-bird identity from built-in image-generated transparent
+  volumetric smoke art. Rejected opaque checkerboard edits, colored-fringe
+  regressions, and liquid-looking dissipation candidates instead of silently
+  mixing them into the delivery. Retained surplus candidates under
+  `artwork/smoke-cloud/keyposes/` for provenance and later refinement.
+- Locked eleven 2048x1280 RGBA key poses around one `(1024, 640)` anchor:
+  neutral flow, opposing wind-shear phases, opposing twirl phases, spread,
+  partial and full gather, compressed micro-twirl, partial release, and late
+  dissipation. Pre-rendered four chronological 15-frame tracks with
+  premultiplied-alpha in-betweens, for 60 completed PNGs total. Runtime does
+  not rig or synthesize the smoke.
+- Packaged the directly importable identity at
+  `artwork/smoke-cloud/delivery/silver-vortex-smoke-v1.zip` with SHA-256
+  `54fea92119ac2c1e9d486ff692b9baa8ae54641599d41b81b84805b157d2279d`.
+  The unzipped delivery includes `manifest.json`, all four track folders,
+  README, and a verified `MANIFEST.sha256`.
+- The fail-closed art validator passes 60/60 final frames: identical
+  2048x1280 canvases, genuine full/partial transparency, transparent outer
+  borders, at least 240 px measured padding at alpha >= 8, and neutral soft
+  edges. The production manifest parser accepts 15 frames per track. Flight
+  loop and all three action handoffs are exact byte-identical seams.
+- Live localhost import reported `Passed: 15 flight poses plus 45 matched
+  landing-action poses`. Normal-speed one-entity playback showed broad flowing
+  flight, compact gather/hold at the landing target, and a wide release moving
+  away. The name and all four tracks survived reload; browser warnings/errors
+  remained empty.
+- QA artifacts are under `artwork/smoke-cloud/qa/`, including chronological
+  sheets, dark/light/checkerboard checks, 8 fps track previews, the combined
+  action preview, per-frame JSON results, and the manifest/seam test. Final
+  repository gates: 59 Vitest tests, TypeScript, ESLint, and the Next.js 16.3.0
+  production build all pass.
+
+## Iteration 26: Quarter Note Gentle Orbit 64-frame identity
+
+- Rejected the first 32-frame Beat Bop attempt after visual review. Its
+  nonuniform scaling and shear changed the quarter-note proportions even though
+  the mechanical alpha/package checks passed. Technical validation is not
+  accepted as a substitute for visual playback review.
+- Rebuilt the identity as 64 frames: sixteen each for flight, approach, perch,
+  and launch. Every frame is now the exact same source silhouette at constant
+  scale, moved only by small rotations and translations. The identity master
+  remains byte-identical to the supplied reference, SHA-256
+  `b156a1d8ce6178ac95ea5bef0d7723c77eda69e80cbc0b1d61b6e585e2cb088b`.
+- The independent verifier passes all 64 RGBA frames: one 1600x1200 canvas,
+  shared `(800, 900)` path anchor, one `#0D8EEB` visible color, transparent RGB
+  zero, at least 178px clear border, and only 0.016% alpha-area drift from rigid
+  resampling.
+- Imported `deliverables/quarter-note-murmur/quarter-note-01-murmur.zip` through
+  the real localhost control. Murmur reported `Passed: 16 flight poses plus 48
+  matched landing-action poses`. Normal-speed playback over the retained pool
+  scene showed one coherent glyph at separated route positions; browser
+  warnings/errors were empty.
+- The manifest-anchor intake fix in `components/flock/asset-panel.tsx` preserves
+  declared flight/action anchors for imported artwork. Reproducible source,
+  contact sheets, MP4 reviews, validation JSON, unzipped files, and the direct
+  import ZIP are retained under `deliverables/quarter-note-murmur/`.

@@ -1,0 +1,1483 @@
+{
+  "schema_version": "1.0",
+  "identity": "quarter-note-01",
+  "master_sha256": "b156a1d8ce6178ac95ea5bef0d7723c77eda69e80cbc0b1d61b6e585e2cb088b",
+  "master_matches_supplied_reference_sha256": "b156a1d8ce6178ac95ea5bef0d7723c77eda69e80cbc0b1d61b6e585e2cb088b",
+  "source_metrics": {
+    "source_anchor_x": 211.4309655848482,
+    "source_anchor_y": 989.6445986347402,
+    "resized_anchor_x": 217.1453160060603,
+    "resized_anchor_y": 635.1578516823138,
+    "placed_left": 583,
+    "placed_top": 265
+  },
+  "frame_count": 64,
+  "canvas": {
+    "width": 1600,
+    "height": 1200,
+    "anchor": {
+      "x": 800,
+      "y": 900
+    }
+  },
+  "ink_color": "#0D8EEB",
+  "passed": true,
+  "gates": {
+    "exactly_64_frames": true,
+    "four_tracks_of_16": true,
+    "all_1600x1200": true,
+    "all_true_alpha": true,
+    "all_contain_visible_and_transparent_pixels": true,
+    "all_edges_clear": true,
+    "all_have_80px_padding": true,
+    "all_anchor_pixels_visible": true,
+    "all_one_visible_color": true,
+    "all_transparent_rgb_zero": true,
+    "frames_chronologically_distinct_within_each_track": true,
+    "rigid_identity_area_preserved": true,
+    "flight_loop_seam_is_gentle": true,
+    "action_track_transitions_overlap": true
+  },
+  "minimum_clear_border_px": 178,
+  "motion_metrics": {
+    "flight_adjacent_silhouette_iou": [
+      0.9349,
+      0.8955,
+      0.8969,
+      0.9303,
+      0.9399,
+      0.8906,
+      0.8897,
+      0.8797,
+      0.8857,
+      0.8972,
+      0.9268,
+      0.9414,
+      0.8973,
+      0.8692,
+      0.9535,
+      0.9781
+    ],
+    "flight_loop_seam_iou": 0.9781,
+    "flight_internal_min_iou": 0.8692,
+    "action_transition_silhouette_iou": {
+      "approach_to_perch": 1.0,
+      "perch_to_launch": 1.0,
+      "launch_to_flight": 1.0
+    },
+    "alpha_mass_ratio_range": [
+      0.999836,
+      1.0
+    ]
+  },
+  "frames": [
+    {
+      "file": "flight/01_neutral.png",
+      "sha256": "c4b0e70111fe2e4fb1e012052aa88b353843bf356420c191feb31ae470640732",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103294,
+      "alpha_bbox": [
+        583,
+        265,
+        1001,
+        1005
+      ],
+      "clear_border_px": 195,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "flight/02_rise_start.png",
+      "sha256": "dee6f352954ff52e13934f15ec4ee762ee71aed2bffd9a904a5de2891aadb6a2",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103209,
+      "alpha_bbox": [
+        585,
+        257,
+        1003,
+        1004
+      ],
+      "clear_border_px": 196,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "flight/03_rise.png",
+      "sha256": "d3fd52aba44396a41f8cf43fbeef36b45613fbb49122d901d83359b0a555804d",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103185,
+      "alpha_bbox": [
+        588,
+        249,
+        1004,
+        1003
+      ],
+      "clear_border_px": 197,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "flight/04_lift.png",
+      "sha256": "282d8e3c356d683421748109c72256e52d0938bf8d2b3776274e0a91353744a3",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103183,
+      "alpha_bbox": [
+        591,
+        241,
+        1005,
+        1002
+      ],
+      "clear_border_px": 198,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "flight/05_lift_apex.png",
+      "sha256": "c920c8434a967659b427d609fa1f604919cfc7c34f1b0843dc15890c076619ad",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103174,
+      "alpha_bbox": [
+        593,
+        236,
+        1006,
+        1002
+      ],
+      "clear_border_px": 198,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "flight/06_lift_return.png",
+      "sha256": "8ca1288c75c43e955d15ad016a0cb3f9f656c67b2ff17474d9db173346063766",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103174,
+      "alpha_bbox": [
+        592,
+        240,
+        1006,
+        1004
+      ],
+      "clear_border_px": 196,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "flight/07_rebound.png",
+      "sha256": "9842fecd7e9c9052dbc54950e074f17efe3efee7551536bcc95811e433bd44f6",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103148,
+      "alpha_bbox": [
+        589,
+        249,
+        1005,
+        1005
+      ],
+      "clear_border_px": 195,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "flight/08_centering.png",
+      "sha256": "989ec1a42c44c787617c0c5ddc279a65439d6a4ef528891594704c9f780bf3d5",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103181,
+      "alpha_bbox": [
+        586,
+        258,
+        1004,
+        1006
+      ],
+      "clear_border_px": 194,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "flight/09_pass_center.png",
+      "sha256": "a54b4ae2b0afa1460170d0ed5ab93437992d7899f7f6ccf01ff0437b59dc31ef",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103153,
+      "alpha_bbox": [
+        581,
+        268,
+        1009,
+        1007
+      ],
+      "clear_border_px": 193,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "flight/10_fall_start.png",
+      "sha256": "78d2b5f785e06be593622b2a2c438cb12d5066990089b65a487485ddb45da4e6",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103172,
+      "alpha_bbox": [
+        578,
+        276,
+        1027,
+        1009
+      ],
+      "clear_border_px": 191,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "flight/11_fall.png",
+      "sha256": "a9d249dcc63f5d15b9799e188c667513f8c571c6e1d0ed8bf4616c4df470797b",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103182,
+      "alpha_bbox": [
+        575,
+        283,
+        1041,
+        1011
+      ],
+      "clear_border_px": 189,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "flight/12_fall_apex.png",
+      "sha256": "4652106888480ce0b1d37fa7bb9dc4ba09c2ac31432181972321f3d940b723e6",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103160,
+      "alpha_bbox": [
+        574,
+        289,
+        1050,
+        1013
+      ],
+      "clear_border_px": 187,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "flight/13_fall_return.png",
+      "sha256": "ab138777c6e9c283716db123b52cf8216fe36ddf7b8e9ef6e10f4a73cbbd61b4",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103176,
+      "alpha_bbox": [
+        576,
+        283,
+        1043,
+        1010
+      ],
+      "clear_border_px": 190,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "flight/14_recover.png",
+      "sha256": "502dae3daf0b9317eaff5a53a1d5283cfccf696329c93a299bffbf3a55650f81",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103171,
+      "alpha_bbox": [
+        579,
+        275,
+        1030,
+        1008
+      ],
+      "clear_border_px": 192,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "flight/15_near_neutral.png",
+      "sha256": "a0c80b819f980976d837dbf3dbf9f0b30b9c7d9e7e21c6438c95fa36650747a6",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103173,
+      "alpha_bbox": [
+        580,
+        269,
+        1011,
+        1007
+      ],
+      "clear_border_px": 193,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "flight/16_loop_seam.png",
+      "sha256": "e3decf6884570aea18c84399b58a4ea4a9a8f3bfb4814a9f6297d07998905338",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103211,
+      "alpha_bbox": [
+        581,
+        266,
+        1004,
+        1006
+      ],
+      "clear_border_px": 194,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "01_landing_approach/01_cruise_in.png",
+      "sha256": "e3decf6884570aea18c84399b58a4ea4a9a8f3bfb4814a9f6297d07998905338",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103211,
+      "alpha_bbox": [
+        581,
+        266,
+        1004,
+        1006
+      ],
+      "clear_border_px": 194,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "01_landing_approach/02_brake_start.png",
+      "sha256": "c754147bec7692685e16526e26728985a3acf085ace7e16a7e49a030ccba6b33",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103173,
+      "alpha_bbox": [
+        581,
+        267,
+        1012,
+        1005
+      ],
+      "clear_border_px": 195,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "01_landing_approach/03_brake_lean.png",
+      "sha256": "b3edb3c84a2b4a6507b654aadea07f56e189683772db7273b23e7295739e692b",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103175,
+      "alpha_bbox": [
+        579,
+        269,
+        1022,
+        1003
+      ],
+      "clear_border_px": 197,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "01_landing_approach/04_brake_rise.png",
+      "sha256": "2f1c1d0f0fa050db5a17544941ac89983dc0e13f7eb5007e6b0e521bf0f2a2bb",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103179,
+      "alpha_bbox": [
+        578,
+        270,
+        1031,
+        1002
+      ],
+      "clear_border_px": 198,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "01_landing_approach/05_brake_lift.png",
+      "sha256": "9adcbebf33d88be623f5dd98c4519c6772c5e6dce15ad17e6e57b881d0c211d3",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103182,
+      "alpha_bbox": [
+        576,
+        273,
+        1042,
+        1001
+      ],
+      "clear_border_px": 199,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "01_landing_approach/06_brake_peak.png",
+      "sha256": "bde398e5b03c96bd0f34f5bf139241aad43fa4404adba65ef966bfb510f0e618",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103160,
+      "alpha_bbox": [
+        576,
+        278,
+        1052,
+        1002
+      ],
+      "clear_border_px": 198,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "01_landing_approach/07_brake_hold.png",
+      "sha256": "970b629bebb5e85516b566c5f4e687067ea87cba470df3e83e7f3909542c6183",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103176,
+      "alpha_bbox": [
+        576,
+        283,
+        1065,
+        1003
+      ],
+      "clear_border_px": 197,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "01_landing_approach/08_brake_release.png",
+      "sha256": "593dee7e6227fcf4d2d4a48e75e9d9923aaaae20b2b2da7f5d4328713d29f2f6",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103160,
+      "alpha_bbox": [
+        578,
+        282,
+        1054,
+        1006
+      ],
+      "clear_border_px": 194,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "01_landing_approach/09_descend_start.png",
+      "sha256": "1864ee36144639fefad814f7eba80cf83922981afc03a3c96768bfc0ffbe4f44",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103182,
+      "alpha_bbox": [
+        579,
+        280,
+        1045,
+        1008
+      ],
+      "clear_border_px": 192,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "01_landing_approach/10_descend.png",
+      "sha256": "7c52b9d5a487ce7a649b632ea1cd4d1e8257b1d23fd9d2eea5a0fcc3aa50f4cc",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103179,
+      "alpha_bbox": [
+        581,
+        279,
+        1034,
+        1011
+      ],
+      "clear_border_px": 189,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "01_landing_approach/11_contact.png",
+      "sha256": "913d35491f11c4fdf2f4b499b54cde0c81ee5adfb17ac85b0a93a66c40a23807",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103175,
+      "alpha_bbox": [
+        582,
+        278,
+        1025,
+        1012
+      ],
+      "clear_border_px": 188,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "01_landing_approach/12_contact_rebound.png",
+      "sha256": "19f7c45d814142dc0df5852de0ba14c84fb079f2c4481d8ff1132d5b85244aab",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103173,
+      "alpha_bbox": [
+        583,
+        274,
+        1014,
+        1012
+      ],
+      "clear_border_px": 188,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "01_landing_approach/13_settle.png",
+      "sha256": "f667a93d141898e6433d19309f0216758874cb5fff8b34e43a85a6ab845273ef",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103294,
+      "alpha_bbox": [
+        584,
+        270,
+        1002,
+        1010
+      ],
+      "clear_border_px": 190,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "01_landing_approach/14_settle_return.png",
+      "sha256": "c378531316bc9464a8b88873bf817dc7e99c16771eda604f18fa07cf2095c4ab",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103149,
+      "alpha_bbox": [
+        584,
+        265,
+        1002,
+        1010
+      ],
+      "clear_border_px": 190,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "01_landing_approach/15_perch_ready.png",
+      "sha256": "ebcf4c88caca2f8267482b689ef35a214445d6ec587aa1b3c523f567c9dae909",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103172,
+      "alpha_bbox": [
+        583,
+        263,
+        1001,
+        1007
+      ],
+      "clear_border_px": 193,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "01_landing_approach/16_anchor_hold.png",
+      "sha256": "c4b0e70111fe2e4fb1e012052aa88b353843bf356420c191feb31ae470640732",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103294,
+      "alpha_bbox": [
+        583,
+        265,
+        1001,
+        1005
+      ],
+      "clear_border_px": 195,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "02_perch_settle_hold/01_anchor_hold.png",
+      "sha256": "c4b0e70111fe2e4fb1e012052aa88b353843bf356420c191feb31ae470640732",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103294,
+      "alpha_bbox": [
+        583,
+        265,
+        1001,
+        1005
+      ],
+      "clear_border_px": 195,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "02_perch_settle_hold/02_settle_left.png",
+      "sha256": "7c2a19c0193e4f3df824bc0ce3ba5d1f29b821ab214267f35c727d5549055028",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103209,
+      "alpha_bbox": [
+        583,
+        261,
+        1001,
+        1008
+      ],
+      "clear_border_px": 192,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "02_perch_settle_hold/03_settle_left_peak.png",
+      "sha256": "2d3f87881c9d9c51bfd70206284c6d4c11127384803868f27a9930d8fcf1cf9e",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103194,
+      "alpha_bbox": [
+        584,
+        259,
+        1001,
+        1011
+      ],
+      "clear_border_px": 189,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "02_perch_settle_hold/04_settle_left_return.png",
+      "sha256": "4277348e38a01c235db2114d9f962cb1d4a5f0d1839b4b383f4ffbfb42c8dc99",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103187,
+      "alpha_bbox": [
+        583,
+        260,
+        1001,
+        1009
+      ],
+      "clear_border_px": 191,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "02_perch_settle_hold/05_quiet_center.png",
+      "sha256": "5d5379ec7dd5f9da539b7a6a9a149733e8e626dc82a9ac8b0134ff926eb0661b",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103148,
+      "alpha_bbox": [
+        583,
+        262,
+        1001,
+        1006
+      ],
+      "clear_border_px": 194,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "02_perch_settle_hold/06_micro_right.png",
+      "sha256": "5351e4c2e06121f06c463fbed21e19e35215f59071e2936e4652ca6d5a758e1a",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103193,
+      "alpha_bbox": [
+        582,
+        265,
+        1010,
+        1004
+      ],
+      "clear_border_px": 196,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "02_perch_settle_hold/07_micro_right_peak.png",
+      "sha256": "be822bd3c4937f3a48f109f8fa85c0c3efb32ad186125c367188d27798f03cdd",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103184,
+      "alpha_bbox": [
+        583,
+        266,
+        1017,
+        1004
+      ],
+      "clear_border_px": 196,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "02_perch_settle_hold/08_micro_right_return.png",
+      "sha256": "fb5dcf36fcaf06ec5ed3b75e695f8d32a8fe6ccd1c3d77f26b80e92c7e609548",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103153,
+      "alpha_bbox": [
+        582,
+        266,
+        1010,
+        1005
+      ],
+      "clear_border_px": 195,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "02_perch_settle_hold/09_quiet_hold.png",
+      "sha256": "ccf40430ddd8ce582630628d4552956e8b5905c47446496fae0432c61212de7d",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103359,
+      "alpha_bbox": [
+        582,
+        265,
+        1003,
+        1005
+      ],
+      "clear_border_px": 195,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "02_perch_settle_hold/10_micro_left.png",
+      "sha256": "f1c1e509ccf3da2698e5195ea793ab32c251b8079bd938b7f4fa63c3b724bd17",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103148,
+      "alpha_bbox": [
+        582,
+        262,
+        1000,
+        1006
+      ],
+      "clear_border_px": 194,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "02_perch_settle_hold/11_micro_left_peak.png",
+      "sha256": "e496077b5d47912a2320788ac9028c5e9a4f6385593b722220206dd769acd3e0",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103149,
+      "alpha_bbox": [
+        582,
+        263,
+        1000,
+        1008
+      ],
+      "clear_border_px": 192,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "02_perch_settle_hold/12_micro_left_return.png",
+      "sha256": "6431c365c7240c6f8d4262b9968ab1b2b1f843221effd06ab908b0ca4d94ffa0",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103172,
+      "alpha_bbox": [
+        583,
+        262,
+        1001,
+        1006
+      ],
+      "clear_border_px": 194,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "02_perch_settle_hold/13_breathe_right.png",
+      "sha256": "b6fe826ee5098b691703b4c7ea91c265d1a8968341a70b93184da929247a328a",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103211,
+      "alpha_bbox": [
+        582,
+        264,
+        1005,
+        1004
+      ],
+      "clear_border_px": 196,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "02_perch_settle_hold/14_breathe_right_peak.png",
+      "sha256": "e165f192361d54ce79ce18089dc118357f571de9d3758ba8911f21ceba76072a",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103199,
+      "alpha_bbox": [
+        583,
+        265,
+        1010,
+        1004
+      ],
+      "clear_border_px": 196,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "02_perch_settle_hold/15_ready.png",
+      "sha256": "8945cf410bf60b1d8b2fdbe3cb385945aa2462007f9e0b0d4e3e63676f2686f2",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103227,
+      "alpha_bbox": [
+        582,
+        265,
+        1004,
+        1005
+      ],
+      "clear_border_px": 195,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "02_perch_settle_hold/16_prelaunch.png",
+      "sha256": "335dfe9d59128f4468484d7ab2a3dbfec02c0071f9e86d104c796f883b78d19c",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103149,
+      "alpha_bbox": [
+        583,
+        264,
+        1001,
+        1009
+      ],
+      "clear_border_px": 191,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "03_launch_flyoff/01_prelaunch.png",
+      "sha256": "335dfe9d59128f4468484d7ab2a3dbfec02c0071f9e86d104c796f883b78d19c",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103149,
+      "alpha_bbox": [
+        583,
+        264,
+        1001,
+        1009
+      ],
+      "clear_border_px": 191,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "03_launch_flyoff/02_anticipate.png",
+      "sha256": "d1e6c542f8c2c960fd61051baee7b4c7259c3888f9bbf56c53c27f4358efc772",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103187,
+      "alpha_bbox": [
+        583,
+        263,
+        1001,
+        1012
+      ],
+      "clear_border_px": 188,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "03_launch_flyoff/03_anticipate_deep.png",
+      "sha256": "0fe53686f40f9c0dffd0e308db91157a7fdb77b4808f389d4713aed62ab786e1",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103185,
+      "alpha_bbox": [
+        585,
+        263,
+        1001,
+        1017
+      ],
+      "clear_border_px": 183,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "03_launch_flyoff/04_release_ready.png",
+      "sha256": "25be880eccbcf9f3c4c13034303f41b77d68253073a9e35e8d6d264244064605",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103170,
+      "alpha_bbox": [
+        586,
+        262,
+        1002,
+        1021
+      ],
+      "clear_border_px": 179,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "03_launch_flyoff/05_release.png",
+      "sha256": "4b274527d0106698430e850ae79f3d9f5ade8cb5bcf9b088676eb16ab86f1ffb",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103202,
+      "alpha_bbox": [
+        588,
+        258,
+        1002,
+        1022
+      ],
+      "clear_border_px": 178,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "03_launch_flyoff/06_rise_start.png",
+      "sha256": "388422942096f71058064bb2af05eb2c3e6f6e243137cc7674370e0ae6e8ee6f",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103174,
+      "alpha_bbox": [
+        590,
+        253,
+        1003,
+        1019
+      ],
+      "clear_border_px": 181,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "03_launch_flyoff/07_rise.png",
+      "sha256": "dec19dc39a3ed53ef2e4cb47053e96f8a8db2c58e146b1b4ad5632ff54adc9a2",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103174,
+      "alpha_bbox": [
+        591,
+        247,
+        1004,
+        1013
+      ],
+      "clear_border_px": 187,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "03_launch_flyoff/08_rise_clear.png",
+      "sha256": "d106f498c42293a66fd7d1855816959d3f1b5760df438f5756e582e317339763",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103202,
+      "alpha_bbox": [
+        590,
+        241,
+        1004,
+        1005
+      ],
+      "clear_border_px": 195,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "03_launch_flyoff/09_rise_apex.png",
+      "sha256": "9bd1a9bf800833a656140caa187f29a6999c4854dd0292d9bbf484ba976fd24b",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103172,
+      "alpha_bbox": [
+        589,
+        239,
+        1004,
+        999
+      ],
+      "clear_border_px": 201,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "03_launch_flyoff/10_airborne.png",
+      "sha256": "a14d102b20468f7ced818c5580e28c592847f4f79e9a5cad5f2c9e0f2c97c34c",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103157,
+      "alpha_bbox": [
+        587,
+        237,
+        1003,
+        994
+      ],
+      "clear_border_px": 206,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "03_launch_flyoff/11_airborne_return.png",
+      "sha256": "a9688843c56f9c2173b8153f51a0644bb461f193c540c117e45e27562ca8ece8",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103194,
+      "alpha_bbox": [
+        586,
+        242,
+        1003,
+        994
+      ],
+      "clear_border_px": 206,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "03_launch_flyoff/12_flyoff.png",
+      "sha256": "f089e94f422d800b2541f478e212c47f4cad8d22f0b85c80b33e7ed7a543bd12",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103209,
+      "alpha_bbox": [
+        584,
+        249,
+        1002,
+        996
+      ],
+      "clear_border_px": 204,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "03_launch_flyoff/13_flyoff_recover.png",
+      "sha256": "1162c488a6d859bb6481fa4fd3784101a7dad2a5ff74f074f1eae7d525fb1695",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103171,
+      "alpha_bbox": [
+        583,
+        256,
+        1001,
+        999
+      ],
+      "clear_border_px": 201,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "03_launch_flyoff/14_near_flight.png",
+      "sha256": "554d7bfcac9711337dc0c9aeab54d680824fd157446c8b32261daac0121f9b56",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103168,
+      "alpha_bbox": [
+        581,
+        262,
+        1006,
+        1002
+      ],
+      "clear_border_px": 198,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "03_launch_flyoff/15_flight_ready.png",
+      "sha256": "8e8ff604cba101abb6a452079c0a1418608dba60e4fde4ddb43f776e93f0845a",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103178,
+      "alpha_bbox": [
+        581,
+        266,
+        1006,
+        1005
+      ],
+      "clear_border_px": 195,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    },
+    {
+      "file": "03_launch_flyoff/16_neutral.png",
+      "sha256": "c4b0e70111fe2e4fb1e012052aa88b353843bf356420c191feb31ae470640732",
+      "width": 1600,
+      "height": 1200,
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "visible_pixels": 103294,
+      "alpha_bbox": [
+        583,
+        265,
+        1001,
+        1005
+      ],
+      "clear_border_px": 195,
+      "edge_alpha_max": 0,
+      "anchor_alpha": 254,
+      "one_visible_rgb": true,
+      "transparent_rgb_zero": true
+    }
+  ]
+}

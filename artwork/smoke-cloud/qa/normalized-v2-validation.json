@@ -1,0 +1,376 @@
+[
+  {
+    "file": "artwork/smoke-cloud/keyposes/normalized-v2/01_neutral_anchor.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 74.081,
+    "partial_alpha_pct": 25.919,
+    "visible_bbox_alpha_gte_8": [
+      279,
+      268,
+      1763,
+      981
+    ],
+    "padding_alpha_gte_8": {
+      "left": 279,
+      "top": 268,
+      "right": 285,
+      "bottom": 299
+    },
+    "colored_soft_edge_pct": 0.0784,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/normalized-v2/02_drift_shear_a.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 80.102,
+    "partial_alpha_pct": 19.898,
+    "visible_bbox_alpha_gte_8": [
+      265,
+      397,
+      1797,
+      859
+    ],
+    "padding_alpha_gte_8": {
+      "left": 265,
+      "top": 397,
+      "right": 251,
+      "bottom": 421
+    },
+    "colored_soft_edge_pct": 0.0636,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/normalized-v2/03_twirl_forward.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 73.365,
+    "partial_alpha_pct": 26.635,
+    "visible_bbox_alpha_gte_8": [
+      263,
+      259,
+      1808,
+      1012
+    ],
+    "padding_alpha_gte_8": {
+      "left": 263,
+      "top": 259,
+      "right": 240,
+      "bottom": 268
+    },
+    "colored_soft_edge_pct": 0.0933,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/normalized-v2/04_drift_shear_b.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 78.344,
+    "partial_alpha_pct": 21.656,
+    "visible_bbox_alpha_gte_8": [
+      245,
+      318,
+      1769,
+      907
+    ],
+    "padding_alpha_gte_8": {
+      "left": 245,
+      "top": 318,
+      "right": 279,
+      "bottom": 373
+    },
+    "colored_soft_edge_pct": 0.0586,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/normalized-v2/05_twirl_reverse.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 76.568,
+    "partial_alpha_pct": 23.432,
+    "visible_bbox_alpha_gte_8": [
+      244,
+      258,
+      1804,
+      966
+    ],
+    "padding_alpha_gte_8": {
+      "left": 244,
+      "top": 258,
+      "right": 244,
+      "bottom": 314
+    },
+    "colored_soft_edge_pct": 0.0512,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/normalized-v2/06_spread_bloom.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 75.124,
+    "partial_alpha_pct": 24.876,
+    "visible_bbox_alpha_gte_8": [
+      256,
+      253,
+      1798,
+      989
+    ],
+    "padding_alpha_gte_8": {
+      "left": 256,
+      "top": 253,
+      "right": 250,
+      "bottom": 291
+    },
+    "colored_soft_edge_pct": 0.1285,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/normalized-v2/07_gather_half.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 80.98,
+    "partial_alpha_pct": 19.02,
+    "visible_bbox_alpha_gte_8": [
+      432,
+      302,
+      1726,
+      963
+    ],
+    "padding_alpha_gte_8": {
+      "left": 432,
+      "top": 302,
+      "right": 322,
+      "bottom": 317
+    },
+    "colored_soft_edge_pct": 0.0869,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/normalized-v2/08_gather_compressed.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 87.246,
+    "partial_alpha_pct": 12.754,
+    "visible_bbox_alpha_gte_8": [
+      618,
+      318,
+      1473,
+      935
+    ],
+    "padding_alpha_gte_8": {
+      "left": 618,
+      "top": 318,
+      "right": 575,
+      "bottom": 345
+    },
+    "colored_soft_edge_pct": 0.2166,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/normalized-v2/09_compressed_microtwirl_review.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 87.546,
+    "partial_alpha_pct": 12.454,
+    "visible_bbox_alpha_gte_8": [
+      592,
+      310,
+      1521,
+      930
+    ],
+    "padding_alpha_gte_8": {
+      "left": 592,
+      "top": 310,
+      "right": 527,
+      "bottom": 350
+    },
+    "colored_soft_edge_pct": 0.1254,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/normalized-v2/10_release_half.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 81.442,
+    "partial_alpha_pct": 18.558,
+    "visible_bbox_alpha_gte_8": [
+      403,
+      280,
+      1703,
+      958
+    ],
+    "padding_alpha_gte_8": {
+      "left": 403,
+      "top": 280,
+      "right": 345,
+      "bottom": 322
+    },
+    "colored_soft_edge_pct": 0.0595,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/normalized-v2/11_dissipate_review.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 253,
+    "transparent_pct": 82.841,
+    "partial_alpha_pct": 17.159,
+    "visible_bbox_alpha_gte_8": [
+      306,
+      350,
+      1742,
+      939
+    ],
+    "padding_alpha_gte_8": {
+      "left": 306,
+      "top": 350,
+      "right": 306,
+      "bottom": 341
+    },
+    "colored_soft_edge_pct": 0.0889,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  }
+]

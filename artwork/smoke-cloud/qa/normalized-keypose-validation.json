@@ -1,0 +1,172 @@
+[
+  {
+    "file": "artwork/smoke-cloud/keyposes/normalized/01_neutral_anchor.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 74.081,
+    "partial_alpha_pct": 25.919,
+    "visible_bbox_alpha_gte_8": [
+      279,
+      268,
+      1763,
+      981
+    ],
+    "padding_alpha_gte_8": {
+      "left": 279,
+      "top": 268,
+      "right": 285,
+      "bottom": 299
+    },
+    "colored_soft_edge_pct": 0.0784,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/normalized/02_gather_compressed.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 87.246,
+    "partial_alpha_pct": 12.754,
+    "visible_bbox_alpha_gte_8": [
+      618,
+      318,
+      1473,
+      935
+    ],
+    "padding_alpha_gte_8": {
+      "left": 618,
+      "top": 318,
+      "right": 575,
+      "bottom": 345
+    },
+    "colored_soft_edge_pct": 0.2166,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/normalized/03_twirl_vortex.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 73.365,
+    "partial_alpha_pct": 26.635,
+    "visible_bbox_alpha_gte_8": [
+      263,
+      259,
+      1808,
+      1012
+    ],
+    "padding_alpha_gte_8": {
+      "left": 263,
+      "top": 259,
+      "right": 240,
+      "bottom": 268
+    },
+    "colored_soft_edge_pct": 0.0933,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/normalized/04_spread_bloom.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 254,
+    "transparent_pct": 75.124,
+    "partial_alpha_pct": 24.876,
+    "visible_bbox_alpha_gte_8": [
+      256,
+      253,
+      1798,
+      989
+    ],
+    "padding_alpha_gte_8": {
+      "left": 256,
+      "top": 253,
+      "right": 250,
+      "bottom": 291
+    },
+    "colored_soft_edge_pct": 0.1285,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  },
+  {
+    "file": "artwork/smoke-cloud/keyposes/normalized/05_dissipate_review.png",
+    "mode": "RGBA",
+    "width": 2048,
+    "height": 1280,
+    "alpha_min": 0,
+    "alpha_max": 253,
+    "transparent_pct": 82.841,
+    "partial_alpha_pct": 17.159,
+    "visible_bbox_alpha_gte_8": [
+      306,
+      350,
+      1742,
+      939
+    ],
+    "padding_alpha_gte_8": {
+      "left": 306,
+      "top": 350,
+      "right": 306,
+      "bottom": 341
+    },
+    "colored_soft_edge_pct": 0.0889,
+    "checks": {
+      "rgba": true,
+      "minimum_width_1600": true,
+      "contains_fully_transparent_pixels": true,
+      "contains_visible_pixels": true,
+      "contains_soft_partial_alpha": true,
+      "transparent_outer_border": true,
+      "minimum_80px_padding": true,
+      "neutral_soft_edges": true
+    },
+    "passed": true
+  }
+]
