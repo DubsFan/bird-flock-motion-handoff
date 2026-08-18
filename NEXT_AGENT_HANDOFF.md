@@ -9,6 +9,7 @@ For a five-second, plain-English overview, open `HANDOFF_DASHBOARD.html` first. 
 - Canonical upstream: `DubsFan/bird-flock-motion-handoff`, default branch `main`.
 - Working fork: `scottspencer1914/bird-flock-motion-handoff`.
 - Publication branch: `codex/non-bird-artwork-handoff`.
+- Publication PR: [DubsFan/bird-flock-motion-handoff#9](https://github.com/DubsFan/bird-flock-motion-handoff/pull/9).
 - This branch contains the complete Silver Vortex Smoke and Quarter Note Gentle Orbit authoring workspaces, import bundles, QA, and the imported-manifest anchor fix.
 
 Open `HANDOFF_DASHBOARD.html` first for the nontechnical status and decision guide. Keep its readiness wording, bundle counts, and links aligned with this file whenever the handoff changes.
