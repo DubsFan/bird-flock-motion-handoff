@@ -13,6 +13,8 @@ For a five-second, plain-English overview, open `HANDOFF_DASHBOARD.html` first. 
 
 Open `HANDOFF_DASHBOARD.html` first for the nontechnical status and decision guide. Keep its readiness wording, bundle counts, and links aligned with this file whenever the handoff changes.
 
+The dashboard is a standalone HTML file with inline styling and behavior and only local asset links. Its checked desktop and phone screenshots are under `artwork/handoff-dashboard/qa/`.
+
 Read `AGENTS.md`, `MOTION_FOUNDATION.md`, and `SOURCE_CURATION.md` before changing renderer or artwork behavior. Read the two project audit files below before revising either custom identity.
 
 ## Silver Vortex Smoke

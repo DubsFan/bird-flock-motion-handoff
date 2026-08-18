@@ -620,3 +620,27 @@ The announced candidate delivery has arrived and was audited. Ten identities are
   declared flight/action anchors for imported artwork. Reproducible source,
   contact sheets, MP4 reviews, validation JSON, unzipped files, and the direct
   import ZIP are retained under `deliverables/quarter-note-murmur/`.
+
+## Iteration 27: standalone operator dashboard and publication handoff
+
+- Added `HANDOFF_DASHBOARD.html` as a dependency-free, plain-language status
+  and decision page. Its first screen identifies two ready bundles, explains
+  the one-minute import path, and links directly to the approved ZIPs, motion
+  reviews, proof files, and next-agent handoff.
+- Browser-checked the dashboard at 1440×900 and 390×844. Both artwork previews
+  loaded, no element overflowed horizontally, the mobile headline and ready
+  state remained readable, and the copy-location interaction worked. All eight
+  key delivery/preview/handoff targets returned HTTP 200. Checked screenshots
+  are retained under `artwork/handoff-dashboard/qa/`.
+- Removed the superseded 32-frame Beat Bop export and the earlier five-pose
+  smoke normalization from the working handoff. Both were generated copies,
+  are recoverable from the local Trash if needed, and must not be restored into
+  the approved delivery. Refreshed the quarter-note review workspace from the
+  accepted 64-frame bundle.
+- Moved the pool scene from an untracked root-level file to the documented
+  review reference at `artwork/references/pool-scene-reference.png`. Retained
+  smoke review/rejected candidates as explicitly labeled provenance.
+- Final pre-publication gates passed: 60/60 smoke frames, 64/64 quarter-note
+  frames, 59 Vitest tests, ESLint, TypeScript, Next.js production build, and
+  `git diff --check`. Smoke ZIP SHA-256 remains `54fea92119ac2c1e9d486ff692b9baa8ae54641599d41b81b84805b157d2279d`;
+  quarter-note ZIP SHA-256 remains `33f43b8b86d5dd17878052f6c96ccb8ba663c14f40cece4b1614cb7d95d86566`.

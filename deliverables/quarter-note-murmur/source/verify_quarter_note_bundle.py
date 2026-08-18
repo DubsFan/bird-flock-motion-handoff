@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Independently verify the import-facing Quarter Note — Beat Bop bundle."""
+"""Independently verify the import-facing Quarter Note — Gentle Orbit bundle."""
 
 from __future__ import annotations
 
